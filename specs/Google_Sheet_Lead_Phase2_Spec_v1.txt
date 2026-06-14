@@ -1,0 +1,997 @@
+# Google_Sheet_Lead_Phase2_Spec_v1
+# Brian-Numerologist – Phase 2: Google Sheet Lead Storage
+# Mục đích: Đặc tả kỹ thuật kết nối website MVP FREE với Google Sheet để lưu lead khách hàng.
+# Phiên bản: v1
+# Trạng thái: ĐÃ CHỐT THEO TRẢ LỜI CỦA BRIAN
+# Ngày tạo: 15/06/2026
+#
+# Website hiện tại:
+# https://brian-numerologist.github.io/Brian-Numerologist-Free/
+#
+# Nền tảng hiện tại:
+# - Website tĩnh HTML/CSS/JS
+# - Hosting: GitHub Pages
+# - MVP FREE v1 đã PASS test case Nguyễn Thanh Trí
+#
+# Phase 2 chỉ làm phần lưu lead Google Sheet.
+# Không thay đổi công thức Thần số học.
+# Không phá bản MVP v1 đã chạy ổn.
+
+============================================================
+I. TÓM TẮT QUYẾT ĐỊNH ĐÃ CHỐT
+============================================================
+
+1. Mục tiêu chính của Google Sheet:
+- Lưu toàn bộ luồng lead:
+  + Người tạo báo cáo FREE.
+  + Người tải TXT.
+  + Người bấm In/Lưu PDF.
+  + Người chọn gói chuyên sâu.
+  + Người yêu cầu tư vấn.
+
+2. Thời điểm gửi/cập nhật dữ liệu lên Google Sheet:
+- Khi khách bấm tạo báo cáo FREE.
+- Khi khách tải TXT.
+- Khi khách bấm In/Lưu PDF.
+- Khi khách chọn gói chuyên sâu.
+- Mỗi hành động cập nhật trạng thái khác nhau.
+
+3. SĐT/Zalo:
+- Không bắt buộc khi xem báo cáo FREE.
+- Bắt buộc khi khách muốn tải PDF/chọn gói chuyên sâu/yêu cầu Brian liên hệ tư vấn.
+
+4. Consent:
+- Có checkbox consent_to_contact.
+- Bắt buộc nếu khách nhập SĐT/Zalo hoặc yêu cầu Brian liên hệ.
+
+5. Danh sách cột Google Sheet:
+- Brian chọn rút gọn.
+- Spec này dùng bản rút gọn nhưng đủ vận hành, tránh lưu quá nhiều cột kỹ thuật.
+
+6. Danh sách status:
+- Brian chọn rút gọn.
+- Spec này dùng bản rút gọn đủ theo dõi quy trình bán hàng.
+
+7. Khách nhập lại nhiều lần:
+- Tạo dòng mới.
+- Có cột duplicate_warning để cảnh báo nếu nghi trùng.
+- Không ghi đè dòng cũ để tránh mất lịch sử.
+
+8. lead_id:
+- Có.
+- Dạng: LEAD_YYYYMMDD_HHMMSS_RANDOM
+
+9. Nội dung báo cáo:
+- Không lưu full report vào Google Sheet.
+- Chỉ lưu chỉ số, trạng thái, gói quan tâm và dữ liệu liên hệ.
+- Lý do: full report dài, làm Sheet nặng và không cần thiết.
+
+10. Thông báo khi gửi Sheet thành công:
+- Hiện thông báo nhỏ: “Thông tin đã được ghi nhận.”
+
+11. Nếu gửi Google Sheet lỗi:
+- Không chặn khách.
+- Vẫn cho khách xem/tải báo cáo.
+- Lưu tạm vào localStorage và báo: “Hệ thống sẽ đồng bộ lại sau.”
+
+12. Đồng bộ lại lead lỗi:
+- Có nút để admin bấm đồng bộ lại.
+
+13. Tài khoản Google Sheet:
+- Dùng tài khoản Gmail của Brian.
+
+14. Tên Google Sheet:
+- Brian_Numerologist_FREE_Leads
+
+15. Số tab trong Google Sheet:
+- 3 tab:
+  + leads
+  + config
+  + logs
+
+16. Logs:
+- Có lưu log mỗi lần khách tạo báo cáo, tải TXT, bấm PDF, chọn gói.
+
+17. Gói dịch vụ:
+- Giữ 6 gói hiện tại.
+
+18. Nguồn khách:
+- Có field source.
+
+19. Phân biệt khách tự nhập và nhập nội bộ:
+- Có field entry_mode:
+  + customer_self
+  + internal_entry
+
+20. Admin page Phase 2:
+- Có hướng dẫn mở Google Sheet.
+- Có nút mở Google Sheet.
+- Có nút tải CSV lead localStorage.
+- Có nút đồng bộ lại lead lỗi.
+- Tất cả các mục trên.
+
+21. Bảo mật Apps Script:
+- Có dùng shared_secret đơn giản.
+
+22. Khi khách chọn gói:
+- Lưu selected_package vào Sheet.
+- Hiện ô nhập Zalo nếu chưa nhập.
+- Hiện nút gọi/Zalo 0948909983.
+- Cập nhật status = paid_report_requested.
+
+23. File Phase 2 cần yêu cầu Codex tạo thêm:
+- google-apps-script/Code.gs
+- google-apps-script/README_Google_Apps_Script.md
+- google-sheet-config.example.json
+- app.js cập nhật hàm saveLead()
+- admin.html cập nhật phần sync
+- README.md cập nhật hướng dẫn Phase 2
+
+24. Cách triển khai Phase 2 hiện tại:
+- An toàn: tạo spec trước, chưa sửa code.
+- Sau khi spec ổn, mới tạo prompt Codex Phase 2 riêng.
+
+============================================================
+II. MỤC TIÊU PHASE 2
+============================================================
+
+Phase 2 nhằm biến website FREE v1 từ công cụ tạo báo cáo thành công cụ thu lead cơ bản.
+
+Mục tiêu:
+1. Lưu thông tin khách vào Google Sheet.
+2. Theo dõi khách đã làm gì trên website.
+3. Biết khách nào quan tâm gói chuyên sâu.
+4. Biết khách nào cần liên hệ lại.
+5. Không làm hỏng công thức tính đã PASS.
+6. Không phụ thuộc backend riêng.
+7. Vẫn giữ website chạy trên GitHub Pages.
+
+Giải pháp kỹ thuật:
+- Frontend: GitHub Pages HTML/CSS/JS.
+- Backend ghi dữ liệu: Google Apps Script Web App.
+- Database đơn giản: Google Sheet.
+
+============================================================
+III. PHẠM VI PHASE 2
+============================================================
+
+Phase 2 làm:
+
+[OK] Tạo Google Sheet 3 tab: leads, config, logs.
+[OK] Tạo Google Apps Script Web App nhận POST.
+[OK] Website gửi lead lên Apps Script.
+[OK] Apps Script ghi vào tab leads.
+[OK] Apps Script ghi log vào tab logs.
+[OK] Dùng shared_secret để hạn chế spam cơ bản.
+[OK] Nếu gửi lỗi, lưu tạm localStorage.
+[OK] Admin có nút đồng bộ lại lead lỗi.
+[OK] Admin có nút mở Google Sheet.
+[OK] Admin có nút tải CSV localStorage.
+[OK] README hướng dẫn cấu hình.
+
+Phase 2 không làm:
+
+[NO] Đăng nhập admin thật.
+[NO] Thanh toán online.
+[NO] Gửi Zalo tự động.
+[NO] Gửi email tự động.
+[NO] Tạo PDF server-side.
+[NO] Quản trị CRM phức tạp.
+[NO] Sửa công thức Thần số học.
+[NO] Tự động chống spam nâng cao.
+[NO] Lưu full report vào Google Sheet.
+
+============================================================
+IV. GOOGLE SHEET STRUCTURE
+============================================================
+
+Tên file Google Sheet:
+Brian_Numerologist_FREE_Leads
+
+Tab 1:
+leads
+
+Tab 2:
+config
+
+Tab 3:
+logs
+
+------------------------------------------------------------
+1. TAB leads
+------------------------------------------------------------
+
+Mục đích:
+Lưu mỗi dòng là một bản ghi lead hoặc một lần khách tương tác quan trọng.
+
+Cột rút gọn nhưng đủ vận hành:
+
+created_at
+last_updated_at
+lead_id
+full_name_original
+birth_date
+phone_or_zalo
+email
+gender
+note
+consent_to_contact
+entry_mode
+source
+device_type
+normalized_name
+life_path
+destiny
+soul
+birthday
+personality
+karmic_debts
+master_numbers
+selected_package
+status
+duplicate_warning
+local_backup_id
+
+Giải thích cột:
+
+created_at:
+- Thời điểm tạo lead lần đầu.
+
+last_updated_at:
+- Thời điểm cập nhật gần nhất.
+
+lead_id:
+- Mã lead tự sinh.
+- Ví dụ: LEAD_20260615_213015_X7K2
+
+full_name_original:
+- Họ tên khai sinh khách nhập.
+
+birth_date:
+- Ngày sinh dạng DD/MM/YYYY.
+
+phone_or_zalo:
+- Số điện thoại/Zalo.
+- Có thể trống nếu khách chỉ xem báo cáo FREE.
+
+email:
+- Tùy chọn.
+
+gender:
+- nam / nu / khac / khong_cung_cap / blank
+
+note:
+- Ghi chú khách nhập.
+
+consent_to_contact:
+- TRUE/FALSE.
+- TRUE bắt buộc nếu khách yêu cầu liên hệ/tư vấn/chọn gói.
+
+entry_mode:
+- customer_self: khách tự nhập.
+- internal_entry: Brian/nhân viên nhập giúp.
+
+source:
+- website
+- facebook
+- tiktok
+- zalo
+- internal
+- other
+
+device_type:
+- desktop
+- mobile
+- tablet
+- unknown
+
+normalized_name:
+- Tên đã chuẩn hóa.
+- Ví dụ: NGUYEN THANH TRI.
+
+life_path:
+- Ví dụ: 13/4.
+
+destiny:
+- Ví dụ: 13/4.
+
+soul:
+- Ví dụ: 16/7.
+
+birthday:
+- Ví dụ: 21/3.
+
+personality:
+- Ví dụ: 24/6.
+
+karmic_debts:
+- Chuỗi, ví dụ: 13/4, 16/7.
+
+master_numbers:
+- Chuỗi, ví dụ: 11/2 intermediate.
+
+selected_package:
+- Gói khách quan tâm.
+- Có thể trống.
+
+status:
+- Trạng thái lead.
+
+duplicate_warning:
+- TRUE/FALSE hoặc mô tả nghi trùng.
+- MVP không ghi đè dòng cũ.
+
+local_backup_id:
+- ID bản localStorage phía frontend nếu từng lưu tạm.
+
+------------------------------------------------------------
+2. TAB config
+------------------------------------------------------------
+
+Mục đích:
+Lưu cấu hình cơ bản để Apps Script/website tham chiếu nếu cần.
+
+Cột đề xuất:
+
+key
+value
+description
+updated_at
+
+Dữ liệu mẫu:
+
+brand_name | BRIAN-NUMEROLOGIST | Tên thương hiệu hiển thị | ...
+consultant_name | BRIAN | Tên người tư vấn | ...
+zalo_phone | 0948909983 | Số Zalo/điện thoại | ...
+discount | 20% | Ưu đãi nâng cấp | ...
+discount_validity | 3 ngày | Thời hạn ưu đãi | ...
+google_sheet_version | phase2_v1 | Phiên bản cấu trúc Sheet | ...
+shared_secret_enabled | true | Có dùng shared secret | ...
+
+Lưu ý:
+- Không nên lưu shared_secret thật ở tab config nếu Sheet có nhiều người xem.
+- shared_secret nên đặt trong Apps Script Properties.
+
+------------------------------------------------------------
+3. TAB logs
+------------------------------------------------------------
+
+Mục đích:
+Lưu từng hành động của khách.
+
+Cột đề xuất:
+
+timestamp
+lead_id
+event_type
+status_after_event
+selected_package
+phone_or_zalo_present
+consent_to_contact
+source
+entry_mode
+device_type
+message
+raw_payload_summary
+
+event_type đề xuất:
+- report_generated
+- txt_downloaded
+- pdf_requested
+- paid_package_clicked
+- sync_failed
+- sync_retried
+- sync_success
+
+Không lưu full payload quá dài.
+Không lưu full report text.
+
+============================================================
+V. STATUS ENUM RÚT GỌN
+============================================================
+
+Brian chọn rút gọn trạng thái. Dùng danh sách sau:
+
+new
+report_generated
+txt_downloaded
+pdf_requested
+paid_report_requested
+contacted
+converted
+not_converted
+
+Giải thích:
+
+new:
+- Lead mới được tạo nhưng chưa chắc đã generate xong.
+
+report_generated:
+- Khách đã tạo báo cáo FREE.
+
+txt_downloaded:
+- Khách đã tải TXT.
+
+pdf_requested:
+- Khách đã bấm In/Lưu PDF hoặc yêu cầu PDF.
+
+paid_report_requested:
+- Khách đã chọn gói chuyên sâu hoặc yêu cầu tư vấn.
+
+contacted:
+- Brian đã liên hệ.
+
+converted:
+- Khách đã mua gói/trở thành khách trả phí.
+
+not_converted:
+- Khách không chuyển đổi.
+
+Ghi chú:
+- Nếu cần đánh dấu liên hệ sai/số không hợp lệ, có thể ghi vào note hoặc duplicate_warning ở Phase 2.
+- Chưa cần thêm invalid_contact để giữ status gọn.
+
+============================================================
+VI. LEAD ID SPEC
+============================================================
+
+lead_id bắt buộc.
+
+Format:
+LEAD_YYYYMMDD_HHMMSS_RANDOM
+
+Ví dụ:
+LEAD_20260615_213015_X7K2
+
+Quy tắc:
+- Sinh ở frontend trước khi gửi.
+- Nếu chưa có lead_id trong localStorage, tạo mới.
+- Nếu cùng session khách bấm nhiều hành động, giữ cùng lead_id.
+- Nếu khách quay lại sau và localStorage còn, có thể dùng lại lead_id.
+- Nếu khách dùng thiết bị khác, tạo lead mới.
+
+Random:
+- 4–6 ký tự A-Z/0-9.
+
+============================================================
+VII. DUPLICATE HANDLING
+============================================================
+
+Brian chọn:
+- Luôn tạo dòng mới.
+- Có duplicate_warning.
+
+MVP không cần tìm và cập nhật dòng cũ.
+
+duplicate_warning có thể là:
+- empty
+- same_phone_possible_duplicate
+- same_name_birthdate_possible_duplicate
+- same_phone_and_name_birthdate_possible_duplicate
+
+Cách làm đơn giản:
+- Frontend chỉ gửi dữ liệu.
+- Apps Script có thể kiểm tra những dòng gần nhất trong leads:
+  + Nếu phone_or_zalo trùng → duplicate_warning = same_phone_possible_duplicate.
+  + Nếu full_name_original + birth_date trùng → duplicate_warning = same_name_birthdate_possible_duplicate.
+  + Nếu cả hai trùng → same_phone_and_name_birthdate_possible_duplicate.
+- Dù trùng vẫn append dòng mới.
+
+============================================================
+VIII. CONSENT SPEC
+============================================================
+
+consent_to_contact:
+- Boolean.
+- Nếu khách chỉ xem FREE và không nhập SĐT/Zalo: có thể false.
+- Nếu khách nhập SĐT/Zalo: nên yêu cầu tick consent.
+- Nếu khách chọn gói, yêu cầu PDF hoặc yêu cầu tư vấn: bắt buộc true.
+
+Text checkbox đề xuất:
+“Tôi đồng ý để Brian-Numerologist lưu thông tin này và liên hệ lại qua Zalo/điện thoại nếu tôi yêu cầu tư vấn hoặc bản chuyên sâu.”
+
+Validation:
+- Nếu selected_package có giá trị mà consent_to_contact = false → không cho gửi yêu cầu tư vấn.
+- Nếu pdf_requested = true và phone_or_zalo có nhập → yêu cầu consent_to_contact = true.
+- Nếu phone_or_zalo trống nhưng khách chọn gói → yêu cầu nhập phone_or_zalo và tick consent.
+
+============================================================
+IX. ACTION TRIGGERS
+============================================================
+
+Website cần gửi/cập nhật lead theo các action:
+
+1. Generate report
+Trigger:
+- Khách bấm “Xem bản FREE của tôi”.
+
+Action:
+- Tạo hoặc lấy lead_id.
+- Tính toán báo cáo.
+- Lưu lead status = report_generated.
+- Gửi Google Sheet.
+- Nếu lỗi, lưu localStorage pending_sync.
+
+2. Download TXT
+Trigger:
+- Khách bấm “Tải báo cáo TXT”.
+
+Action:
+- Cập nhật status = txt_downloaded.
+- Gửi event vào Google Sheet.
+- Vẫn cho tải TXT kể cả gửi Sheet lỗi.
+
+3. Print / Save PDF
+Trigger:
+- Khách bấm “In/Lưu PDF”.
+
+Action:
+- Nếu chưa có phone_or_zalo, có thể cho in bằng browser print theo MVP hiện tại.
+- Nhưng nếu muốn “nhận PDF/chăm sóc tư vấn”, cần phone_or_zalo + consent.
+- Cập nhật status = pdf_requested.
+- Gửi event vào Google Sheet.
+- Gọi window.print().
+
+4. Package click
+Trigger:
+- Khách bấm “Tôi quan tâm” ở một gói.
+
+Action:
+- Ghi selected_package.
+- Nếu thiếu phone_or_zalo, hiện ô nhập Zalo.
+- Bắt tick consent_to_contact.
+- Cập nhật status = paid_report_requested.
+- Gửi Google Sheet.
+- Hiện CTA: “Brian đã ghi nhận yêu cầu. Anh/chị có thể nhắn Zalo 0948909983 để được tư vấn nhanh hơn.”
+
+5. Admin retry sync
+Trigger:
+- Brian vào admin.html và bấm “Đồng bộ lại lead lỗi”.
+
+Action:
+- Lấy pending leads từ localStorage.
+- Gửi lại Apps Script.
+- Nếu thành công, xóa khỏi pending queue.
+- Ghi log sync_success hoặc sync_failed.
+
+============================================================
+X. FRONTEND DATA PAYLOAD
+============================================================
+
+Payload gửi từ website sang Apps Script:
+
+{
+  "shared_secret": "SET_IN_CONFIG",
+  "event_type": "report_generated",
+  "lead": {
+    "created_at": "2026-06-15T21:30:15+07:00",
+    "last_updated_at": "2026-06-15T21:30:15+07:00",
+    "lead_id": "LEAD_20260615_213015_X7K2",
+    "full_name_original": "Nguyễn Thanh Trí",
+    "birth_date": "21/04/1986",
+    "phone_or_zalo": "0948909983",
+    "email": "",
+    "gender": "nam",
+    "note": "",
+    "consent_to_contact": true,
+    "entry_mode": "customer_self",
+    "source": "website",
+    "device_type": "desktop",
+    "normalized_name": "NGUYEN THANH TRI",
+    "life_path": "13/4",
+    "destiny": "13/4",
+    "soul": "16/7",
+    "birthday": "21/3",
+    "personality": "24/6",
+    "karmic_debts": "13/4, 16/7",
+    "master_numbers": "11/2 intermediate",
+    "selected_package": "ban_do_kien_tao",
+    "status": "paid_report_requested",
+    "local_backup_id": "LOCAL_..."
+  },
+  "meta": {
+    "site_url": "https://brian-numerologist.github.io/Brian-Numerologist-Free/",
+    "app_version": "free_mvp_v1_phase2",
+    "user_agent": "browser user agent",
+    "screen_width": 1440,
+    "screen_height": 900
+  }
+}
+
+Không gửi:
+- full_report_text
+- nội dung báo cáo dài
+- dữ liệu nhạy cảm không cần thiết
+
+============================================================
+XI. GOOGLE APPS SCRIPT SPEC
+============================================================
+
+Tạo file:
+google-apps-script/Code.gs
+
+Apps Script cần có:
+
+1. doPost(e)
+- Nhận request POST từ website.
+- Parse JSON.
+- Kiểm tra shared_secret.
+- Validate payload tối thiểu.
+- Append row vào tab leads.
+- Append row vào tab logs.
+- Trả JSON response.
+
+2. getSheet_(sheetName)
+- Lấy sheet theo tên.
+- Nếu chưa có thì tạo.
+
+3. setupSheets()
+- Tạo tab leads, config, logs.
+- Tạo header nếu chưa có.
+
+4. appendLead_(payload)
+- Ghi vào tab leads.
+
+5. appendLog_(payload, message)
+- Ghi vào tab logs.
+
+6. detectDuplicate_(lead)
+- Kiểm tra trùng đơn giản.
+- Vẫn append dòng mới.
+
+7. jsonResponse_(data)
+- Trả response JSON.
+
+8. validateSecret_(payload)
+- So sánh shared_secret với Script Properties.
+
+9. setSecretOnce()
+- Hàm để Brian/lập trình viên set shared_secret trong Apps Script Properties.
+
+Apps Script response thành công:
+{
+  "ok": true,
+  "message": "Lead saved",
+  "lead_id": "LEAD_...",
+  "duplicate_warning": ""
+}
+
+Apps Script response lỗi:
+{
+  "ok": false,
+  "message": "Invalid shared secret"
+}
+
+============================================================
+XII. SHARED SECRET SPEC
+============================================================
+
+Vì website public nên endpoint Apps Script có thể bị người khác thấy trong DevTools.
+
+Dùng shared_secret chỉ là lớp bảo vệ cơ bản, không phải bảo mật tuyệt đối.
+
+Cách dùng:
+- Frontend có config placeholder.
+- Apps Script có SECRET lưu trong Script Properties.
+- Request gửi shared_secret.
+- Apps Script kiểm tra trước khi ghi Sheet.
+
+Tên config:
+GOOGLE_SCRIPT_SHARED_SECRET
+
+Lưu ý:
+- Không commit secret thật vào GitHub public nếu muốn an toàn hơn.
+- Với GitHub Pages public, secret đặt trong JS vẫn có thể bị xem.
+- Mục đích của shared_secret ở Phase 2 chỉ là giảm ghi rác vô tình, không chống được attacker nghiêm túc.
+- Nếu cần bảo mật thật, Phase 3 nên có backend riêng.
+
+============================================================
+XIII. FRONTEND UPDATE SPEC
+============================================================
+
+Cập nhật app.js:
+
+Các hàm mới/cần sửa:
+
+1. generateLeadId()
+- Tạo LEAD_YYYYMMDD_HHMMSS_RANDOM.
+
+2. getOrCreateLeadId()
+- Lấy lead_id hiện tại từ localStorage.
+- Nếu chưa có thì tạo.
+
+3. buildLeadPayload(eventType, status)
+- Tạo payload theo schema.
+
+4. saveLeadToGoogleSheet(payload)
+- POST đến Apps Script Web App URL.
+- Nếu thành công, ghi log local.
+- Nếu thất bại, lưu pending queue.
+
+5. saveLead(payload)
+- Wrapper.
+- Gọi saveLeadToGoogleSheet().
+- Nếu lỗi, fallback localStorage.
+
+6. updateLeadStatus(status, extraData)
+- Cập nhật trạng thái.
+- Gửi event mới lên Sheet.
+
+7. savePendingLead(payload)
+- Lưu lead lỗi vào localStorage key:
+  brian_numerologist_pending_leads
+
+8. retryPendingLeads()
+- Gửi lại các lead lỗi.
+
+9. downloadLeadsCsv()
+- Giữ chức năng cũ để tải CSV localStorage.
+
+10. validateContactConsentForPaidAction()
+- Nếu chọn gói/PDF/tư vấn mà thiếu phone_or_zalo hoặc consent thì báo lỗi.
+
+Cập nhật index.html:
+- Nếu chưa có entry_mode, thêm select:
+  + Khách tự nhập
+  + Brian/nhân viên nhập giúp
+- Nếu chưa có source, có thể hidden default = website.
+- Cập nhật message khi chọn gói.
+
+Cập nhật admin.html:
+- Nút mở Google Sheet.
+- Nút tải CSV localStorage.
+- Nút đồng bộ lại lead lỗi.
+- Hiển thị số pending leads.
+- Ghi chú Google Sheet Phase 2.
+
+============================================================
+XIV. GOOGLE SHEET CONFIG FILE
+============================================================
+
+Tạo file:
+google-sheet-config.example.json
+
+Nội dung mẫu:
+
+{
+  "google_apps_script_web_app_url": "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE",
+  "google_sheet_name": "Brian_Numerologist_FREE_Leads",
+  "shared_secret": "CHANGE_ME_PHASE2_SECRET",
+  "enable_google_sheet_sync": false,
+  "fallback_to_local_storage": true
+}
+
+Quy tắc:
+- File example không chứa secret thật.
+- README hướng dẫn Brian copy thành google-sheet-config.js hoặc dán URL vào app.js theo cách Codex chọn.
+- Nếu enable_google_sheet_sync = false thì website chỉ dùng localStorage.
+- Khi bật true mới gửi Sheet.
+
+============================================================
+XV. ADMIN PAGE PHASE 2
+============================================================
+
+admin.html cần có:
+
+1. Tiêu đề:
+Brian-Numerologist Admin – Lead Sync Phase 2
+
+2. Các card:
+- Google Sheet Status
+- Pending Local Leads
+- Export CSV
+- Retry Sync
+- Open Google Sheet
+
+3. Nút:
+- Mở Google Sheet
+- Tải CSV lead localStorage
+- Đồng bộ lại lead lỗi
+- Quay về website
+
+4. Thông tin hiển thị:
+- Số lead local.
+- Số pending sync.
+- Trạng thái cấu hình Google Sheet:
+  + Not configured
+  + Ready
+  + Error
+
+5. Không cần login thật ở Phase 2.
+6. Ghi cảnh báo:
+“Trang admin hiện là bản nội bộ đơn giản. Không chia sẻ public nếu chưa có bảo mật.”
+
+============================================================
+XVI. README PHASE 2 SPEC
+============================================================
+
+README cần cập nhật:
+
+1. Phase 2 là gì.
+2. Cách tạo Google Sheet.
+3. Cách tạo tab leads/config/logs.
+4. Cách mở Apps Script.
+5. Cách dán Code.gs.
+6. Cách set shared_secret.
+7. Cách deploy Apps Script Web App.
+8. Cách lấy Web App URL.
+9. Cách đưa URL vào website config.
+10. Cách test gửi lead.
+11. Cách test khi mạng lỗi.
+12. Cách dùng admin retry sync.
+13. Cách tải CSV localStorage.
+14. Cảnh báo bảo mật shared_secret.
+15. Không sửa công thức khi làm Phase 2.
+
+============================================================
+XVII. TESTING PHASE 2
+============================================================
+
+Test 1: Generate report without phone
+Input:
+- Họ tên: Nguyễn Thanh Trí
+- Ngày sinh: 21/04/1986
+- Không nhập phone
+
+Expected:
+- Report tạo được.
+- Lead gửi lên Sheet status = report_generated.
+- phone_or_zalo trống.
+- consent_to_contact = false hoặc blank.
+- Test case công thức vẫn PASS.
+
+Test 2: Download TXT
+Action:
+- Bấm tải TXT.
+
+Expected:
+- status = txt_downloaded.
+- logs có event_type = txt_downloaded.
+- TXT vẫn tải được kể cả sync lỗi.
+
+Test 3: Print PDF
+Action:
+- Bấm In/Lưu PDF.
+
+Expected:
+- status = pdf_requested.
+- logs có event_type = pdf_requested.
+- Browser print hoạt động.
+
+Test 4: Click paid package without phone
+Action:
+- Bấm “Tôi quan tâm” một gói khi chưa nhập phone.
+
+Expected:
+- Website hiện yêu cầu nhập Zalo/SĐT.
+- Website yêu cầu tick consent.
+- Chưa gửi paid_report_requested nếu thiếu thông tin bắt buộc.
+
+Test 5: Click paid package with phone + consent
+Input:
+- phone_or_zalo = 0948909983
+- consent_to_contact = true
+- selected_package = ban_do_kien_tao
+
+Expected:
+- status = paid_report_requested.
+- selected_package lưu đúng.
+- Lead ghi vào Sheet.
+- logs có event_type = paid_package_clicked.
+
+Test 6: Apps Script error
+Action:
+- Dùng sai Web App URL hoặc tắt sync.
+
+Expected:
+- Website không crash.
+- Lead lưu vào pending localStorage.
+- Hiển thị: “Hệ thống sẽ đồng bộ lại sau.”
+- Admin thấy pending lead.
+
+Test 7: Retry sync
+Action:
+- Sửa config đúng.
+- Vào admin bấm đồng bộ lại lead lỗi.
+
+Expected:
+- Pending lead được gửi lên Sheet.
+- Nếu thành công, xóa khỏi pending queue.
+- logs có sync_success.
+
+Test 8: Duplicate behavior
+Action:
+- Nhập cùng họ tên + ngày sinh nhiều lần.
+
+Expected:
+- Tạo dòng mới.
+- duplicate_warning có thể được ghi nếu Apps Script phát hiện trùng.
+- Không ghi đè dòng cũ.
+
+============================================================
+XVIII. FILE OUTPUT EXPECTED FROM CODEX PHASE 2
+============================================================
+
+Khi tạo prompt Codex Phase 2, yêu cầu Codex xuất:
+
+/google-apps-script/Code.gs
+/google-apps-script/README_Google_Apps_Script.md
+/google-sheet-config.example.json
+/app.js updated
+/admin.html updated
+/README.md updated
+
+Không bắt buộc sửa:
+- calculation functions
+- report content libraries
+- test case calculations
+
+Nếu có sửa app.js:
+- Phải chạy lại runTestCase001().
+- Test case 001 phải PASS.
+
+============================================================
+XIX. DEFINITION OF DONE – PHASE 2
+============================================================
+
+Phase 2 được xem là hoàn thành khi:
+
+[ ] Google Sheet Brian_Numerologist_FREE_Leads đã tạo.
+[ ] Có 3 tab: leads, config, logs.
+[ ] Apps Script Code.gs đã deploy thành Web App.
+[ ] Website gửi lead lên Sheet thành công.
+[ ] Generate report ghi status = report_generated.
+[ ] Download TXT ghi status = txt_downloaded.
+[ ] Print PDF ghi status = pdf_requested.
+[ ] Chọn gói ghi status = paid_report_requested.
+[ ] selected_package lưu đúng.
+[ ] consent_to_contact hoạt động.
+[ ] Thiếu phone/consent khi chọn gói thì báo lỗi.
+[ ] Sync lỗi không làm website crash.
+[ ] Lead lỗi lưu pending localStorage.
+[ ] Admin retry sync hoạt động.
+[ ] Admin mở Google Sheet được.
+[ ] CSV localStorage vẫn tải được.
+[ ] logs ghi event.
+[ ] Duplicate tạo dòng mới, không ghi đè.
+[ ] runTestCase001() vẫn PASS.
+[ ] Công thức không bị sửa sai.
+[ ] Website vẫn chạy GitHub Pages.
+
+============================================================
+XX. CẤM LÀM TRONG PHASE 2
+============================================================
+
+Không được:
+1. Sửa công thức tính.
+2. Đổi cách tính Y.
+3. Đổi routing BIRTHDAY_21.
+4. Ghi full report text vào Google Sheet.
+5. Chặn khách xem báo cáo nếu Google Sheet lỗi.
+6. Bắt khách nhập SĐT ngay từ đầu.
+7. Ghi đè lead cũ khi nghi trùng.
+8. Xóa chức năng tải TXT cũ.
+9. Xóa localStorage fallback.
+10. Làm admin phức tạp có login nếu chưa cần.
+11. Commit secret thật nếu repo public.
+12. Làm Phase 2 khiến MVP v1 đang chạy ổn bị hỏng.
+
+============================================================
+XXI. GHI CHÚ CHO BRIAN
+============================================================
+
+Bản spec này chỉ chốt hướng Phase 2.
+
+Việc tiếp theo sau file này:
+1. Tạo prompt Codex Phase 2.
+2. Đưa prompt + source code hiện tại cho Codex.
+3. Yêu cầu Codex chỉ thêm Google Sheet sync, không sửa công thức.
+4. Sau khi Codex trả code, kiểm tra lại:
+   - runTestCase001 PASS.
+   - Lead ghi được vào Google Sheet.
+   - Website không crash khi Sheet lỗi.
+
+Ưu tiên:
+- An toàn trước.
+- Không phá bản FREE MVP v1.
+- Google Sheet có thể đơn giản, miễn ghi đúng lead và status.

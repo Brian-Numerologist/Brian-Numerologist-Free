@@ -521,6 +521,79 @@ details[open] summary::after {
   margin: 0 auto;
 }
 
+.toast-container {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  display: grid;
+  gap: 0.75rem;
+  width: min(360px, calc(100vw - 2rem));
+}
+
+.toast {
+  padding: 0.85rem 1rem;
+  color: var(--text);
+  background: rgba(17, 17, 17, 0.96);
+  border: 1px solid rgba(199, 154, 58, 0.34);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  line-height: 1.45;
+}
+
+.toast.success {
+  border-color: rgba(188, 231, 190, 0.44);
+}
+
+.toast.warning {
+  border-color: rgba(234, 211, 154, 0.5);
+}
+
+.toast.error {
+  border-color: rgba(255, 176, 168, 0.5);
+}
+
+.attention-field {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(255, 176, 168, 0.14) !important;
+}
+
+.sync-status-list {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+
+.sync-status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(199, 154, 58, 0.14);
+}
+
+.sync-status-row span {
+  color: var(--muted);
+}
+
+.sync-status-row strong {
+  color: var(--gold-soft);
+  text-align: right;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.admin-message {
+  margin-top: 1rem;
+  color: var(--gold-soft);
+  line-height: 1.5;
+}
+
 .site-footer {
   border-top: 1px solid rgba(199, 154, 58, 0.18);
   padding: 1.4rem clamp(1rem, 4vw, 3rem);

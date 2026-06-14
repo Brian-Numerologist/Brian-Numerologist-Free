@@ -1,0 +1,211 @@
+# CODEx REVIEW REPORT – Brian-Numerologist FREE MVP
+# File kiểm tra: files-mentioned-by-the-user-codex-2(1).zip
+# Trạng thái kiểm tra: PASS
+# Ghi chú: Báo cáo này do ChatGPT tạo sau khi kiểm tra source code Codex.
+
+============================================================
+I. KẾT LUẬN NHANH
+============================================================
+
+Kết quả: ĐẠT yêu cầu MVP kỹ thuật cơ bản.
+
+Tôi đã kiểm tra:
+- Cấu trúc file.
+- Source code chính.
+- Công thức tính.
+- Test case Nguyễn Thanh Trí.
+- Routing nội dung.
+- Tải TXT / In PDF / Lead tạm localStorage / Admin placeholder.
+- README hướng dẫn.
+
+============================================================
+II. CẤU TRÚC FILE
+============================================================
+
+Các file chính có đủ:
+
+[OK] index.html
+[OK] styles.css
+[OK] app.js
+[OK] README.md
+[OK] admin.html
+[OK] content/01_Calculation_Rules_v1.1.txt
+[OK] content/LifePath_Library_FREE_v1.txt
+[OK] content/Karmic_Overlay_FREE_v1.txt
+[OK] content/Destiny_Library_FREE_v1.txt
+[OK] content/Soul_Library_FREE_v1.txt
+[OK] content/Birthday_Library_FREE_v1.txt
+[OK] content/Report_Template_FREE_11_Buoc_v1.txt
+[OK] content/Data_Schema_FREE_v1.json
+[OK] test-cases/TEST_CASE_001_NGUYEN_THANH_TRI_FREE_REPORT.txt
+
+Ghi chú:
+- File ZIP gốc có thư mục __MACOSX và .DS_Store do hệ macOS tạo ra.
+- Tôi đã tạo bản ZIP sạch, loại bỏ các file rác này.
+
+============================================================
+III. TEST CASE 001
+============================================================
+
+Đã chạy bằng Node:
+
+runTestCase001()
+
+Kết quả:
+{
+  "pass": true,
+  "errors": [],
+  "core": {
+    "life_path": "13/4",
+    "life_path_base": 4,
+    "destiny": "13/4",
+    "destiny_base": 4,
+    "soul": "16/7",
+    "soul_base": 7,
+    "birthday": "21/3",
+    "birthday_original": 21,
+    "birthday_base": 3,
+    "personality": "24/6",
+    "personality_base": 6
+  },
+  "routing": {
+    "life_path_blocks": [
+      "LIFEPATH_4",
+      "KARMIC_OVERLAY_13_4"
+    ],
+    "destiny_blocks": [
+      "DESTINY_4",
+      "KARMIC_OVERLAY_13_4"
+    ],
+    "soul_blocks": [
+      "SOUL_7",
+      "KARMIC_OVERLAY_16_7"
+    ],
+    "birthday_blocks": [
+      "BIRTHDAY_21"
+    ]
+  },
+  "audit": {
+    "letter_count": 14,
+    "number_count": 14,
+    "is_valid": true,
+    "audit_notes": [
+      "Số chữ cái A-Z khớp số con số quy đổi."
+    ]
+  },
+  "sections": 11
+}
+
+Kết luận:
+[OK] Test case PASS.
+[OK] Nguyễn Thanh Trí chuẩn hóa thành NGUYEN THANH TRI.
+[OK] Đếm đúng 14 chữ cái.
+[OK] Đếm đúng 14 số quy đổi.
+[OK] Đường Đời = 13/4.
+[OK] Sứ Mệnh = 13/4.
+[OK] Linh Hồn = 16/7.
+[OK] Ngày Sinh = 21/3.
+[OK] Nhân Cách = 24/6.
+[OK] Birthday route = BIRTHDAY_21.
+[OK] Karmic Overlay đúng.
+[OK] Báo cáo có 11 section.
+
+============================================================
+IV. ĐÁNH GIÁ CÔNG THỨC
+============================================================
+
+[OK] Có bảng Pythagoras đúng.
+[OK] Y được đưa vào nhóm nguyên âm.
+[OK] Hàm isConsonant loại Y khỏi phụ âm.
+[OK] Đường Đời tính theo ngày + tháng + năm đã rút gọn.
+[OK] Sứ Mệnh tính riêng Họ – Cụm tên lót – Tên.
+[OK] Linh Hồn tính riêng nguyên âm theo từng phần tên.
+[OK] Nhân Cách tính riêng phụ âm theo từng phần tên.
+[OK] Birthday lưu hiển thị 21/3 nhưng route theo BIRTHDAY_21.
+[OK] Audit letter_count/number_count hoạt động.
+
+============================================================
+V. ĐÁNH GIÁ GIAO DIỆN / CHỨC NĂNG
+============================================================
+
+[OK] Có form nhập họ tên và ngày sinh.
+[OK] Có trường Zalo, email, giới tính, ghi chú.
+[OK] Có checkbox consent_to_contact.
+[OK] Có nút Run Test Case 001.
+[OK] Có accordion báo cáo 11 bước.
+[OK] Có nút tải TXT.
+[OK] Có nút In/Lưu PDF bằng browser print.
+[OK] Có CTA chọn gói.
+[OK] Có lead localStorage.
+[OK] Có tải CSV lead tạm.
+[OK] Có admin.html placeholder.
+[OK] README có hướng dẫn chạy local và deploy GitHub Pages.
+
+============================================================
+VI. ĐIỀU TÔI ĐÃ VÁ NHẸ TRONG BẢN REVIEWED
+============================================================
+
+Vá nhẹ:
+[OK] Đã thêm openAllSections() trước window.print() để khi In/Lưu PDF, toàn bộ accordion được mở trước khi in.
+
+Lý do:
+Nếu accordion đang đóng, một số trình duyệt có thể không in đủ toàn bộ nội dung. Việc mở tất cả section trước khi gọi window.print() an toàn hơn.
+
+============================================================
+VII. LỖI / RỦI RO NHỎ CẦN BIẾT
+============================================================
+
+1. Google Sheet chưa kết nối thật.
+- Đây là đúng phạm vi MVP: hiện tại dùng localStorage/CSV.
+- Phase 2 mới cần Google Apps Script.
+
+2. Admin chỉ là placeholder.
+- Đúng theo yêu cầu đã chốt.
+
+3. Report Template file parse được 0 block.
+- Không nghiêm trọng vì app không phụ thuộc trực tiếp vào block trong Report_Template.
+- Các thư viện chính LifePath/Destiny/Soul/Birthday/Karmic parse được.
+
+4. Khi mở trực tiếp index.html bằng file://, browser có thể chặn fetch TXT.
+- README đã hướng dẫn dùng:
+  python3 -m http.server 8000
+- App cũng có fallback object để không chết.
+
+============================================================
+VIII. KHUYẾN NGHỊ TIẾP THEO
+============================================================
+
+Nên làm tiếp:
+
+1. Dùng bản ZIP sạch đã kiểm tra:
+Brian_Numerologist_FREE_MVP_CODEX_REVIEWED_v1.zip
+
+2. Giải nén.
+
+3. Chạy local:
+python3 -m http.server 8000
+
+4. Mở:
+http://localhost:8000
+
+5. Bấm:
+Run Test Case 001
+
+6. Nếu PASS, nhập thử hồ sơ thật khác.
+
+7. Sau khi ổn, đưa lên GitHub Pages.
+
+============================================================
+IX. KẾT LUẬN
+============================================================
+
+Bản Codex này làm tốt hơn mức MVP cơ bản.
+
+Có thể dùng để chạy thử local và chuẩn bị deploy GitHub Pages.
+
+Ưu tiên tiếp theo:
+- Chạy thử bằng trình duyệt thật.
+- Kiểm tra giao diện mobile.
+- Kiểm tra nút Tải TXT.
+- Kiểm tra In/Lưu PDF.
+- Sau đó mới tính tới Google Sheet phase 2.

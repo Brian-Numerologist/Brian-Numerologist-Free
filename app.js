@@ -5,6 +5,17 @@
   const CONSULTANT = "BRIAN";
   const ZALO_PHONE = "0948909983";
   const LEADS_STORAGE_KEY = "brian_numerologist_free_leads_v1";
+  const PENDING_LEADS_STORAGE_KEY = "brian_numerologist_pending_leads";
+  const LEAD_ID_STORAGE_KEY = "brian_numerologist_current_lead_id";
+  const APP_VERSION = "free_mvp_v1_phase2";
+  const GOOGLE_SHEET_CONFIG = {
+    google_apps_script_web_app_url: "https://script.google.com/macros/s/AKfycby5GujG0AlO6fpZA69LoF0IiD8t6oaEjE2FyeaNIpTfGROwiSNtPKhaDYeigzDEAdCQ/exec",
+    google_sheet_url: "https://docs.google.com/spreadsheets/d/11q34k1QhhgSwishOx9QqFabRrjvElbpRfU6PE5UlmrM/edit?gid=0#gid=0",
+    google_sheet_name: "Brian_Numerologist_FREE_Leads",
+    shared_secret: "CHANGE_ME_PHASE2_SECRET",
+    enable_google_sheet_sync: true,
+    fallback_to_local_storage: true
+  };
 
   const CONTENT_FILES = [
     "content/LifePath_Library_FREE_v1.txt",
@@ -1293,6 +1304,102 @@
     container.innerHTML = "";
   }
 
+  function showToast(message, type = "info") {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    const container = getElement("toast-container");
+    if (!container) {
+      return;
+    }
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    window.setTimeout(() => {
+      toast.remove();
+    }, 4200);
+  }
+
+  function getGoogleSheetConfig() {
+    const externalConfig =
+      (typeof window !== "undefined" &&
+        (window.BRIAN_NUMEROLOGIST_GOOGLE_SHEET_CONFIG || window.GOOGLE_SHEET_CONFIG)) ||
+      {};
+
+    return {
+      ...GOOGLE_SHEET_CONFIG,
+      ...externalConfig
+    };
+  }
+
+  function generateLeadId() {
+    const now = new Date();
+    const pad = (value) => String(value).padStart(2, "0");
+    const datePart = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
+    const timePart = `${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+    const randomPart = Math.random().toString(36).slice(2, 8).toUpperCase().padEnd(4, "X");
+
+    return `LEAD_${datePart}_${timePart}_${randomPart}`;
+  }
+
+  function getOrCreateLeadId() {
+    if (currentLeadId) {
+      return currentLeadId;
+    }
+
+    if (typeof localStorage !== "undefined") {
+      const storedLeadId = localStorage.getItem(LEAD_ID_STORAGE_KEY);
+      if (storedLeadId) {
+        currentLeadId = storedLeadId;
+        return currentLeadId;
+      }
+    }
+
+    currentLeadId = generateLeadId();
+
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(LEAD_ID_STORAGE_KEY, currentLeadId);
+    }
+
+    return currentLeadId;
+  }
+
+  function detectDeviceType() {
+    if (typeof navigator === "undefined") {
+      return "unknown";
+    }
+
+    const ua = navigator.userAgent || "";
+
+    if (/ipad|tablet|playbook|silk/i.test(ua)) {
+      return "tablet";
+    }
+
+    if (/mobile|iphone|ipod|android.*mobile|windows phone/i.test(ua)) {
+      return "mobile";
+    }
+
+    return "desktop";
+  }
+
+  function getEntryMode() {
+    const value = getElement("entryMode")?.value;
+    return value === "internal_entry" ? "internal_entry" : "customer_self";
+  }
+
+  function getSource() {
+    if (typeof window === "undefined") {
+      return "website";
+    }
+
+    const sourceFromUrl = new URLSearchParams(window.location.search).get("source");
+    return sourceFromUrl || getElement("leadSource")?.value || "website";
+  }
+
   function getFormInput() {
     return {
       full_name_original: getElement("fullName")?.value.trim() || "",
@@ -1300,6 +1407,8 @@
       phone_or_zalo: getElement("phoneOrZalo")?.value.trim() || "",
       email: getElement("email")?.value.trim() || "",
       gender: getElement("gender")?.value || "khong_cung_cap",
+      entry_mode: getElement("entryMode")?.value || "customer_self",
+      source: getElement("leadSource")?.value || getSource(),
       note: getElement("note")?.value.trim() || "",
       consent_to_contact: Boolean(getElement("consentToContact")?.checked)
     };
@@ -1321,27 +1430,43 @@
       errors.push(parsedDate.error);
     }
 
+    if (input.phone_or_zalo && !input.consent_to_contact) {
+      errors.push("Nếu đã nhập số điện thoại/Zalo, vui lòng tick đồng ý để Brian-Numerologist lưu thông tin và liên hệ khi cần.");
+    }
+
     return errors;
   }
 
   function validateContactRequirement(reason) {
+    return validateContactConsentForPaidAction(reason);
+  }
+
+  function validateContactConsentForPaidAction(reason = "yêu cầu tư vấn hoặc bản chuyên sâu") {
     const input = getFormInput();
     const errors = [];
+    const phoneField = getElement("phoneOrZalo");
+    const consentField = getElement("consentToContact");
 
     if (!input.phone_or_zalo) {
       errors.push(`Để ${reason}, vui lòng nhập số điện thoại/Zalo.`);
     }
 
     if (!input.consent_to_contact) {
-      errors.push(`Để ${reason}, vui lòng tick đồng ý để Brian liên hệ.`);
+      errors.push(`Để ${reason}, vui lòng tick đồng ý để Brian-Numerologist lưu thông tin và liên hệ.`);
     }
+
+    phoneField?.classList.toggle("attention-field", !input.phone_or_zalo);
+    consentField?.classList.toggle("attention-field", !input.consent_to_contact);
 
     if (errors.length) {
       showValidationError(errors);
-      getElement("phoneOrZalo")?.focus();
+      getElement("leadForm")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      phoneField?.focus();
       return false;
     }
 
+    phoneField?.classList.remove("attention-field");
+    consentField?.classList.remove("attention-field");
     return true;
   }
 
@@ -1446,28 +1571,48 @@
     renderReportAccordion(currentReportData.report.sections);
 
     if (options.saveLead !== false) {
-      currentReportData.lead = buildLeadData(currentReportData, {
-        status: "report_generated"
+      updateLeadStatus("report_generated", {
+        event_type: "report_generated"
       });
-      saveLead(currentReportData.lead);
     }
 
     getElement("reportPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function formatMasterNumbersForLead(data) {
+    const primary = data?.master_numbers?.primary_master_numbers || [];
+    const intermediate = data?.master_numbers?.intermediate_master_numbers || [];
+    const parts = [];
+
+    primary.forEach((item) => {
+      parts.push(`${item.value} primary`);
+    });
+
+    intermediate.forEach((item) => {
+      parts.push(`${item.value} intermediate`);
+    });
+
+    return parts.join(", ");
   }
 
   function buildLeadData(data, overrides = {}) {
     const input = getFormInput();
     const now = new Date().toISOString();
     const existingLead = data?.lead || {};
+    const leadId = overrides.lead_id || existingLead.lead_id || getOrCreateLeadId();
+    const createdAt = existingLead.created_at || now;
+    const selectedPackageValue = overrides.selected_package ?? selectedPackage ?? existingLead.selected_package ?? null;
+    const coreNumbers = data?.core_numbers || {};
 
     return {
-      lead_id: currentLeadId || existingLead.lead_id || `lead_${Date.now()}`,
-      created_at: existingLead.created_at || now,
+      lead_id: leadId,
+      created_at: createdAt,
+      last_updated_at: now,
       updated_at: now,
       status: overrides.status || existingLead.status || "new",
       requested_pdf: Boolean(overrides.requested_pdf ?? existingLead.requested_pdf),
       requested_paid_report: Boolean(overrides.requested_paid_report ?? existingLead.requested_paid_report),
-      selected_package: overrides.selected_package ?? selectedPackage ?? existingLead.selected_package ?? null,
+      selected_package: selectedPackageValue,
       consent_to_contact: input.consent_to_contact,
       full_name_original: data?.input?.full_name_original || input.full_name_original,
       birth_date: data?.input?.birth_date || input.birth_date,
@@ -1475,8 +1620,20 @@
       email: input.email || data?.input?.email || "",
       gender: input.gender || data?.input?.gender || "khong_cung_cap",
       note: input.note || data?.input?.note || "",
+      entry_mode: input.entry_mode || getEntryMode(),
+      source: input.source || getSource(),
+      device_type: detectDeviceType(),
       normalized_full_name: data?.normalized?.full_name || "",
-      core_numbers: data?.core_numbers || {},
+      normalized_name: data?.normalized?.full_name || "",
+      life_path: coreNumbers.life_path || "",
+      destiny: coreNumbers.destiny || "",
+      soul: coreNumbers.soul || "",
+      birthday: coreNumbers.birthday || "",
+      personality: coreNumbers.personality || "",
+      karmic_debts_text: (data?.karmic_debts || []).join(", "),
+      master_numbers_text: formatMasterNumbersForLead(data),
+      local_backup_id: existingLead.local_backup_id || `LOCAL_${Date.now()}`,
+      core_numbers: coreNumbers,
       karmic_debts: data?.karmic_debts || [],
       routing: data?.routing || {},
       calculation_audit: data?.calculation_audit || {}
@@ -1497,7 +1654,7 @@
     }
   }
 
-  function saveLead(leadData) {
+  function saveLocalLead(leadData) {
     if (typeof localStorage === "undefined") {
       return leadData;
     }
@@ -1525,9 +1682,216 @@
 
     localStorage.setItem(LEADS_STORAGE_KEY, JSON.stringify(leads));
     currentLeadId = lead.lead_id;
+    localStorage.setItem(LEAD_ID_STORAGE_KEY, currentLeadId);
 
     return lead;
-    // Phase 2: thay hàm này bằng Google Apps Script Web App POST đến Google Sheet.
+  }
+
+  function statusToEventType(status) {
+    if (status === "paid_report_requested") {
+      return "paid_package_clicked";
+    }
+
+    return status || "report_generated";
+  }
+
+  function buildLeadPayload(eventType, status, extraData = {}) {
+    const lead = extraData.lead || buildLeadData(currentReportData, {
+      ...extraData,
+      status
+    });
+    const config = getGoogleSheetConfig();
+
+    return {
+      shared_secret: config.shared_secret,
+      event_type: eventType || statusToEventType(status),
+      lead: {
+        created_at: lead.created_at || "",
+        last_updated_at: lead.last_updated_at || lead.updated_at || "",
+        lead_id: lead.lead_id || "",
+        full_name_original: lead.full_name_original || "",
+        birth_date: lead.birth_date || "",
+        phone_or_zalo: lead.phone_or_zalo || "",
+        email: lead.email || "",
+        gender: lead.gender || "",
+        note: lead.note || "",
+        consent_to_contact: Boolean(lead.consent_to_contact),
+        entry_mode: lead.entry_mode || "customer_self",
+        source: lead.source || "website",
+        device_type: lead.device_type || "unknown",
+        normalized_name: lead.normalized_name || lead.normalized_full_name || "",
+        life_path: lead.life_path || lead.core_numbers?.life_path || "",
+        destiny: lead.destiny || lead.core_numbers?.destiny || "",
+        soul: lead.soul || lead.core_numbers?.soul || "",
+        birthday: lead.birthday || lead.core_numbers?.birthday || "",
+        personality: lead.personality || lead.core_numbers?.personality || "",
+        karmic_debts: lead.karmic_debts_text || (lead.karmic_debts || []).join(", "),
+        master_numbers: lead.master_numbers_text || "",
+        selected_package: lead.selected_package || "",
+        status: lead.status || status || "new",
+        local_backup_id: lead.local_backup_id || ""
+      },
+      meta: {
+        site_url: typeof window !== "undefined" ? window.location.href : "",
+        app_version: APP_VERSION,
+        user_agent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+        screen_width: typeof window !== "undefined" ? window.innerWidth : "",
+        screen_height: typeof window !== "undefined" ? window.innerHeight : ""
+      }
+    };
+  }
+
+  async function saveLeadToGoogleSheet(payload) {
+    const config = getGoogleSheetConfig();
+
+    if (!config.enable_google_sheet_sync) {
+      return {
+        ok: true,
+        skipped: true,
+        message: "Google Sheet sync disabled."
+      };
+    }
+
+    if (!config.google_apps_script_web_app_url) {
+      throw new Error("Google Apps Script Web App URL is not configured.");
+    }
+
+    const response = await fetch(config.google_apps_script_web_app_url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+    const text = await response.text();
+    let result = {};
+
+    try {
+      result = text ? JSON.parse(text) : {};
+    } catch (error) {
+      result = {
+        ok: response.ok,
+        message: text
+      };
+    }
+
+    if (!response.ok || result.ok === false) {
+      throw new Error(result.message || "Google Sheet sync failed.");
+    }
+
+    showToast("Thông tin đã được ghi nhận.", "success");
+    return result;
+  }
+
+  function getPendingLeads() {
+    if (typeof localStorage === "undefined") {
+      return [];
+    }
+
+    try {
+      const raw = localStorage.getItem(PENDING_LEADS_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (error) {
+      console.warn(error);
+      return [];
+    }
+  }
+
+  function savePendingLead(payload) {
+    if (typeof localStorage === "undefined") {
+      return payload;
+    }
+
+    const pending = getPendingLeads();
+    const pendingItem = {
+      pending_id: `PENDING_${Date.now()}_${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
+      saved_at: new Date().toISOString(),
+      attempts: 0,
+      payload
+    };
+    pending.push(pendingItem);
+    localStorage.setItem(PENDING_LEADS_STORAGE_KEY, JSON.stringify(pending));
+
+    return pendingItem;
+  }
+
+  async function retryPendingLeads() {
+    const config = getGoogleSheetConfig();
+    const pending = getPendingLeads();
+
+    if (!pending.length) {
+      showToast("Không có lead lỗi đang chờ đồng bộ.", "info");
+      return {
+        synced: 0,
+        remaining: 0
+      };
+    }
+
+    if (!config.enable_google_sheet_sync || !config.google_apps_script_web_app_url) {
+      showToast("Google Sheet sync chưa bật hoặc chưa có Web App URL.", "warning");
+      return {
+        synced: 0,
+        remaining: pending.length
+      };
+    }
+
+    const remaining = [];
+    let synced = 0;
+
+    for (const item of pending) {
+      try {
+        const payload = {
+          ...item.payload,
+          event_type: item.payload.event_type || "sync_retried"
+        };
+        await saveLeadToGoogleSheet(payload);
+        synced += 1;
+      } catch (error) {
+        remaining.push({
+          ...item,
+          attempts: Number(item.attempts || 0) + 1,
+          last_error: error.message,
+          last_attempt_at: new Date().toISOString()
+        });
+      }
+    }
+
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(PENDING_LEADS_STORAGE_KEY, JSON.stringify(remaining));
+    }
+
+    showToast(`Đã đồng bộ ${synced} lead. Còn lại ${remaining.length}.`, remaining.length ? "warning" : "success");
+
+    return {
+      synced,
+      remaining: remaining.length
+    };
+  }
+
+  function getPendingLeadCount() {
+    return getPendingLeads().length;
+  }
+
+  function saveLead(payloadOrLead, options = {}) {
+    const isPayload = Boolean(payloadOrLead && payloadOrLead.lead && payloadOrLead.event_type);
+    const lead = isPayload ? payloadOrLead.lead : payloadOrLead;
+    const eventType = isPayload ? payloadOrLead.event_type : options.event_type || statusToEventType(lead?.status);
+    const status = lead?.status || options.status || "new";
+    const localLead = saveLocalLead(lead);
+    const payload = isPayload ? payloadOrLead : buildLeadPayload(eventType, status, { lead: localLead });
+    const config = getGoogleSheetConfig();
+
+    if (!config.enable_google_sheet_sync) {
+      return localLead;
+    }
+
+    saveLeadToGoogleSheet(payload).catch((error) => {
+      console.warn(error);
+      savePendingLead(payload);
+      showToast("Hệ thống sẽ đồng bộ lại sau.", "warning");
+    });
+
+    return localLead;
   }
 
   function updateLeadStatus(status, overrides = {}) {
@@ -1546,7 +1910,10 @@
       selected_package: overrides.selected_package ?? selectedPackage ?? existingLead.selected_package ?? null
     };
     currentReportData.lead = buildLeadData(currentReportData, extra);
-    return saveLead(currentReportData.lead);
+    return saveLead(currentReportData.lead, {
+      event_type: overrides.event_type || statusToEventType(status),
+      status
+    });
   }
 
   function csvEscape(value) {
@@ -1588,13 +1955,24 @@
       "phone_or_zalo",
       "email",
       "gender",
+      "note",
+      "entry_mode",
+      "source",
+      "device_type",
       "selected_package",
       "requested_pdf",
       "requested_paid_report",
       "consent_to_contact",
       "normalized_full_name",
+      "life_path",
+      "destiny",
+      "soul",
+      "birthday",
+      "personality",
       "core_numbers",
-      "karmic_debts"
+      "karmic_debts",
+      "master_numbers_text",
+      "local_backup_id"
     ];
     const rows = leads.map((lead) => headers.map((header) => csvEscape(lead[header])).join(","));
     downloadBlob("brian-numerologist-leads.csv", [headers.join(","), ...rows].join("\n"), "text/csv;charset=utf-8");
@@ -1606,7 +1984,9 @@
       return;
     }
 
-    updateLeadStatus("txt_downloaded");
+    updateLeadStatus("txt_downloaded", {
+      event_type: "txt_downloaded"
+    });
     const normalized = currentReportData.normalized.full_name.toLowerCase().replace(/\s+/g, "-");
     downloadBlob(
       `brian-numerologist-free-${normalized}.txt`,
@@ -1625,7 +2005,10 @@
       return;
     }
 
-    updateLeadStatus("pdf_requested", { requested_pdf: true });
+    updateLeadStatus("pdf_requested", {
+      event_type: "pdf_requested",
+      requested_pdf: true
+    });
     openAllSections();
     window.print();
   }
@@ -1667,20 +2050,17 @@
       return;
     }
 
-    if (!validateContactRequirement("chọn gói chuyên sâu")) {
-      currentReportData.lead = buildLeadData(currentReportData, {
-        selected_package: packageKey,
-        requested_paid_report: true,
-        status: currentReportData.lead.status || "report_generated"
-      });
-      saveLead(currentReportData.lead);
+    if (!validateContactConsentForPaidAction("chọn gói chuyên sâu")) {
+      showToast("Vui lòng nhập Zalo/SĐT và tick consent trước khi gửi yêu cầu gói chuyên sâu.", "warning");
       return;
     }
 
     updateLeadStatus("paid_report_requested", {
+      event_type: "paid_package_clicked",
       selected_package: packageKey,
       requested_paid_report: true
     });
+    showToast("Brian đã ghi nhận yêu cầu. Bạn có thể nhắn Zalo 0948909983 để được tư vấn nhanh hơn.", "success");
   }
 
   function assertEqual(errors, label, actual, expected) {
@@ -1853,6 +2233,7 @@
     VOWELS,
     KARMIC_VALUES,
     MASTER_VALUES,
+    GOOGLE_SHEET_CONFIG,
     normalizeVietnameseName,
     splitVietnameseName,
     letterToNumber,
@@ -1876,9 +2257,24 @@
     renderReportAccordion,
     downloadTxt,
     printPdf,
+    generateLeadId,
+    getOrCreateLeadId,
+    detectDeviceType,
+    getEntryMode,
+    getSource,
+    getGoogleSheetConfig,
     buildLeadData,
+    buildLeadPayload,
+    getStoredLeads,
+    saveLocalLead,
     saveLead,
+    saveLeadToGoogleSheet,
+    getPendingLeads,
+    savePendingLead,
+    retryPendingLeads,
+    getPendingLeadCount,
     updateLeadStatus,
+    validateContactConsentForPaidAction,
     downloadLeadsCsv,
     runTestCase001,
     assertEqual,
@@ -1886,6 +2282,7 @@
     handleFormSubmit,
     showValidationError,
     clearValidationErrors,
+    showToast,
     handlePackageClick,
     openAllSections,
     closeAllSections

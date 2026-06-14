@@ -82,13 +82,23 @@
             </div>
 
             <div class="field">
+              <label for="entryMode">Chế độ nhập</label>
+              <select id="entryMode" name="entry_mode">
+                <option value="customer_self">Khách tự nhập</option>
+                <option value="internal_entry">Brian/nhân viên nhập giúp</option>
+              </select>
+            </div>
+
+            <input id="leadSource" name="source" type="hidden" value="website">
+
+            <div class="field">
               <label for="note">Ghi chú thêm</label>
               <textarea id="note" name="note" rows="4" placeholder="Nhu cầu tư vấn, bối cảnh cá nhân, câu hỏi muốn Brian xem sâu hơn..."></textarea>
             </div>
 
             <label class="checkbox-row" for="consentToContact">
               <input id="consentToContact" name="consent_to_contact" type="checkbox">
-              <span>Tôi đồng ý để Brian liên hệ qua Zalo/điện thoại/email khi tôi yêu cầu PDF hoặc gói chuyên sâu.</span>
+              <span>Tôi đồng ý để Brian-Numerologist lưu thông tin này và liên hệ lại qua Zalo/điện thoại nếu tôi yêu cầu tư vấn hoặc bản chuyên sâu.</span>
             </label>
 
             <div id="formErrors" class="form-errors" role="alert" hidden></div>
@@ -167,8 +177,10 @@
 
     <footer class="site-footer no-print">
       <p>Brian-Numerologist. Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.</p>
-      <p><a href="admin.html">Admin placeholder Phase 2</a></p>
+      <p><a href="admin.html">Admin Lead Sync Phase 2</a></p>
     </footer>
+
+    <div id="toast-container" class="toast-container no-print" aria-live="polite" aria-atomic="true"></div>
 
     <script src="app.js" defer></script>
   </body>

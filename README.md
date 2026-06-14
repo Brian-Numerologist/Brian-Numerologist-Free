@@ -11,6 +11,12 @@ Website MVP tĩnh bằng HTML/CSS/JavaScript thuần để tạo báo cáo Thầ
 ├── styles.css
 ├── app.js
 ├── README.md
+├── google-sheet-config.example.json
+├── google-apps-script/
+│   ├── Code.gs
+│   └── README_Google_Apps_Script.md
+├── specs/
+│   └── Google_Sheet_Lead_Phase2_Spec_v1.txt
 ├── content/
 │   ├── 01_Calculation_Rules_v1.1.txt
 │   ├── LifePath_Library_FREE_v1.txt
@@ -101,16 +107,116 @@ Mỗi lần generate report, app lưu lead vào `localStorage` với key `brian_
 - `pdf_requested`
 - `paid_report_requested`
 
-Bấm `Tải CSV lead tạm` để xuất lead hiện có. Phase 2 sẽ thay `saveLead()` bằng Google Apps Script Web App POST đến Google Sheet.
+Bấm `Tải CSV lead tạm` để xuất lead hiện có. Phase 2 vẫn giữ localStorage/CSV làm fallback khi Google Sheet sync tắt hoặc lỗi.
 
-## Admin Phase 2
+## Phase 2 – Google Sheet Lead Sync
 
-`admin.html` hiện là placeholder. Phase 2 sẽ:
+Phase 2 thêm Google Sheet Lead Sync nhưng không thay đổi công thức Thần số học. Sync mặc định tắt để website GitHub Pages vẫn chạy như MVP v1.
 
-- Xem lead từ Google Sheet.
-- Tải lại báo cáo.
-- Regenerate report.
-- Cập nhật trạng thái khách.
+File mới:
+
+- `google-apps-script/Code.gs`
+- `google-apps-script/README_Google_Apps_Script.md`
+- `google-sheet-config.example.json`
+- `specs/Google_Sheet_Lead_Phase2_Spec_v1.txt`
+
+Google Sheet cần tạo:
+
+```text
+Brian_Numerologist_FREE_Leads
+```
+
+Tab bắt buộc:
+
+- `leads`
+- `config`
+- `logs`
+
+`Code.gs` có hàm `setupSheets()` để tạo header cho 3 tab và không xóa dữ liệu cũ.
+
+## Cấu hình Google Sheet Sync
+
+1. Tạo Google Sheet `Brian_Numerologist_FREE_Leads`.
+2. Vào `Extensions > Apps Script`.
+3. Dán nội dung `google-apps-script/Code.gs`.
+4. Chạy `setupSheets()`.
+5. Chạy `setSecretOnce()`.
+6. Deploy Apps Script:
+   - Type: `Web app`
+   - Execute as: `Me`
+   - Who has access: `Anyone`
+7. Copy Web App URL.
+8. Mở `app.js`, sửa object `GOOGLE_SHEET_CONFIG`:
+
+```js
+const GOOGLE_SHEET_CONFIG = {
+  google_apps_script_web_app_url: "PASTE_YOUR_DEPLOYED_WEB_APP_URL_HERE",
+  google_sheet_url: "PASTE_YOUR_GOOGLE_SHEET_URL_HERE",
+  google_sheet_name: "Brian_Numerologist_FREE_Leads",
+  shared_secret: "CHANGE_ME_PHASE2_SECRET",
+  enable_google_sheet_sync: true,
+  fallback_to_local_storage: true
+};
+```
+
+`google-sheet-config.example.json` chỉ là file mẫu. Không commit secret thật lên repo public nếu không muốn lộ.
+
+## Fallback localStorage và pending sync
+
+Website luôn lưu lead vào localStorage trước. Nếu `enable_google_sheet_sync = false`, app không gọi Apps Script và không báo lỗi.
+
+Nếu sync bật nhưng Apps Script lỗi:
+
+- Website vẫn tạo report, tải TXT và In/Lưu PDF.
+- App hiển thị: `Hệ thống sẽ đồng bộ lại sau.`
+- Payload lỗi được lưu vào localStorage key `brian_numerologist_pending_leads`.
+- Vào `admin.html` bấm `Đồng bộ lại lead lỗi` để retry.
+
+Không gửi `full_report_text` lên Google Sheet. Sheet chỉ nhận thông tin lead, chỉ số, trạng thái, gói quan tâm và log event.
+
+## Admin Lead Sync Phase 2
+
+`admin.html` có:
+
+- Trạng thái sync enabled/disabled.
+- Trạng thái Web App URL và Google Sheet URL.
+- Số lead localStorage.
+- Số pending lead lỗi.
+- Nút mở Google Sheet.
+- Nút tải CSV lead localStorage.
+- Nút đồng bộ lại lead lỗi.
+
+Admin hiện chưa có login thật. Không chia sẻ public nếu chưa có bảo mật.
+
+## Test Phase 2
+
+Sau mỗi lần sửa, chạy lại:
+
+```bash
+node -e "const app=require('./app.js'); console.log(app.runTestCase001().pass)"
+```
+
+Expected: `true`.
+
+Checklist:
+
+- Generate report không nhập phone vẫn tạo được báo cáo và lưu status `report_generated`.
+- Bấm `Tải báo cáo TXT` vẫn tải được, status `txt_downloaded`.
+- Bấm `In/Lưu PDF` gọi browser print, status `pdf_requested`.
+- Chọn gói thiếu phone/consent thì báo lỗi và chưa ghi `paid_report_requested`.
+- Chọn gói đủ phone/consent thì lưu `selected_package` và status `paid_report_requested`.
+- Sync tắt thì website vẫn chạy localStorage.
+- Sync lỗi thì payload vào pending queue.
+- Admin retry sync làm pending queue giảm khi Web App URL đúng.
+- Tab `logs` ghi event chính.
+
+## Bảo mật shared_secret
+
+`shared_secret` trong frontend chỉ là lớp bảo vệ cơ bản vì website GitHub Pages là public. Người có kỹ thuật vẫn có thể xem JS trong DevTools. Nếu cần bảo mật nghiêm túc, Phase 3 nên có backend riêng.
+
+## Admin Phase 2 cũ
+
+Admin placeholder đã được nâng cấp thành Admin Lead Sync Phase 2.
 
 ## Các lỗi cấm mắc
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brian-Numerologist Admin – Phase 2</title>
+    <title>Brian-Numerologist Admin – Lead Sync Phase 2</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -19,39 +19,125 @@
 
     <main class="admin-shell">
       <section class="admin-hero">
-        <p class="eyebrow">Phase 2</p>
-        <h1>Brian-Numerologist Admin – Phase 2</h1>
+        <p class="eyebrow">Lead Sync Phase 2</p>
+        <h1>Brian-Numerologist Admin – Lead Sync Phase 2</h1>
         <p>
-          MVP hiện tại chỉ lưu lead tạm bằng localStorage/CSV. Phase 2 sẽ kết nối Google Sheet,
-          tải lại báo cáo, regenerate report và cập nhật trạng thái khách.
+          Trang nội bộ đơn giản để kiểm tra cấu hình Google Sheet, tải CSV localStorage
+          và đồng bộ lại các lead lỗi. Không chia sẻ public nếu chưa có bảo mật.
         </p>
       </section>
 
       <section class="admin-grid">
         <article class="admin-card">
-          <h2>Lead Google Sheet</h2>
-          <p>Xem danh sách lead mới, lọc theo trạng thái và mở lại hồ sơ khách.</p>
-          <span class="phase-badge">Placeholder</span>
+          <h2>Google Sheet Status</h2>
+          <div class="sync-status-list">
+            <div class="sync-status-row">
+              <span>Sync</span>
+              <strong id="syncEnabledStatus">Đang kiểm tra...</strong>
+            </div>
+            <div class="sync-status-row">
+              <span>Web App URL</span>
+              <strong id="webAppStatus">Đang kiểm tra...</strong>
+            </div>
+            <div class="sync-status-row">
+              <span>Google Sheet URL</span>
+              <strong id="sheetUrlStatus">Đang kiểm tra...</strong>
+            </div>
+          </div>
+          <p>Phase 2 dùng Google Apps Script Web App và shared_secret cơ bản.</p>
         </article>
 
         <article class="admin-card">
-          <h2>Tải lại báo cáo</h2>
-          <p>Nhập mã lead hoặc số Zalo để tải lại dữ liệu tính toán và bản báo cáo đã sinh.</p>
-          <span class="phase-badge">Placeholder</span>
+          <h2>Pending Local Leads</h2>
+          <div class="sync-status-list">
+            <div class="sync-status-row">
+              <span>Lead localStorage</span>
+              <strong id="localLeadCount">0</strong>
+            </div>
+            <div class="sync-status-row">
+              <span>Pending sync</span>
+              <strong id="pendingLeadCount">0</strong>
+            </div>
+          </div>
+          <p>Lead lỗi sync vẫn được giữ trong localStorage để retry sau.</p>
         </article>
 
         <article class="admin-card">
-          <h2>Regenerate report</h2>
-          <p>Chạy lại report khi thư viện nội dung hoặc công thức được nâng phiên bản.</p>
-          <span class="phase-badge">Placeholder</span>
+          <h2>Actions</h2>
+          <div class="admin-actions">
+            <button class="primary-button" type="button" id="openSheetButton">Mở Google Sheet</button>
+            <button class="secondary-button" type="button" id="downloadAdminCsvButton">Tải CSV lead localStorage</button>
+            <button class="secondary-button" type="button" id="retrySyncButton">Đồng bộ lại lead lỗi</button>
+            <a class="ghost-button" href="index.html">Quay về website</a>
+          </div>
+          <p id="adminMessage" class="admin-message" role="status"></p>
         </article>
 
         <article class="admin-card">
-          <h2>Cập nhật trạng thái khách</h2>
-          <p>Đổi trạng thái: contacted, converted, not_converted hoặc ghi chú follow-up.</p>
-          <span class="phase-badge">Placeholder</span>
+          <h2>Notes</h2>
+          <p>
+            Admin Phase 2 chưa có login thật. Sync mặc định tắt cho đến khi Brian cấu hình
+            Apps Script Web App URL, Google Sheet URL, shared_secret và bật
+            <code>enable_google_sheet_sync = true</code> trong <code>app.js</code>.
+          </p>
         </article>
       </section>
     </main>
+
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="app.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var api = window.BrianNumerologist;
+        var config = api.getGoogleSheetConfig();
+        var message = document.getElementById("adminMessage");
+
+        function setText(id, text) {
+          var element = document.getElementById(id);
+          if (element) {
+            element.textContent = text;
+          }
+        }
+
+        function refreshStatus() {
+          setText("syncEnabledStatus", config.enable_google_sheet_sync ? "Enabled" : "Disabled");
+          setText("webAppStatus", config.google_apps_script_web_app_url ? "Configured" : "Not configured");
+          setText("sheetUrlStatus", config.google_sheet_url ? "Configured" : "Not configured");
+          setText("localLeadCount", String(api.getStoredLeads().length));
+          setText("pendingLeadCount", String(api.getPendingLeadCount()));
+        }
+
+        document.getElementById("openSheetButton").addEventListener("click", function () {
+          if (!config.google_sheet_url) {
+            message.textContent = "Chưa cấu hình Google Sheet URL trong app.js.";
+            api.showToast("Chưa cấu hình Google Sheet URL.", "warning");
+            return;
+          }
+
+          window.open(config.google_sheet_url, "_blank", "noopener");
+        });
+
+        document.getElementById("downloadAdminCsvButton").addEventListener("click", function () {
+          if (!api.getStoredLeads().length) {
+            message.textContent = "Chưa có lead localStorage để tải CSV.";
+            api.showToast("Chưa có lead localStorage để tải CSV.", "warning");
+            return;
+          }
+
+          api.downloadLeadsCsv();
+          message.textContent = "Đã tạo file CSV từ localStorage.";
+        });
+
+        document.getElementById("retrySyncButton").addEventListener("click", function () {
+          api.retryPendingLeads().then(function (result) {
+            refreshStatus();
+            message.textContent = "Retry xong: đồng bộ " + result.synced + ", còn lại " + result.remaining + ".";
+          });
+        });
+
+        refreshStatus();
+      });
+    </script>
   </body>
 </html>
