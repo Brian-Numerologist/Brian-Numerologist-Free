@@ -1,0 +1,743 @@
+# TEST_CASE_001_NGUYEN_THANH_TRI_FREE_REPORT
+# Brian_Numerologist – Test Case Chuẩn 001
+# Loại test: FREE REPORT 11 BƯỚC
+# Mục tiêu: Kiểm tra Calculation Engine + Routing + Report Template + Content Libraries
+# Trạng thái: CHUẨN DÙNG CHO CODEX / LẬP TRÌNH VIÊN / GPT BUILDER
+# Phiên bản test case: v1.0
+# Ngày tạo: 14/06/2026
+#
+# File phụ thuộc chuẩn:
+# - 01_Calculation_Rules_v1.1.txt
+# - LifePath_Library_FREE_v1.txt
+# - Karmic_Overlay_FREE_v1.txt
+# - Destiny_Library_FREE_v1.txt
+# - Soul_Library_FREE_v1.txt
+# - Birthday_Library_FREE_v1.txt
+# - Report_Template_FREE_11_Buoc_v1.txt
+
+============================================================
+I. TEST CASE METADATA
+============================================================
+
+test_case_id: TEST_CASE_001
+test_case_name: NGUYEN_THANH_TRI_FREE_REPORT
+test_type: end_to_end_free_report
+output_format: txt
+target_report_type: FREE_11_BUOC
+language: Vietnamese
+tone: Trực diện, sâu sắc, thấu cảm, không hù dọa, không định mệnh hóa tuyệt đối
+
+============================================================
+II. INPUT DATA
+============================================================
+
+full_name_original: Nguyễn Thanh Trí
+birth_date: 21/04/1986
+profile_owner: Của chính Brian / Nguyễn Thanh Trí
+cta_policy: Giữ CTA ưu đãi 20% nếu nâng cấp trong vòng 3 ngày
+
+============================================================
+III. EXPECTED NORMALIZATION
+============================================================
+
+full_name_normalized: NGUYEN THANH TRI
+last_name: NGUYEN
+middle_name_group: THANH
+first_name: TRI
+
+name_without_spaces: NGUYENTHANHTRI
+letter_count_expected: 14
+number_count_expected: 14
+audit_expected: valid
+
+Pythagoras mapping:
+N=5
+G=7
+U=3
+Y=7
+E=5
+N=5
+T=2
+H=8
+A=1
+N=5
+H=8
+T=2
+R=9
+I=9
+
+Important correction:
+NGUYEN THANH TRI có 14 chữ cái, không phải 15.
+
+============================================================
+IV. EXPECTED CALCULATION RESULT
+============================================================
+
+life_path:
+- display: 13/4
+- base: 4
+- karmic: 13/4
+- route: LIFEPATH_4 + KARMIC_OVERLAY_13_4
+
+destiny:
+- display: 13/4
+- base: 4
+- karmic: 13/4
+- route: DESTINY_4 + KARMIC_OVERLAY_13_4
+
+soul:
+- display: 16/7
+- base: 7
+- karmic: 16/7
+- route: SOUL_7 + KARMIC_OVERLAY_16_7
+
+birthday:
+- birthday_original: 21
+- birthday_base: 3
+- birthday_display: 21/3
+- route: BIRTHDAY_21
+
+personality:
+- display: 24/6
+- base: 6
+
+master_numbers:
+- Dấu vết 11 xuất hiện trong phần phụ âm của Tên “TRI” khi tính Nhân Cách.
+- Kết quả Nhân Cách cuối cùng vẫn là 24/6.
+- Bản FREE chỉ ghi nhận, không phân tích sâu.
+
+karmic_debts_expected:
+- 13/4
+- 16/7
+
+============================================================
+V. EXPECTED JSON SNAPSHOT
+============================================================
+
+{
+  "input": {
+    "full_name_original": "Nguyễn Thanh Trí",
+    "birth_date": "21/04/1986"
+  },
+  "normalized": {
+    "full_name": "NGUYEN THANH TRI",
+    "last_name": "NGUYEN",
+    "middle_name_group": "THANH",
+    "first_name": "TRI"
+  },
+  "core_numbers": {
+    "life_path": "13/4",
+    "life_path_base": 4,
+    "destiny": "13/4",
+    "destiny_base": 4,
+    "soul": "16/7",
+    "soul_base": 7,
+    "birthday": "21/3",
+    "birthday_original": 21,
+    "birthday_base": 3,
+    "personality": "24/6",
+    "personality_base": 6
+  },
+  "master_numbers": [],
+  "karmic_debts": ["13/4", "16/7"],
+  "calculation_audit": {
+    "letter_count": 14,
+    "number_count": 14,
+    "is_valid": true
+  },
+  "routing": {
+    "life_path_blocks": ["LIFEPATH_4", "KARMIC_OVERLAY_13_4"],
+    "destiny_blocks": ["DESTINY_4", "KARMIC_OVERLAY_13_4"],
+    "soul_blocks": ["SOUL_7", "KARMIC_OVERLAY_16_7"],
+    "birthday_blocks": ["BIRTHDAY_21"]
+  }
+}
+
+============================================================
+VI. PASS / FAIL CONDITIONS
+============================================================
+
+PASS nếu hệ thống đạt toàn bộ điều kiện sau:
+
+[ ] Chuẩn hóa Nguyễn Thanh Trí thành NGUYEN THANH TRI.
+[ ] Tách Họ = NGUYEN.
+[ ] Tách Cụm tên lót = THANH.
+[ ] Tách Tên = TRI.
+[ ] Ghi nhận Y là nguyên âm.
+[ ] letter_count = 14.
+[ ] number_count = 14.
+[ ] Đường Đời = 13/4.
+[ ] Sứ Mệnh = 13/4.
+[ ] Linh Hồn = 16/7.
+[ ] Ngày Sinh hiển thị = 21/3.
+[ ] Birthday routing = BIRTHDAY_21, không phải BIRTHDAY_3.
+[ ] Nhân Cách = 24/6.
+[ ] Gọi đúng Karmic Overlay 13/4 cho Đường Đời.
+[ ] Gọi đúng Karmic Overlay 13/4 cho Sứ Mệnh.
+[ ] Gọi đúng Karmic Overlay 16/7 cho Linh Hồn.
+[ ] Xuất đủ 11 bước báo cáo FREE.
+[ ] Có CTA ưu đãi 20% trong vòng 3 ngày.
+[ ] Không dùng câu khẳng định định mệnh tuyệt đối.
+[ ] Không dùng ngôn ngữ hù dọa mua hàng.
+
+FAIL nếu có một trong các lỗi sau:
+
+[ ] Đếm NGUYEN THANH TRI thành 15 chữ cái.
+[ ] Tính Y là phụ âm.
+[ ] Tính Sứ Mệnh bằng cách cộng cả chuỗi tên trước rồi mới rút gọn.
+[ ] Tính Linh Hồn bằng cách cộng toàn bộ nguyên âm cả chuỗi trước rồi mới rút gọn.
+[ ] Gọi Birthday block là BIRTHDAY_3 thay vì BIRTHDAY_21.
+[ ] Bỏ qua Karmic Overlay 13/4 hoặc 16/7.
+[ ] Xuất nội dung hù dọa, định mệnh hóa hoặc ép mua gói.
+
+============================================================
+VII. FREE REPORT OUTPUT
+============================================================
+
+============================================================
+TRANG BÌA
+============================================================
+
+BẢN ĐỒ THẦN SỐ HỌC FREE 11 BƯỚC
+Cửa mở đầu tiên để hiểu bản thân qua Họ tên và Ngày sinh
+
+Họ tên khai sinh: Nguyễn Thanh Trí
+Ngày sinh dương lịch: 21/04/1986
+Thương hiệu: Brian-Numerologist
+
+Lưu ý nền:
+Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh. Báo cáo này giúp gọi tên những cấu trúc năng lượng chính, nhưng quyền lựa chọn, hành động và chuyển hóa vẫn thuộc về bạn.
+
+============================================================
+LỜI MỞ ĐẦU
+============================================================
+
+Chào anh, Nguyễn Thanh Trí.
+
+Bản FREE này là “cửa mở” đầu tiên trong hệ thống Brian-Numerologist. Nó không nhằm nói hết mọi thứ về anh, cũng không thay thế bản phân tích chuyên sâu. Mục tiêu của bản này là giúp anh nhìn thấy 4 trụ cột cốt lõi đầu tiên trong bản đồ cá nhân: Đường Đời, Sứ Mệnh, Linh Hồn và Ngày Sinh.
+
+Nếu bản chuyên sâu là một bản đồ nhiều lớp, thì bản FREE này giống như bản phác thảo nền. Nó đủ để anh nhận ra vài mô thức quen thuộc, vài điểm “nhột”, vài xung đột nội tại đang âm thầm vận hành. Nhưng các chiến lược hóa giải, định hướng dài hạn, dự báo chu kỳ và phân tích các chỉ số bổ sung sẽ được giữ lại cho gói chuyên sâu.
+
+============================================================
+BƯỚC 1 – TÍNH TOÁN VÀ NHẬN DIỆN 4 CHỈ SỐ CỐT LÕI
+============================================================
+
+1. THÔNG TIN ĐẦU VÀO
+
+Họ tên khai sinh: Nguyễn Thanh Trí
+Tên chuẩn hóa: NGUYEN THANH TRI
+Ngày sinh dương lịch: 21/04/1986
+
+Cấu trúc tên:
+- Họ: NGUYEN
+- Cụm tên lót: THANH
+- Tên: TRI
+
+Lưu ý kỹ thuật:
+Tên lót được hiểu là toàn bộ cụm từ sau Họ và trước Tên. Trong hồ sơ này, cụm tên lót là “THANH”.
+
+2. BẢNG QUY ĐỔI CHỮ CÁI
+
+Tên sau khi bỏ khoảng trắng:
+NGUYENTHANHTRI
+
+Bảng quy đổi:
+
+N = 5
+G = 7
+U = 3
+Y = 7
+E = 5
+N = 5
+T = 2
+H = 8
+A = 1
+N = 5
+H = 8
+T = 2
+R = 9
+I = 9
+
+Tổng số chữ cái: 14
+Tổng số con số quy đổi: 14
+Trạng thái kiểm tra chéo: HỢP LỆ
+
+Ghi chú quan trọng:
+Trong lần kiểm tra này, tên NGUYEN THANH TRI có 14 chữ cái, không phải 15. Đây là điểm cần cập nhật lại ở test case mẫu trong file Calculation Rules nếu muốn toàn bộ hệ thống đồng nhất tuyệt đối.
+
+3. TÍNH ĐƯỜNG ĐỜI
+
+Ngày sinh: 21/04/1986
+
+Ngày:
+21 → 2 + 1 = 3
+
+Tháng:
+04 → 4
+
+Năm:
+1986 → 1 + 9 + 8 + 6 = 24 → 2 + 4 = 6
+
+Tổng:
+3 + 4 + 6 = 13 → 1 + 3 = 4
+
+Kết luận:
+Đường Đời: 13/4
+
+Ghi nhận:
+Đây là Đường Đời 4 có lớp Nợ Nghiệp 13/4.
+
+4. TÍNH SỨ MỆNH
+
+Công thức:
+Tính Họ riêng, Cụm tên lót riêng, Tên riêng; rút gọn từng phần trước, sau đó mới cộng.
+
+Họ: NGUYEN
+N5 + G7 + U3 + Y7 + E5 + N5 = 32 → 3 + 2 = 5
+
+Cụm tên lót: THANH
+T2 + H8 + A1 + N5 + H8 = 24 → 2 + 4 = 6
+
+Tên: TRI
+T2 + R9 + I9 = 20 → 2 + 0 = 2
+
+Tổng:
+5 + 6 + 2 = 13 → 1 + 3 = 4
+
+Kết luận:
+Sứ Mệnh: 13/4
+
+Ghi nhận:
+Đây là Sứ Mệnh 4 có lớp Nợ Nghiệp 13/4.
+
+5. TÍNH LINH HỒN
+
+Nguyên âm tiếng Việt được chốt:
+A, E, I, O, U, Y
+Trong tên tiếng Việt, Y luôn là nguyên âm.
+
+Họ: NGUYEN
+Nguyên âm: U, Y, E
+U3 + Y7 + E5 = 15 → 1 + 5 = 6
+
+Cụm tên lót: THANH
+Nguyên âm: A
+A1 = 1
+
+Tên: TRI
+Nguyên âm: I
+I9 = 9
+
+Tổng:
+6 + 1 + 9 = 16 → 1 + 6 = 7
+
+Kết luận:
+Linh Hồn: 16/7
+
+Ghi nhận:
+Đây là Linh Hồn 7 có lớp Nợ Nghiệp 16/7.
+
+6. TÍNH NGÀY SINH
+
+Ngày sinh gốc: 21
+
+21 → 2 + 1 = 3
+
+Kết luận:
+Ngày Sinh: 21/3
+
+Routing nội dung:
+Dùng block BIRTHDAY_21.
+
+7. TÍNH NHÂN CÁCH SƠ LƯỢC
+
+Phụ âm là các chữ cái không thuộc nhóm A, E, I, O, U, Y. Trong tiếng Việt, Y luôn là nguyên âm, nên Y không được tính vào Nhân Cách.
+
+Họ: NGUYEN
+Phụ âm: N, G, N
+N5 + G7 + N5 = 17 → 1 + 7 = 8
+
+Cụm tên lót: THANH
+Phụ âm: T, H, N, H
+T2 + H8 + N5 + H8 = 23 → 2 + 3 = 5
+
+Tên: TRI
+Phụ âm: T, R
+T2 + R9 = 11
+
+Tổng:
+8 + 5 + 11 = 24 → 2 + 4 = 6
+
+Kết luận:
+Nhân Cách: 24/6
+
+8. TÓM TẮT 4 CHỈ SỐ CỐT LÕI
+
+- Đường Đời: 13/4
+- Sứ Mệnh: 13/4
+- Linh Hồn: 16/7
+- Ngày Sinh: 21/3
+- Nhân Cách tham khảo: 24/6
+
+Master/Karmic Debt:
+- 13/4 xuất hiện ở Đường Đời.
+- 13/4 xuất hiện ở Sứ Mệnh.
+- 16/7 xuất hiện ở Linh Hồn.
+- Dấu vết 11 xuất hiện trong phần phụ âm của Tên “TRI” khi tính Nhân Cách, nhưng kết quả Nhân Cách cuối cùng là 24/6.
+
+Routing kiểm thử:
+- LifePath: LIFEPATH_4 + KARMIC_OVERLAY_13_4
+- Destiny: DESTINY_4 + KARMIC_OVERLAY_13_4
+- Soul: SOUL_7 + KARMIC_OVERLAY_16_7
+- Birthday: BIRTHDAY_21
+
+============================================================
+BƯỚC 2 – ĐƯỜNG ĐỜI: 13/4
+============================================================
+
+Đường Đời là dòng chảy chính trong bản đồ Thần số học. Nó không nói anh chắc chắn sẽ trở thành ai, mà chỉ ra bài học lớn nhất và con đường thuận nhất để anh trưởng thành.
+
+Với Đường Đời 13/4, lõi năng lượng của anh là số 4: Người Kiến Tạo. Đây là con đường của kỷ luật, trật tự, sự bền bỉ và năng lực xây dựng nền móng. Anh không đến để sống theo cảm hứng nhất thời. Anh đến để học cách xây một thứ gì đó đủ vững, đủ thật, đủ bền.
+
+Khi sống đúng năng lượng 4, anh là người thực tế, có trách nhiệm, đáng tin và có khả năng làm việc đường dài. Người khác có thể nhìn vào anh như một cột trụ: không quá ồn ào, không nhất thiết phải tỏa sáng bằng hào quang bên ngoài, nhưng có sức chịu đựng và khả năng giữ hệ thống vận hành.
+
+Tuy nhiên, lớp 13/4 khiến bài học này nặng hơn số 4 thông thường. Theo ngôn ngữ nghiệp học, 13/4 là bài học về sự lười biếng, vô kỷ luật, trì hoãn hoặc trốn tránh trách nhiệm trong một mô thức cũ. Trong đời sống hiện tại, nó thường biểu hiện bằng cảm giác: làm gì cũng phải đi qua chướng ngại, làm đi làm lại, xây rồi sửa, bắt đầu rồi bị kéo lại xử lý nền móng.
+
+Một vài triệu chứng dễ thấy:
+- Anh có thể cảm thấy mình phải nỗ lực nhiều hơn người khác mới đạt được kết quả tương đương.
+- Anh dễ bị đặt vào những việc cần trách nhiệm, quy trình và sự kiên trì.
+- Anh có thể có lúc rất muốn đi nhanh, nhưng cuộc đời lại bắt quay về sửa từng viên gạch nhỏ.
+- Nếu mất động lực, anh dễ trì hoãn, nhưng càng trì hoãn thì áp lực càng nặng hơn.
+
+Bài học cốt lõi của Đường Đời 13/4 là: không than vãn, không đi đường tắt, không bỏ cuộc giữa chừng. Con đường của anh không phải là cú nhảy vọt nhất thời, mà là sự tích lũy bền bỉ. Khi anh chịu xây nền, chịu chuẩn hóa, chịu làm đều, năng lượng 13/4 bắt đầu chuyển từ gánh nặng thành sức mạnh kiến tạo.
+
+Phần này mới chỉ là bề mặt. Gốc rễ thật sự nằm ở cách Đường Đời 13/4 va vào Sứ Mệnh 13/4 và Linh Hồn 16/7 phía sau.
+
+============================================================
+BƯỚC 3 – SỨ MỆNH: 13/4
+============================================================
+
+Nếu Đường Đời là con đường anh đi, thì Sứ Mệnh là hành trang anh mang theo. Nó cho biết anh có xu hướng dùng tài năng nào để đi qua cuộc đời này.
+
+Sứ Mệnh 13/4 cho thấy anh mang hành trang của Người Kiến Thiết. Năng lực tự nhiên của anh là biến những ý tưởng mơ hồ thành cấu trúc cụ thể, biến sự hỗn loạn thành trật tự, biến cảm hứng thành quy trình. Đây là tài năng rất phù hợp với những việc cần hệ thống, trách nhiệm, tính bền và khả năng quản lý chi tiết.
+
+Khi năng lượng này phát lộ tích cực, anh có thể là người:
+- Đáng tin, nói được làm được.
+- Có khả năng tổ chức, chuẩn hóa, xây quy trình.
+- Chịu được việc khó, việc dài, việc cần sự tỉ mỉ.
+- Làm việc có trách nhiệm và không dễ bỏ cuộc nếu đã thật sự cam kết.
+
+Nhưng khi tài năng bị lãng phí hoặc bị lệch, Sứ Mệnh 13/4 có thể biểu hiện thành:
+- Cứng nhắc, bảo thủ, khó linh hoạt.
+- Quá kỹ tính, dễ sa vào tiểu tiết.
+- Cảm giác nặng nề, trì trệ, chán nản trước các chướng ngại.
+- Biết mình cần kỷ luật nhưng lại có lúc rất muốn buông xuôi.
+
+Điểm đáng chú ý là cả Đường Đời và Sứ Mệnh của anh đều là 13/4. Điều này khiến bài học về kỷ luật, nền tảng và trách nhiệm không chỉ là “con đường phải học”, mà còn là “công cụ phải dùng”. Nói cách khác: anh không chỉ cần đi con đường số 4, anh còn phải dùng chính năng lực số 4 để đi con đường đó.
+
+Định hướng nghề nghiệp phù hợp với Sứ Mệnh 4 thường là các lĩnh vực có cấu trúc rõ: quản trị, giáo dục, hệ thống, kế toán, luật, kỹ thuật, vận hành, quy trình, xây dựng nội dung chuyên môn, tổ chức hoặc bất kỳ công việc nào cần sự bền bỉ và chính xác.
+
+Phân tích trên chỉ là sơ lược. Để biết cách phát huy Sứ Mệnh 13/4 mà không rơi vào áp lực, trì trệ hoặc tự biến mình thành “người gánh hệ thống”, cần đọc ở bản chuyên sâu.
+
+============================================================
+BƯỚC 4 – ĐƯỜNG ĐỜI VS SỨ MỆNH
+============================================================
+
+Đây là một điểm rất mạnh trong hồ sơ của anh: Đường Đời và Sứ Mệnh cùng là 13/4.
+
+Khi hai chỉ số này trùng nhau, năng lượng không bị chia đôi ở tầng “con đường” và “hành trang”. Anh đi trên con đường của kỷ luật, nền tảng, quy trình; đồng thời hành trang anh mang theo cũng là kỷ luật, nền tảng, quy trình. Điều này có thể tạo ra cảm giác rất rõ: cuộc đời liên tục giao cho anh những bài toán cần sự bền bỉ, còn bản thân anh cũng được trang bị khả năng chịu trách nhiệm để xử lý chúng.
+
+Nói theo ẩn dụ: anh vừa đi trên con đường xây nhà, vừa cầm trong tay bộ dụng cụ của người thợ xây. Đây là một cấu trúc khá “khớp”. Nhưng cái khớp này không đồng nghĩa với nhẹ. Ngược lại, vì cả hai cùng là 13/4, bài học có thể bị nhân đôi: trách nhiệm nhiều hơn, áp lực nền móng rõ hơn, cảm giác phải làm cho đúng, cho chắc, cho tử tế cũng nặng hơn.
+
+Về mặt Hiệu quả/Khoảng cách, hồ sơ này cho thấy năng lực và con đường có tương xứng. Anh không phải kiểu người thiếu công cụ để đi đường. Vấn đề có thể nằm ở chỗ: công cụ quá giống con đường, nên nếu không tỉnh thức, anh dễ biến toàn bộ cuộc sống thành một công trình phải sửa, một nhiệm vụ phải hoàn thành, một trách nhiệm phải gánh.
+
+Một vài triệu chứng “nhột” có thể xuất hiện:
+- Anh làm được nhiều việc, nhưng dễ thấy mình luôn còn thiếu, còn chưa đủ chắc, chưa đủ hoàn chỉnh.
+- Anh có năng lực xây hệ thống, nhưng cũng dễ bị chính hệ thống đó làm mệt.
+- Anh có thể trở thành người người khác tin cậy, nhưng bên trong lại thấy nặng vì “sao việc gì cũng đến tay mình”.
+- Anh dễ kẹt giữa hai trạng thái: muốn làm thật chỉn chu và muốn buông vì quá mệt.
+
+Điểm cần lưu ý: năng lượng 13/4 không thưởng cho đường tắt. Nếu anh cố né việc khó, việc đó sẽ quay lại dưới dạng khác. Nhưng nếu anh biết dùng đúng bộ công cụ 4 – chia nhỏ, lập quy trình, đi từng bước, chuẩn hóa và kiên trì – thì chính cấu trúc này có thể trở thành nền tảng rất mạnh cho thành tựu dài hạn.
+
+Phần này mới chỉ là sơ lược. Bản chuyên sâu sẽ bóc tách kỹ hơn: trong những lĩnh vực nào anh nên dùng năng lượng 13/4, ở đâu nó đang giúp anh vững, và ở đâu nó đang khiến anh tự giam mình trong áp lực.
+
+============================================================
+BƯỚC 5 – LINH HỒN: 16/7
+============================================================
+
+Linh Hồn là phần ít người nhìn thấy nhất, nhưng lại điều khiển rất nhiều lựa chọn của anh. Nó không hỏi anh đang làm gì, mà hỏi: sâu thẳm bên trong, anh thật sự khao khát điều gì?
+
+Linh Hồn 16/7 cho thấy bên trong anh là người đi tìm chân lý. Anh không dễ thỏa mãn với những câu trả lời hời hợt. Anh cần chiều sâu, tri thức, sự riêng tư và một hệ giá trị nội tâm đủ vững để tin vào. Đây là Linh Hồn của người cần hiểu bản chất, không chỉ làm theo bề mặt.
+
+Khi Linh Hồn 7 được thỏa mãn, anh cảm thấy bình yên trong sự sâu sắc. Anh được nuôi dưỡng bởi học hỏi, nghiên cứu, chiêm nghiệm và những khoảng riêng tư chất lượng. Anh có xu hướng muốn hiểu vì sao mọi thứ vận hành như vậy, vì sao con người hành xử như vậy, vì sao một mô thức cứ lặp lại.
+
+Nhưng lớp 16/7 khiến năng lượng này có chiều sâu nghiệp học rõ hơn. 16/7 thường gắn với bài học về sự trung thực, niềm tin, cái tôi và tái sinh nội tâm. Theo ngôn ngữ nghiệp học, nó có thể là mô thức liên quan đến lừa dối, phản bội niềm tin, sống giả tạo hoặc vô trách nhiệm với mối quan hệ trong một tầng biểu tượng nào đó. Ở đời sống hiện tại, nó có thể biểu hiện bằng những cú thức tỉnh khiến cái tôi phải mềm xuống.
+
+Một vài triệu chứng dễ thấy:
+- Anh có thể rất khó tin người khác hoàn toàn.
+- Anh cần ở một mình để hồi phục, nhưng nếu quá lâu dễ thành cô lập.
+- Anh dễ nhìn ra điều không thật, nhưng cũng dễ bị tổn thương khi niềm tin bị phá vỡ.
+- Anh có thể có vẻ mạnh, lạnh hoặc lý trí, nhưng bên trong có những tầng cảm xúc không dễ nói ra.
+
+Điều quan trọng: Linh Hồn 16/7 không phải “số xấu”. Đây là tín hiệu cho thấy bên trong anh có một bài học sâu về sự chân thật. Anh cần sống thật với mình, bớt ngạo mạn trí tuệ, bớt cố tỏ ra ổn, và xây lại niềm tin từ những giá trị nội tâm vững chắc.
+
+Phần này mới chỉ gọi tên động lực ngầm. Khi ráp Linh Hồn 16/7 với Đường Đời 13/4 và Sứ Mệnh 13/4, một mâu thuẫn rất rõ bắt đầu hiện ra: bên ngoài cần xây nền, bên trong lại cần tìm chân lý và không gian riêng.
+
+============================================================
+BƯỚC 6 – LINH HỒN VS ĐƯỜNG ĐỜI, LINH HỒN VS SỨ MỆNH
+============================================================
+
+Đây là một trong những vùng quan trọng nhất của hồ sơ này.
+
+Đường Đời và Sứ Mệnh của anh đều là 13/4: thực tế, kỷ luật, trách nhiệm, xây dựng, quy trình, nền tảng. Nhưng Linh Hồn của anh là 16/7: sâu sắc, riêng tư, chiêm nghiệm, tìm chân lý, cần khoảng lặng và sự thật nội tâm.
+
+Nói đơn giản: bên ngoài anh được yêu cầu xây, làm, chịu trách nhiệm, hoàn thiện hệ thống. Bên trong anh lại cần hiểu, tĩnh lại, đào sâu và tìm ý nghĩa.
+
+Nếu hai năng lượng này hòa hợp, anh có thể trở thành người xây hệ thống rất có chiều sâu. Không chỉ làm cho xong, mà còn hiểu bản chất. Không chỉ tạo quy trình, mà còn biết vì sao quy trình đó cần tồn tại. Không chỉ chịu trách nhiệm, mà còn có năng lực quan sát sâu để sửa từ gốc.
+
+Nhưng nếu lệch, đây là mâu thuẫn rất hao năng lượng. Số 4 bắt anh làm đều, làm chắc, làm theo kế hoạch. Số 7 lại cần khoảng lặng, sự riêng tư, sự thật nội tâm và thời gian suy ngẫm. Khi đời sống bên ngoài quá nhiều trách nhiệm, Linh Hồn 7 có thể thấy nghẹt thở. Khi Linh Hồn 7 rút vào cô độc quá lâu, Đường Đời 4 lại bị đình trệ vì thiếu hành động đều đặn.
+
+Một vài triệu chứng dễ xuất hiện:
+- Anh làm tốt việc cần trách nhiệm, nhưng bên trong có lúc thấy trống hoặc mỏi vì thiếu ý nghĩa.
+- Anh có thể được khen là chắc chắn, đáng tin, nhưng vẫn tự hỏi: “Mình đang xây cái này để làm gì?”
+- Anh cần yên tĩnh để nghĩ sâu, nhưng cuộc đời lại liên tục giao việc phải xử lý.
+- Anh có thể trì hoãn không phải vì lười, mà vì bên trong chưa thật sự đồng thuận.
+- Anh dễ đốt năng lượng vào việc sửa hệ thống bên ngoài, trong khi gốc rễ lại nằm ở một niềm tin bên trong chưa được chữa lành.
+
+Câu hỏi cốt lõi không phải là “anh có giỏi không?”. Câu hỏi thật sự là: “Anh có đang dùng sự giỏi đó cho một điều mà Linh Hồn anh thấy có ý nghĩa không?”
+
+Nếu câu trả lời là có, năng lượng 13/4 và 16/7 trở thành một tổ hợp rất mạnh: người kiến tạo có chiều sâu. Nếu câu trả lời là chưa, anh dễ rơi vào trạng thái làm tốt nhưng không vui, có trách nhiệm nhưng cô độc, có năng lực nhưng vẫn thấy như đang mắc kẹt trong một cấu trúc chưa đúng với mình.
+
+Bản miễn phí giúp gọi tên mâu thuẫn. Bản chuyên sâu mới đi vào chiến lược hòa giải giữa kỷ luật bên ngoài và chân lý bên trong.
+
+============================================================
+BƯỚC 7 – NGÀY SINH: 21/3
+============================================================
+
+Ngày Sinh là món quà phụ trợ. Nó không mạnh bằng Đường Đời, nhưng thường hiện ra rất nhanh trong cách anh phản ứng, tạo ấn tượng và xử lý tình huống hằng ngày.
+
+Anh sinh ngày 21, rút gọn về 3. Đây là Ngày Sinh của “Nghệ Sĩ Ngoại Giao”.
+
+Ngày Sinh 21 được tạo bởi số 2 và số 1, rồi rút về số 3. Điều này cho thấy anh có một món quà khá thú vị: khả năng biểu đạt, giao tiếp, tạo thiện cảm nhưng không quá thô bạo. Anh có thể dùng sự tinh tế của số 2, sự chủ động của số 1 và năng lượng biểu đạt của số 3 để kết nối với người khác.
+
+Vũ khí của Ngày Sinh 21 là sự duyên dáng xã giao. Anh có thể biết nói điều người khác dễ tiếp nhận, biết tạo bầu không khí nhẹ hơn, biết dùng lời nói hoặc sự vui vẻ để mở cửa quan hệ. Đây là món quà rất tốt cho giảng dạy, tư vấn, truyền thông, thuyết trình, viết nội dung hoặc các công việc cần truyền đạt ý tưởng.
+
+Tuy nhiên, Ngày Sinh 21 cũng có lưu ý riêng: đừng hứa hẹn quá nhiều mà không làm được. Năng lượng 3 có thể nói nhanh, hứng nhanh, mở ý tưởng nhanh. Nếu thiếu kỷ luật của số 4, sự duyên dáng có thể biến thành phân tán hoặc mất chữ tín.
+
+Điểm thú vị trong hồ sơ này là: Ngày Sinh 21/3 có thể làm mềm bộ đôi 13/4 rất mạnh của anh. Đường Đời và Sứ Mệnh 13/4 khiến anh nghiêng về trách nhiệm, quy trình, sự chắc chắn. Nhưng Ngày Sinh 21/3 lại cho anh khả năng giao tiếp, truyền cảm hứng và tạo kết nối. Đây là một món quà bổ trợ tốt, giúp anh không trở thành một “cỗ máy trách nhiệm” quá khô.
+
+Nếu lệch, có thể xuất hiện:
+- Bên trong muốn làm cho chắc, nhưng khi giao tiếp lại dễ hứa nhanh hơn khả năng triển khai.
+- Có duyên diễn đạt, nhưng đôi khi chưa muốn bước ra thể hiện vì Linh Hồn 7 thích riêng tư.
+- Có thể nói được, dạy được, truyền cảm hứng được, nhưng sau đó vẫn tự nghi ngờ chiều sâu của mình.
+
+Ngày Sinh 21 chỉ là một lớp phụ trợ. Nhưng khi đặt cạnh Đường Đời, nó cho thấy anh có một món quà giúp đi nhanh hơn: khả năng dùng lời nói, sự tinh tế và biểu đạt để đưa cấu trúc 13/4 đến gần người khác hơn.
+
+============================================================
+BƯỚC 8 – TỔNG HỢP MÂU THUẪN CHÍNH
+============================================================
+
+Khi nhìn riêng từng chỉ số, anh có thể thấy từng mảnh rời rạc: 13/4 là kỷ luật và nền tảng, 16/7 là chiều sâu và chân lý, 21/3 là biểu đạt và giao tiếp. Nhưng khi ráp lại, hồ sơ này hiện ra một mâu thuẫn rất rõ:
+
+Anh là người cần xây một điều gì đó vững chắc, nhưng bên trong lại không chấp nhận xây những thứ vô nghĩa.
+
+Đường Đời 13/4 và Sứ Mệnh 13/4 khiến cuộc đời liên tục đẩy anh vào bài học của trách nhiệm, quy trình, chuẩn hóa và đi đường dài. Anh có năng lực xây nền, tổ chức, chịu trách nhiệm và tạo ra thứ có cấu trúc. Nhưng Linh Hồn 16/7 không cho phép anh chỉ làm vì nghĩa vụ. Nó hỏi: “Điều này có thật không? Có đúng với mình không? Có ý nghĩa không? Có chiều sâu không?”
+
+Đó là lý do anh có thể vừa rất trách nhiệm, vừa rất dễ mệt nếu việc mình làm thiếu ý nghĩa. Anh có thể làm tốt, nhưng nếu bên trong không tin, không thấy chiều sâu, không thấy giá trị, năng lượng sẽ tụt rất nhanh. Người ngoài có thể nhìn thấy một người có năng lực, còn bên trong anh lại thấy một câu hỏi lớn: “Mình đang xây công trình này cho ai, vì điều gì?”
+
+Mâu thuẫn thứ hai là giữa Ngày Sinh 21/3 và Linh Hồn 16/7. Ngày Sinh 21/3 giúp anh có khả năng giao tiếp, biểu đạt, tạo thiện cảm. Nhưng Linh Hồn 7 lại cần riêng tư, không thích phơi bày quá nhiều, không dễ mở hết lòng. Vì vậy, anh có thể là người nói được, truyền đạt được, nhưng không phải lúc nào cũng thấy mình được hiểu thật sự.
+
+Một vài triệu chứng “hiểu mình nhưng vẫn mắc kẹt”:
+- Anh biết mình có khả năng xây hệ thống, nhưng vẫn cần một lý do đủ sâu để không bỏ cuộc.
+- Anh có thể giao tiếp tốt, nhưng nội tâm lại giữ nhiều điều không nói hết.
+- Anh có thể muốn mọi thứ chỉn chu, nhưng bên trong lại mỏi vì phải gánh quá nhiều.
+- Anh có thể nhìn ra vấn đề của hệ thống, nhưng việc sửa nó lại tiêu hao rất nhiều năng lượng.
+- Anh có thể vừa muốn ổn định, vừa muốn rút lui để tìm sự thật bên trong.
+
+Đây không phải điểm yếu để xấu hổ. Đây là một nút thắt cần được tháo đúng cách. Nếu chỉ nhìn một chỉ số, anh sẽ thấy mình rời rạc. Khi ráp toàn bản đồ, lý do mới hiện ra rõ.
+
+============================================================
+BƯỚC 9 – TẦM QUAN TRỌNG CỦA HÓA GIẢI MÂU THUẪN
+============================================================
+
+Nếu mâu thuẫn nội tại kéo dài, vấn đề không nằm ở việc anh “không đủ giỏi”. Vấn đề là năng lượng bên trong bị chia tầng.
+
+Một phần trong anh muốn xây dựng, chịu trách nhiệm, làm cho đúng, làm cho chắc. Một phần khác lại cần tĩnh lại, hiểu sâu, tìm ý nghĩa và không muốn sống giả với chính mình. Một phần có thể giao tiếp, biểu đạt, tạo thiện cảm. Một phần lại muốn giữ khoảng cách, quan sát và không dễ tin ai hoàn toàn.
+
+Khi các lực này không được hiểu đúng, dễ xuất hiện vài mô thức:
+- Làm nhiều nhưng mau cạn năng lượng.
+- Gánh trách nhiệm nhưng không thấy được nuôi dưỡng.
+- Có năng lực nhưng vẫn tự nghi ngờ.
+- Muốn xây dựng dài hạn nhưng có lúc lại muốn rút lui.
+- Có thể giúp người khác hiểu vấn đề, nhưng chính mình vẫn mắc kẹt trong một vòng lặp nội tâm.
+- Dễ thấy mệt với những việc thiếu chiều sâu, dù bề ngoài vẫn làm được.
+
+Nếu không tỉnh thức, anh có thể rơi vào trạng thái “biết vấn đề nhưng không thoát ra được”. Biết mình cần kỷ luật, nhưng không phải lúc nào cũng duy trì được. Biết mình cần chiều sâu, nhưng đời sống lại kéo vào trách nhiệm. Biết mình có thể truyền đạt, nhưng bên trong vẫn có những vùng không muốn mở ra.
+
+Bản FREE giúp anh nhìn thấy dấu hiệu. Bản chuyên sâu sẽ đi sâu hơn vào cơ chế: mâu thuẫn nào là chính, mâu thuẫn nào là phụ, chỉ số nào đang kéo năng lượng xuống, và nên bắt đầu tháo từ đâu để không tự ép mình quá mức.
+
+============================================================
+BƯỚC 10 – CÁC CHỈ SỐ BỔ SUNG
+============================================================
+
+Bốn chỉ số cốt lõi chỉ là phần khung chính. Bên dưới còn nhiều lớp khác có thể giải thích vì sao anh phản ứng như vậy, vì sao anh lặp lại một số mô thức, và vì sao có những giai đoạn cuộc đời tưởng như “tự nhiên” đổi hướng rất mạnh.
+
+Trong bản chuyên sâu, các lớp sau sẽ được mở khóa:
+
+1. Nhân Cách
+Hệ thống đã ghi nhận Nhân Cách của anh là 24/6. Đây là cách người khác thường cảm nhận về anh trước khi họ hiểu anh thật sự. Với 24/6, người khác có thể dễ nhìn thấy ở anh sự trách nhiệm, sự chăm sóc, sự đáng tin hoặc cảm giác có thể dựa vào. Tuy nhiên, phần này trong bản FREE chỉ ghi nhận, chưa phân tích sâu.
+
+2. Trưởng Thành
+Chỉ số cho thấy năng lượng anh cần phát triển mạnh hơn khi bước vào các giai đoạn trưởng thành.
+
+3. Nợ Nghiệp
+Hồ sơ này có 13/4 và 16/7. Đây là hai lớp rất đáng đọc sâu vì chúng liên quan đến kỷ luật, trách nhiệm, niềm tin, sự trung thực và tái sinh nội tâm.
+
+4. Thử Thách
+Cho biết những dạng bài kiểm tra lặp lại trong từng giai đoạn đời.
+
+5. Bài Học Nghiệp
+Cho biết những năng lượng còn thiếu, cần học thêm trong đời này.
+
+6. Cường Độ
+Cho thấy con số nào đang quá mạnh hoặc quá yếu trong tên gọi.
+
+7. Cân Bằng
+Cho biết phản xạ khi gặp áp lực, khủng hoảng hoặc xung đột.
+
+8. Phát Triển
+Cho biết chìa khóa phát triển thông qua tên gọi chính.
+
+9. Planes
+Cho biết anh thiên về thể chất, trí tuệ, cảm xúc hay trực giác.
+
+10. Khí Chất
+Cho biết cách anh bắt đầu, duy trì và kết thúc một việc.
+
+Nếu chỉ nhìn 4 chỉ số cốt lõi, anh mới thấy phần khung. Khi mở các lớp bổ sung, lý do sâu hơn mới hiện ra rõ.
+
+============================================================
+BƯỚC 11 – HỆ SINH THÁI BRIAN-NUMEROLOGIST
+============================================================
+
+Anh vừa đi qua bản FREE 11 bước – một cửa mở đầu tiên để nhìn thấy 4 trụ cột quan trọng trong bản đồ cá nhân.
+
+Nhưng đây chưa phải toàn bộ bản đồ.
+
+Bản FREE giúp gọi tên vấn đề. Bản chuyên sâu mới đi vào cơ chế, mâu thuẫn, chiến lược hóa giải và hướng ứng dụng thực tế trong công việc, tình cảm, tài chính, gia đình và định hướng tương lai.
+
+Các gói trong hệ sinh thái Brian-Numerologist:
+
+1. Hạt Giống Thấu Hiểu
+Phù hợp với người mới bắt đầu, muốn hiểu 4 chỉ số cốt lõi và có một bản nền để soi lại bản thân.
+
+2. Lộ Trình Giải Mã
+Mở rộng từ cốt lõi sang các chỉ số bổ sung như Nhân Cách, Cân Bằng, Cường Độ, Bài Học Nghiệp, Thử Thách và các lớp nội tâm khác.
+
+3. Bản Đồ Kiến Tạo
+Bản đồ toàn diện hơn, kết hợp phân tích cốt lõi, bổ sung, dự báo, chu kỳ và định hướng hành động.
+
+4. Tối Ưu Doanh Nghiệp
+Dành cho tên thương hiệu, tên cửa hàng, năng lượng kinh doanh, đối tác, đội nhóm hoặc định hướng phát triển dịch vụ.
+
+5. Thấu Hiểu Mối Quan Hệ
+Dành cho vợ chồng, người yêu, đối tác, gia đình, bạn bè hoặc đội nhóm cần hiểu cách hai bản đồ năng lượng tương tác với nhau.
+
+6. Kiến Tạo Bản Thân
+Dành cho người muốn đi sâu toàn diện: bản đồ cá nhân, dự báo chu kỳ, định hướng nghề nghiệp, tên phụ và chiến lược phát triển dài hạn.
+
+CTA:
+Đặc quyền dành riêng cho hồ sơ này: Nếu anh nâng cấp lên gói tính phí trong vòng 3 ngày tới, anh được ưu đãi 20% phí dịch vụ.
+
+CTA mềm:
+Nếu bản FREE này đã chạm đúng một phần con người anh, thì bản chuyên sâu sẽ giúp anh hiểu rõ hơn: vì sao mô thức đó lặp lại, đâu là nút thắt chính, và nên bắt đầu tháo từ đâu.
+
+============================================================
+BỘ NHỚ HỒ SƠ FREE – TEST CASE
+============================================================
+
+--- [⚙️ BỘ NHỚ HỒ SƠ FREE - BƯỚC 11]
+Họ tên khai sinh: Nguyễn Thanh Trí -> NGUYEN THANH TRI
+Ngày sinh gốc: 21/04/1986
+
+4 chỉ số cốt lõi:
+Đường Đời: 13/4
+Sứ Mệnh: 13/4
+Linh Hồn: 16/7
+Ngày Sinh: 21/3
+
+Chỉ số bổ sung:
+Nhân Cách: 24/6
+Thái Độ: Chưa phân tích
+Màng lọc: Chưa phân tích
+Cường độ: Chưa phân tích
+Cân bằng: Chưa phân tích
+Phát triển: Chưa phân tích
+Khí Chất: Chưa phân tích
+Thử Thách: Chưa phân tích
+Bài học nghiệp: Chưa phân tích
+Trưởng thành: Chưa phân tích
+
+Master/Karmic Debt:
+13/4 xuất hiện ở Đường Đời và Sứ Mệnh.
+16/7 xuất hiện ở Linh Hồn.
+Dấu vết 11 xuất hiện trong phần phụ âm của Tên khi tính Nhân Cách, nhưng chưa phân tích sâu ở bản FREE.
+
+Mâu thuẫn đã gợi mở:
+Mâu thuẫn chính là giữa năng lượng 13/4 cần kỷ luật, trách nhiệm, xây nền và Linh Hồn 16/7 cần chiều sâu, sự thật, không gian nội tâm. Ngày Sinh 21/3 bổ trợ khả năng giao tiếp và truyền đạt, nhưng cũng có thể tạo phân tán nếu thiếu kỷ luật.
+
+Gợi ý nâng cấp:
+Nên nâng cấp lên gói chuyên sâu nếu muốn đọc cơ chế mâu thuẫn, các chỉ số bổ sung, chiến lược hóa giải và định hướng hành động.
+
+Ghi chú trạng thái:
+Bản FREE test đã hoàn thành.
+---
+
+============================================================
+CHECKLIST TEST
+============================================================
+
+[OK] Có họ tên khai sinh.
+[OK] Có ngày sinh dương lịch.
+[OK] Tên đã chuẩn hóa.
+[OK] Đã tách Họ – Cụm tên lót – Tên.
+[OK] Đã tính Đường Đời.
+[OK] Đã tính Sứ Mệnh.
+[OK] Đã tính Linh Hồn.
+[OK] Đã tính Ngày Sinh.
+[OK] Đã tính Nhân Cách.
+[OK] Đã kiểm tra Master/Karmic.
+[OK] letter_count = number_count = 14.
+[OK] Đã gọi LifePath block.
+[OK] Đã gọi Destiny block.
+[OK] Đã gọi Soul block.
+[OK] Đã gọi Birthday block.
+[OK] Đã gọi Karmic Overlay nếu có.
+[OK] Có Bước 4 động.
+[OK] Có Bước 6 động.
+[OK] Có Bước 8 động.
+[OK] Có Bước 9 động.
+[OK] Có Bước 10 preview chỉ số bổ sung.
+[OK] Có Bước 11 CTA upsell.
+[OK] Không dùng câu khẳng định định mệnh tuyệt đối.
+[OK] Không dùng câu hù dọa mua hàng.
+
+============================================================
+GHI CHÚ KỸ THUẬT SAU TEST
+============================================================
+
+1. Test case này chạy tốt vì có đủ:
+- Chỉ số cốt lõi.
+- Karmic Debt 13/4 và 16/7.
+- Ngày Sinh cụ thể 21/3.
+- Nhân Cách tham khảo 24/6.
+- Mâu thuẫn nội tại rõ để kiểm thử bước động.
+
+2. Cần cập nhật lại test case trong Calculation Rules:
+- Tên NGUYEN THANH TRI có 14 chữ cái.
+- Không phải 15 chữ cái.
+
+3. Nếu triển khai website:
+- birthday_display nên là “21/3”, không chỉ ghi “3”.
+- birthday_routing nên gọi “BIRTHDAY_21”.
+- Nếu chỉ ghi birthday_base = 3, báo cáo sẽ mất sắc thái riêng của ngày 21.

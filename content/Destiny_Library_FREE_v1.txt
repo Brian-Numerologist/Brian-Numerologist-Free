@@ -1,0 +1,585 @@
+# Brian_Numerologist – Destiny Library FREE v1
+# Mục đích: Thư viện nội dung Sứ Mệnh dùng cho website bản FREE.
+# Phạm vi v1: Destiny/Sứ Mệnh 1–9, 11, 22.
+# Nguồn nội dung: Bảng Sứ Mệnh do Brian biên soạn và cung cấp.
+# Quy tắc dùng:
+# - Nếu destiny = số đơn → gọi DESTINY_[số].
+# - Nếu destiny = 11/2 → gọi DESTINY_11.
+# - Nếu destiny = 22/4 → gọi DESTINY_22.
+# - Nếu destiny có nợ nghiệp 13/4, 14/5, 16/7, 19/1 → gọi block base + Karmic Overlay tương ứng.
+#
+# Vai trò trong báo cáo FREE:
+# - Dùng cho BƯỚC 3 – SỨ MỆNH.
+# - Mục tiêu: phân tích sơ lược tài năng, thái độ khi phát lộ, thái độ khi bị lãng phí.
+# - Không xả hết chiến lược hóa giải chuyên sâu.
+#
+# Phong cách:
+# - Trực diện, sâu sắc, thấu cảm.
+# - Có sức chạm, không hù dọa.
+# - Không định mệnh hóa tuyệt đối.
+# - Dùng “có khuynh hướng”, “dễ xuất hiện”, “nếu không tỉnh thức”, “cần đọc sâu hơn”.
+
+============================================================
+DESTINY_1
+============================================================
+
+field: destiny
+value: 1
+display_title: Sứ Mệnh 1 – Người Khởi Xướng
+subtitle: Hành trang: Sự Độc Lập – Tư Duy Lãnh Đạo
+keywords: Độc lập | Lãnh đạo | Khởi xướng | Quyết đoán
+condition: destiny_base = 1
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 1 cho thấy bạn mang hành trang của người khởi xướng. Đây là năng lượng của sự độc lập, tư duy lãnh đạo và khả năng mở đường. Bạn không được sinh ra để chỉ đứng chờ chỉ đạo; bên trong bạn có một cơ chế muốn tự quyết, tự làm và tạo ra dấu ấn riêng.
+
+core_potential:
+Bạn sở hữu “bộ gen” của người đứng đầu. Năng lực tự nhiên của bạn là tư duy chiến lược, khả năng ra quyết định độc lập và năng lực kiến tạo cái mới. Khi được đặt đúng môi trường, bạn có thể trở thành người dẫn dắt, người mở lối hoặc người chịu trách nhiệm cho hướng đi chung.
+
+positive_attitude:
+- Quyết đoán và dũng cảm: Bạn không chờ đợi cơ hội, bạn có khuynh hướng tự tạo ra cơ hội.
+- Tự tin và độc lập: Bạn dám đi ngược dòng nếu tin mình đúng.
+- Sáng tạo giải pháp: Bạn thích tìm cách làm mới, hiệu quả hơn thay vì lặp lại lối mòn cũ.
+
+shadow_attitude:
+- Độc tài và áp đặt: Khi cái tôi quá lớn, bạn dễ hách dịch, khó lắng nghe và muốn người khác làm theo ý mình.
+- Bướng bỉnh: Bạn khó chấp nhận sai lầm, dễ bảo thủ đến mức mù quáng.
+- Lười biếng hoặc ỷ lại: Nếu năng lượng 1 bị méo, bạn có thể sợ trách nhiệm và muốn dựa vào người khác thay vì tự đứng lên.
+
+career_direction:
+Các môi trường phù hợp gồm: CEO, chủ doanh nghiệp, quản lý dự án, sĩ quan quân đội, nhà phát minh, người sáng lập hoặc các vai trò có quyền tự chủ cao.
+
+career_note:
+Dù làm bất cứ nghề gì, kể cả vị trí nhân viên, bạn vẫn cần không gian được tự quyết. Nếu bị kiểm soát quá chi tiết, năng lượng Sứ Mệnh 1 dễ trở thành bức bối, phản kháng hoặc mất động lực.
+
+life_symptoms:
+- Bạn dễ khó chịu khi bị ra lệnh quá nhiều.
+- Bạn muốn được tin tưởng giao quyền, nhưng đôi khi lại chưa học đủ bài học lắng nghe.
+- Bạn có thể rất giỏi khởi đầu, nhưng cần học thêm cách dẫn dắt người khác cùng đi.
+
+free_guidance:
+Điều bạn cần nhớ là năng lực lãnh đạo không chỉ nằm ở việc đi trước, mà còn ở khả năng khiến người khác muốn đi cùng. Hãy dùng sự độc lập để mở đường, nhưng đừng để cái tôi cắt đứt sự kết nối.
+
+upsell_hook:
+Phần này mới chỉ gọi tên hành trang Sứ Mệnh 1. Để biết cách phát huy năng lực lãnh đạo mà không rơi vào cô độc, áp đặt hoặc kiệt sức, cần đọc sâu hơn mối tương tác giữa Sứ Mệnh, Đường Đời và Linh Hồn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_2
+============================================================
+
+field: destiny
+value: 2
+display_title: Sứ Mệnh 2 – Người Điều Phối
+subtitle: Hành trang: Sự Tinh Tế – Ngoại Giao
+keywords: Tinh tế | Hợp tác | Ngoại giao | Điều phối
+condition: destiny_base = 2
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 2 cho thấy bạn mang hành trang của sự tinh tế, cảm nhận và kết nối. Bạn không nhất thiết phải đứng ở trung tâm ánh đèn, nhưng thường là người giữ cho hệ thống, mối quan hệ hoặc tập thể vận hành mềm mại hơn.
+
+core_potential:
+Hành trang của bạn là sự nhạy cảm và khả năng ngoại giao. Bạn nhìn thấy những chi tiết nhỏ, cảm xúc ẩn giấu và những dòng chảy ngầm trong mối quan hệ mà người khác dễ bỏ qua.
+
+positive_attitude:
+- Hòa nhã và khiêm tốn: Bạn làm việc nhóm tốt, biết hỗ trợ tập thể tỏa sáng.
+- Khéo léo và thuyết phục: Bạn có khả năng giải quyết mâu thuẫn bằng sự mềm mỏng.
+- Tỉ mỉ và chi tiết: Bạn phù hợp với các việc cần sự chính xác, quan sát và tinh tế.
+
+shadow_attitude:
+- Quá nhạy cảm: Bạn dễ tổn thương bởi lời nói, ánh nhìn hoặc phản ứng của người khác.
+- Thiếu quyết đoán: Vì sợ mất lòng, bạn có thể do dự, ba phải hoặc không dám nói chính kiến.
+- Lệ thuộc cảm xúc: Bạn dễ bám vào người khác để thấy an toàn.
+
+career_direction:
+Các môi trường phù hợp gồm: nhà ngoại giao, thư ký/trợ lý cấp cao, tư vấn tâm lý, chăm sóc khách hàng, kế toán, thống kê, điều phối dự án hoặc các vai trò hỗ trợ chiến lược.
+
+career_note:
+Bạn có thể tỏa sáng ở vai trò “cánh tay phải” đắc lực cho người lãnh đạo. Đây không phải vị trí thấp hơn, mà là nơi bạn dùng sự tinh tế để giữ cho hệ thống không bị gãy.
+
+life_symptoms:
+- Bạn dễ biết người khác đang bất ổn trước khi họ nói ra.
+- Bạn giỏi giữ hòa khí nhưng có thể quên bảo vệ nhu cầu của mình.
+- Bạn thường làm tốt vai trò hậu phương nhưng vẫn cần được ghi nhận đúng mức.
+
+free_guidance:
+Điều bạn cần học là hợp tác mà không hòa tan. Sự tinh tế của bạn là tài sản lớn, nhưng nó cần đi cùng ranh giới cảm xúc và khả năng nói rõ điều mình muốn.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Sứ Mệnh 2. Để hiểu vì sao bạn dễ bị ảnh hưởng bởi cảm xúc người khác và cách biến sự nhạy cảm thành năng lực nghề nghiệp, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_3
+============================================================
+
+field: destiny
+value: 3
+display_title: Sứ Mệnh 3 – Người Sáng Tạo
+subtitle: Hành trang: Ngôn Từ – Cảm Xúc – Nghệ Thuật
+keywords: Sáng tạo | Giao tiếp | Cảm xúc | Nghệ thuật
+condition: destiny_base = 3
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 3 cho thấy bạn mang hành trang của sự biểu đạt. Bạn có năng lực làm cho thông điệp trở nên sống động, cảm xúc trở nên có hình hài và bầu không khí xung quanh nhẹ hơn.
+
+core_potential:
+Bạn có món quà của ngôn từ, cảm xúc và sáng tạo. Dù là nói, viết, hát, diễn xuất, kể chuyện hay thiết kế, bạn có khuynh hướng làm cho điều bình thường trở nên lấp lánh hơn.
+
+positive_attitude:
+- Lạc quan và vui vẻ: Bạn có thể vực dậy tinh thần người khác.
+- Sáng tạo nghệ thuật: Trí tưởng tượng phong phú, nhiều ý tưởng mới.
+- Giao tiếp lôi cuốn: Bạn có duyên ăn nói, dễ thu hút và thuyết phục đám đông.
+
+shadow_attitude:
+- Hời hợt và phân tán: Bạn dễ cả thèm chóng chán, bắt đầu nhiều nhưng kết thúc ít.
+- Khẩu nghiệp: Bạn có thể dùng lời nói để châm chọc, mỉa mai hoặc gây tổn thương.
+- Thất thường: Cảm xúc lên xuống mạnh, ảnh hưởng đến hiệu quả công việc.
+
+career_direction:
+Các môi trường phù hợp gồm: sales, marketing, diễn giả, MC, nhà văn, blogger, nghệ sĩ, thiết kế, giải trí, truyền thông, sáng tạo nội dung.
+
+career_note:
+Bạn cần công việc cho phép tương tác, thể hiện và sáng tạo. Nếu bị nhốt quá lâu trong sự im lặng, lặp lại hoặc khuôn mẫu, năng lượng Sứ Mệnh 3 dễ bị tắt.
+
+life_symptoms:
+- Bạn có thể nói rất hay, nhưng cần học cách nói có trọng tâm.
+- Bạn có nhiều ý tưởng, nhưng dễ thiếu hệ thống để biến ý tưởng thành kết quả.
+- Khi buồn, bạn dễ che giấu bằng sự hài hước hoặc vẻ ngoài vui vẻ.
+
+free_guidance:
+Điều bạn cần học là biến cảm hứng thành giá trị có chiều sâu. Sáng tạo không chỉ để gây chú ý, mà để truyền tải thông điệp, chữa lành và tạo ảnh hưởng thật.
+
+upsell_hook:
+Phần này mới chỉ gọi tên hành trang Sứ Mệnh 3. Để biết cách biến năng lực biểu đạt thành thương hiệu, sự nghiệp hoặc thành tựu rõ ràng, cần đọc sâu hơn các mâu thuẫn cốt lõi trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_4
+============================================================
+
+field: destiny
+value: 4
+display_title: Sứ Mệnh 4 – Người Kiến Thiết
+subtitle: Hành trang: Kỷ Luật – Quy Trình – Chi Tiết
+keywords: Kỷ luật | Quy trình | Chi tiết | Xây dựng
+condition: destiny_base = 4
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 4 cho thấy bạn mang hành trang của người kiến thiết. Bạn có năng lực biến ý tưởng mơ hồ thành cấu trúc cụ thể, biến sự hỗn loạn thành trật tự và xây nền cho thành công lâu dài.
+
+core_potential:
+Hành trang của bạn là kỷ luật, sự thực tế và khả năng tổ chức. Bạn có thể không phải người tạo tiếng vang nhanh nhất, nhưng là người làm cho mọi thứ đứng vững.
+
+positive_attitude:
+- Trung thực và tận tụy: Bạn đáng tin cậy, lời hứa thường đi kèm hành động.
+- Hệ thống và tổ chức: Bạn giỏi quy trình hóa công việc.
+- Kiên trì và bền bỉ: Bạn chịu được những việc chi tiết, tỉ mỉ mà người khác dễ chán.
+
+shadow_attitude:
+- Cứng nhắc và bảo thủ: Bạn có thể sợ thay đổi, bám vào lề thói cũ.
+- Quá kỹ tính: Bạn dễ sa lầy vào tiểu tiết hoặc xét nét người khác.
+- Trì trệ: Khi áp lực quá nặng, bạn có thể chán nản, buông xuôi hoặc mất động lực.
+
+career_direction:
+Các môi trường phù hợp gồm: kỹ sư, kiến trúc sư, xây dựng, kế toán, kiểm toán, luật sư, quản trị hệ thống, vận hành, quản lý quy trình.
+
+career_note:
+Bạn phù hợp với môi trường có cấu trúc rõ ràng, quy trình minh bạch và đề cao sự chính xác. Tuy nhiên, bạn cũng cần học sự linh hoạt để không biến hệ thống thành chiếc lồng.
+
+life_symptoms:
+- Bạn dễ thấy khó chịu khi mọi thứ thiếu quy trình.
+- Bạn làm tốt việc người khác thấy nhàm chán, nhưng có thể bị kiệt sức vì quá trách nhiệm.
+- Bạn cần học cách nhìn bức tranh lớn, không chỉ sửa từng chi tiết nhỏ.
+
+free_guidance:
+Điều bạn cần nhớ là kỷ luật là sức mạnh, nhưng linh hoạt mới giúp kỷ luật sống được lâu. Hãy xây nền, nhưng đừng quên cửa sổ để ánh sáng đi vào.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Sứ Mệnh 4. Để biết vì sao bạn dễ bị mắc kẹt giữa trách nhiệm, kỷ luật và sự trì trệ, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_5
+============================================================
+
+field: destiny
+value: 5
+display_title: Sứ Mệnh 5 – Người Cổ Động
+subtitle: Hành trang: Đa Năng – Thích Nghi – Quảng Bá
+keywords: Đa năng | Tự do | Thích nghi | Quảng bá
+condition: destiny_base = 5
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 5 cho thấy bạn mang hành trang của sự linh hoạt, quảng bá và thích nghi. Bạn giống một “tắc kè hoa” có thể đổi màu theo môi trường, học nhanh và làm cho mọi thứ trở nên thú vị hơn.
+
+core_potential:
+Bạn đa tài, năng động và có khả năng tạo xu hướng. Tự do là nhiên liệu của bạn. Khi được di chuyển, trải nghiệm và tương tác, bạn có thể bộc lộ rất nhiều năng lực cùng lúc.
+
+positive_attitude:
+- Linh hoạt và đổi mới: Bạn phát triển mạnh trong môi trường biến động.
+- Năng động và cuốn hút: Bạn có khiếu bán hàng, quảng bá và truyền cảm hứng hành động.
+- Đa nhiệm: Bạn có thể xử lý nhiều việc và kết nối nhiều nguồn lực.
+
+shadow_attitude:
+- Thiếu cam kết: Bạn dễ đổi mục tiêu, đứng núi này trông núi nọ.
+- Buông thả: Bạn dễ bị kéo vào thú vui, khoái cảm hoặc lối sống thiếu trách nhiệm.
+- Bốc đồng: Bạn có thể ra quyết định theo cảm xúc nhất thời mà chưa tính hậu quả.
+
+career_direction:
+Các môi trường phù hợp gồm: du lịch, khách sạn, sales, tiếp thị, truyền thông, báo chí, tổ chức sự kiện, freelancer, sáng tạo nội dung, môi giới, đào tạo trải nghiệm.
+
+career_note:
+Bạn nên tránh công việc lặp lại nhàm chán hoặc bị kiểm soát quá chặt. Bạn cần không gian để thở, di chuyển và thử nghiệm.
+
+life_symptoms:
+- Bạn học nhanh nhưng cũng chán nhanh.
+- Bạn có nhiều cơ hội, nhưng dễ phân tán nếu không có ưu tiên rõ.
+- Bạn càng bị bó buộc, năng lượng càng phản kháng hoặc mất sức sống.
+
+free_guidance:
+Điều bạn cần học là dùng tự do có định hướng. Sự đa năng chỉ trở thành tài sản khi nó được đặt trong một cam kết đủ lâu để tạo thành kết quả.
+
+upsell_hook:
+Phần này mới chỉ gọi tên hành trang Sứ Mệnh 5. Để biết cách biến sự linh hoạt thành lợi thế nghề nghiệp mà không rơi vào hỗn loạn, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_6
+============================================================
+
+field: destiny
+value: 6
+display_title: Sứ Mệnh 6 – Người Chăm Sóc
+subtitle: Hành trang: Trách Nhiệm – Yêu Thương – Sửa Chữa
+keywords: Trách nhiệm | Chăm sóc | Chữa lành | Gia đình
+condition: destiny_base = 6
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 6 cho thấy bạn mang hành trang của người chăm sóc, chữa lành và tạo hòa hợp. Bạn có khuynh hướng nhìn thấy điều cần sửa, người cần nâng đỡ và không gian cần được làm ấm lại.
+
+core_potential:
+Vũ khí của bạn là trái tim của người cha/người mẹ. Bạn có năng lực nuôi dưỡng, chữa lành và mang lại sự hài hòa. Bên trong bạn thường có cảm thức trách nhiệm mạnh với gia đình, cộng đồng hoặc những người mình yêu thương.
+
+positive_attitude:
+- Tận tâm và chu đáo: Bạn chăm sóc người khác bằng cả tấm lòng.
+- Công bằng và hòa giải: Bạn muốn các bên được lắng nghe và đối xử tử tế.
+- Thẩm mỹ cao: Bạn có khả năng tạo ra không gian sống hoặc làm việc ấm cúng, đẹp và có hồn.
+
+shadow_attitude:
+- Ôm đồm và bao đồng: Bạn dễ làm thay việc của người khác đến mức kiệt sức.
+- Kiểm soát: Bạn có thể áp đặt ý muốn của mình nhân danh tình yêu thương.
+- Than vãn: Khi hy sinh không được ghi nhận, bạn dễ oán trách hoặc đóng vai nạn nhân.
+
+career_direction:
+Các môi trường phù hợp gồm: y tế, bác sĩ, y tá, giáo dục, huấn luyện viên, thiết kế, nghệ thuật, công tác xã hội, ẩm thực, chăm sóc sức khỏe, tư vấn gia đình.
+
+career_note:
+Dù làm kinh doanh, bạn nên hướng đến sản phẩm hoặc dịch vụ mang lại sức khỏe, hạnh phúc, cái đẹp hoặc sự an toàn cho con người.
+
+life_symptoms:
+- Bạn dễ thấy trách nhiệm ở nơi người khác chỉ thấy chuyện bình thường.
+- Bạn chăm sóc người khác tốt, nhưng có thể quên chăm sóc chính mình.
+- Bạn có thể yêu rất nhiều, nhưng nếu không tỉnh thức, tình yêu dễ biến thành kiểm soát.
+
+free_guidance:
+Điều bạn cần học là yêu thương có ranh giới. Giúp người khác không có nghĩa là sống thay họ. Khi bạn biết chăm sóc mình, năng lượng chăm sóc của bạn mới không biến thành gánh nặng.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Sứ Mệnh 6. Để hiểu vì sao bạn dễ ôm trách nhiệm, dễ hy sinh và dễ thất vọng khi không được ghi nhận, cần đọc sâu hơn bản đồ chuyên sâu.
+
+
+============================================================
+DESTINY_7
+============================================================
+
+field: destiny
+value: 7
+display_title: Sứ Mệnh 7 – Người Phân Tích
+subtitle: Hành trang: Trí Tuệ – Chuyên Môn – Trực Giác
+keywords: Trí tuệ | Chuyên môn | Phân tích | Trực giác
+condition: destiny_base = 7
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 7 cho thấy bạn mang hành trang của trí tuệ, chiều sâu và khả năng phân tích. Bạn không sinh ra để tin ngay vào bề mặt; bạn cần đi vào gốc rễ, kiểm chứng và tìm ra bản chất thật của vấn đề.
+
+core_potential:
+Hành trang của bạn là trí tuệ và trực giác. Bạn có khả năng đào sâu, tư duy logic sắc bén và khao khát tìm kiếm chân lý. Khi được ở đúng môi trường, bạn có thể trở thành chuyên gia thực thụ.
+
+positive_attitude:
+- Sâu sắc và chuyên môn: Bạn không chấp nhận sự hời hợt.
+- Trực giác nhạy bén: Bạn dễ nhận ra lỗ hổng hoặc cơ hội mà người khác không thấy.
+- Độc lập và tĩnh lặng: Bạn có khả năng làm việc một mình và giữ bình tĩnh tốt.
+
+shadow_attitude:
+- Cô lập và khó gần: Bạn dễ thu mình, lạnh lùng hoặc xa cách.
+- Hoài nghi và chỉ trích: Bạn có thể dùng trí tuệ để bắt bẻ thay vì xây dựng.
+- Kiêu ngạo trí tuệ: Khi lệch, bạn dễ coi thường người khác hoặc nghĩ mình hiểu hơn tất cả.
+
+career_direction:
+Các môi trường phù hợp gồm: nhà khoa học, nghiên cứu, lập trình viên, IT, bác sĩ chuyên khoa, luật sư, thẩm phán, nhà văn, triết gia, phân tích dữ liệu, cố vấn chuyên môn.
+
+career_note:
+Bạn phù hợp với vai trò chuyên gia hơn là quản lý chung. Bạn cần một lĩnh vực đủ sâu để đào, đủ khó để kích hoạt trí tuệ và đủ yên tĩnh để tập trung.
+
+life_symptoms:
+- Bạn dễ thấy mệt với những cuộc trò chuyện hời hợt.
+- Bạn cần không gian riêng để suy nghĩ, nhưng dễ bị hiểu là lạnh lùng.
+- Bạn có thể biết rất nhiều, nhưng đôi khi khó diễn đạt sao cho người khác tiếp nhận.
+
+free_guidance:
+Điều bạn cần học là chia sẻ trí tuệ một cách có lòng trắc ẩn. Sự sắc bén của bạn là tài sản, nhưng nếu thiếu sự mềm mại, nó có thể trở thành lưỡi dao trong quan hệ.
+
+upsell_hook:
+Phần này mới chỉ gọi tên hành trang Sứ Mệnh 7. Để biết cách dùng trí tuệ, trực giác và chuyên môn mà không rơi vào cô lập, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_8
+============================================================
+
+field: destiny
+value: 8
+display_title: Sứ Mệnh 8 – Người Điều Hành
+subtitle: Hành trang: Quản Trị – Tài Chính – Quyền Lực
+keywords: Quản trị | Tài chính | Quyền lực | Hiệu quả
+condition: destiny_base = 8
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 8 cho thấy bạn mang hành trang của người điều hành. Bạn hiểu ngôn ngữ của tiền bạc, quyền lực, tổ chức và kết quả. Đây là năng lượng có khả năng vận hành những cỗ máy lớn.
+
+core_potential:
+Bạn có năng lực quản trị vĩ mô, chịu áp lực, nhìn vào hiệu quả và sắp xếp nguồn lực để đạt mục tiêu. Khi được đặt đúng sân chơi, bạn có thể tạo ra kết quả cụ thể, đo được và có giá trị vật chất rõ ràng.
+
+positive_attitude:
+- Thực tế và hiệu quả: Bạn có thể biến ý tưởng thành lợi nhuận hoặc kết quả cụ thể.
+- Tầm nhìn và tổ chức: Bạn biết cách sắp xếp nhân sự, tài nguyên và mục tiêu.
+- Đáng tin cậy: Bạn có thể là chỗ dựa tài chính hoặc định hướng cho tập thể.
+
+shadow_attitude:
+- Thực dụng và tàn nhẫn: Bạn dễ bị cuốn theo tiền bạc đến mức thiếu tình người.
+- Lạm quyền: Bạn có xu hướng áp đặt hoặc dùng quyền lực để kiểm soát.
+- Mất cân bằng: Bạn dễ tham công tiếc việc, đánh đổi sức khỏe và gia đình lấy sự nghiệp.
+
+career_direction:
+Các môi trường phù hợp gồm: chủ doanh nghiệp, giám đốc điều hành, tài chính, ngân hàng, đầu tư, bất động sản, chính trị, quản trị tổ chức, vận hành doanh nghiệp.
+
+career_note:
+Bạn cần sân chơi đủ lớn. Nếu bị chôn chân ở vị trí không có cơ hội tăng trưởng, thăng tiến hoặc tạo kết quả tài chính rõ ràng, năng lượng Sứ Mệnh 8 dễ bị bí bách.
+
+life_symptoms:
+- Bạn thường quan tâm đến kết quả, hiệu suất và giá trị thực tế.
+- Bạn có thể dễ gánh vai trò quyết định, nhưng cũng dễ áp lực vì thành công.
+- Bạn cần học cách dùng quyền lực có đạo đức, không dùng nó để tự cô lập mình.
+
+free_guidance:
+Điều bạn cần nhớ là quyền lực chỉ thật sự bền khi đi cùng trách nhiệm. Tiền bạc và thành tựu là công cụ, không phải thước đo duy nhất của giá trị con người.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Sứ Mệnh 8. Để hiểu vì sao bạn dễ bị kéo vào bài toán tiền bạc, quyền lực và thành tựu, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_9
+============================================================
+
+field: destiny
+value: 9
+display_title: Sứ Mệnh 9 – Người Nhân Đạo
+subtitle: Hành trang: Nghệ Thuật – Tầm Nhìn – Vị Tha
+keywords: Nhân đạo | Nghệ thuật | Vị tha | Tầm nhìn
+condition: destiny_base = 9
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 9 cho thấy bạn mang hành trang của tầm nhìn rộng, lòng vị tha và khả năng chạm đến cộng đồng lớn. Đây là năng lượng của người nhìn đời không chỉ bằng lợi ích cá nhân, mà bằng câu hỏi: điều này có ý nghĩa gì cho người khác?
+
+core_potential:
+Tài năng của bạn nằm ở lòng nhân ái, gu nghệ thuật, khả năng truyền cảm hứng và tầm nhìn nhân văn. Bạn có thể kết nối với đám đông thông qua cảm xúc, lý tưởng hoặc những giá trị lớn.
+
+positive_attitude:
+- Bao dung và hào phóng: Bạn có khuynh hướng cho đi và thu hút người khác bằng sự ấm áp.
+- Tầm nhìn nhân văn: Bạn quan tâm đến xã hội, môi trường và lợi ích chung.
+- Sáng tạo nghệ thuật: Bạn có khả năng chạm đến cảm xúc đám đông.
+
+shadow_attitude:
+- Mơ mộng hão huyền: Bạn có thể thiếu thực tế, đặc biệt trong tài chính.
+- Thất vọng và cay nghiệt: Khi thế giới không như lý tưởng, bạn dễ oán trách.
+- Bỏ bê người thân: Đôi khi bạn lo chuyện lớn ngoài xã hội mà quên trách nhiệm gần bên.
+
+career_direction:
+Các môi trường phù hợp gồm: hoạt động xã hội, NGO, giáo dục, đào tạo, nghệ thuật, sáng tạo, y tế cộng đồng, truyền thông giá trị, dự án nhân văn.
+
+career_note:
+Bạn thường thành công nhất khi công việc mang lại giá trị tinh thần, cảm xúc hoặc phụng sự xã hội. Nếu chỉ làm vì tiền, năng lượng Sứ Mệnh 9 dễ mất lửa.
+
+life_symptoms:
+- Bạn dễ xúc động trước nỗi đau của người khác.
+- Bạn có lý tưởng lớn, nhưng cần học cách biến nó thành hành động thực tế.
+- Bạn dễ cho đi nhiều, nhưng cần biết ai thật sự xứng đáng nhận năng lượng của mình.
+
+free_guidance:
+Điều bạn cần học là phụng sự mà không tự đánh mất mình. Lòng tốt cần đi cùng trí tuệ, nếu không bạn dễ bị lợi dụng hoặc thất vọng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên hành trang Sứ Mệnh 9. Để biết cách biến lòng vị tha, nghệ thuật và lý tưởng thành con đường sống bền vững, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_11
+============================================================
+
+field: destiny
+value: 11
+display_title: Sứ Mệnh 11 – Sứ Giả Tâm Linh
+subtitle: Hành trang: Trực Giác – Khai Sáng
+keywords: Trực giác | Khai sáng | Cảm hứng | Chữa lành tinh thần
+condition: destiny_base = 11
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 11 cho thấy bạn mang hành trang của trực giác, cảm hứng và khả năng khai sáng. Đây là năng lượng nhạy hơn bình thường, có thể nhìn thấy những lớp vô hình trong con người, cảm xúc và đời sống tinh thần.
+
+core_potential:
+Bạn là kênh dẫn của trực giác và sự khai sáng. Bạn có khả năng cảm nhận sâu, truyền cảm hứng mạnh và đánh thức nhận thức tinh thần ở người khác.
+
+positive_attitude:
+- Trực giác mạnh: Bạn có những linh cảm chính xác và khả năng nhìn trước xu hướng.
+- Truyền cảm hứng: Sự hiện diện hoặc lời nói của bạn có thể chữa lành, nâng đỡ hoặc đánh thức người khác.
+- Nhạy với tầng sâu: Bạn dễ cảm được những điều không hiện rõ trên bề mặt.
+
+shadow_attitude:
+- Căng thẳng thần kinh: Bạn rất nhạy, dễ quá tải cảm xúc hoặc tinh thần.
+- Mơ hồ và ảo tưởng: Bạn có thể sống trên mây, thiếu kỹ năng thực tế hoặc rơi vào cực đoan tinh thần.
+- Mất trục: Khi không có nền tảng, bạn dễ dao động giữa cảm giác đặc biệt và mất phương hướng.
+
+career_direction:
+Các môi trường phù hợp gồm: tâm lý, cố vấn tinh thần, nghệ sĩ, nhà phát minh, giáo dục khai phóng, truyền cảm hứng, chữa lành, sáng tạo nội dung có chiều sâu.
+
+career_note:
+Bạn cần môi trường cho phép cảm hứng và trực giác được sử dụng, nhưng cũng cần cấu trúc đủ rõ để không bị trôi vào mơ hồ.
+
+life_symptoms:
+- Bạn dễ quá tải vì cảm nhận quá nhiều.
+- Bạn có thể truyền cảm hứng rất mạnh, nhưng lại khó ổn định chính mình.
+- Bạn cần học cách phân biệt trực giác thật với cảm xúc nhất thời.
+
+free_guidance:
+Điều bạn cần học là giữ đôi chân chạm đất. Trực giác phải đi cùng kỷ luật, đời sống tinh thần phải đi cùng hành động thực tế. Khi đó, năng lượng 11 mới trở thành ánh sáng thay vì áp lực.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Sứ Mệnh 11. Để hiểu vì sao bạn nhạy cảm mạnh, dễ quá tải và cần chiến lược giữ trục riêng, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+DESTINY_22
+============================================================
+
+field: destiny
+value: 22
+display_title: Sứ Mệnh 22 – Kiến Trúc Sư Đại Tài
+subtitle: Hành trang: Tầm Nhìn Vĩ Mô – Thực Thi
+keywords: Kiến tạo | Tầm nhìn lớn | Thực thi | Di sản
+condition: destiny_base = 22
+report_section: BƯỚC 3 – SỨ MỆNH
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: chiến lược phát huy tài năng, môi trường nghề nghiệp phù hợp, mâu thuẫn với Đường Đời và Linh Hồn
+
+summary:
+Sứ Mệnh 22 cho thấy bạn mang hành trang của người kiến tạo tầm vóc lớn. Đây là năng lượng kết hợp giữa tầm nhìn xa và khả năng thực thi, giữa mơ lớn và xây thật.
+
+core_potential:
+Bạn có tiềm năng xây dựng hệ thống, tổ chức, công trình hoặc di sản lâu dài. Sứ Mệnh 22 không chỉ nói về tài năng cá nhân, mà nói về khả năng tạo giá trị có cấu trúc và ảnh hưởng rộng.
+
+positive_attitude:
+- Kiến tạo di sản: Bạn có năng lực xây dựng những hệ thống hoặc công trình có giá trị lâu dài.
+- Lãnh đạo thực tiễn: Bạn biết biến giấc mơ lớn thành kế hoạch cụ thể.
+- Tầm nhìn vĩ mô: Bạn nhìn được bức tranh rộng và cách các nguồn lực kết nối với nhau.
+
+shadow_attitude:
+- Áp lực đè nén: Sức nặng của con số này có thể khiến bạn lo âu, ngợp hoặc tự phá hoại.
+- Tham vọng lệch lạc: Nếu không phục vụ giá trị lớn hơn, năng lực mạnh có thể bị dùng sai.
+- Sợ tầm vóc của chính mình: Bạn có thể sống dưới khả năng thật vì sợ trách nhiệm lớn.
+
+career_direction:
+Các môi trường phù hợp gồm: lãnh đạo tập đoàn, chính khách, quy hoạch đô thị, xây dựng công trình vĩ mô, ngoại giao quốc tế, phát triển hệ thống, giáo dục quy mô lớn, dự án cộng đồng lớn.
+
+career_note:
+Bạn cần nghĩ lớn nhưng bắt đầu có hệ thống. Nếu chỉ mơ lớn mà không có nền tảng, năng lượng 22 dễ biến thành áp lực. Nếu chỉ làm nhỏ mãi, bạn lại lãng phí hành trang của mình.
+
+life_symptoms:
+- Bạn có thể cảm thấy mình được gọi để làm điều lớn hơn hiện tại.
+- Bạn dễ bị áp lực bởi kỳ vọng, trách nhiệm hoặc tầm nhìn quá rộng.
+- Bạn cần đội ngũ, hệ thống và kỷ luật để biến năng lượng lớn thành kết quả thật.
+
+free_guidance:
+Điều bạn cần học là bắt đầu nhỏ nhưng không được nghĩ nhỏ. Tầm vóc lớn cần được xây bằng những bước thực tế, rõ ràng và bền bỉ.
+
+upsell_hook:
+Phần này mới chỉ gọi tên hành trang Sứ Mệnh 22. Để biết cách dùng tầm nhìn lớn mà không bị áp lực đè nặng hoặc tự phá hoại, cần đọc sâu hơn các chỉ số cốt lõi, chu kỳ và định hướng hành động trong bản chuyên sâu.
+
+
+============================================================
+IMPLEMENTATION NOTES
+============================================================
+
+1. Routing:
+- Nếu destiny = 1 → DESTINY_1
+- Nếu destiny = 2 → DESTINY_2
+- Nếu destiny = 3 → DESTINY_3
+- Nếu destiny = 4 → DESTINY_4
+- Nếu destiny = 5 → DESTINY_5
+- Nếu destiny = 6 → DESTINY_6
+- Nếu destiny = 7 → DESTINY_7
+- Nếu destiny = 8 → DESTINY_8
+- Nếu destiny = 9 → DESTINY_9
+- Nếu destiny = 11/2 hoặc 11 → DESTINY_11
+- Nếu destiny = 22/4 hoặc 22 → DESTINY_22
+
+2. Karmic routing:
+- Nếu destiny = 13/4 → DESTINY_4 + KARMIC_OVERLAY_13_4
+- Nếu destiny = 14/5 → DESTINY_5 + KARMIC_OVERLAY_14_5
+- Nếu destiny = 16/7 → DESTINY_7 + KARMIC_OVERLAY_16_7
+- Nếu destiny = 19/1 → DESTINY_1 + KARMIC_OVERLAY_19_1
+
+3. FREE display:
+- Nên hiển thị 500–900 chữ cho phần Sứ Mệnh.
+- Ưu tiên các trường: summary, core_potential, positive_attitude, shadow_attitude, career_direction, free_guidance, upsell_hook.
+- Không đưa toàn bộ chiến lược phát triển cá nhân hóa trong bản FREE.
+
+4. Paid upgrade:
+Bản trả phí có thể mở rộng bằng:
+- Sứ Mệnh vs Đường Đời
+- Sứ Mệnh vs Linh Hồn
+- Sứ Mệnh vs Nhân Cách
+- Môi trường nghề nghiệp phù hợp
+- Cạm bẫy nghề nghiệp
+- Chiến lược phát huy tài năng theo giai đoạn

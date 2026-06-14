@@ -1,0 +1,531 @@
+# Brian_Numerologist – LifePath Library FREE v1
+# Mục đích: Thư viện nội dung Đường Đời dùng cho website bản FREE.
+# Phạm vi v1: LifePath 1–9, 11, 22.
+# Ghi chú: Các biến thể nợ nghiệp 13/4, 14/5, 16/7, 19/1 nên được tách thành Karmic Overlay riêng ở phiên bản tiếp theo.
+# Quy tắc đã chốt liên quan đến tính toán tên tiếng Việt: Y luôn là nguyên âm trong tên tiếng Việt.
+# Phong cách: trực diện, sâu sắc, thấu cảm, có sức chạm, không hù dọa, không định mệnh hóa tuyệt đối.
+# Vai trò trong báo cáo FREE: dùng cho BƯỚC 2 – ĐƯỜNG ĐỜI.
+
+============================================================
+LIFEPATH_1
+============================================================
+
+field: life_path
+value: 1
+display_title: Đường Đời 1 – Người Tiên Phong
+keywords: Độc lập | Khởi xướng | Bản lĩnh
+condition: life_path = 1
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của người tiên phong. Đường Đời 1 không đến để đi theo lối mòn, mà đến để học cách đứng trên đôi chân của chính mình, tự ra quyết định và dám mở đường khi chưa có ai đi trước.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Đứng Trên Đôi Chân Của Chính Mình”. Hành trình này thường có hai giai đoạn: trước hết là thoát khỏi sự phụ thuộc vào gia đình, hoàn cảnh hoặc ý kiến đám đông; sau đó là dám đứng mũi chịu sào, lãnh đạo và kiến tạo con đường riêng.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 1, bạn là người quyết đoán, tự tin, dám nghĩ dám làm. Sự hiện diện của bạn có khí chất dẫn đầu. Bạn không chờ người khác trao cơ hội, bạn có khuynh hướng tự tạo ra cơ hội.
+
+underbalanced_energy:
+Khi năng lượng 1 bị thiếu hụt, bạn dễ yếu đuối, ba phải, thiếu chính kiến, hoặc luôn cần người khác quyết định thay mình.
+
+overbalanced_energy:
+Khi năng lượng 1 bị thái quá, bạn có thể trở nên độc đoán, cái tôi quá lớn, cố chấp và khó lắng nghe.
+
+warning_signs:
+- Tự cao tự đại, xem nhẹ người khác.
+- Cố chấp, bảo thủ đến mức mù quáng.
+- Sợ thất bại nên không dám bắt đầu, dù bên trong rất muốn làm điều lớn.
+
+life_symptoms:
+- Bạn dễ rơi vào cảm giác “mình phải tự làm hết” nhưng lại cô độc trên chính con đường mình chọn.
+- Bạn có thể rất ghét bị kiểm soát, nhưng đôi khi lại vô thức áp đặt người khác.
+- Bạn muốn dẫn đầu, nhưng nếu thiếu tự tin, bạn lại chờ một sự cho phép từ bên ngoài.
+
+free_guidance:
+Điều bạn cần học là lãnh đạo bằng sự khiêm nhường. Sức mạnh thật sự không phải là bắt người khác phục tùng, mà là truyền cảm hứng để họ tự nguyện đi theo. Đừng ngại đi một mình, vì những con đường mới thường rất vắng người qua lại.
+
+upsell_hook:
+Phần này mới chỉ gọi tên năng lượng Đường Đời 1. Để hiểu vì sao bạn vừa muốn tự chủ vừa dễ cô độc, cần đọc sâu hơn cách Đường Đời 1 va chạm với Sứ Mệnh, Linh Hồn và các chỉ số bổ sung trong bản chuyên sâu.
+
+
+============================================================
+LIFEPATH_2
+============================================================
+
+field: life_path
+value: 2
+display_title: Đường Đời 2 – Người Hòa Giải
+keywords: Hợp tác | Kết nối | Tinh tế
+condition: life_path = 2
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của người kết nối. Đường Đời 2 không nhất thiết phải đứng giữa sân khấu, nhưng thường là người giữ cho các mối quan hệ, tập thể hoặc gia đình không bị đổ vỡ.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Sức Mạnh Của Sự Hòa Hợp”. Bạn học cách thành công thông qua sự nâng đỡ, kết nối, lắng nghe và thấu hiểu người khác.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 2, bạn là người tinh tế, nhạy cảm, biết lắng nghe những điều không ai nói ra. Bạn có khả năng ngoại giao, hòa giải và trở thành chất keo gắn kết tập thể.
+
+underbalanced_energy:
+Khi năng lượng 2 bị thiếu hụt, bạn có thể thờ ơ, vô cảm, rụt rè hoặc không dám lên tiếng bảo vệ chính kiến.
+
+overbalanced_energy:
+Khi năng lượng 2 bị thái quá, bạn dễ quá nhạy cảm, dễ tổn thương, lụy tình, hoặc cố làm hài lòng tất cả đến mức đánh mất chính mình.
+
+warning_signs:
+- Phụ thuộc cảm xúc vào người khác.
+- Nhút nhát, né tránh mâu thuẫn đến mức nhu nhược.
+- Hay dỗi hờn, suy diễn hoặc tự làm mình tổn thương vì những tín hiệu rất nhỏ.
+
+life_symptoms:
+- Bạn dễ cảm nhận không khí xung quanh rất nhanh, nhưng lại khó nói thẳng điều mình cần.
+- Bạn có thể giữ hòa khí cho mọi người, nhưng bên trong lại âm thầm chịu đựng.
+- Bạn sợ bị bỏ rơi, nên đôi khi chấp nhận những mối quan hệ làm mình mệt mỏi.
+
+free_guidance:
+Điều bạn cần học là thiết lập ranh giới cảm xúc. Bạn yêu thương và hỗ trợ, nhưng không có nghĩa là phải chịu đựng sự chèn ép. Sự dịu dàng của bạn là vũ khí, không phải điểm yếu.
+
+upsell_hook:
+Phần này mới chỉ chạm vào bề mặt của năng lượng Đường Đời 2. Để hiểu vì sao bạn dễ hút những mối quan hệ cần được chữa lành, cần đọc sâu hơn cấu trúc Linh Hồn, Sứ Mệnh và các mâu thuẫn cốt lõi.
+
+
+============================================================
+LIFEPATH_3
+============================================================
+
+field: life_path
+value: 3
+display_title: Đường Đời 3 – Người Truyền Cảm Hứng
+keywords: Sáng tạo | Ngôn từ | Lạc quan
+condition: life_path = 3
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của sự diễn đạt và sáng tạo. Đường Đời 3 đến để dùng ngôn từ, cảm xúc, nghệ thuật hoặc sự lạc quan để làm thế giới nhẹ hơn, sáng hơn và có sức sống hơn.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Mang Niềm Vui Đến Thế Gian”. Bạn cần học cách sử dụng năng lượng sáng tạo và khả năng biểu đạt để vực dậy tinh thần của chính mình và người khác.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 3, bạn hoạt ngôn, hài hước, giàu nghệ sĩ tính. Bạn có khả năng biến những điều tẻ nhạt thành màu sắc, biến nỗi buồn thành câu chuyện và biến cảm xúc thành sự kết nối.
+
+underbalanced_energy:
+Khi năng lượng 3 bị thiếu hụt, bạn dễ tự ti, khép kín, khó diễn đạt suy nghĩ hoặc mắc kẹt trong trạng thái buồn bã kéo dài.
+
+overbalanced_energy:
+Khi năng lượng 3 bị thái quá, bạn có thể trở nên phù phiếm, nông cạn, nói nhiều nhưng thiếu chiều sâu, hoặc phóng đại sự thật để được chú ý.
+
+warning_signs:
+- Sống hời hợt, cả thèm chóng chán.
+- Dùng lời nói để châm chọc hoặc làm tổn thương người khác.
+- Trốn tránh thực tế bằng những ảo tưởng vui vẻ giả tạo.
+
+life_symptoms:
+- Bạn có nhiều ý tưởng nhưng dễ bỏ ngang khi cảm hứng giảm.
+- Bạn muốn được công nhận, nhưng đôi khi lại sợ bị đánh giá.
+- Bạn có thể cười nói rất nhiều bên ngoài, nhưng bên trong lại có những khoảng trống khó gọi tên.
+
+free_guidance:
+Điều bạn cần học là tập trung năng lượng. Bạn có thể có nhiều tài lẻ, nhưng nếu không đào sâu, bạn sẽ dễ mãi ở tầng bề nổi. Hãy dùng sự sáng tạo để tạo ra giá trị có chiều sâu, không chỉ để giải trí hoặc gây chú ý.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu tiên của Đường Đời 3. Để hiểu vì sao cảm hứng của bạn dễ lên xuống và cách biến tài năng biểu đạt thành thành tựu thật, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+LIFEPATH_4
+============================================================
+
+field: life_path
+value: 4
+display_title: Đường Đời 4 – Người Kiến Tạo
+keywords: Kỷ luật | Trật tự | Vững chắc
+condition: life_path = 4
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của người xây nền. Đường Đời 4 không đến để sống tùy hứng, mà đến để học cách xây dựng sự vững chắc thông qua kỷ luật, quy trình và khả năng đi đường dài.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Xây Dựng Nền Tảng”. Bạn đến để học cách làm việc có hệ thống, tôn trọng cam kết và kiên trì đến cùng. Với số 4, không có đường tắt bền vững.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 4, bạn thực tế, trung thành, tỉ mỉ và đáng tin cậy. Bạn có thể trở thành cột trụ của gia đình, tổ chức hoặc dự án vì người khác nhìn thấy ở bạn sự ổn định.
+
+underbalanced_energy:
+Khi năng lượng 4 bị thiếu hụt, bạn dễ vô tổ chức, thiếu trách nhiệm, lười biếng hoặc bỏ cuộc giữa chừng.
+
+overbalanced_energy:
+Khi năng lượng 4 bị thái quá, bạn có thể trở nên cứng nhắc, bảo thủ, kỹ tính đến mức xét nét, hoặc tham công tiếc việc.
+
+warning_signs:
+- Tự giới hạn bản thân trong khuôn khổ cũ kỹ.
+- Chống đối sự thay đổi, sợ rủi ro.
+- Khô khan, thiếu linh hoạt và khó cảm thông.
+
+life_symptoms:
+- Bạn muốn mọi thứ chắc chắn rồi mới hành động, nên đôi khi bỏ lỡ cơ hội.
+- Bạn có thể làm việc rất bền, nhưng lại dễ kiệt sức vì ôm trách nhiệm quá nặng.
+- Bạn ghét sự hỗn loạn, nhưng cuộc đời lại thường đưa bạn vào những tình huống buộc phải tái cấu trúc.
+
+free_guidance:
+Điều bạn cần học là mở rộng tầm nhìn. Kỷ luật là sức mạnh, nhưng đừng biến nó thành nhà tù. Sự ổn định của bạn nên là bệ phóng để phát triển, không phải chiếc lồng giam sự sáng tạo.
+
+upsell_hook:
+Phần này mới chỉ gọi tên năng lượng Đường Đời 4. Nếu chỉ nhìn riêng số 4, bạn sẽ chưa thấy vì sao mình vừa cần ổn định vừa có thể bị mắc kẹt. Bản chuyên sâu sẽ bóc tách mâu thuẫn này qua các chỉ số còn lại.
+
+
+============================================================
+LIFEPATH_5
+============================================================
+
+field: life_path
+value: 5
+display_title: Đường Đời 5 – Người Tự Do
+keywords: Phiêu lưu | Thay đổi | Đa tài
+condition: life_path = 5
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của tự do và dịch chuyển. Đường Đời 5 không đến để sống trong chiếc hộp chật hẹp, mà đến để học cách trải nghiệm, thích nghi và làm chủ sự thay đổi.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Sự Tự Do Có Trách Nhiệm”. Vũ trụ trao cho bạn đôi cánh để bay, nhưng bạn cần học cách tự định hướng, thay vì bay loạn theo mọi chiều gió.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 5, bạn thông minh, linh hoạt, thu hút và thích nghi rất nhanh. Bạn dám sống những trải nghiệm mà nhiều người chỉ dám tưởng tượng.
+
+underbalanced_energy:
+Khi năng lượng 5 bị thiếu hụt, bạn dễ sợ thay đổi, sống tù túng, bám vào vùng an toàn và đánh mất sự sống động bên trong.
+
+overbalanced_energy:
+Khi năng lượng 5 bị thái quá, bạn dễ buông thả, vô kỷ luật, sa đà vào khoái lạc hoặc thay đổi công việc, tình cảm, mục tiêu quá nhanh.
+
+warning_signs:
+- Đứng núi này trông núi nọ, không bao giờ thật sự thỏa mãn.
+- Bỏ dở nhiều thứ giữa chừng.
+- Lạm dụng tự do để làm tổn thương những người ở lại.
+
+life_symptoms:
+- Bạn rất dễ hứng thú với điều mới, nhưng khó duy trì khi mọi thứ bắt đầu lặp lại.
+- Bạn sợ bị kiểm soát, nhưng nếu thiếu kỷ luật, chính sự tự do lại làm bạn rối loạn.
+- Bạn có thể có nhiều cơ hội, nhưng không phải cơ hội nào cũng xứng đáng để đuổi theo.
+
+free_guidance:
+Điều bạn cần học là sự cam kết. Tự do thật sự không phải muốn làm gì thì làm, mà là khả năng tự chủ trước cám dỗ. Hãy chọn một mục tiêu đủ quan trọng và theo đuổi nó đủ lâu để thấy thành quả.
+
+upsell_hook:
+Phần này mới chỉ chạm vào mặt nổi của Đường Đời 5. Để hiểu vì sao bạn dễ chán, dễ đổi hướng hoặc khó đi đường dài, cần đọc sâu hơn cấu trúc động lực bên trong và các chỉ số bổ sung.
+
+
+============================================================
+LIFEPATH_6
+============================================================
+
+field: life_path
+value: 6
+display_title: Đường Đời 6 – Người Chăm Sóc
+keywords: Yêu thương | Trách nhiệm | Gia đình
+condition: life_path = 6
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của tình yêu thương, trách nhiệm và sự chăm sóc. Đường Đời 6 thường đến để học cách chữa lành, nâng đỡ và tạo ra mái ấm, nhưng cũng phải học cách không hy sinh mù quáng.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Yêu Thương Có Trí Tuệ”. Bạn sinh ra để chăm sóc và chữa lành, nhưng không phải để trở thành bảo mẫu của cả thế giới.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 6, bạn ấm áp, bao dung, có trách nhiệm, có khiếu thẩm mỹ và biết tạo cảm giác an toàn cho người khác. Bạn dễ trở thành trái tim của gia đình hoặc tập thể.
+
+underbalanced_energy:
+Khi năng lượng 6 bị thiếu hụt, bạn có thể vô tâm, lạnh lùng, né tránh trách nhiệm hoặc không muốn gắn bó sâu với gia đình và cộng đồng.
+
+overbalanced_energy:
+Khi năng lượng 6 bị thái quá, bạn dễ kiểm soát người khác nhân danh tình yêu, lo lắng quá mức, bao đồng hoặc can thiệp quá sâu vào đời sống của người khác.
+
+warning_signs:
+- Hy sinh quá mức rồi quay lại oán trách vì không được đền đáp.
+- Can thiệp quá sâu vào đời tư người khác.
+- Cố chấp với sự hoàn hảo trong tình cảm và gia đình.
+
+life_symptoms:
+- Bạn dễ thấy mình phải gánh trách nhiệm cho người khác, kể cả khi không ai yêu cầu.
+- Bạn yêu nhiều, nhưng đôi khi yêu theo cách khiến người khác thấy áp lực.
+- Bạn có thể chăm sóc mọi người rất tốt, nhưng lại quên hỏi chính mình có ổn không.
+
+free_guidance:
+Điều bạn cần học là yêu bản thân trước. Bạn không thể rót nước từ một chiếc ly rỗng. Trao quyền cho người khác tự chịu trách nhiệm về cuộc đời họ cũng là một dạng tình yêu trưởng thành.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu tiên của Đường Đời 6. Để hiểu vì sao bạn dễ mắc kẹt giữa yêu thương và kiểm soát, cần đọc sâu hơn các mâu thuẫn giữa Đường Đời, Linh Hồn và Sứ Mệnh.
+
+
+============================================================
+LIFEPATH_7
+============================================================
+
+field: life_path
+value: 7
+display_title: Đường Đời 7 – Người Chiêm Nghiệm
+keywords: Trí tuệ | Đức tin | Cô độc
+condition: life_path = 7
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của người đi tìm chân lý. Đường Đời 7 không sống tốt với sự hời hợt. Bạn cần chiều sâu, sự thật, tri thức và những khoảng lặng để hiểu mình, hiểu đời.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Tìm Thấy Đức Tin Qua Sự Hiểu Biết”. Bạn học cách tin vào trực giác, các quy luật vô hình và chiều sâu nội tâm, thay vì chỉ bám vào những gì mắt thấy tai nghe.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 7, bạn sâu sắc, uyên bác, có khả năng phân tích và trực giác mạnh. Bạn tìm thấy bình yên trong sự tĩnh lặng và có thể nhìn ra bản chất của vấn đề.
+
+underbalanced_energy:
+Khi năng lượng 7 bị thiếu hụt, bạn có thể hời hợt, ham vui, sợ ở một mình hoặc liên tục chạy trốn đời sống nội tâm.
+
+overbalanced_energy:
+Khi năng lượng 7 bị thái quá, bạn dễ lập dị, cô độc, hoài nghi tất cả, xa rời thực tế hoặc rơi vào cực đoan tinh thần.
+
+warning_signs:
+- Tự cô lập mình khỏi thế giới.
+- Dùng trí tuệ để chỉ trích hoặc mỉa mai người khác.
+- Sống trong nghi ngờ và lo âu kéo dài.
+
+life_symptoms:
+- Bạn cần ở một mình để nạp năng lượng, nhưng nếu quá lâu, sự cô độc có thể biến thành bức tường.
+- Bạn thường đặt câu hỏi sâu hơn người khác, nên dễ thấy mình lạc lõng.
+- Bạn có thể hiểu rất nhiều, nhưng lại khó mở lòng chia sẻ điều mình thật sự cảm nhận.
+
+free_guidance:
+Điều bạn cần học là mở lòng kết nối. Trí tuệ chỉ có giá trị khi được chia sẻ. Đừng biến mình thành một hòn đảo hoang; hãy dùng sự hiểu biết sâu sắc để soi sáng cho những người đang lạc lối.
+
+upsell_hook:
+Phần này mới chỉ gọi tên bản chất Đường Đời 7. Để hiểu vì sao bạn vừa cần cô độc vừa cần kết nối, cần đọc sâu hơn các chỉ số nội tâm và cách chúng tương tác trong bản đồ cá nhân.
+
+
+============================================================
+LIFEPATH_8
+============================================================
+
+field: life_path
+value: 8
+display_title: Đường Đời 8 – Người Điều Hành
+keywords: Quyền lực | Tiền bạc | Cân bằng
+condition: life_path = 8
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của quyền lực, vật chất và năng lực điều hành. Đường Đời 8 đến để học cách làm chủ tiền bạc, quyền lực, thành tựu và trách nhiệm đi kèm với chúng.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Cân Bằng Giữa Tiền Bạc Và Hạnh Phúc”. Bạn phải học cách kiếm tiền, quản trị quyền lực và sử dụng nguồn lực một cách đạo đức.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 8, bạn thực tế, có tầm nhìn, giỏi quản lý và có khả năng tạo ra sự thịnh vượng. Bạn không chỉ muốn thành công cho bản thân, mà còn có thể tạo giá trị cho cộng đồng.
+
+underbalanced_energy:
+Khi năng lượng 8 bị thiếu hụt, bạn dễ sợ tiền bạc, thiếu năng lực quản trị, cảm thấy mình là nạn nhân của tài chính hoặc né tránh trách nhiệm lớn.
+
+overbalanced_energy:
+Khi năng lượng 8 bị thái quá, bạn dễ trở thành nô lệ của đồng tiền, thực dụng, tàn nhẫn hoặc dùng quyền lực để chèn ép người khác.
+
+warning_signs:
+- Đánh đổi sức khỏe và gia đình lấy sự nghiệp.
+- Lạm dụng quyền lực để kiểm soát người yếu thế.
+- Không bao giờ biết đủ.
+
+life_symptoms:
+- Bạn dễ bị kéo vào bài toán tiền bạc, vị thế, thành tựu hoặc quyền kiểm soát.
+- Bạn có thể rất mạnh mẽ bên ngoài, nhưng bên trong lại áp lực vì luôn phải chứng minh năng lực.
+- Bạn muốn thành công lớn, nhưng nếu thiếu cân bằng, thành công đó có thể khiến bạn cô độc.
+
+free_guidance:
+Điều bạn cần nhớ là tiền bạc là phương tiện, không phải mục đích. Sức mạnh thật sự của số 8 nằm ở sự hào phóng, đạo đức và tinh thần trách nhiệm với những nguồn lực mình đang nắm giữ.
+
+upsell_hook:
+Phần này mới chỉ chạm vào bề mặt của Đường Đời 8. Để hiểu vì sao tiền bạc, quyền lực và cảm giác an toàn luôn là bài học lớn của bạn, cần đọc sâu hơn các chỉ số cốt lõi và chu kỳ vận hành cá nhân.
+
+
+============================================================
+LIFEPATH_9
+============================================================
+
+field: life_path
+value: 9
+display_title: Đường Đời 9 – Người Nhân Đạo
+keywords: Cho đi | Vị tha | Đại đồng
+condition: life_path = 9
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của lòng nhân đạo, sự bao dung và tinh thần cho đi. Đường Đời 9 là bài học cuối của dãy số đơn, gắn với buông bỏ, tha thứ và phụng sự điều lớn hơn bản thân.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Học Cách Buông Bỏ Và Cho Đi Vô Điều Kiện”. Bạn đến để hoàn trả những món nợ ân tình, mở rộng trái tim và học cách phục vụ nhân loại theo cách phù hợp với mình.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 9, bạn bao dung, nhân ái, lý tưởng và có sức hút từ sự thiện lương. Bạn dễ cảm được nỗi đau của người khác và muốn tạo ra điều tốt đẹp cho đời.
+
+underbalanced_energy:
+Khi năng lượng 9 bị thiếu hụt, bạn có thể ích kỷ, nhỏ nhen, đóng lòng hoặc chỉ biết bảo vệ phần lợi ích của riêng mình.
+
+overbalanced_energy:
+Khi năng lượng 9 bị thái quá, bạn dễ mơ mộng hão huyền, hy sinh mù quáng, bị lợi dụng hoặc trở nên đạo đức giả khi cho đi mà vẫn mong được công nhận.
+
+warning_signs:
+- Ôm nỗi đau quá khứ, không chịu tha thứ.
+- Thất vọng vì thế giới không hoàn hảo như mình nghĩ.
+- Cho đi nhưng vẫn mong cầu được đền đáp.
+
+life_symptoms:
+- Bạn dễ bị chạm bởi nỗi đau của người khác, nhưng không phải lúc nào cũng biết đặt ranh giới.
+- Bạn có thể sống rất lý tưởng, rồi tổn thương khi thực tế không như mong đợi.
+- Bạn cần học cách buông bỏ, nhưng thường chính điều đó lại là bài học khó nhất.
+
+free_guidance:
+Điều bạn cần học là tha thứ cho chính mình và người khác. Sứ mệnh của bạn là chữa lành thế giới bằng tình yêu thương, nhưng không để sự cay nghiệt hoặc thất vọng làm vẩn đục tâm hồn.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Đường Đời 9. Để hiểu vì sao bạn dễ mang nặng quá khứ, dễ thương người nhưng cũng dễ cạn năng lượng, cần đọc sâu hơn các nút thắt trong bản đồ cá nhân.
+
+
+============================================================
+LIFEPATH_11
+============================================================
+
+field: life_path
+value: 11
+display_title: Đường Đời 11 – Bậc Thầy Trực Giác
+keywords: Trực giác | Cảm hứng | Dẫn lối tinh thần
+condition: life_path = 11
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của người thắp đuốc. Đường Đời 11 là tần số trực giác cao, nhạy cảm mạnh và có khả năng truyền cảm hứng, nhưng cũng đi kèm áp lực thần kinh lớn hơn số đơn thông thường.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Tin Vào Trực Giác Để Dẫn Lối Tinh Thần”. Bạn đứng giữa hai thế giới: vật chất và tinh thần. Nhiệm vụ của bạn là học cách làm cầu nối, không phải trốn khỏi đời sống thực tế.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 11, bạn có trực giác nhạy bén, tầm nhìn xa và khả năng khơi dậy niềm tin ở người khác. Bạn có thể truyền cảm hứng mạnh mẽ bằng sự hiện diện, lời nói hoặc con đường sống của mình.
+
+underbalanced_energy:
+Khi năng lượng 11 bị thiếu hụt, bạn dễ không tin vào trực giác, tự nghi ngờ bản thân, sống mờ nhạt hoặc né tránh vai trò truyền cảm hứng.
+
+overbalanced_energy:
+Khi năng lượng 11 bị thái quá, bạn có thể ảo tưởng sức mạnh, căng thẳng thần kinh, mơ hồ, thiếu thực tế hoặc bị cuốn vào những viễn cảnh không có nền tảng.
+
+warning_signs:
+- Căng thẳng, mất ngủ, quá tải cảm xúc hoặc tinh thần.
+- Mơ lớn nhưng thiếu kế hoạch cụ thể.
+- Dễ dao động giữa cảm giác mình rất đặc biệt và cảm giác mình hoàn toàn lạc hướng.
+
+life_symptoms:
+- Bạn thường cảm được những điều chưa ai nói ra, nhưng không phải lúc nào cũng biết kiểm chứng.
+- Bạn có thể có tầm nhìn rất sáng, nhưng lại khó biến nó thành hành động đều đặn.
+- Bạn dễ bị quá tải bởi năng lượng, kỳ vọng hoặc áp lực vô hình.
+
+free_guidance:
+Điều bạn cần học là giữ đôi chân chạm đất. Trực giác cần đi cùng kỷ luật đời thường. Hãy dùng năng lực tinh thần để giải quyết các vấn đề thực tế, thay vì trốn vào thế giới ảo mộng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên tần số Đường Đời 11. Để hiểu vì sao bạn nhạy cảm mạnh, dễ quá tải và cần một chiến lược giữ trục riêng, cần đọc sâu hơn toàn bộ bản đồ cốt lõi và các chỉ số bổ sung.
+
+
+============================================================
+LIFEPATH_22
+============================================================
+
+field: life_path
+value: 22
+display_title: Đường Đời 22 – Bậc Thầy Kiến Tạo
+keywords: Kiến tạo | Tầm vóc lớn | Hiện thực hóa
+condition: life_path = 22
+report_section: BƯỚC 2 – ĐƯỜNG ĐỜI
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế gốc rễ, chiến lược hóa giải, tương tác đa chỉ số
+
+summary:
+Bạn mang năng lượng của người xây dựng vĩ đại. Đường Đời 22 kết hợp tầm nhìn lớn với năng lực thực thi, nhưng cũng tạo ra áp lực rất mạnh nếu bạn chưa đủ nền tảng để gánh tầm vóc của nó.
+
+soul_lesson:
+Bài học linh hồn của bạn là “Biến Giấc Mơ Lớn Thành Hiện Thực”. Bạn có tầm nhìn của số 11 và khả năng xây dựng của số 4. Đây là năng lượng của người có thể tạo ra hệ thống, công trình hoặc di sản có giá trị lâu dài.
+
+positive_energy:
+Khi sống đúng năng lượng Đường Đời 22, bạn có khả năng lãnh đạo quy mô lớn, xây dựng hệ thống và biến ý tưởng lớn thành kết quả cụ thể. Bạn không chỉ mơ, bạn có tiềm năng kiến tạo.
+
+underbalanced_energy:
+Khi năng lượng 22 bị thiếu hụt, bạn dễ sợ trách nhiệm, không dám nghĩ lớn, sống dưới tầm hoặc để tài năng bị lãng phí.
+
+overbalanced_energy:
+Khi năng lượng 22 bị thái quá, áp lực có thể khiến bạn sụp đổ, kiểm soát quá mức, phá hoại chính mình hoặc biến giấc mơ lớn thành gánh nặng đè nén.
+
+warning_signs:
+- Nghĩ rất lớn nhưng trì hoãn vì sợ không đủ sức.
+- Ôm quá nhiều trách nhiệm vượt khả năng hiện tại.
+- Tự phá hủy cơ hội vì áp lực hoàn hảo hoặc nỗi sợ thất bại.
+
+life_symptoms:
+- Bạn có thể luôn cảm thấy mình sinh ra để làm điều gì đó lớn hơn, nhưng chưa biết bắt đầu từ đâu.
+- Bạn dễ bị giằng co giữa tầm nhìn lớn và nỗi sợ hiện thực hóa.
+- Bạn cần hệ thống, đội ngũ và kỷ luật; nếu không, năng lượng 22 dễ biến thành áp lực khổng lồ.
+
+free_guidance:
+Điều bạn cần học là nghĩ lớn nhưng bắt đầu nhỏ. Sứ mệnh của bạn không chỉ là thành công cá nhân, mà là tạo giá trị có thể phục vụ cộng đồng rộng hơn. Hãy xây từng viên gạch thay vì cố nâng cả tòa nhà trong một ngày.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp nền của Đường Đời 22. Để hiểu vì sao bạn có tầm nhìn lớn nhưng dễ bị áp lực đè nặng, cần đọc sâu hơn cấu trúc Sứ Mệnh, Linh Hồn, chu kỳ và các chỉ số bổ trợ trong bản chuyên sâu.
+
+
+============================================================
+IMPLEMENTATION NOTES
+============================================================
+
+1. Routing:
+- Nếu life_path = 1 → dùng LIFEPATH_1.
+- Nếu life_path = 2 → dùng LIFEPATH_2.
+- Nếu life_path = 3 → dùng LIFEPATH_3.
+- Nếu life_path = 4 → dùng LIFEPATH_4.
+- Nếu life_path = 5 → dùng LIFEPATH_5.
+- Nếu life_path = 6 → dùng LIFEPATH_6.
+- Nếu life_path = 7 → dùng LIFEPATH_7.
+- Nếu life_path = 8 → dùng LIFEPATH_8.
+- Nếu life_path = 9 → dùng LIFEPATH_9.
+- Nếu life_path = 11 → dùng LIFEPATH_11.
+- Nếu life_path = 22 → dùng LIFEPATH_22.
+
+2. Karmic routing đề xuất cho bản tiếp theo:
+- Nếu kết quả là 13/4 → dùng LIFEPATH_4 + KARMIC_OVERLAY_13_4.
+- Nếu kết quả là 14/5 → dùng LIFEPATH_5 + KARMIC_OVERLAY_14_5.
+- Nếu kết quả là 16/7 → dùng LIFEPATH_7 + KARMIC_OVERLAY_16_7.
+- Nếu kết quả là 19/1 → dùng LIFEPATH_1 + KARMIC_OVERLAY_19_1.
+
+3. Nguyên tắc FREE:
+- Không đưa hết chiến lược hóa giải.
+- Không dùng ngôn ngữ hù dọa.
+- Dùng “có khuynh hướng”, “dễ xuất hiện”, “nếu không tỉnh thức”, “cần đọc sâu hơn”.
+- Luôn kết thúc bằng gợi mở nâng cấp tự nhiên.

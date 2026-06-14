@@ -1,0 +1,584 @@
+# Brian_Numerologist – Soul Library FREE v1
+# Mục đích: Thư viện nội dung Linh Hồn dùng cho website bản FREE.
+# Phạm vi v1: Soul/Linh Hồn 1–9, 11, 22.
+# Nguồn nội dung: Bảng Linh Hồn do Brian biên soạn và cung cấp.
+# Quy tắc dùng:
+# - Nếu soul = số đơn → gọi SOUL_[số].
+# - Nếu soul = 11/2 → gọi SOUL_11.
+# - Nếu soul = 22/4 → gọi SOUL_22.
+# - Nếu soul có nợ nghiệp 13/4, 14/5, 16/7, 19/1 → gọi block base + Karmic Overlay tương ứng.
+#
+# Vai trò trong báo cáo FREE:
+# - Dùng cho BƯỚC 5 – LINH HỒN.
+# - Mục tiêu: phân tích sơ lược động lực ngầm bên trong, trạng thái khi Linh Hồn được thỏa mãn và khi bị kìm nén.
+# - Không xả hết chiến lược hóa giải chuyên sâu.
+#
+# Phong cách:
+# - Trực diện, sâu sắc, thấu cảm.
+# - Có sức chạm, không hù dọa.
+# - Không định mệnh hóa tuyệt đối.
+# - Dùng “có khuynh hướng”, “dễ xuất hiện”, “nếu không tỉnh thức”, “cần đọc sâu hơn”.
+
+============================================================
+SOUL_1
+============================================================
+
+field: soul
+value: 1
+display_title: Linh Hồn 1 – Khát Khao Dẫn Đầu
+keywords: Dẫn đầu | Độc lập | Tự chủ | Tiên phong
+condition: soul_base = 1
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 1 cho thấy bên trong bạn có khát khao mạnh mẽ được tự chủ, dẫn đầu và làm chủ cuộc chơi. Bạn không dễ chịu khi phải sống dưới cái bóng của người khác hoặc phải cúi đầu trước một khuôn mẫu không thuộc về mình.
+
+core_motivation:
+Sâu thẳm bên trong, bạn không chịu được cảm giác làm người thứ hai. Bạn khao khát được tự do tuyệt đối trong suy nghĩ và hành động. Tiếng nói nội tâm thường thúc giục bạn: “Hãy làm chủ cuộc chơi. Đừng cúi đầu.” Bạn muốn tên mình gắn với sự tiên phong, khởi xướng và độc nhất.
+
+fulfilled_state:
+Khi Linh Hồn 1 được thỏa mãn, bạn cảm thấy mạnh mẽ, tự tin và sống có chủ quyền. Bạn dám đứng mũi chịu sào, tự ra quyết định và chịu trách nhiệm cho con đường mình chọn.
+
+positive_attitude:
+- Dũng cảm: Bạn dám đứng mũi chịu sào khi người khác sợ hãi.
+- Độc lập: Bạn có khả năng tự chữa lành và tự đứng dậy sau vấp ngã.
+- Quyết đoán: Bạn biết mình muốn gì và có xu hướng đi thẳng đến mục tiêu.
+
+blocked_state:
+Khi Linh Hồn 1 bị kìm nén, bạn dễ bức bối, tức giận hoặc cảm thấy mình bị xem thường. Nếu không được quyền tự quyết, bạn có thể phản kháng âm thầm, mất động lực hoặc trở nên gay gắt.
+
+shadow_attitude:
+- Cái tôi quá lớn: Bạn dễ kiêu ngạo hoặc xem nhẹ ý kiến người khác.
+- Nóng nảy: Sự thiếu kiên nhẫn khiến bạn dễ nổi giận khi mọi việc không theo ý mình.
+- Cô độc: Vì quá mạnh mẽ, bạn có thể vô tình đẩy người khác ra xa.
+
+life_symptoms:
+- Bạn khó chịu khi người khác kiểm soát hoặc ra lệnh quá chi tiết.
+- Bạn muốn được công nhận là người có bản lĩnh riêng.
+- Bạn có thể mạnh mẽ bên ngoài nhưng bên trong lại sợ bị xem là yếu đuối.
+- Bạn dễ cô độc khi cứ phải chứng minh rằng mình tự làm được tất cả.
+
+free_guidance:
+Hãy nhớ rằng người lãnh đạo giỏi nhất là người biết cúi xuống để nâng người khác lên. Độc lập không có nghĩa là cô lập. Sức mạnh của bạn sẽ sâu hơn khi nó biết lắng nghe.
+
+upsell_hook:
+Phần này mới chỉ gọi tên khát khao Linh Hồn 1. Để hiểu vì sao bạn vừa muốn dẫn đầu vừa dễ cô độc hoặc áp lực tự chứng minh, cần đọc sâu hơn mối tương tác giữa Linh Hồn, Đường Đời và Sứ Mệnh trong bản chuyên sâu.
+
+
+============================================================
+SOUL_2
+============================================================
+
+field: soul
+value: 2
+display_title: Linh Hồn 2 – Khát Khao Hòa Hợp
+keywords: Hòa hợp | Kết nối | Tình cảm | Tinh tế
+condition: soul_base = 2
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 2 cho thấy trái tim bạn cần sự kết nối, tình yêu thương và cảm giác thuộc về. Bạn không thật sự bình yên trong xung đột kéo dài hoặc trong những mối quan hệ lạnh lẽo, thiếu lắng nghe.
+
+core_motivation:
+Trái tim bạn chỉ thực sự bình yên khi được bao bọc trong tình yêu thương và sự kết nối. Bạn sợ sự xung đột, sợ tiếng to tiếng nhỏ. Động lực lớn nhất của bạn là mối quan hệ. Bạn muốn là một mảnh ghép hài hòa trong bức tranh chung, không muốn bị tách ra đứng một mình.
+
+fulfilled_state:
+Khi Linh Hồn 2 được thỏa mãn, bạn mềm mại, tinh tế và biết nâng đỡ người khác. Bạn cảm thấy có giá trị khi được yêu thương, được tin tưởng và được cùng ai đó xây dựng sự hòa hợp.
+
+positive_attitude:
+- Tinh tế: Bạn cảm nhận được nỗi đau của người khác trước khi họ nói ra.
+- Hàn gắn: Bạn là sứ giả hòa bình, luôn tìm cách xoa dịu căng thẳng.
+- Trung thành: Bạn là người bạn đời, người đồng nghiệp hoặc người đồng hành đáng tin cậy.
+
+blocked_state:
+Khi Linh Hồn 2 bị kìm nén, bạn dễ thấy bất an, bị bỏ rơi hoặc không được yêu thương. Bạn có thể cố làm hài lòng người khác để giữ kết nối, dù điều đó khiến mình mệt.
+
+shadow_attitude:
+- Phụ thuộc cảm xúc: Bạn dễ đánh mất chính mình để làm hài lòng người khác.
+- Mong manh: Một lời chỉ trích nhỏ cũng có thể khiến bạn tổn thương sâu.
+- Thiếu quyết đoán: Bạn sợ làm sai nên thường do dự và không dám lựa chọn.
+
+life_symptoms:
+- Bạn rất dễ bị ảnh hưởng bởi thái độ của người khác.
+- Bạn thường biết người khác cần gì, nhưng lại khó nói rõ mình cần gì.
+- Bạn có thể chịu đựng quá lâu chỉ để giữ hòa khí.
+- Bạn sợ cô đơn, nên đôi khi bám vào những mối quan hệ không còn nuôi dưỡng mình.
+
+free_guidance:
+Yêu thương người khác là tốt, nhưng đừng quên yêu thương chính mình. Bạn không có nhiệm vụ phải làm hài lòng tất cả mọi người. Một mối quan hệ lành mạnh cần cả kết nối lẫn ranh giới.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Linh Hồn 2. Để hiểu vì sao bạn dễ nhạy cảm, dễ phụ thuộc cảm xúc hoặc khó rời khỏi mối quan hệ cũ, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+SOUL_3
+============================================================
+
+field: soul
+value: 3
+display_title: Linh Hồn 3 – Khát Khao Tỏa Sáng
+keywords: Tỏa sáng | Biểu đạt | Niềm vui | Sáng tạo
+condition: soul_base = 3
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 3 cho thấy bên trong bạn có một nguồn năng lượng muốn được biểu đạt, được nhìn thấy và được sống với niềm vui. Sự im lặng kéo dài hoặc môi trường quá khô cứng có thể làm bạn mất sức sống.
+
+core_motivation:
+Linh hồn bạn giống một đứa trẻ vĩnh cửu: khao khát niềm vui, tiếng cười và sự chú ý. Bạn muốn thế giới nhìn thấy tài năng của mình. Động lực của bạn là sự biểu đạt – được nói, được viết, được diễn, được hát, được tạo ra điều gì đó có màu sắc riêng.
+
+fulfilled_state:
+Khi Linh Hồn 3 được thỏa mãn, bạn rạng rỡ, lạc quan và có khả năng truyền cảm hứng. Bạn cảm thấy mình đang sống khi được sáng tạo, giao tiếp, kể chuyện hoặc làm người khác bật cười.
+
+positive_attitude:
+- Lạc quan: Bạn nhìn thấy ánh mặt trời ngay cả trong ngày mưa bão.
+- Truyền cảm hứng: Năng lượng vui vẻ của bạn có khả năng chữa lành người khác.
+- Sáng tạo: Bạn luôn tìm ra cách mới mẻ để làm cuộc sống thú vị hơn.
+
+blocked_state:
+Khi Linh Hồn 3 bị kìm nén, bạn dễ buồn bã, chán nản, tự ti hoặc cảm thấy mình không được nhìn thấy. Niềm vui bị khóa lại có thể biến thành sự trống rỗng hoặc cảm giác không ai hiểu mình.
+
+shadow_attitude:
+- Hời hợt: Bạn dễ bị cuốn theo bề nổi mà thiếu chiều sâu.
+- Phù phiếm: Bạn quá quan tâm đến hình thức hoặc sự tán dương ảo.
+- Sợ buồn chán: Bạn chạy trốn cảm xúc tiêu cực bằng vui chơi quá đà thay vì đối mặt.
+
+life_symptoms:
+- Bạn cần được thể hiện, nhưng cũng sợ bị chê.
+- Bạn có thể vui vẻ bên ngoài nhưng bên trong có những khoảng buồn không dễ nói ra.
+- Bạn dễ có nhiều ý tưởng nhưng thiếu kỷ luật để hoàn thành.
+- Bạn bị tụt năng lượng mạnh trong môi trường quá im lặng, quá khô hoặc quá máy móc.
+
+free_guidance:
+Hãy dùng sự sáng tạo của mình để tạo ra giá trị thật, không chỉ là những màn trình diễn hào nhoáng nhất thời. Niềm vui của bạn sẽ bền hơn khi nó có chiều sâu.
+
+upsell_hook:
+Phần này mới chỉ gọi tên khát khao Linh Hồn 3. Để hiểu vì sao bạn cần được nhìn thấy nhưng cũng dễ phân tán hoặc sợ bị đánh giá, cần đọc sâu hơn bản đồ cốt lõi trong bản chuyên sâu.
+
+
+============================================================
+SOUL_4
+============================================================
+
+field: soul
+value: 4
+display_title: Linh Hồn 4 – Khát Khao Ổn Định
+keywords: Ổn định | An toàn | Trật tự | Kế hoạch
+condition: soul_base = 4
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 4 cho thấy bên trong bạn cần sự an toàn, rõ ràng và trật tự. Bạn khó bình yên trong hỗn loạn, mơ hồ hoặc những tình huống không có kế hoạch.
+
+core_motivation:
+Bạn tìm kiếm sự an toàn, trật tự và rõ ràng. Linh hồn bạn dị ứng với sự mơ hồ và hỗn loạn. Bạn muốn mọi thứ có quy trình, kế hoạch và nền tảng vững chắc: nhà cửa, sự nghiệp, tài chính, trách nhiệm, cam kết.
+
+fulfilled_state:
+Khi Linh Hồn 4 được thỏa mãn, bạn bình tĩnh, vững vàng và có cảm giác kiểm soát được đời sống. Bạn thấy an tâm khi mọi thứ rõ ràng, có cấu trúc và có thể đo lường.
+
+positive_attitude:
+- Kỷ luật: Bạn làm việc đến nơi đến chốn, không dễ bỏ cuộc giữa chừng.
+- Trung thực: Bạn ghét sự giả dối, lươn lẹo; lời nói của bạn có trọng lượng.
+- Thực tế: Bạn không mơ mộng hão huyền, bạn tập trung vào kết quả hiện hữu.
+
+blocked_state:
+Khi Linh Hồn 4 bị kìm nén, bạn dễ lo lắng, bực bội hoặc thấy bất an vì mọi thứ thiếu chắc chắn. Bạn có thể bám vào kiểm soát để chống lại cảm giác hỗn loạn bên trong.
+
+shadow_attitude:
+- Cứng nhắc: Bạn sợ thay đổi đến mức bảo thủ.
+- Kiểm soát: Bạn muốn mọi thứ và mọi người phải theo trật tự của mình.
+- Khô khan: Bạn khó bộc lộ cảm xúc mềm mỏng, khiến người khác thấy xa cách.
+
+life_symptoms:
+- Bạn dễ căng thẳng khi kế hoạch bị thay đổi đột ngột.
+- Bạn muốn chắc chắn rồi mới hành động, nên đôi khi chậm nắm bắt cơ hội.
+- Bạn có thể rất trách nhiệm, nhưng cũng dễ biến trách nhiệm thành gánh nặng.
+- Bạn khó chịu với người sống tùy hứng hoặc thiếu cam kết.
+
+free_guidance:
+Cuộc sống vốn dĩ là biến động. Hãy học cách thả lỏng và chấp nhận sự không hoàn hảo. Một cái cây quá cứng sẽ dễ gãy trước gió bão hơn cây tre mềm dẻo.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Linh Hồn 4. Để hiểu vì sao bạn cần ổn định đến vậy và vì sao sự kiểm soát có thể vừa bảo vệ vừa giam giữ bạn, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+SOUL_5
+============================================================
+
+field: soul
+value: 5
+display_title: Linh Hồn 5 – Khát Khao Tự Do
+keywords: Tự do | Trải nghiệm | Thay đổi | Mới lạ
+condition: soul_base = 5
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 5 cho thấy bên trong bạn có tiếng gọi rất mạnh của tự do, trải nghiệm và sự mới lạ. Sự nhàm chán, lặp lại hoặc bị kiểm soát quá chặt dễ khiến bạn thấy ngột ngạt.
+
+core_motivation:
+“Đừng nhốt tôi lại!” là tiếng thét của linh hồn bạn. Bạn khao khát được bay nhảy, khám phá và trải nghiệm những gì thế giới mang lại. Sự nhàm chán là kẻ thù số một. Động lực của bạn là thay đổi và mới lạ.
+
+fulfilled_state:
+Khi Linh Hồn 5 được thỏa mãn, bạn sống động, linh hoạt, nhiệt huyết và cởi mở. Bạn cảm thấy mình đang sống thật khi được di chuyển, học cái mới, gặp người mới hoặc thử nghiệm một hướng đi mới.
+
+positive_attitude:
+- Linh hoạt: Bạn thích nghi nhanh với hoàn cảnh.
+- Phóng khoáng: Bạn cởi mở, ít phán xét và chấp nhận sự đa dạng.
+- Nhiệt huyết: Bạn sống hết mình, trải nghiệm mạnh và luôn muốn làm mới cuộc đời.
+
+blocked_state:
+Khi Linh Hồn 5 bị kìm nén, bạn dễ bồn chồn, khó chịu, muốn phá vỡ khuôn mẫu hoặc thoát khỏi hoàn cảnh hiện tại bằng mọi giá.
+
+shadow_attitude:
+- Bồn chồn: Bạn đứng núi này trông núi nọ, không thấy thỏa mãn.
+- Thiếu cam kết: Bạn sợ ràng buộc nên dễ bỏ dở công việc hoặc quan hệ.
+- Buông thả: Bạn dễ sa vào thú vui để khỏa lấp sự trống rỗng.
+
+life_symptoms:
+- Bạn rất khó chịu khi bị kiểm soát, giám sát hoặc ép vào khuôn.
+- Bạn thích cái mới nhưng dễ chán khi mọi thứ lặp lại.
+- Bạn có thể nhầm lẫn giữa tự do và trốn chạy.
+- Bạn càng thiếu kỷ luật, cuộc sống càng dễ hỗn loạn.
+
+free_guidance:
+Tự do không có nghĩa là chạy trốn trách nhiệm. Tự do đích thực là khi bạn có thể tìm thấy niềm vui ngay cả trong những điều bình dị, và vẫn giữ cam kết với điều thật sự quan trọng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên khát khao Linh Hồn 5. Để hiểu vì sao bạn dễ bồn chồn, dễ đổi hướng hoặc khó đi đường dài, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+SOUL_6
+============================================================
+
+field: soul
+value: 6
+display_title: Linh Hồn 6 – Khát Khao Gánh Vác
+keywords: Gánh vác | Yêu thương | Phụng sự | Gia đình
+condition: soul_base = 6
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 6 cho thấy trái tim bạn hướng về gia đình, cộng đồng và những người mình yêu thương. Bạn cảm thấy mình có giá trị khi được chăm sóc, bảo vệ và gánh vác.
+
+core_motivation:
+Trái tim bạn luôn hướng về gia đình và cộng đồng. Bạn muốn chăm sóc, nuôi dưỡng và bảo vệ những người mình yêu thương. Bạn cảm thấy mình có giá trị nhất khi được ai đó cần đến. Động lực của bạn là phụng sự và yêu thương.
+
+fulfilled_state:
+Khi Linh Hồn 6 được thỏa mãn, bạn ấm áp, tận tâm và có cảm giác mình đang sống có ý nghĩa. Bạn muốn tạo ra sự an toàn, cái đẹp và cảm giác được chăm sóc cho người khác.
+
+positive_attitude:
+- Tận tâm: Bạn chăm sóc người khác chu đáo hơn cả bản thân.
+- Trách nhiệm: Bạn là trụ cột vững chắc mà nhiều người muốn dựa vào.
+- Thẩm mỹ: Bạn yêu cái đẹp và muốn tạo không gian sống hài hòa, ấm cúng.
+
+blocked_state:
+Khi Linh Hồn 6 bị kìm nén, bạn dễ thấy mình vô dụng, không được cần đến hoặc không được ghi nhận. Bạn có thể hy sinh quá mức rồi âm thầm oán trách.
+
+shadow_attitude:
+- Ôm đồm: Bạn lo chuyện bao đồng, can thiệp sâu vào đời người khác.
+- Oán trách: Khi hy sinh mà không được ghi nhận, bạn dễ rơi vào tâm lý nạn nhân.
+- Lo âu thái quá: Bạn thường tưởng tượng viễn cảnh xấu cho người thân.
+
+life_symptoms:
+- Bạn dễ thấy trách nhiệm ở khắp nơi.
+- Bạn chăm người khác tốt, nhưng dễ bỏ quên nhu cầu của mình.
+- Bạn có thể yêu thương bằng cách kiểm soát mà không nhận ra.
+- Bạn dễ mệt vì cứ phải là người “đứng ra gánh”.
+
+free_guidance:
+Hãy nhớ quy tắc trên máy bay: đeo mặt nạ dưỡng khí cho mình trước khi giúp người khác. Bạn phải hạnh phúc thì mới mang lại hạnh phúc cho người khác được.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Linh Hồn 6. Để hiểu vì sao bạn dễ ôm đồm, dễ hy sinh và dễ bị tổn thương khi không được ghi nhận, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+SOUL_7
+============================================================
+
+field: soul
+value: 7
+display_title: Linh Hồn 7 – Khát Khao Chân Lý
+keywords: Chân lý | Tri thức | Chiêm nghiệm | Nội tâm
+condition: soul_base = 7
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 7 cho thấy bên trong bạn là một kẻ lữ hành đi tìm ý nghĩa cuộc đời. Bạn không thỏa mãn với câu trả lời hời hợt; bạn cần chiều sâu, tri thức và sự tĩnh lặng để hiểu bản chất.
+
+core_motivation:
+Bạn khao khát sự tĩnh lặng để chiêm nghiệm, nghiên cứu và tìm ra sự thật. Động lực của bạn là tri thức và sự thấu hiểu. Bạn muốn hiểu vì sao mọi thứ vận hành như vậy, chứ không chỉ chấp nhận câu trả lời có sẵn.
+
+fulfilled_state:
+Khi Linh Hồn 7 được thỏa mãn, bạn cảm thấy bình yên trong sự sâu sắc. Bạn được nuôi dưỡng bởi học hỏi, nghiên cứu, chiêm nghiệm và những khoảng riêng tư chất lượng.
+
+positive_attitude:
+- Sâu sắc: Bạn nhìn thấu bản chất vấn đề mà người khác bỏ qua.
+- Độc lập tư duy: Bạn không hùa theo đám đông, bạn có quan điểm riêng.
+- Trực giác mạnh: Bạn có kết nối sâu sắc với thế giới tinh thần, tâm linh hoặc khoa học.
+
+blocked_state:
+Khi Linh Hồn 7 bị kìm nén, bạn dễ mệt vì phải sống quá ồn, quá nông hoặc quá xã giao. Bạn có thể rút vào bên trong và dựng tường ngăn cách với thế giới.
+
+shadow_attitude:
+- Cô lập: Bạn dựng bức tường ngăn cách và trở nên lạnh lùng, khó gần.
+- Hoài nghi: Bạn nghi ngờ tất cả, khó mở lòng tin tưởng.
+- Mơ mộng: Bạn sống quá nhiều trong đầu và xa rời thực tế đời sống.
+
+life_symptoms:
+- Bạn dễ cần ở một mình để phục hồi năng lượng.
+- Bạn khó chịu với sự hời hợt hoặc những câu trả lời quá đơn giản.
+- Bạn có thể khó tin người khác, kể cả khi họ thật lòng.
+- Bạn thường hiểu rất nhiều nhưng không dễ chia sẻ ra ngoài.
+
+free_guidance:
+Đừng để sự hiểu biết biến thành sự kiêu ngạo. Hãy dùng trí tuệ để kết nối và giúp đỡ mọi người, thay vì phán xét họ. Chiều sâu thật sự cần cả trí tuệ lẫn lòng trắc ẩn.
+
+upsell_hook:
+Phần này mới chỉ gọi tên khát khao Linh Hồn 7. Để hiểu vì sao bạn cần cô độc, dễ hoài nghi hoặc thường cảm thấy khác biệt với đám đông, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+SOUL_8
+============================================================
+
+field: soul
+value: 8
+display_title: Linh Hồn 8 – Khát Khao Quyền Lực
+keywords: Quyền lực | Thành tựu | Tiền bạc | Công nhận
+condition: soul_base = 8
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 8 cho thấy bên trong bạn có khát khao thành công lớn, quyền kiểm soát đời mình và sự công nhận rõ ràng. Bạn không dễ chấp nhận sự tầm thường, bất lực hoặc nghèo khó kéo dài.
+
+core_motivation:
+Thành thật mà nói, bạn muốn thành công lớn. Bạn muốn có tiền bạc, địa vị và quyền lực để kiểm soát cuộc đời mình và ảnh hưởng đến người khác. Động lực của bạn là thành tựu vật chất và sự công nhận.
+
+fulfilled_state:
+Khi Linh Hồn 8 được thỏa mãn, bạn cảm thấy mạnh mẽ, có vị thế, có khả năng tạo kết quả và quản trị nguồn lực. Bạn thấy mình sống đúng khi làm chủ tài chính, sự nghiệp và quyền quyết định.
+
+positive_attitude:
+- Tự tin: Bạn tin vào năng lực của mình và dám nghĩ lớn, làm lớn.
+- Tổ chức: Bạn có đầu óc quản trị, biết biến ý tưởng thành lợi nhuận.
+- Chịu áp lực: Khó khăn càng lớn, bản lĩnh của bạn càng được kích hoạt.
+
+blocked_state:
+Khi Linh Hồn 8 bị kìm nén, bạn dễ thấy bất lực, cay đắng hoặc bị ám ảnh bởi việc phải chứng minh năng lực. Nếu không có thành tựu rõ ràng, bạn có thể tự nghi ngờ giá trị bản thân.
+
+shadow_attitude:
+- Thực dụng: Bạn dễ đánh giá con người qua tiền bạc hoặc địa vị.
+- Độc đoán: Bạn muốn kiểm soát mọi thứ, trở nên cứng nhắc và thiếu khoan dung.
+- Mất cân bằng: Bạn lao vào kiếm tiền mà bỏ quên sức khỏe, gia đình và tình cảm.
+
+life_symptoms:
+- Bạn khó chịu khi thấy mình không có quyền quyết định.
+- Bạn muốn thành công rõ ràng, đo được, nhìn thấy được.
+- Bạn dễ đặt áp lực tài chính hoặc địa vị lên chính mình.
+- Bạn cần học cách phân biệt giá trị con người và giá trị thành tựu.
+
+free_guidance:
+Tiền bạc là người đầy tớ tốt nhưng là ông chủ tồi. Hãy làm chủ đồng tiền để phục vụ cho mục đích cao đẹp hơn, thay vì để nó quyết định toàn bộ giá trị sống của bạn.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Linh Hồn 8. Để hiểu vì sao bạn khát khao thành tựu mạnh đến vậy và làm sao cân bằng quyền lực với hạnh phúc, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+SOUL_9
+============================================================
+
+field: soul
+value: 9
+display_title: Linh Hồn 9 – Khát Khao Cống Hiến
+keywords: Cống hiến | Vị tha | Lý tưởng | Nhân ái
+condition: soul_base = 9
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 9 cho thấy trái tim bạn rộng lớn, nhạy với nỗi đau và khao khát làm điều gì đó có ý nghĩa cho cộng đồng. Bạn không dễ thỏa mãn nếu cuộc sống chỉ xoay quanh lợi ích cá nhân.
+
+core_motivation:
+Bạn khao khát được làm điều tốt đẹp cho nhân loại, cho cộng đồng. Bạn cảm thấy đau lòng trước sự bất công và khổ đau. Động lực của bạn là lòng vị tha và lý tưởng cao đẹp.
+
+fulfilled_state:
+Khi Linh Hồn 9 được thỏa mãn, bạn cảm thấy mình sống có ý nghĩa khi được cho đi, chữa lành, truyền cảm hứng hoặc đóng góp cho điều lớn hơn bản thân.
+
+positive_attitude:
+- Nhân ái: Bạn cho đi mà không toan tính, sẵn sàng tha thứ và bao dung.
+- Tầm nhìn: Bạn hướng tới lợi ích chung, không chỉ vụ lợi cá nhân.
+- Nghệ thuật: Bạn nhạy cảm với cái đẹp và có khả năng truyền cảm hứng nhân văn.
+
+blocked_state:
+Khi Linh Hồn 9 bị kìm nén, bạn dễ rơi vào thất vọng, cay nghiệt hoặc cảm giác thế giới quá lạnh lùng. Lòng tốt nếu không có ranh giới có thể biến thành vết thương.
+
+shadow_attitude:
+- Thất vọng: Khi thế giới không tốt đẹp như bạn nghĩ, bạn dễ bi quan.
+- Mơ hồ: Bạn có nhiều lý tưởng nhưng thiếu hành động thực tế.
+- Xa cách: Đôi khi vì lo chuyện lớn mà bạn lạnh nhạt với người thân ngay bên cạnh.
+
+life_symptoms:
+- Bạn dễ xúc động trước bất công hoặc nỗi đau của người khác.
+- Bạn muốn giúp nhiều người, nhưng dễ quên người gần mình nhất.
+- Bạn có thể cho đi quá nhiều rồi cạn năng lượng.
+- Bạn cần học cách biến lý tưởng thành hành động cụ thể.
+
+free_guidance:
+Hãy bắt đầu thay đổi thế giới từ việc yêu thương người gần bên. Đừng để lý tưởng che khuất thực tế. Lòng vị tha cần đi cùng sự tỉnh táo và ranh giới lành mạnh.
+
+upsell_hook:
+Phần này mới chỉ gọi tên khát khao Linh Hồn 9. Để hiểu vì sao bạn dễ thương người, dễ thất vọng và cần học bài học buông bỏ, cần đọc sâu hơn bản đồ chuyên sâu.
+
+
+============================================================
+SOUL_11
+============================================================
+
+field: soul
+value: 11
+display_title: Linh Hồn 11 – Khát Khao Khai Sáng
+keywords: Khai sáng | Trực giác | Tâm linh | Truyền cảm hứng
+condition: soul_base = 11
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 11 cho thấy bên trong bạn có khát khao trở thành ngọn đèn soi đường về mặt tinh thần. Bạn nhạy với tầng sâu, dễ cảm nhận điều vô hình và có nhu cầu tìm kiếm ý nghĩa cao hơn của cuộc sống.
+
+core_motivation:
+Bạn muốn tìm kiếm chân lý tinh thần và truyền cảm hứng cho sự thức tỉnh của người khác. Bên trong bạn có một tiếng gọi hướng về sự khai sáng, chữa lành hoặc nâng đỡ nhận thức.
+
+fulfilled_state:
+Khi Linh Hồn 11 được thỏa mãn, bạn cảm thấy mình có ý nghĩa khi truyền được ánh sáng, niềm tin hoặc cảm hứng cho người khác. Bạn sống tốt nhất khi trực giác được tôn trọng nhưng vẫn có nền tảng thực tế.
+
+positive_attitude:
+- Trực giác siêu phàm: Bạn cảm nhận được những điều vô hình.
+- Lý tưởng: Bạn sống vì những giá trị tinh thần cao quý.
+- Khai sáng: Bạn có thể giúp người khác nhìn thấy một tầng ý nghĩa mới.
+
+blocked_state:
+Khi Linh Hồn 11 bị kìm nén, bạn dễ căng thẳng, mất phương hướng hoặc cảm thấy mình không thuộc về đời sống thông thường. Sự nhạy cảm không được hiểu đúng có thể trở thành áp lực.
+
+shadow_attitude:
+- Căng thẳng thần kinh: Sự nhạy cảm quá mức khiến bạn dễ stress, lo âu.
+- Ảo tưởng: Bạn dễ sa đà vào mê tín hoặc tự cho mình là người cứu rỗi.
+- Thiếu nền tảng: Bạn có thể có cảm hứng lớn nhưng thiếu hành động cụ thể.
+
+life_symptoms:
+- Bạn dễ cảm được điều người khác chưa nói ra.
+- Bạn thường có lý tưởng lớn nhưng không phải lúc nào cũng biết bắt đầu từ đâu.
+- Bạn cần không gian tinh thần, nhưng cũng cần kỷ luật đời thường để không bị trôi.
+- Bạn dễ quá tải bởi năng lượng cảm xúc, kỳ vọng hoặc trực giác.
+
+free_guidance:
+Trực giác là món quà, nhưng cần được đặt trên nền đất vững. Hãy để ánh sáng tinh thần đi cùng hành động thực tế. Khi đó, Linh Hồn 11 mới trở thành nguồn cảm hứng thay vì áp lực.
+
+upsell_hook:
+Phần này mới chỉ mở ra lớp đầu của Linh Hồn 11. Để hiểu vì sao bạn nhạy cảm mạnh, dễ quá tải và cần chiến lược giữ trục tinh thần riêng, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+SOUL_22
+============================================================
+
+field: soul
+value: 22
+display_title: Linh Hồn 22 – Khát Khao Kiến Tạo Vĩ Đại
+keywords: Di sản | Kiến tạo | Tầm vóc | Hệ thống
+condition: soul_base = 22
+report_section: BƯỚC 5 – LINH HỒN
+free_depth: sơ lược có sức chạm
+paid_depth_reserved: cơ chế khao khát sâu, tổn thương nội tâm, chiến lược cân bằng với Đường Đời và Sứ Mệnh
+
+summary:
+Linh Hồn 22 cho thấy bên trong bạn có khát khao để lại di sản. Không chỉ là thành công cá nhân, bạn muốn xây dựng điều gì đó có cấu trúc, có ích và có sức ảnh hưởng lâu dài.
+
+core_motivation:
+Bạn muốn xây dựng những công trình, hệ thống hoặc giá trị mang lại lợi ích cho nhiều người và tồn tại với thời gian. Động lực sâu của bạn là kiến tạo vĩ đại, không chỉ đạt thành tựu nhỏ lẻ.
+
+fulfilled_state:
+Khi Linh Hồn 22 được thỏa mãn, bạn cảm thấy mình đang sống đúng khi biến tầm nhìn lớn thành cấu trúc thật. Bạn cần thấy giấc mơ không chỉ nằm trong đầu, mà trở thành điều có thể vận hành và phục vụ người khác.
+
+positive_attitude:
+- Tầm nhìn vĩ mô: Bạn nghĩ lớn và nhìn được bức tranh rộng.
+- Thực thi: Bạn biết cách biến giấc mơ thành hiện thực.
+- Kiến tạo: Bạn có xu hướng muốn xây hệ thống, tổ chức hoặc di sản.
+
+blocked_state:
+Khi Linh Hồn 22 bị kìm nén, bạn dễ thấy mình sống dưới tầm, bị áp lực bởi điều lớn lao chưa thành hình, hoặc sợ chính tầm vóc mà mình cảm nhận được bên trong.
+
+shadow_attitude:
+- Áp lực đè nén: Gánh nặng của sứ mệnh lớn có thể khiến bạn sụp đổ.
+- Tham vọng lệch lạc: Nếu không vì cộng đồng, năng lượng lớn có thể bị dùng sai hướng.
+- Tự phá hoại: Bạn có thể trì hoãn vì sợ thất bại trước một tầm nhìn quá lớn.
+
+life_symptoms:
+- Bạn thường cảm thấy mình phải làm điều gì đó lớn hơn hiện tại.
+- Bạn dễ bị ngợp khi nhìn thấy khoảng cách giữa tầm nhìn và thực tế.
+- Bạn cần hệ thống, đội ngũ và từng bước rõ ràng.
+- Bạn dễ căng thẳng nếu ôm tầm nhìn lớn một mình.
+
+free_guidance:
+Hãy nghĩ lớn nhưng bắt đầu bằng một viên gạch nhỏ. Di sản không được xây trong một ngày. Năng lượng 22 chỉ phát sáng khi tầm nhìn lớn được đặt vào kế hoạch thực tế và phụng sự giá trị chung.
+
+upsell_hook:
+Phần này mới chỉ gọi tên khát khao Linh Hồn 22. Để hiểu vì sao bạn muốn để lại di sản nhưng dễ bị áp lực hoặc tự trì hoãn, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+IMPLEMENTATION NOTES
+============================================================
+
+1. Routing:
+- Nếu soul = 1 → SOUL_1
+- Nếu soul = 2 → SOUL_2
+- Nếu soul = 3 → SOUL_3
+- Nếu soul = 4 → SOUL_4
+- Nếu soul = 5 → SOUL_5
+- Nếu soul = 6 → SOUL_6
+- Nếu soul = 7 → SOUL_7
+- Nếu soul = 8 → SOUL_8
+- Nếu soul = 9 → SOUL_9
+- Nếu soul = 11/2 hoặc 11 → SOUL_11
+- Nếu soul = 22/4 hoặc 22 → SOUL_22
+
+2. Karmic routing:
+- Nếu soul = 13/4 → SOUL_4 + KARMIC_OVERLAY_13_4
+- Nếu soul = 14/5 → SOUL_5 + KARMIC_OVERLAY_14_5
+- Nếu soul = 16/7 → SOUL_7 + KARMIC_OVERLAY_16_7
+- Nếu soul = 19/1 → SOUL_1 + KARMIC_OVERLAY_19_1
+
+3. FREE display:
+- Nên hiển thị 500–900 chữ cho phần Linh Hồn.
+- Ưu tiên các trường: summary, core_motivation, fulfilled_state, positive_attitude, blocked_state, shadow_attitude, life_symptoms, free_guidance, upsell_hook.
+- Không đưa toàn bộ chiến lược chữa lành hoặc hóa giải cá nhân hóa trong bản FREE.
+
+4. Paid upgrade:
+Bản trả phí có thể mở rộng bằng:
+- Linh Hồn vs Đường Đời
+- Linh Hồn vs Sứ Mệnh
+- Linh Hồn vs Nhân Cách
+- Mâu thuẫn giữa khát khao bên trong và hành động bên ngoài
+- Chiến lược hòa giải nội tâm theo từng chỉ số

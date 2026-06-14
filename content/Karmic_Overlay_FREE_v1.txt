@@ -1,0 +1,218 @@
+# Brian_Numerologist – Karmic Overlay FREE v1
+# Mục đích: Thư viện lớp phủ Nợ Nghiệp dùng cho website bản FREE.
+# Phạm vi v1: 13/4, 14/5, 16/7, 19/1.
+# Cách dùng: Khi một chỉ số cốt lõi có dạng nợ nghiệp, website sẽ gọi block gốc theo số rút gọn + overlay nợ nghiệp tương ứng.
+# Ví dụ:
+# - 13/4 → dùng nội dung LifePath_4 + KARMIC_OVERLAY_13_4
+# - 14/5 → dùng nội dung LifePath_5 + KARMIC_OVERLAY_14_5
+# - 16/7 → dùng nội dung LifePath_7 + KARMIC_OVERLAY_16_7
+# - 19/1 → dùng nội dung LifePath_1 + KARMIC_OVERLAY_19_1
+#
+# Phong cách FREE:
+# - Trực diện, sâu sắc, có sức chạm.
+# - Không hù dọa, không phán xét, không định mệnh hóa tuyệt đối.
+# - Dùng ngôn ngữ: “có khuynh hướng”, “dễ xuất hiện”, “nếu không tỉnh thức”, “đây là tín hiệu cần đọc sâu hơn”.
+# - Không xả hết chiến lược hóa giải chuyên sâu.
+#
+# Lưu ý diễn giải:
+# “Kiếp trước” trong bản FREE nên được hiểu như một ngôn ngữ biểu tượng của nghiệp lực, mô thức lặp lại hoặc bài học linh hồn còn dang dở.
+# Không khẳng định tuyệt đối rằng người sở hữu chỉ số này chắc chắn từng làm điều tiêu cực trong quá khứ.
+#
+# Vai trò trong báo cáo FREE:
+# - Có thể chèn sau phần Đường Đời/Sứ Mệnh/Linh Hồn/Ngày Sinh nếu chỉ số đó có nợ nghiệp.
+# - Có thể dùng trong phần Master/Karmic Debt của bộ nhớ hồ sơ.
+# - Có thể dùng làm đoạn “cảnh báo nhẹ + gợi mở nâng cấp” trong báo cáo FREE.
+
+============================================================
+KARMIC_OVERLAY_19_1
+============================================================
+
+field: karmic_debt
+value: 19/1
+base_number: 1
+display_title: Nợ Nghiệp 19/1 – Sự Lạm Dụng Quyền Lực
+subtitle: Bài học về Sự Độc Lập & Tôn Trọng
+keywords: Độc lập | Quyền lực | Tôn trọng | Lắng nghe
+condition: karmic_debt contains 19/1
+compatible_base_block: LIFEPATH_1
+report_section: KARMIC OVERLAY – NỢ NGHIỆP
+free_depth: cảnh báo nhẹ, có sức chạm
+paid_depth_reserved: cơ chế nghiệp lực, chiến lược hóa giải, bài tập hành động cá nhân hóa
+
+core_meaning:
+Nợ Nghiệp 19/1 là bài học về cách sử dụng cái tôi, quyền lực và sự độc lập. Người mang rung động này thường cần học cách đứng trên đôi chân của mình, nhưng đồng thời không được biến sự tự chủ thành độc đoán, ích kỷ hoặc cô lập.
+
+symbolic_cause:
+Theo ngôn ngữ nghiệp học, 19/1 gợi về một mô thức cũ liên quan đến việc lạm dụng quyền lực, đặt cái tôi lên trên người khác, chà đạp hoặc xem nhẹ cảm xúc của người xung quanh để đạt mục đích. Ở chiều ngược lại, nó cũng có thể phản ánh mô thức quá ỷ lại, sống bám, không chịu tự lập và để người khác gánh trách nhiệm thay mình.
+
+current_life_manifestation:
+Trong đời sống hiện tại, năng lượng 19/1 có thể biểu hiện qua cảm giác phải tự làm, tự chịu, tự gánh mọi thứ. Bạn có thể thường xuyên thấy mình cô độc, khó nhận được sự hỗ trợ đúng lúc, hoặc bị đặt vào hoàn cảnh buộc phải tự đứng lên. Một mặt khác, bạn cũng có thể gặp những người áp đặt, kiểm soát, chèn ép mình để học lại cảm giác của người từng bị quyền lực đè nén. Nếu không tỉnh thức, chính bạn cũng có thể lặp lại mô thức độc đoán, cái tôi quá lớn và khó lắng nghe.
+
+life_symptoms:
+- Có cảm giác “không ai thật sự giúp mình”, việc gì cũng phải tự xoay xở.
+- Dễ bị kéo vào những tình huống phải chứng minh bản lĩnh cá nhân.
+- Dễ gặp người kiểm soát hoặc áp đặt, khiến bạn thấy bị đè nén.
+- Khi căng thẳng, bạn có thể trở nên cứng đầu, muốn làm theo ý mình bằng mọi giá.
+- Khó nhờ giúp đỡ, nhưng bên trong lại rất mệt vì phải tự gánh quá nhiều.
+
+free_guidance:
+Bài học của 19/1 là học cách độc lập mà vẫn biết tôn trọng người khác. Bạn cần đứng trên đôi chân mình, nhưng không phải để tách mình khỏi tất cả. Hãy chuyển từ “Tôi muốn” sang “Chúng ta cùng làm”. Sức mạnh thật sự của số 1 không nằm ở việc thống trị, mà nằm ở khả năng dẫn dắt bằng bản lĩnh và sự lắng nghe.
+
+upsell_hook:
+Phần này mới chỉ gọi tên bài học 19/1. Để hiểu vì sao bạn dễ cô độc, dễ bị áp lực phải tự gánh hoặc dễ va chạm với quyền lực, cần đọc sâu hơn cách nợ nghiệp này tương tác với Đường Đời, Sứ Mệnh, Linh Hồn và các chỉ số bổ sung trong bản chuyên sâu.
+
+
+============================================================
+KARMIC_OVERLAY_13_4
+============================================================
+
+field: karmic_debt
+value: 13/4
+base_number: 4
+display_title: Nợ Nghiệp 13/4 – Sự Lười Biếng & Vô Kỷ Luật
+subtitle: Bài học về Sự Tập Trung & Chăm Chỉ
+keywords: Kỷ luật | Trách nhiệm | Lao động | Kiên trì
+condition: karmic_debt contains 13/4
+compatible_base_block: LIFEPATH_4
+report_section: KARMIC OVERLAY – NỢ NGHIỆP
+free_depth: cảnh báo nhẹ, có sức chạm
+paid_depth_reserved: cơ chế nghiệp lực, chiến lược hóa giải, bài tập hành động cá nhân hóa
+
+core_meaning:
+Nợ Nghiệp 13/4 là bài học về kỷ luật, trách nhiệm, sự chăm chỉ và khả năng hoàn thành việc đã cam kết. Đây là rung động buộc người sở hữu phải học cách xây dựng từng viên gạch nhỏ, làm đến nơi đến chốn và không trốn tránh phần việc khó.
+
+symbolic_cause:
+Theo ngôn ngữ nghiệp học, 13/4 gợi về mô thức cũ liên quan đến sự lười biếng, hời hợt, sống phù phiếm hoặc trốn tránh trách nhiệm, để người khác gánh phần việc của mình. Vì vậy, trong hiện tại, bài học này thường quay lại dưới dạng những hoàn cảnh bắt buộc bạn phải rèn sự bền bỉ và kỷ luật.
+
+current_life_manifestation:
+Trong đời sống hiện tại, năng lượng 13/4 có thể khiến bạn cảm thấy cuộc đời liên tục đặt ra công việc khó, trở ngại, trì hoãn hoặc những tình huống phải làm đi làm lại nhiều lần. Có lúc bạn như đang đeo tạ khi chạy: vừa định bắt đầu thì có việc xen vào, vừa xây được một chút thì lại phải sửa, vừa muốn đi nhanh thì lại bị bắt quay về xử lý nền móng.
+
+life_symptoms:
+- Làm việc gì cũng dễ có cảm giác chậm, nặng, nhiều bước hơn người khác.
+- Dễ bị kéo vào những việc đòi hỏi trách nhiệm, quy trình và sự kiên trì.
+- Hay gặp tình huống phải làm lại, sửa lại, xây lại từ đầu.
+- Có xu hướng trì hoãn khi việc quá khó hoặc quá dài.
+- Cảm thấy mình phải nỗ lực nhiều hơn người khác mới có kết quả tương đương.
+
+free_guidance:
+Bài học của 13/4 là không than vãn, không đi đường tắt và không bỏ cuộc giữa chừng. Con đường trả nợ của chỉ số này nằm ở kỷ luật, sự chăm chỉ và khả năng hoàn thành cam kết. Khi bạn chịu xây nền, cuộc đời bắt đầu bớt “đánh sập” những gì bạn làm.
+
+upsell_hook:
+Phần này mới chỉ gọi tên bài học 13/4. Để hiểu vì sao bạn thường gặp cảm giác nặng nề, chậm trễ, phải làm lại nhiều lần hoặc khó duy trì kỷ luật, cần đọc sâu hơn toàn bộ cấu trúc bản đồ cá nhân trong bản chuyên sâu.
+
+
+============================================================
+KARMIC_OVERLAY_14_5
+============================================================
+
+field: karmic_debt
+value: 14/5
+base_number: 5
+display_title: Nợ Nghiệp 14/5 – Sự Buông Thả & Lạm Dụng Tự Do
+subtitle: Bài học về Sự Tiết Chế & Cam Kết
+keywords: Tự do | Tiết chế | Cam kết | Trật tự
+condition: karmic_debt contains 14/5
+compatible_base_block: LIFEPATH_5
+report_section: KARMIC OVERLAY – NỢ NGHIỆP
+free_depth: cảnh báo nhẹ, có sức chạm
+paid_depth_reserved: cơ chế nghiệp lực, chiến lược hóa giải, bài tập hành động cá nhân hóa
+
+core_meaning:
+Nợ Nghiệp 14/5 là bài học về tự do có trách nhiệm. Người mang rung động này thường cần học cách tiết chế ham muốn, giữ cam kết và không dùng tự do như cái cớ để sống thất thường hoặc làm tổn thương người khác.
+
+symbolic_cause:
+Theo ngôn ngữ nghiệp học, 14/5 gợi về mô thức cũ liên quan đến sự phóng túng, buông thả, nghiện khoái cảm, thay đổi thất thường hoặc phá vỡ cam kết. Tự do từng bị dùng sai cách, nên trong hiện tại, bài học quay lại dưới dạng yêu cầu phải học kỷ luật bên trong.
+
+current_life_manifestation:
+Trong đời sống hiện tại, năng lượng 14/5 có thể biểu hiện thành sự bất ổn: thay đổi công việc, chỗ ở, người yêu, mục tiêu hoặc lối sống liên tục. Bạn có thể dễ bị hấp dẫn bởi cái mới, dễ chán cái cũ, dễ sa vào thú vui quá đà hoặc gặp những sự cố bất ngờ làm đảo lộn kế hoạch. Nếu không tỉnh thức, tự do có thể biến thành hỗn loạn.
+
+life_symptoms:
+- Dễ cả thèm chóng chán, bắt đầu nhanh nhưng duy trì khó.
+- Cuộc sống có nhiều biến động, đổi hướng, đổi môi trường hoặc đổi kế hoạch.
+- Dễ bị kéo vào cám dỗ, thú vui hoặc trải nghiệm mạnh.
+- Khó giữ cam kết khi cảm xúc thay đổi.
+- Có cảm giác càng muốn tự do thì cuộc sống càng mất trật tự.
+
+free_guidance:
+Bài học của 14/5 là cam kết và tiết chế. Đừng trốn chạy khi gặp khó khăn. Hãy học cách duy trì trật tự trong một đời sống nhiều biến động. Tự do thật sự không đến từ sự buông thả, mà đến từ khả năng tự chủ trước cám dỗ.
+
+upsell_hook:
+Phần này mới chỉ gọi tên bài học 14/5. Để hiểu vì sao bạn dễ đổi hướng, dễ bị cám dỗ hoặc khó đi đường dài, cần đọc sâu hơn mối quan hệ giữa Đường Đời, Linh Hồn, Sứ Mệnh và các chu kỳ cá nhân trong bản chuyên sâu.
+
+
+============================================================
+KARMIC_OVERLAY_16_7
+============================================================
+
+field: karmic_debt
+value: 16/7
+base_number: 7
+display_title: Nợ Nghiệp 16/7 – Sự Phản Bội & Vô Trách Nhiệm Tình Cảm
+subtitle: Bài học về Sự Trung Thực & Niềm Tin
+keywords: Trung thực | Đức tin | Tái sinh | Khiêm nhường
+condition: karmic_debt contains 16/7
+compatible_base_block: LIFEPATH_7
+report_section: KARMIC OVERLAY – NỢ NGHIỆP
+free_depth: cảnh báo nhẹ, có sức chạm
+paid_depth_reserved: cơ chế nghiệp lực, chiến lược hóa giải, bài tập hành động cá nhân hóa
+
+core_meaning:
+Nợ Nghiệp 16/7 là bài học về sự trung thực, niềm tin, cái tôi và sự tái sinh nội tâm. Đây là rung động thường buộc con người phải tháo bỏ lớp vỏ giả tạo, từ bỏ sự ngạo mạn và học cách xây dựng đời sống tinh thần chân thật hơn.
+
+symbolic_cause:
+Theo ngôn ngữ nghiệp học, 16/7 gợi về mô thức cũ liên quan đến sự lừa dối tình cảm, phản bội niềm tin, sống giả tạo hoặc vô trách nhiệm với những người thân thiết. Vì vậy, trong hiện tại, bài học này có thể quay lại dưới dạng những cú sụp đổ khiến cái tôi phải tỉnh thức.
+
+current_life_manifestation:
+Trong đời sống hiện tại, năng lượng 16/7 có thể biểu hiện qua cảm giác “tháp cũ sụp đổ”: một mối quan hệ, niềm tin, hình ảnh bản thân hoặc nền tảng cuộc sống nào đó bị phá vỡ mạnh mẽ. Người mang rung động này có thể trải qua những cú sốc làm tổn thương cái tôi, cảm giác bị phản bội, bị cô lập hoặc phải một mình đối diện với sự thật bên trong.
+
+life_symptoms:
+- Dễ trải qua những cú sốc khiến hình ảnh bản thân thay đổi mạnh.
+- Có cảm giác bị phản bội, bị bỏ lại hoặc không còn tin ai hoàn toàn.
+- Dễ cô độc sâu, kể cả khi xung quanh vẫn có người.
+- Có xu hướng giấu tổn thương sau vẻ ngoài lạnh, mạnh hoặc bất cần.
+- Bài học thường đến qua tình cảm, niềm tin, gia đình hoặc những mối quan hệ thân thiết.
+
+free_guidance:
+Bài học của 16/7 là chấp nhận sự sụp đổ như một cơ hội tái sinh. Bạn cần từ bỏ sự ngạo mạn, giả tạo hoặc nhu cầu kiểm soát hình ảnh bản thân. Sống chân thành, trung thực và tìm về một hệ giá trị tinh thần vững chắc sẽ giúp bạn xây lại nội tâm từ gốc.
+
+upsell_hook:
+Phần này mới chỉ gọi tên bài học 16/7. Để hiểu vì sao bạn dễ gặp những cú sốc về niềm tin, tình cảm hoặc cảm giác cô độc sâu, cần đọc kỹ hơn cấu trúc Linh Hồn, Sứ Mệnh, các mâu thuẫn cốt lõi và chu kỳ vận hành cá nhân trong bản chuyên sâu.
+
+
+============================================================
+IMPLEMENTATION NOTES
+============================================================
+
+1. Routing đề xuất:
+- Nếu life_path = 13/4 → hiển thị LIFEPATH_4 + KARMIC_OVERLAY_13_4.
+- Nếu life_path = 14/5 → hiển thị LIFEPATH_5 + KARMIC_OVERLAY_14_5.
+- Nếu life_path = 16/7 → hiển thị LIFEPATH_7 + KARMIC_OVERLAY_16_7.
+- Nếu life_path = 19/1 → hiển thị LIFEPATH_1 + KARMIC_OVERLAY_19_1.
+
+2. Có thể dùng overlay này cho nhiều trường:
+- Đường Đời
+- Sứ Mệnh
+- Linh Hồn
+- Nhân Cách
+- Trưởng Thành
+- Các chỉ số khác nếu hệ thống Brian-Numerologist cho phép ghi nhận Karmic Debt ở chỉ số đó.
+
+3. Khuyến nghị hiển thị trong bản FREE:
+- Chỉ hiển thị 1 đoạn ngắn 250–450 chữ cho mỗi nợ nghiệp.
+- Nếu nhiều chỉ số cùng có nợ nghiệp, chỉ ưu tiên nợ nghiệp xuất hiện ở 4 chỉ số cốt lõi.
+- Không phân tích toàn bộ chiến lược hóa giải trong bản FREE.
+- Luôn kết thúc bằng gợi mở bản chuyên sâu.
+
+4. Ngôn ngữ cần tránh:
+- “Bạn chắc chắn từng…”
+- “Bạn chắc chắn sẽ thất bại…”
+- “Không hóa giải thì sẽ gặp tai họa…”
+- “Bị trừng phạt…”
+- “Số này rất xấu…”
+
+5. Ngôn ngữ nên dùng:
+- “Có khuynh hướng…”
+- “Dễ xuất hiện mô thức…”
+- “Nếu không tỉnh thức…”
+- “Đây là tín hiệu cần đọc sâu hơn…”
+- “Bản chuyên sâu sẽ bóc tách kỹ hơn cơ chế này…”

@@ -1,0 +1,615 @@
+# Brian_Numerologist – Calculation Rules v1.1
+# Mục đích: File luật tính toán chuẩn cho website Brian-Numerologist bản FREE.
+# Vai trò: Dùng làm tài liệu kỹ thuật cho Calculation Engine, Codex hoặc lập trình viên.
+# Trạng thái: BẢN SỬA LỖI NHỎ SAU TEST CASE NGUYỄN THANH TRÍ
+# Phiên bản: v1.1
+#
+# Phạm vi v1:
+# - Chuẩn hóa họ tên tiếng Việt.
+# - Tính 4 chỉ số cốt lõi bản FREE: Đường Đời, Sứ Mệnh, Linh Hồn, Ngày Sinh.
+# - Tính Nhân Cách để dùng ở bước bổ sung/preview.
+# - Ghi nhận Master Number và Karmic Debt.
+# - Xuất kết quả dạng JSON để website ghép báo cáo.
+
+============================================================
+I. NGUYÊN TẮC NỀN
+============================================================
+
+1. Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.
+2. Calculation Engine chỉ làm nhiệm vụ tính toán, không tự diễn giải.
+3. Phần diễn giải lấy từ các thư viện nội dung:
+   - LifePath_Library_FREE_v1.txt
+   - Karmic_Overlay_FREE_v1.txt
+   - Destiny_Library_FREE_v1.txt
+   - Soul_Library_FREE_v1.txt
+   - Birthday_Library_FREE_v1.txt
+   - Các thư viện bổ sung khác nếu có.
+4. Mọi phép tính phải có thể kiểm tra chéo.
+5. Nếu dữ liệu đầu vào thiếu họ tên hoặc ngày sinh, chưa được phân tích.
+
+============================================================
+II. DỮ LIỆU ĐẦU VÀO
+============================================================
+
+Website cần thu tối thiểu:
+
+required_fields:
+- full_name_original: Họ tên khai sinh đầy đủ, có dấu tiếng Việt nếu có.
+- birth_date: Ngày/tháng/năm sinh dương lịch, định dạng DD/MM/YYYY.
+
+optional_fields:
+- email
+- phone_or_zalo
+- gender
+- note
+
+Ví dụ:
+full_name_original: Nguyễn Thanh Trí
+birth_date: 21/04/1986
+
+============================================================
+III. CHUẨN HÓA HỌ TÊN TIẾNG VIỆT
+============================================================
+
+RULE_NAME_001: Bỏ dấu tiếng Việt
+- Nguyễn Thanh Trí → Nguyen Thanh Tri
+- Trần Thị Kim Hoàng → Tran Thi Kim Hoang
+
+RULE_NAME_002: Chuyển Đ thành D
+- Đặng → Dang
+- Đỗ → Do
+- Đinh → Dinh
+
+RULE_NAME_003: Viết HOA toàn bộ
+- Nguyen Thanh Tri → NGUYEN THANH TRI
+
+RULE_NAME_004: Xóa khoảng trắng thừa
+- Chỉ giữ một khoảng trắng giữa các tiếng.
+- Không để khoảng trắng đầu/cuối chuỗi.
+
+RULE_NAME_005: Chỉ giữ chữ cái A-Z và khoảng trắng
+- Dấu câu, ký tự đặc biệt, emoji, số lạ trong tên phải được loại bỏ hoặc báo lỗi tùy cấu hình website.
+
+Ví dụ chuẩn hóa:
+input: Nguyễn   Thanh   Trí
+normalized_name: NGUYEN THANH TRI
+
+============================================================
+IV. CẤU TRÚC HỌ TÊN
+============================================================
+
+RULE_STRUCTURE_001:
+- Từ đầu tiên = Họ.
+- Từ cuối cùng = Tên.
+- Tất cả các từ ở giữa = Cụm tên lót.
+
+LƯU Ý QUAN TRỌNG:
+Tên lót chính là CỤM TỪ sau Họ và trước Tên. Cụm tên lót có thể gồm một hoặc nhiều tiếng.
+
+Ví dụ 1:
+NGUYEN THANH TRI
+- Họ: NGUYEN
+- Cụm tên lót: THANH
+- Tên: TRI
+
+Ví dụ 2:
+TRAN THI KIM HOANG
+- Họ: TRAN
+- Cụm tên lót: THI KIM
+- Tên: HOANG
+
+Ví dụ 3:
+LE NGUYEN ANH TUAN
+- Họ: LE
+- Cụm tên lót: NGUYEN ANH
+- Tên: TUAN
+
+RULE_STRUCTURE_002:
+Nếu tên chỉ có 2 tiếng:
+Ví dụ: LE AN
+- Họ: LE
+- Cụm tên lót: rỗng
+- Tên: AN
+
+RULE_STRUCTURE_003:
+Nếu tên chỉ có 1 tiếng:
+- Báo lỗi hoặc yêu cầu nhập họ tên khai sinh đầy đủ.
+- Không phân tích vì thiếu cấu trúc họ tên.
+
+============================================================
+V. BẢNG PYTHAGORAS
+============================================================
+
+1: A, J, S
+2: B, K, T
+3: C, L, U
+4: D, M, V
+5: E, N, W
+6: F, O, X
+7: G, P, Y
+8: H, Q, Z
+9: I, R
+
+Mapping dạng máy đọc:
+
+A=1
+B=2
+C=3
+D=4
+E=5
+F=6
+G=7
+H=8
+I=9
+J=1
+K=2
+L=3
+M=4
+N=5
+O=6
+P=7
+Q=8
+R=9
+S=1
+T=2
+U=3
+V=4
+W=5
+X=6
+Y=7
+Z=8
+
+============================================================
+VI. NGUYÊN ÂM – PHỤ ÂM
+============================================================
+
+RULE_VOWEL_001:
+Trong tên tiếng Việt, Y LUÔN LÀ NGUYÊN ÂM.
+
+Danh sách nguyên âm chính thức:
+A, E, I, O, U, Y
+
+RULE_CONSONANT_001:
+Phụ âm là các chữ cái còn lại sau khi loại nguyên âm.
+
+Danh sách phụ âm:
+B, C, D, F, G, H, J, K, L, M, N, P, Q, R, S, T, V, W, X, Z
+
+RULE_CONSONANT_002:
+Y không bao giờ được tính là phụ âm trong tên tiếng Việt.
+
+============================================================
+VII. QUY TẮC RÚT GỌN SỐ
+============================================================
+
+RULE_REDUCE_001:
+Cộng các chữ số của tổng cho đến khi còn một chữ số, trừ các trường hợp Master Number hợp lệ hoặc Karmic Debt cần ghi nhận.
+
+Ví dụ:
+24 → 2+4 = 6
+32 → 3+2 = 5
+20 → 2+0 = 2
+
+RULE_MASTER_001:
+Giữ Master Number 11/2 và 22/4 khi hợp lệ.
+
+Cách ghi:
+- Nếu tổng là 11 → ghi 11/2
+- Nếu tổng là 22 → ghi 22/4
+
+RULE_KARMIC_001:
+Nếu tổng trung gian có 13, 14, 16, 19 thì ghi Karmic Debt:
+
+13 → 13/4
+14 → 14/5
+16 → 16/7
+19 → 19/1
+
+RULE_DISPLAY_001:
+Nếu không có Master/Karmic:
+- Ghi số đơn: 1, 2, 3, 4, 5, 6, 7, 8, 9.
+
+Nếu có Karmic:
+- Ghi dạng: 13/4, 14/5, 16/7, 19/1.
+
+Nếu có Master:
+- Ghi dạng: 11/2 hoặc 22/4.
+
+RULE_PRIORITY_001:
+Karmic Debt và Master Number cần được ghi nhận khi xuất hiện ở tổng trung gian hoặc tổng cuối cùng theo từng phép tính.
+
+============================================================
+VIII. CÁCH TÍNH ĐƯỜNG ĐỜI
+============================================================
+
+field: life_path
+source: birth_date
+
+RULE_LIFEPATH_001:
+Đường Đời = Ngày rút gọn + Tháng rút gọn + Năm rút gọn.
+
+Không cộng toàn bộ chuỗi ngày tháng năm một lần.
+
+Cách làm:
+1. Rút gọn ngày sinh.
+2. Rút gọn tháng sinh.
+3. Rút gọn năm sinh.
+4. Cộng ba kết quả đã rút gọn.
+5. Ghi Master/Karmic nếu xuất hiện.
+
+Ví dụ:
+birth_date: 21/04/1986
+
+Ngày:
+21 → 2+1 = 3
+
+Tháng:
+04 → 4
+
+Năm:
+1986 → 1+9+8+6 = 24 → 2+4 = 6
+
+Tổng:
+3 + 4 + 6 = 13 → 13/4
+
+Kết quả:
+life_path: 13/4
+life_path_base: 4
+life_path_karmic: 13/4
+
+============================================================
+IX. CÁCH TÍNH SỨ MỆNH
+============================================================
+
+field: destiny
+source: full_name_normalized
+letters_used: tất cả chữ cái trong họ tên
+
+RULE_DESTINY_001:
+Sứ Mệnh được tính bằng toàn bộ chữ cái trong họ tên khai sinh đã chuẩn hóa.
+
+RULE_DESTINY_002:
+Không cộng cả chuỗi họ tên rồi mới rút gọn.
+
+Cách làm bắt buộc:
+1. Tính tổng chữ cái của Họ riêng rồi rút gọn.
+2. Tính tổng chữ cái của Cụm tên lót riêng rồi rút gọn.
+3. Tính tổng chữ cái của Tên riêng rồi rút gọn.
+4. Cộng kết quả đã rút gọn của 3 phần.
+5. Ghi Master/Karmic nếu xuất hiện.
+
+Lưu ý:
+- Cụm tên lót có thể gồm nhiều tiếng. Vẫn xem toàn bộ các tiếng giữa Họ và Tên là một cụm.
+- Nếu không có tên lót, phần cụm tên lót = 0 và không ảnh hưởng tổng.
+
+Ví dụ:
+full_name_normalized: NGUYEN THANH TRI
+
+Họ:
+NGUYEN = N5 + G7 + U3 + Y7 + E5 + N5 = 32 → 5
+
+Cụm tên lót:
+THANH = T2 + H8 + A1 + N5 + H8 = 24 → 6
+
+Tên:
+TRI = T2 + R9 + I9 = 20 → 2
+
+Tổng:
+5 + 6 + 2 = 13 → 13/4
+
+Kết quả:
+destiny: 13/4
+destiny_base: 4
+destiny_karmic: 13/4
+
+============================================================
+X. CÁCH TÍNH LINH HỒN
+============================================================
+
+field: soul
+source: full_name_normalized
+letters_used: nguyên âm A, E, I, O, U, Y
+
+RULE_SOUL_001:
+Linh Hồn được tính bằng các nguyên âm trong họ tên khai sinh đã chuẩn hóa.
+
+RULE_SOUL_002:
+Trong tên tiếng Việt, Y luôn là nguyên âm.
+
+RULE_SOUL_003:
+Không cộng toàn bộ nguyên âm cả chuỗi rồi mới rút gọn.
+
+Cách làm bắt buộc:
+1. Lấy nguyên âm trong Họ, cộng riêng rồi rút gọn.
+2. Lấy nguyên âm trong Cụm tên lót, cộng riêng rồi rút gọn.
+3. Lấy nguyên âm trong Tên, cộng riêng rồi rút gọn.
+4. Cộng kết quả đã rút gọn của 3 phần.
+5. Ghi Master/Karmic nếu xuất hiện.
+
+Ví dụ:
+full_name_normalized: NGUYEN THANH TRI
+
+Nguyên âm Họ:
+NGUYEN → U3 + Y7 + E5 = 15 → 6
+
+Nguyên âm Cụm tên lót:
+THANH → A1 = 1
+
+Nguyên âm Tên:
+TRI → I9 = 9
+
+Tổng:
+6 + 1 + 9 = 16 → 16/7
+
+Kết quả:
+soul: 16/7
+soul_base: 7
+soul_karmic: 16/7
+
+============================================================
+XI. CÁCH TÍNH NHÂN CÁCH
+============================================================
+
+field: personality
+source: full_name_normalized
+letters_used: phụ âm
+
+RULE_PERSONALITY_001:
+Nhân Cách được tính bằng các phụ âm trong họ tên khai sinh đã chuẩn hóa.
+
+RULE_PERSONALITY_002:
+Trong tên tiếng Việt, Y luôn là nguyên âm, nên Y không bao giờ được đưa vào Nhân Cách.
+
+RULE_PERSONALITY_003:
+Không cộng toàn bộ phụ âm cả chuỗi rồi mới rút gọn.
+
+Cách làm bắt buộc:
+1. Lấy phụ âm trong Họ, cộng riêng rồi rút gọn.
+2. Lấy phụ âm trong Cụm tên lót, cộng riêng rồi rút gọn.
+3. Lấy phụ âm trong Tên, cộng riêng rồi rút gọn.
+4. Cộng kết quả đã rút gọn của 3 phần.
+5. Ghi Master/Karmic nếu xuất hiện.
+
+Ví dụ:
+full_name_normalized: NGUYEN THANH TRI
+
+Phụ âm Họ:
+NGUYEN → N5 + G7 + N5 = 17 → 8
+
+Phụ âm Cụm tên lót:
+THANH → T2 + H8 + N5 + H8 = 23 → 5
+
+Phụ âm Tên:
+TRI → T2 + R9 = 11 → giữ 11/2 nếu hợp lệ ở cấp phần tên
+
+Tổng:
+8 + 5 + 11 = 24 → 6
+
+Kết quả:
+personality: 24/6
+personality_base: 6
+
+============================================================
+XII. CÁCH TÍNH NGÀY SINH
+============================================================
+
+field: birthday
+source: birth_date.day
+
+RULE_BIRTHDAY_001:
+Ngày Sinh được tính từ ngày trong ngày/tháng/năm sinh dương lịch.
+
+RULE_BIRTHDAY_002:
+Ngày Sinh có thể ghi:
+- Số gốc ngày sinh: 1–31
+- Số rút gọn: 1–9, 11, 22 nếu hợp lệ
+- Karmic nếu ngày là 13, 14, 16, 19
+
+Ví dụ:
+birth_date: 21/04/1986
+birthday_original: 21
+birthday: 21/3
+
+Ví dụ:
+birth_date: 13/04/1986
+birthday_original: 13
+birthday: 13/4
+birthday_base: 4
+birthday_karmic: 13/4
+
+============================================================
+XIII. KIỂM TRA CHÉO
+============================================================
+
+RULE_CHECK_001:
+Sau khi bỏ dấu, bỏ khoảng trắng, số chữ cái trong tên phải bằng số con số được quy đổi.
+
+Ví dụ:
+NGUYEN THANH TRI
+Bỏ khoảng trắng: NGUYENTHANHTRI
+Số chữ cái: 14
+
+Quy đổi:
+N G U Y E N T H A N H T R I
+5 7 3 7 5 5 2 8 1 5 8 2 9 9
+
+Số con số quy đổi: 14
+
+Kết luận: hợp lệ.
+
+RULE_CHECK_002:
+Nếu số chữ cái và số con số quy đổi không khớp:
+- Báo lỗi.
+- Không xuất báo cáo.
+- Yêu cầu kiểm tra lại dữ liệu đầu vào hoặc hàm chuẩn hóa tên.
+
+============================================================
+XIV. ĐỊNH DẠNG KẾT QUẢ JSON
+============================================================
+
+Website nên xuất kết quả tính toán theo schema sau:
+
+{
+  "input": {
+    "full_name_original": "Nguyễn Thanh Trí",
+    "birth_date": "21/04/1986"
+  },
+  "normalized": {
+    "full_name": "NGUYEN THANH TRI",
+    "last_name": "NGUYEN",
+    "middle_name_group": "THANH",
+    "first_name": "TRI"
+  },
+  "core_numbers": {
+    "life_path": "13/4",
+    "life_path_base": 4,
+    "destiny": "13/4",
+    "destiny_base": 4,
+    "soul": "16/7",
+    "soul_base": 7,
+    "birthday": "21/3",
+    "birthday_base": 3,
+    "birthday_original": 21,
+    "personality": "24/6",
+    "personality_base": 6
+  },
+  "master_numbers": [],
+  "karmic_debts": ["13/4", "16/7"],
+  "calculation_audit": {
+    "letter_count": 14,
+    "number_count": 14,
+    "is_valid": true
+  },
+  "routing": {
+    "life_path_blocks": ["LIFEPATH_4", "KARMIC_OVERLAY_13_4"],
+    "destiny_blocks": ["DESTINY_4", "KARMIC_OVERLAY_13_4"],
+    "soul_blocks": ["SOUL_7", "KARMIC_OVERLAY_16_7"],
+    "birthday_blocks": ["BIRTHDAY_21"]
+  }
+}
+
+============================================================
+XV. ROUTING NỘI DUNG CHO WEBSITE
+============================================================
+
+RULE_ROUTING_001:
+Nếu chỉ số là số đơn:
+- 1 → gọi block tương ứng _1
+- 2 → gọi block tương ứng _2
+- ...
+- 9 → gọi block tương ứng _9
+
+Ví dụ:
+life_path = 4 → LIFEPATH_4
+
+RULE_ROUTING_002:
+Nếu chỉ số là Master:
+- 11/2 → gọi block _11
+- 22/4 → gọi block _22
+
+Ví dụ:
+life_path = 11/2 → LIFEPATH_11
+
+RULE_ROUTING_003:
+Nếu chỉ số là Karmic:
+- 13/4 → gọi block base _4 + KARMIC_OVERLAY_13_4
+- 14/5 → gọi block base _5 + KARMIC_OVERLAY_14_5
+- 16/7 → gọi block base _7 + KARMIC_OVERLAY_16_7
+- 19/1 → gọi block base _1 + KARMIC_OVERLAY_19_1
+
+Ví dụ:
+life_path = 13/4 → LIFEPATH_4 + KARMIC_OVERLAY_13_4
+
+============================================================
+XVI. TEST CASE CHUẨN
+============================================================
+
+TEST_CASE_001
+
+Input:
+full_name_original: Nguyễn Thanh Trí
+birth_date: 21/04/1986
+
+Expected normalized:
+full_name: NGUYEN THANH TRI
+last_name: NGUYEN
+middle_name_group: THANH
+first_name: TRI
+
+Expected core:
+life_path: 13/4
+destiny: 13/4
+soul: 16/7
+birthday: 21/3
+personality: 24/6
+
+Expected audit:
+letter_count: 14
+number_count: 14
+is_valid: true
+
+Expected routing:
+life_path_blocks: LIFEPATH_4 + KARMIC_OVERLAY_13_4
+destiny_blocks: DESTINY_4 + KARMIC_OVERLAY_13_4
+soul_blocks: SOUL_7 + KARMIC_OVERLAY_16_7
+birthday_blocks: BIRTHDAY_21
+
+============================================================
+XVII. GHI CHÚ TRIỂN KHAI
+============================================================
+
+1. File này là nguồn luật chuẩn cho Calculation Engine.
+2. Nếu website, Codex, GPT Builder hoặc lập trình viên có cách tính khác, ưu tiên file này.
+3. Không để AI tự suy luận công thức nếu công thức đã được quy định ở đây.
+4. Khi xuất báo cáo, nên lưu lại calculation_audit để kiểm tra sai số.
+5. Khi có cập nhật công thức, tạo phiên bản mới:
+   - Calculation_Rules_v2.txt
+   - Không ghi đè v1 nếu hệ thống đã vận hành.
+
+============================================================
+XVIII. CẬP NHẬT v1.1 – SỬA LỖI SAU TEST CASE
+============================================================
+
+Bản v1.1 là bản sửa lỗi nhỏ, không thay đổi công thức gốc.
+
+1. Sửa lỗi kiểm tra chéo tên NGUYEN THANH TRI:
+- Tên sau khi bỏ khoảng trắng: NGUYENTHANHTRI
+- Số chữ cái đúng: 14
+- Số con số quy đổi đúng: 14
+- Kết luận audit: hợp lệ
+
+Chi tiết:
+N G U Y E N T H A N H T R I
+5 7 3 7 5 5 2 8 1 5 8 2 9 9
+
+2. Chuẩn hóa cách hiển thị Ngày Sinh:
+- birthday_original: giữ ngày sinh gốc, ví dụ 21
+- birthday_base: số rút gọn, ví dụ 3
+- birthday_display hoặc birthday: nên hiển thị 21/3 nếu ngày gốc không trùng số rút gọn
+
+Ví dụ:
+Ngày sinh gốc: 21
+21 → 2 + 1 = 3
+Hiển thị đề xuất: 21/3
+Routing nội dung: BIRTHDAY_21
+
+3. Lý do cập nhật:
+Nếu chỉ lưu birthday = 3, website vẫn biết nhóm số 3 nhưng sẽ mất sắc thái riêng của ngày sinh 21. Vì Birthday_Library_FREE_v1.txt đã có block riêng BIRTHDAY_21, Calculation Engine cần xuất đúng birthday_original để Report Engine gọi đúng block.
+
+4. Kết quả test case Nguyễn Thanh Trí – 21/04/1986:
+- Đường Đời: 13/4
+- Sứ Mệnh: 13/4
+- Linh Hồn: 16/7
+- Ngày Sinh: 21/3
+- Nhân Cách: 24/6
+- letter_count = 14
+- number_count = 14
+- audit = hợp lệ
+- birthday routing = BIRTHDAY_21
+
+
+v1.1:
+- Sửa lỗi audit test case NGUYEN THANH TRI: 14 chữ cái, không phải 15.
+- Chuẩn hóa hiển thị Ngày Sinh theo dạng birthday_original/birthday_base/birthday_display.
+- Cập nhật routing Ngày Sinh mẫu từ BIRTHDAY_3 thành BIRTHDAY_21.
+- Không thay đổi công thức tính Đường Đời, Sứ Mệnh, Linh Hồn, Nhân Cách, Master Number hoặc Karmic Debt.

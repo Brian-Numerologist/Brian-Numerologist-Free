@@ -1,0 +1,1299 @@
+# Brian_Numerologist – Birthday Library FREE v1
+# Mục đích: Thư viện nội dung Ngày Sinh dùng cho website bản FREE.
+# Phạm vi v1: Birthday/Ngày Sinh 1–31.
+# Nguồn nội dung: Bảng Ngày Sinh do Brian biên soạn và cung cấp.
+#
+# Quy tắc dùng:
+# - Nếu birthday_original = 1 → gọi BIRTHDAY_1.
+# - Nếu birthday_original = 10 → gọi BIRTHDAY_10.
+# - ...
+# - Nếu birthday_original = 31 → gọi BIRTHDAY_31.
+#
+# Vai trò trong báo cáo FREE:
+# - Dùng cho BƯỚC 7 – NGÀY SINH.
+# - Mục tiêu: phân tích sơ lược bài học phụ, tài năng phụ, ấn tượng ban đầu.
+# - Có thể dùng để kiểm tra Ngày Sinh bổ trợ hay cản trở Đường Đời.
+# - Không xả hết chiến lược hóa giải chuyên sâu.
+#
+# Phong cách:
+# - Trực diện, sâu sắc, thấu cảm.
+# - Có sức chạm, không hù dọa.
+# - Không định mệnh hóa tuyệt đối.
+# - Dùng “có khuynh hướng”, “dễ xuất hiện”, “nếu không tỉnh thức”, “cần đọc sâu hơn”.
+
+============================================================
+BIRTHDAY_GROUP_1
+============================================================
+
+field: birthday_group
+value: 1
+display_title: Nhóm Số 1 – Những Người Tiên Phong
+birthdays: 1, 10, 19, 28
+keywords: Độc lập | Quyết đoán | Làm chủ cuộc chơi
+condition: birthday_base = 1
+summary:
+Nhóm Ngày Sinh 1 mang năng lượng của sự độc lập, quyết đoán và khát khao làm chủ cuộc chơi. Đây là nhóm người có xu hướng muốn tự khởi xướng, tự quyết định và tạo dấu ấn cá nhân rõ ràng.
+
+============================================================
+BIRTHDAY_1
+============================================================
+
+field: birthday
+value: 1
+base_number: 1
+group: BIRTHDAY_GROUP_1
+display_title: Ngày Sinh 1 – Năng Lượng Tiên Phong Thuần Khiết
+keywords: Tự tin | Khởi xướng | Thuyền trưởng
+condition: birthday_original = 1
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 1 cho thấy bạn có món quà phụ trợ của người tiên phong. Bạn dễ tạo ấn tượng là người chủ động, mạnh mẽ và không thích chờ người khác ra lệnh.
+
+gift:
+Vũ khí của bạn là sự tự tin và khả năng khởi xướng. Bạn không chờ ai bật đèn xanh nếu bên trong đã thấy con đường. Bạn có khuynh hướng sinh ra để làm thuyền trưởng, hoặc ít nhất là người cầm lái trong phần việc của mình.
+
+warning:
+Đừng biến sự tự tin thành kiêu ngạo. Nếu chỉ quen ra lệnh mà không biết lắng nghe, bạn dễ làm người khác cảm thấy bị gạt ra ngoài.
+
+life_symptoms:
+- Bạn dễ khó chịu khi phải phụ thuộc quá nhiều vào người khác.
+- Bạn muốn tự quyết, nhưng đôi khi hơi vội vàng.
+- Bạn có thể tạo cảm giác mạnh mẽ ngay từ lần gặp đầu.
+
+free_guidance:
+Hãy học cách lắng nghe thủy thủ đoàn. Người dẫn đầu không chỉ biết đi trước, mà còn biết đưa người khác cùng về đích.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 1. Để hiểu nó hỗ trợ hay va chạm với Đường Đời, Sứ Mệnh và Linh Hồn ra sao, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_10
+============================================================
+
+field: birthday
+value: 10
+base_number: 1
+group: BIRTHDAY_GROUP_1
+display_title: Ngày Sinh 10 – Người Khởi Xướng Có Vòng Tròn Tiềm Năng
+keywords: Tự tin | Khởi xướng | Tiềm năng mở rộng
+condition: birthday_original = 10
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 10 vẫn thuộc nhóm năng lượng 1, nhưng có thêm sắc thái của số 0: khả năng khuếch đại tiềm năng. Bạn có khuynh hướng muốn bắt đầu điều mới, mở đường và để lại dấu ấn cá nhân.
+
+gift:
+Vũ khí của bạn là sự tự tin, khả năng khởi xướng và cảm giác mình cần làm điều gì đó khác biệt. Bạn không thích bị đặt vào vai trò quá thụ động.
+
+warning:
+Đừng biến sự tự tin thành kiêu ngạo. Khi năng lượng 10 bị lệch, bạn có thể hoặc quá muốn làm chủ, hoặc chờ điều kiện hoàn hảo rồi mới dám bắt đầu.
+
+life_symptoms:
+- Bạn dễ có ý tưởng khởi đầu trước người khác.
+- Bạn muốn được tin tưởng giao quyền.
+- Bạn có thể giỏi mở màn nhưng cần học cách duy trì đến cuối.
+
+free_guidance:
+Hãy dùng sự chủ động để tạo giá trị thật. Người có Ngày Sinh 10 cần nhớ rằng bắt đầu hay là một lợi thế, nhưng hoàn thành mới tạo uy tín.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 10. Để hiểu vì sao bạn có tiềm năng khởi xướng nhưng đôi khi vẫn bị giằng co giữa tự tin và trì hoãn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_19
+============================================================
+
+field: birthday
+value: 19
+base_number: 1
+group: BIRTHDAY_GROUP_1
+display_title: Ngày Sinh 19 – Thử Thách Của Sự Độc Lập
+keywords: Ý chí | Độc lập | Nợ nghiệp 19/1 | Lãnh đạo nhân hậu
+condition: birthday_original = 19
+compatible_karmic_overlay: KARMIC_OVERLAY_19_1
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 19 mang năng lượng 1 có lớp bài học nợ nghiệp 19/1. Đây là ngày sinh của ý chí mạnh, nhưng thường được tôi luyện qua cảm giác đơn độc, bị áp lực hoặc phải tự đứng lên sau nhiều thử thách.
+
+gift:
+Vũ khí của bạn là sức mạnh ý chí phi thường được tôi luyện qua gian khó. Bạn có thể phải trải qua sự đơn độc hoặc bị chèn ép trước khi vùng lên làm chủ cuộc đời mình.
+
+warning:
+Đừng oán trách quá khứ. Nếu chỉ giữ vết thương, bạn dễ trở nên cứng, lạnh hoặc cực đoan. Bài học của bạn là dùng kinh nghiệm đau thương để trở thành người lãnh đạo nhân hậu hơn.
+
+life_symptoms:
+- Bạn có thể thường thấy mình phải tự lực nhiều hơn người khác.
+- Bạn dễ bị đặt vào tình huống phải chứng minh bản lĩnh.
+- Bạn có thể vừa sợ phụ thuộc, vừa thấy mệt vì phải tự gánh.
+
+free_guidance:
+Hãy học cách độc lập mà vẫn biết lắng nghe. Sức mạnh của 19/1 không phải là “tôi không cần ai”, mà là “tôi đủ vững để hợp tác mà không đánh mất mình”.
+
+upsell_hook:
+Ngày Sinh 19 cần đọc cùng Karmic Overlay 19/1 để hiểu rõ hơn mô thức quyền lực, cô độc và bài học tôn trọng trong bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_28
+============================================================
+
+field: birthday
+value: 28
+base_number: 1
+group: BIRTHDAY_GROUP_1
+display_title: Ngày Sinh 28 – Lãnh Đạo Mềm Mỏng
+keywords: Lãnh đạo | Trái tim | Lý trí | Cân bằng
+condition: birthday_original = 28
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 28 rút gọn về 1, nhưng được tạo thành từ 2 và 8. Vì vậy, bạn có nét lãnh đạo vừa có cảm xúc, vừa có đầu óc thực tế.
+
+gift:
+Vũ khí của bạn là sự kết hợp giữa “trái tim” của số 2 và “cái đầu lạnh” của số 8. Bạn không nhất thiết ra lệnh bằng tiếng quát; bạn có thể thuyết phục bằng lý trí, cảm xúc và khả năng đọc tình huống.
+
+warning:
+Bạn dễ mâu thuẫn giữa nhu cầu được yêu thương và khát khao quyền lực. Nếu lệch, bạn có thể vừa muốn được người khác công nhận, vừa muốn kiểm soát kết quả.
+
+life_symptoms:
+- Bạn có khả năng lãnh đạo bằng sự mềm mỏng.
+- Bạn dễ quan tâm đến cả cảm xúc lẫn hiệu quả.
+- Bạn có thể giằng co giữa làm người dễ thương và làm người có quyền lực.
+
+free_guidance:
+Hãy tìm điểm cân bằng giữa sự tinh tế và quyền lực. Khi trái tim và lý trí cùng vận hành, bạn có thể lãnh đạo mà không làm người khác thấy bị đè nén.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 28. Để hiểu mâu thuẫn giữa nhu cầu được yêu thương và khát khao thành tựu trong bạn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_2
+============================================================
+
+field: birthday_group
+value: 2
+display_title: Nhóm Số 2 – Những Người Kết Nối
+birthdays: 2, 11, 20, 29
+keywords: Nhạy cảm | Tinh tế | Làm việc nhóm
+condition: birthday_base = 2 or birthday_master = 11
+summary:
+Nhóm Ngày Sinh 2 mang năng lượng của sự nhạy cảm, tinh tế và kết nối. Đây là nhóm người dễ cảm nhận cảm xúc, giỏi phối hợp và thường đóng vai trò làm dịu các căng thẳng trong tập thể.
+
+============================================================
+BIRTHDAY_2
+============================================================
+
+field: birthday
+value: 2
+base_number: 2
+group: BIRTHDAY_GROUP_2
+display_title: Ngày Sinh 2 – Sứ Giả Hòa Bình
+keywords: Trực giác | Thấu cảm | Kết nối
+condition: birthday_original = 2
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 2 cho thấy bạn có món quà của sự tinh tế, thấu cảm và kết nối. Bạn dễ cảm được điều người khác chưa nói ra.
+
+gift:
+Vũ khí của bạn là trực giác và sự thấu cảm. Bạn là chất keo gắn kết mọi người, nhìn thấy những chi tiết cảm xúc mà người khác bỏ qua.
+
+warning:
+Đừng quá nhạy cảm đến mức dễ vỡ. Nếu mọi lời nói đều đi thẳng vào tim, bạn sẽ rất dễ kiệt sức trong quan hệ.
+
+life_symptoms:
+- Bạn dễ cảm nhận bầu không khí trong phòng.
+- Bạn thường chọn hòa giải thay vì đối đầu.
+- Bạn có thể nhường nhịn nhiều đến mức quên nhu cầu của mình.
+
+free_guidance:
+Hãy học cách bảo vệ cảm xúc của mình. Sự nhạy cảm là món quà, nhưng cần có ranh giới để không biến thành vết thương.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 2. Để hiểu nó hỗ trợ hay làm yếu các chỉ số cốt lõi khác, cần đọc sâu hơn trong bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_11
+============================================================
+
+field: birthday
+value: 11
+base_number: 11
+group: BIRTHDAY_GROUP_2
+display_title: Ngày Sinh 11 – Bậc Thầy Trực Giác
+keywords: Master 11 | Trực giác | Truyền cảm hứng | Tâm linh
+condition: birthday_original = 11
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 11 mang năng lượng Master Number. Đây là món quà của trực giác mạnh, khả năng truyền cảm hứng và tầm nhìn vượt khỏi bề mặt.
+
+gift:
+Vũ khí của bạn là “ăng-ten tâm linh”. Bạn có khả năng cảm nhận những điều vô hình, truyền cảm hứng và nhìn thấy hướng đi xa hơn người khác.
+
+warning:
+Cẩn thận với căng thẳng thần kinh. Năng lượng 11 nhạy và mạnh, nếu không được giữ trục, bạn dễ quá tải, lo âu hoặc mất phương hướng.
+
+life_symptoms:
+- Bạn có linh cảm mạnh và thường cảm được điều chưa rõ ràng.
+- Bạn dễ nhạy hơn người khác với môi trường và cảm xúc.
+- Bạn cần không gian tĩnh để cân bằng hệ thần kinh.
+
+free_guidance:
+Thiền định, tĩnh tâm hoặc một hình thức kỷ luật tinh thần sẽ giúp bạn giữ cái đầu lạnh. Trực giác cần đi cùng nền tảng thực tế.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 11. Để hiểu Master 11 đang mở ra tiềm năng hay tạo áp lực trong bản đồ của bạn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_20
+============================================================
+
+field: birthday
+value: 20
+base_number: 2
+group: BIRTHDAY_GROUP_2
+display_title: Ngày Sinh 20 – Sứ Giả Hòa Bình Có Chiều Sâu
+keywords: Trực giác | Thấu cảm | Bình an | Kết nối
+condition: birthday_original = 20
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 20 thuộc nhóm số 2, có thêm sắc thái của số 0 làm tăng chiều sâu cảm nhận. Bạn dễ trở thành người kết nối âm thầm, không phô trương nhưng rất quan trọng trong tập thể.
+
+gift:
+Vũ khí của bạn là trực giác và sự thấu cảm. Bạn nhìn thấy những chi tiết cảm xúc mà người khác bỏ qua và có thể làm dịu bầu không khí chỉ bằng sự hiện diện mềm mại.
+
+warning:
+Đừng quá nhạy cảm đến mức dễ vỡ. Nếu không có ranh giới, bạn dễ hấp thụ cảm xúc người khác rồi tưởng đó là vấn đề của mình.
+
+life_symptoms:
+- Bạn dễ cảm thấy tâm trạng mình bị ảnh hưởng bởi môi trường.
+- Bạn không thích xung đột trực diện.
+- Bạn có thể giỏi nâng đỡ người khác nhưng ít khi nói mình cần được nâng đỡ.
+
+free_guidance:
+Hãy học cách bảo vệ cảm xúc. Sự dịu dàng của bạn là tài sản, nhưng nó cần đi cùng khả năng nói “không”.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 20. Để hiểu vì sao bạn dễ nhạy cảm và cần ranh giới rõ hơn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_29
+============================================================
+
+field: birthday
+value: 29
+base_number: 11
+group: BIRTHDAY_GROUP_2
+display_title: Ngày Sinh 29 – Nhà Tâm Linh Sâu Sắc
+keywords: Trực giác | Nhân ái | Master 11 | Chữa lành
+condition: birthday_original = 29
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 29 rút về 11, kết hợp trực giác của 11 với lòng nhân ái của số 9. Đây là ngày sinh có chiều sâu cảm xúc và tiềm năng chữa lành mạnh.
+
+gift:
+Vũ khí của bạn là sự kết hợp giữa trực giác và lòng nhân ái. Bạn có thể sinh ra để chữa lành, phụng sự hoặc truyền cảm hứng cho người khác bằng sự thấu hiểu sâu sắc.
+
+warning:
+Bạn dễ rơi vào bi quan nếu thế giới không tốt đẹp như mình nghĩ. Lý tưởng càng lớn, thất vọng càng sâu nếu thiếu nền tảng thực tế và đức tin.
+
+life_symptoms:
+- Bạn dễ xúc động trước nỗi đau của người khác.
+- Bạn có linh cảm mạnh về con người và tình huống.
+- Bạn có thể mang nhiều nỗi buồn không thuộc về mình.
+
+free_guidance:
+Hãy giữ vững đức tin, nhưng cũng giữ ranh giới. Bạn không cần cứu cả thế giới trong một ngày; chữa lành bắt đầu từ việc không tự làm mình cạn kiệt.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 29. Để hiểu năng lượng 29/11 ảnh hưởng thế nào đến trực giác, tình cảm và đường đời, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_3
+============================================================
+
+field: birthday_group
+value: 3
+display_title: Nhóm Số 3 – Những Người Truyền Cảm Hứng
+birthdays: 3, 12, 21, 30
+keywords: Sáng tạo | Vui vẻ | Giỏi ăn nói
+condition: birthday_base = 3
+summary:
+Nhóm Ngày Sinh 3 mang năng lượng của sự sáng tạo, biểu đạt và truyền cảm hứng. Đây là nhóm người dễ thu hút qua lời nói, cảm xúc, nụ cười hoặc khả năng làm bầu không khí trở nên sống động.
+
+============================================================
+BIRTHDAY_3
+============================================================
+
+field: birthday
+value: 3
+base_number: 3
+group: BIRTHDAY_GROUP_3
+display_title: Ngày Sinh 3 – Nghệ Sĩ Thuần Khiết
+keywords: Lạc quan | Biểu đạt | Chữa lành bằng lời nói
+condition: birthday_original = 3
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 3 cho thấy bạn có món quà của sự lạc quan, biểu đạt và sáng tạo. Bạn dễ khiến không gian xung quanh nhẹ hơn bằng lời nói, nụ cười hoặc năng lượng vui vẻ.
+
+gift:
+Vũ khí của bạn là sự lạc quan và khả năng biểu đạt. Bạn giống ánh mặt trời trong nhiều tình huống; lời nói của bạn có thể chữa lành, truyền cảm hứng hoặc làm người khác thấy được nâng đỡ.
+
+warning:
+Tránh sự hời hợt và phân tán. Nếu năng lượng 3 chỉ chạy theo niềm vui nhất thời, bạn dễ có nhiều ý tưởng nhưng ít kết quả.
+
+life_symptoms:
+- Bạn có duyên nói chuyện, kể chuyện hoặc làm người khác vui.
+- Bạn dễ mất năng lượng trong môi trường khô khan.
+- Bạn cần học cách tập trung vào một mục tiêu đủ lâu.
+
+free_guidance:
+Hãy dùng khả năng biểu đạt để tạo giá trị thật. Niềm vui của bạn sẽ bền hơn khi nó được đặt vào một mục tiêu rõ ràng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 3. Để hiểu nó hỗ trợ hay làm phân tán các chỉ số khác, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_12
+============================================================
+
+field: birthday
+value: 12
+base_number: 3
+group: BIRTHDAY_GROUP_3
+display_title: Ngày Sinh 12 – Nghệ Sĩ Kỷ Luật
+keywords: Sáng tạo | Chủ động | Biểu đạt | Niềm tin
+condition: birthday_original = 12
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 12 rút về 3, kết hợp sự chủ động của số 1 với khả năng kết nối của số 2. Bạn có sự sáng tạo, nhưng không chỉ mơ mộng; bên trong bạn có tiềm năng biến ý tưởng thành điều có thể chia sẻ.
+
+gift:
+Vũ khí của bạn là sự sáng tạo đi cùng tính chủ động. Bạn có thể không chỉ nghĩ ra ý tưởng, mà còn biết cách bắt đầu và đưa nó đến người khác.
+
+warning:
+Bạn có thể tự ti và nghi ngờ bản thân. Khi sợ bị đánh giá, năng lượng sáng tạo dễ bị khóa lại.
+
+life_symptoms:
+- Bạn có nhiều ý tưởng nhưng cần thêm niềm tin để đưa ra ngoài.
+- Bạn vừa muốn thể hiện, vừa sợ mình chưa đủ hay.
+- Bạn cần môi trường khích lệ để nở ra.
+
+free_guidance:
+Hãy tin vào tài năng của mình. Không phải ý tưởng nào cũng hoàn hảo ngay từ đầu; sáng tạo cần được luyện qua quá trình thể hiện thật.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 12. Để hiểu vì sao bạn có tài nhưng dễ nghi ngờ chính mình, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_21
+============================================================
+
+field: birthday
+value: 21
+base_number: 3
+group: BIRTHDAY_GROUP_3
+display_title: Ngày Sinh 21 – Nghệ Sĩ Ngoại Giao
+keywords: Duyên dáng | Xã giao | Tinh tế | Biểu đạt
+condition: birthday_original = 21
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 21 rút về 3, được tạo bởi 2 và 1. Bạn có sự duyên dáng xã giao, biết kết hợp tinh tế với sự chủ động để thu hút người khác.
+
+gift:
+Vũ khí của bạn là khả năng làm hài lòng người khác bằng sự tinh tế và vui vẻ. Bạn có thể thu hút đám đông mà không cần quá phô trương.
+
+warning:
+Đừng hứa hẹn quá nhiều mà không làm được. Với Ngày Sinh 21, chữ tín là bài học quan trọng để năng lượng duyên dáng không biến thành thiếu tin cậy.
+
+life_symptoms:
+- Bạn dễ tạo thiện cảm khi giao tiếp.
+- Bạn có thể biết nói điều người khác muốn nghe.
+- Bạn cần cẩn thận với việc nói quá nhanh, hứa quá nhanh hoặc chiều lòng quá mức.
+
+free_guidance:
+Hãy giữ chữ tín. Duyên nói chuyện là món quà, nhưng sự nhất quán mới tạo niềm tin dài lâu.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 21. Để hiểu khả năng ngoại giao này hỗ trợ hay che lấp con người thật của bạn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_30
+============================================================
+
+field: birthday
+value: 30
+base_number: 3
+group: BIRTHDAY_GROUP_3
+display_title: Ngày Sinh 30 – Nghệ Sĩ Thuần Khiết Có Độ Khuếch Đại
+keywords: Lạc quan | Biểu đạt | Sáng tạo | Sức hút
+condition: birthday_original = 30
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 30 thuộc nhóm số 3, có thêm số 0 như một vòng khuếch đại năng lượng biểu đạt. Bạn dễ có sức hút tự nhiên qua cách nói, cảm xúc, sự hài hước hoặc khả năng sáng tạo.
+
+gift:
+Vũ khí của bạn là sự lạc quan và khả năng biểu đạt mạnh. Bạn có thể đem lại ánh sáng, tiếng cười và cảm hứng cho người khác.
+
+warning:
+Tránh sự hời hợt và phân tán. Nếu chỉ chạy theo cảm xúc nhất thời, bạn dễ tỏa sáng nhanh nhưng khó giữ chiều sâu.
+
+life_symptoms:
+- Bạn dễ được chú ý khi thể hiện bản thân.
+- Bạn có thể rất có duyên trong giao tiếp.
+- Bạn cần học cách biến sức hút thành giá trị thật.
+
+free_guidance:
+Hãy tập trung năng lượng vào một mục tiêu. Sáng tạo càng được rèn luyện, ánh sáng của bạn càng bền.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 30. Để hiểu vì sao bạn dễ tỏa sáng nhưng cũng dễ phân tán, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_4
+============================================================
+
+field: birthday_group
+value: 4
+display_title: Nhóm Số 4 – Những Người Kiến Thiết
+birthdays: 4, 13, 22, 31
+keywords: Kỷ luật | Thực tế | Chăm chỉ
+condition: birthday_base = 4 or birthday_master = 22
+summary:
+Nhóm Ngày Sinh 4 mang năng lượng của kỷ luật, thực tế và khả năng xây dựng. Đây là nhóm người có xu hướng tạo nền móng, tổ chức hệ thống và làm việc đến nơi đến chốn.
+
+============================================================
+BIRTHDAY_4
+============================================================
+
+field: birthday
+value: 4
+base_number: 4
+group: BIRTHDAY_GROUP_4
+display_title: Ngày Sinh 4 – Người Xây Dựng
+keywords: Bền bỉ | Tỉ mỉ | Trụ cột | Ngăn nắp
+condition: birthday_original = 4
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 4 cho thấy bạn có món quà của sự bền bỉ, tỉ mỉ và thực tế. Bạn dễ tạo cảm giác đáng tin cậy và biết cách sắp xếp mọi thứ ngăn nắp.
+
+gift:
+Vũ khí của bạn là sự bền bỉ và tỉ mỉ. Bạn là trụ cột vững chắc; việc gì vào tay bạn cũng có xu hướng được sắp xếp rõ ràng hơn.
+
+warning:
+Đừng quá cứng nhắc. Nếu bạn chỉ tin vào cách cũ, bạn dễ biến sự ổn định thành sự trì trệ.
+
+life_symptoms:
+- Bạn thích mọi việc rõ ràng, có quy trình.
+- Bạn ghét sự lộn xộn hoặc thiếu trách nhiệm.
+- Bạn có thể hơi khó tính khi người khác làm việc tùy hứng.
+
+free_guidance:
+Hãy học cách linh hoạt như cây tre trước gió. Sự vững chãi của bạn sẽ mạnh hơn khi biết uốn mà không gãy.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 4. Để hiểu nó hỗ trợ hay làm nặng thêm các chỉ số cốt lõi khác, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_13
+============================================================
+
+field: birthday
+value: 13
+base_number: 4
+group: BIRTHDAY_GROUP_4
+display_title: Ngày Sinh 13 – Người Cải Cách
+keywords: Nợ nghiệp 13/4 | Kỷ luật | Cải cách | Chăm chỉ
+condition: birthday_original = 13
+compatible_karmic_overlay: KARMIC_OVERLAY_13_4
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 13 rút về 4 và mang lớp bài học nợ nghiệp 13/4. Đây là năng lượng vừa có khả năng cải cách, vừa đòi hỏi kỷ luật rất cao để tránh trì trệ hoặc bỏ cuộc.
+
+gift:
+Vũ khí của bạn là khả năng phá vỡ lề thói cũ để xây dựng cái mới tốt hơn. Bạn có sự sáng tạo trong khuôn khổ và có thể cải tổ những hệ thống đã lỗi thời.
+
+warning:
+Đừng lười biếng hoặc đổ lỗi cho hoàn cảnh. Với Ngày Sinh 13, kỷ luật là chìa khóa duy nhất để chuyển hóa trở ngại thành thành tựu.
+
+life_symptoms:
+- Bạn dễ gặp việc khó, việc phải làm lại hoặc sửa lại nhiều lần.
+- Bạn có thể rất muốn thay đổi hệ thống nhưng phải học cách làm đều đặn.
+- Bạn dễ nản nếu kết quả đến chậm.
+
+free_guidance:
+Hãy xây từng viên gạch. Khi bạn cam kết với kỷ luật, năng lượng 13/4 sẽ chuyển từ gánh nặng thành sức mạnh cải cách.
+
+upsell_hook:
+Ngày Sinh 13 cần đọc cùng Karmic Overlay 13/4 để hiểu rõ hơn bài học về kỷ luật, trách nhiệm và sự kiên trì trong bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_22
+============================================================
+
+field: birthday
+value: 22
+base_number: 22
+group: BIRTHDAY_GROUP_4
+display_title: Ngày Sinh 22 – Kiến Trúc Sư Đại Tài
+keywords: Master 22 | Tầm nhìn vĩ mô | Thực thi | Di sản
+condition: birthday_original = 22
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 22 mang năng lượng Master Number, kết hợp tầm nhìn vĩ mô với khả năng thực thi. Đây là ngày sinh của người có tiềm năng làm việc lớn, nhưng cũng mang áp lực lớn.
+
+gift:
+Vũ khí của bạn là tầm nhìn vĩ mô và khả năng biến ý tưởng thành cấu trúc thật. Bạn có thể sinh ra để làm những dự án để đời hoặc tạo ảnh hưởng vượt khỏi phạm vi cá nhân.
+
+warning:
+Áp lực trên vai bạn rất lớn. Nếu ôm mọi thứ một mình, bạn dễ kiệt sức hoặc sợ chính tầm vóc của mình.
+
+life_symptoms:
+- Bạn có thể nghĩ lớn hơn môi trường xung quanh.
+- Bạn dễ cảm thấy trách nhiệm nặng.
+- Bạn cần đội ngũ, hệ thống và khả năng chia sẻ gánh nặng.
+
+free_guidance:
+Hãy học cách chia sẻ trách nhiệm và giữ cân bằng. Master 22 không cần chứng minh bằng cách gánh hết; nó cần xây hệ thống để nhiều người cùng nâng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 22. Để hiểu Master 22 đang tạo tiềm năng hay áp lực trong bản đồ của bạn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_31
+============================================================
+
+field: birthday
+value: 31
+base_number: 4
+group: BIRTHDAY_GROUP_4
+display_title: Ngày Sinh 31 – Người Tổ Chức
+keywords: Kỷ luật | Ý tưởng | Quản lý dự án | Trao quyền
+condition: birthday_original = 31
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 31 rút về 4, kết hợp ý tưởng của số 3 với tính chủ động của số 1. Bạn có khả năng tổ chức tốt, vừa biết lên kế hoạch vừa có thể truyền cảm hứng.
+
+gift:
+Vũ khí của bạn là kỷ luật của số 4 nhưng vẫn có ý tưởng của số 3. Bạn có thể là người quản lý dự án tốt vì biết sắp xếp công việc và khơi dậy tinh thần cho người khác.
+
+warning:
+Bạn thường ôm đồm quá nhiều việc. Nếu không học cách trao quyền, bạn dễ mệt vì tự biến mình thành trung tâm xử lý tất cả.
+
+life_symptoms:
+- Bạn vừa muốn có kế hoạch, vừa muốn có không gian sáng tạo.
+- Bạn dễ thấy việc gì cũng cần mình can thiệp.
+- Bạn có thể quản lý tốt nhưng cần tránh kiểm soát quá mức.
+
+free_guidance:
+Hãy học cách trao quyền. Một hệ thống tốt không phải là hệ thống chỉ chạy khi bạn tự làm tất cả, mà là hệ thống vẫn chạy khi bạn biết phân vai đúng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 31. Để hiểu vì sao bạn dễ ôm đồm và cách dùng năng lực tổ chức hiệu quả hơn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_5
+============================================================
+
+field: birthday_group
+value: 5
+display_title: Nhóm Số 5 – Những Người Tự Do
+birthdays: 5, 14, 23
+keywords: Linh hoạt | Thích nghi | Yêu tự do
+condition: birthday_base = 5
+summary:
+Nhóm Ngày Sinh 5 mang năng lượng của sự linh hoạt, thích nghi và yêu tự do. Đây là nhóm người học nhanh, đổi hướng nhanh và cần trải nghiệm để cảm thấy mình đang sống.
+
+============================================================
+BIRTHDAY_5
+============================================================
+
+field: birthday
+value: 5
+base_number: 5
+group: BIRTHDAY_GROUP_5
+display_title: Ngày Sinh 5 – Nhà Thám Hiểm
+keywords: Đa năng | Tốc độ | Thích nghi | Cam kết
+condition: birthday_original = 5
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 5 cho thấy bạn có món quà của sự đa năng, tốc độ và thích nghi. Bạn dễ học nhanh, hiểu nhanh và xoay chuyển tốt trong nhiều môi trường.
+
+gift:
+Vũ khí của bạn là sự đa năng và tốc độ. Bạn có khả năng thích nghi với thay đổi, nắm bắt cái mới và tạo sự sống động trong nơi mình xuất hiện.
+
+warning:
+Tránh cả thèm chóng chán. Nếu không học bài học cam kết, bạn dễ có nhiều trải nghiệm nhưng ít thành tựu bền.
+
+life_symptoms:
+- Bạn chán nhanh khi mọi thứ lặp lại.
+- Bạn học nhanh nhưng cần học cách đi sâu.
+- Bạn có thể thích đổi việc, đổi môi trường hoặc đổi kế hoạch.
+
+free_guidance:
+Cam kết là bài học lớn nhất của bạn. Hãy chọn một điều đủ đáng giá và ở lại với nó đủ lâu để thấy kết quả.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 5. Để hiểu nó giúp bạn linh hoạt hay làm bạn phân tán, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_14
+============================================================
+
+field: birthday
+value: 14
+base_number: 5
+group: BIRTHDAY_GROUP_5
+display_title: Ngày Sinh 14 – Người Điều Độ
+keywords: Nợ nghiệp 14/5 | Tự do | Tiết chế | Kỷ luật
+condition: birthday_original = 14
+compatible_karmic_overlay: KARMIC_OVERLAY_14_5
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 14 rút về 5 và mang lớp bài học nợ nghiệp 14/5. Đây là năng lượng học về tự do thông qua tiết chế, ranh giới và khả năng giữ cam kết.
+
+gift:
+Vũ khí của bạn là sự hiểu biết sâu sắc về ranh giới. Khi trưởng thành, bạn có thể dùng trải nghiệm với tự do để hiểu đâu là tự chủ thật, đâu là buông thả trá hình.
+
+warning:
+Đừng sa đà vào nghiện ngập, thú vui thể xác hoặc các lối thoát tạm thời. Với Ngày Sinh 14, tự do chỉ thật sự bền khi có kỷ luật.
+
+life_symptoms:
+- Bạn dễ bị hấp dẫn bởi cái mới hoặc cảm giác mạnh.
+- Bạn có thể khó duy trì cam kết khi thấy nhàm chán.
+- Cuộc sống dễ có biến động nếu thiếu trật tự.
+
+free_guidance:
+Hãy tìm tự do trong sự kỷ luật. Khi bạn biết tự kiểm soát, không gì có thể nhốt bạn lại từ bên trong.
+
+upsell_hook:
+Ngày Sinh 14 cần đọc cùng Karmic Overlay 14/5 để hiểu rõ hơn bài học về tự do, tiết chế và cam kết trong bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_23
+============================================================
+
+field: birthday
+value: 23
+base_number: 5
+group: BIRTHDAY_GROUP_5
+display_title: Ngày Sinh 23 – Nhà Ngoại Giao Linh Hoạt
+keywords: Kết nối | Tiếng cười | Bán hàng | Linh hoạt
+condition: birthday_original = 23
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 23 rút về 5, kết hợp sự tinh tế của số 2 với khả năng biểu đạt của số 3. Bạn có sức hút tự nhiên trong giao tiếp và khả năng kết nối linh hoạt.
+
+gift:
+Vũ khí của bạn là khả năng chữa lành bằng tiếng cười và sự kết nối. Bạn cực kỳ thu hút, có duyên bán hàng, quảng bá hoặc làm người khác cảm thấy dễ chịu.
+
+warning:
+Đừng dùng sự khéo léo để thao túng người khác. Khi năng lượng 23 bị lệch, sự duyên dáng có thể biến thành chiêu trò.
+
+life_symptoms:
+- Bạn dễ tạo thiện cảm nhanh.
+- Bạn biết dùng lời nói để mở cửa quan hệ.
+- Bạn có thể rất linh hoạt nhưng cần giữ sự chân thành.
+
+free_guidance:
+Hãy dùng sự khéo léo để kết nối thật, không phải để điều khiển. Khi lời nói đi cùng đạo đức, sức hút của bạn sẽ bền.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 23. Để hiểu khả năng kết nối này hỗ trợ nghề nghiệp và quan hệ ra sao, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_6
+============================================================
+
+field: birthday_group
+value: 6
+display_title: Nhóm Số 6 – Những Người Chăm Sóc
+birthdays: 6, 15, 24
+keywords: Trách nhiệm | Yêu thương | Gia đình
+condition: birthday_base = 6
+summary:
+Nhóm Ngày Sinh 6 mang năng lượng của trách nhiệm, yêu thương và chăm sóc. Đây là nhóm người dễ hướng về gia đình, cộng đồng và nhu cầu tạo sự an toàn cho người khác.
+
+============================================================
+BIRTHDAY_6
+============================================================
+
+field: birthday
+value: 6
+base_number: 6
+group: BIRTHDAY_GROUP_6
+display_title: Ngày Sinh 6 – Người Mẹ/Người Cha
+keywords: Yêu thương | Trái tim | Gia đình | Chăm sóc
+condition: birthday_original = 6
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 6 cho thấy bạn có món quà của tình yêu thương, trách nhiệm và sự chăm sóc. Bạn dễ trở thành trái tim của gia đình hoặc cộng đồng nhỏ quanh mình.
+
+gift:
+Vũ khí của bạn là tình yêu thương vô điều kiện. Bạn có khả năng tạo cảm giác an toàn, ấm áp và được quan tâm cho người khác.
+
+warning:
+Đừng biến tình yêu thành sự kiểm soát nghẹt thở. Khi yêu thương thiếu ranh giới, nó có thể làm cả bạn và người khác mệt.
+
+life_symptoms:
+- Bạn dễ lo cho người khác trước khi lo cho mình.
+- Bạn có thể bị kéo vào vai trò gánh vác.
+- Bạn muốn mọi người ổn, nhưng đôi khi quên hỏi mình có ổn không.
+
+free_guidance:
+Hãy yêu thương có trí tuệ. Không phải mọi việc đều cần bạn đứng ra sửa, và không phải ai bạn yêu cũng cần bạn gánh thay cuộc đời họ.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 6. Để hiểu nó hỗ trợ hay làm bạn ôm đồm trong bản đồ tổng thể, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_15
+============================================================
+
+field: birthday
+value: 15
+base_number: 6
+group: BIRTHDAY_GROUP_6
+display_title: Ngày Sinh 15 – Người Bảo Mẫu Mạnh Mẽ
+keywords: Chăm sóc | Độc lập | Vui vẻ | Che chở
+condition: birthday_original = 15
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 15 rút về 6, kết hợp sự độc lập của số 1 với sự linh hoạt của số 5. Bạn chăm sóc người khác nhưng vẫn có nét mạnh mẽ, vui vẻ và không quá bi lụy.
+
+gift:
+Vũ khí của bạn là khả năng che chở đáng tin cậy. Bạn có thể chăm sóc người khác mà vẫn giữ được sự độc lập và tinh thần sống động.
+
+warning:
+Đừng hy sinh bản thân quá mức. Khi cứ phải là người bảo vệ, bạn có thể quên mình cũng cần được nghỉ ngơi và nâng đỡ.
+
+life_symptoms:
+- Bạn dễ trở thành người người khác tìm đến khi có chuyện.
+- Bạn có nét vừa ấm áp vừa mạnh mẽ.
+- Bạn có thể giấu mệt mỏi sau vẻ ngoài ổn định.
+
+free_guidance:
+Hãy nhớ rằng chăm sóc không đồng nghĩa với tự hy sinh đến cạn kiệt. Sự che chở bền vững cần bắt đầu từ một nội tâm được nuôi dưỡng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 15. Để hiểu cách cân bằng giữa chăm sóc, tự do và độc lập, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_24
+============================================================
+
+field: birthday
+value: 24
+base_number: 6
+group: BIRTHDAY_GROUP_6
+display_title: Ngày Sinh 24 – Người Kiến Tạo Hòa Bình
+keywords: Tỉ mỉ | Tinh tế | Tổ ấm | Cầu toàn
+condition: birthday_original = 24
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 24 rút về 6, kết hợp sự tinh tế của số 2 với kỷ luật của số 4. Bạn có món quà chăm sóc người khác bằng sự tỉ mỉ, ngăn nắp và khả năng xây dựng tổ ấm.
+
+gift:
+Vũ khí của bạn là khả năng chăm sóc bằng chi tiết. Bạn biết tạo nên những tổ ấm, môi trường hoặc mối quan hệ có cảm giác vững chắc và hài hòa.
+
+warning:
+Đừng quá lo lắng hoặc cầu toàn trong các mối quan hệ. Khi muốn mọi thứ hoàn hảo, bạn dễ tạo áp lực cho chính mình và người thân.
+
+life_symptoms:
+- Bạn để ý nhiều chi tiết nhỏ trong gia đình hoặc quan hệ.
+- Bạn muốn mọi thứ vừa đẹp, vừa ổn định.
+- Bạn dễ lo xa khi người thân không theo kế hoạch mình nghĩ là tốt.
+
+free_guidance:
+Hãy cho phép người khác có nhịp sống riêng. Tổ ấm không cần hoàn hảo mới là nơi an toàn; đôi khi sự mềm mại quan trọng hơn sự ngăn nắp.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 24. Để hiểu vì sao bạn dễ lo lắng và cầu toàn trong yêu thương, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_7
+============================================================
+
+field: birthday_group
+value: 7
+display_title: Nhóm Số 7 – Những Người Chiêm Nghiệm
+birthdays: 7, 16, 25
+keywords: Sâu sắc | Phân tích | Riêng tư
+condition: birthday_base = 7
+summary:
+Nhóm Ngày Sinh 7 mang năng lượng của sự sâu sắc, phân tích và riêng tư. Đây là nhóm người cần chiều sâu, tri thức và không gian nội tâm để sống đúng mình.
+
+============================================================
+BIRTHDAY_7
+============================================================
+
+field: birthday
+value: 7
+base_number: 7
+group: BIRTHDAY_GROUP_7
+display_title: Ngày Sinh 7 – Nhà Nghiên Cứu
+keywords: Trí tuệ | Đào sâu | Riêng tư | Chia sẻ
+condition: birthday_original = 7
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 7 cho thấy bạn có món quà của trí tuệ sắc bén, khả năng đào sâu và nhu cầu tìm bản chất. Bạn không dễ tin vào bề nổi.
+
+gift:
+Vũ khí của bạn là trí tuệ và khả năng nghiên cứu. Bạn có xu hướng nhìn sâu vào vấn đề, đặt câu hỏi và tìm ra điều người khác bỏ qua.
+
+warning:
+Đừng tự cô lập mình khỏi thế giới. Nếu chỉ giữ kiến thức trong đầu mà không chia sẻ, bạn dễ trở thành một hòn đảo.
+
+life_symptoms:
+- Bạn cần không gian riêng để suy nghĩ.
+- Bạn khó chịu với sự hời hợt.
+- Bạn có thể bị hiểu lầm là lạnh lùng hoặc xa cách.
+
+free_guidance:
+Hãy mở lòng chia sẻ kiến thức. Trí tuệ của bạn sẽ có giá trị lớn hơn khi nó được dùng để soi sáng, không chỉ để quan sát.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 7. Để hiểu nó hỗ trợ hay làm bạn cô lập trong bản đồ tổng thể, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_16
+============================================================
+
+field: birthday
+value: 16
+base_number: 7
+group: BIRTHDAY_GROUP_7
+display_title: Ngày Sinh 16 – Người Thức Tỉnh
+keywords: Nợ nghiệp 16/7 | Chân lý | Đổ vỡ | Khiêm tốn
+condition: birthday_original = 16
+compatible_karmic_overlay: KARMIC_OVERLAY_16_7
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 16 rút về 7 và mang lớp bài học nợ nghiệp 16/7. Đây là ngày sinh có khả năng nhìn thấu sự giả dối, nhưng thường học bài học thức tỉnh qua những cú đổ vỡ hoặc sự sụp xuống của cái tôi.
+
+gift:
+Vũ khí của bạn là khả năng nhìn thấu sự giả dối. Bạn có thể trải qua đổ vỡ để tìm thấy chân lý tinh thần đích thực và xây dựng nội tâm sâu hơn.
+
+warning:
+Đừng kiêu ngạo về trí tuệ của mình. Nếu dùng sự hiểu biết để phán xét, bạn sẽ dễ làm gãy các mối quan hệ quan trọng.
+
+life_symptoms:
+- Bạn có thể từng trải qua cú sốc khiến mình thay đổi mạnh.
+- Bạn dễ phát hiện điều không thật trong người khác.
+- Bạn cần học sự khiêm tốn và bao dung.
+
+free_guidance:
+Hãy xem sự sụp đổ như cơ hội tái sinh. Khi bạn khiêm tốn hơn, trí tuệ của bạn sẽ trở thành ánh sáng, không phải lưỡi dao.
+
+upsell_hook:
+Ngày Sinh 16 cần đọc cùng Karmic Overlay 16/7 để hiểu rõ hơn bài học về niềm tin, sự trung thực và tái sinh nội tâm trong bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_25
+============================================================
+
+field: birthday
+value: 25
+base_number: 7
+group: BIRTHDAY_GROUP_7
+display_title: Ngày Sinh 25 – Nhà Tâm Linh Trực Giác
+keywords: Trực giác | Trí tuệ | Độc đáo | Thực tế
+condition: birthday_original = 25
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 25 rút về 7, kết hợp trực giác của số 2 với sự linh hoạt trải nghiệm của số 5. Bạn có cách tiếp cận vấn đề khá độc đáo, vừa cảm được vừa phân tích được.
+
+gift:
+Vũ khí của bạn là trực giác kết hợp với trí tuệ. Bạn có những linh cảm chính xác và cách nhìn vấn đề không giống số đông.
+
+warning:
+Đừng quá mơ mộng xa rời thực tế. Trực giác cần được kiểm chứng, nếu không bạn dễ lẫn giữa linh cảm thật và cảm xúc nhất thời.
+
+life_symptoms:
+- Bạn có những cảm nhận khó giải thích.
+- Bạn thích đào sâu nhưng cũng cần trải nghiệm để hiểu.
+- Bạn có thể thay đổi góc nhìn rất nhanh khi phát hiện sự thật mới.
+
+free_guidance:
+Hãy kết hợp trực giác với dữ kiện. Khi cảm nhận và lý trí cùng làm việc, bạn có thể đưa ra những nhận định rất sắc.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 25. Để hiểu trực giác và trí tuệ này vận hành thế nào trong toàn bản đồ, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_8
+============================================================
+
+field: birthday_group
+value: 8
+display_title: Nhóm Số 8 – Những Người Điều Hành
+birthdays: 8, 17, 26
+keywords: Tham vọng | Thực tế | Quản trị
+condition: birthday_base = 8
+summary:
+Nhóm Ngày Sinh 8 mang năng lượng của tham vọng, thực tế và quản trị. Đây là nhóm người dễ hướng tới kết quả, quyền lực, tài chính và khả năng điều hành nguồn lực.
+
+============================================================
+BIRTHDAY_8
+============================================================
+
+field: birthday
+value: 8
+base_number: 8
+group: BIRTHDAY_GROUP_8
+display_title: Ngày Sinh 8 – Doanh Nhân
+keywords: Điều hành | Kiếm tiền | Vật chất | Cân bằng
+condition: birthday_original = 8
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 8 cho thấy bạn có món quà về quản trị, vật chất và năng lực tạo kết quả. Bạn dễ quan tâm đến hiệu quả, thành tựu và khả năng làm chủ nguồn lực.
+
+gift:
+Vũ khí của bạn là năng lực điều hành và kiếm tiền. Bạn có khuynh hướng sinh ra để hiểu thế giới vật chất, vận hành nguồn lực và tạo giá trị đo được.
+
+warning:
+Đừng để đồng tiền làm mờ mắt. Nếu chỉ chạy theo thành tựu, bạn dễ mất cân bằng giữa sự nghiệp, tình cảm và sức khỏe.
+
+life_symptoms:
+- Bạn dễ nhìn vấn đề qua hiệu quả và kết quả.
+- Bạn có thể bị cuốn vào áp lực tài chính hoặc địa vị.
+- Bạn cần học cách dùng quyền lực có trách nhiệm.
+
+free_guidance:
+Hãy cân bằng giữa sự nghiệp và tình cảm. Thành công bền vững không chỉ là có nhiều hơn, mà là có đúng thứ đáng để giữ.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 8. Để hiểu nó hỗ trợ hay làm nặng bài học vật chất trong bản đồ của bạn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_17
+============================================================
+
+field: birthday
+value: 17
+base_number: 8
+group: BIRTHDAY_GROUP_8
+display_title: Ngày Sinh 17 – Nhà Quản Lý Sắc Sảo
+keywords: Độc lập | Phân tích | Kinh doanh | Chiến lược
+condition: birthday_original = 17
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 17 rút về 8, kết hợp tư duy độc lập của số 1 với chiều sâu phân tích của số 7. Bạn có đầu óc chiến lược và khả năng quản lý khá sắc bén.
+
+gift:
+Vũ khí của bạn là cái đầu lạnh trong kinh doanh hoặc quản trị. Bạn có thể ra quyết định dựa trên phân tích, chiến lược và khả năng nhìn xa.
+
+warning:
+Bạn có thể hơi khó gần hoặc độc đoán. Nếu quá tin vào phân tích của mình, bạn dễ bỏ qua cảm xúc và góc nhìn của người khác.
+
+life_symptoms:
+- Bạn thích tự quyết và có quan điểm rõ.
+- Bạn dễ nhìn ra rủi ro hoặc lỗ hổng trong kế hoạch.
+- Bạn cần học cách lắng nghe nhân viên hoặc cộng sự.
+
+free_guidance:
+Hãy dùng sự sắc sảo để dẫn dắt, không phải để tạo khoảng cách. Một nhà quản lý giỏi cần cả chiến lược lẫn khả năng kết nối con người.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 17. Để hiểu cách dùng tư duy chiến lược mà không rơi vào lạnh lùng, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_26
+============================================================
+
+field: birthday
+value: 26
+base_number: 8
+group: BIRTHDAY_GROUP_8
+display_title: Ngày Sinh 26 – Nhà Lãnh Đạo Nhân Ái
+keywords: Ngoại giao | Gia đình | Tài chính | Trách nhiệm
+condition: birthday_original = 26
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 26 rút về 8, kết hợp ngoại giao của số 2 với trách nhiệm của số 6. Bạn có năng lực lãnh đạo gắn với gia đình, cộng đồng và sự chăm sóc có tổ chức.
+
+gift:
+Vũ khí của bạn là khả năng kiếm tiền hoặc quản trị nguồn lực để lo cho gia đình và cộng đồng. Bạn có thể lãnh đạo bằng sự ngoại giao, trách nhiệm và cảm giác bảo vệ.
+
+warning:
+Đừng để tình cảm chi phối các quyết định tài chính. Khi cảm xúc và tiền bạc trộn lẫn thiếu tỉnh táo, bạn dễ gánh trách nhiệm không thuộc về mình.
+
+life_symptoms:
+- Bạn thường nghĩ đến gia đình hoặc người thân trong quyết định lớn.
+- Bạn có thể rất có trách nhiệm về tài chính.
+- Bạn dễ bị kéo vào việc lo cho người khác quá mức.
+
+free_guidance:
+Hãy cân bằng giữa trái tim và lý trí. Lãnh đạo nhân ái không có nghĩa là dùng tiền bạc để gánh thay mọi bài học của người khác.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 26. Để hiểu bài học giữa tài chính, trách nhiệm và tình cảm trong bản đồ của bạn, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_GROUP_9
+============================================================
+
+field: birthday_group
+value: 9
+display_title: Nhóm Số 9 – Những Người Nhân Đạo
+birthdays: 9, 18, 27
+keywords: Vị tha | Bao dung | Tầm nhìn rộng
+condition: birthday_base = 9
+summary:
+Nhóm Ngày Sinh 9 mang năng lượng của sự vị tha, bao dung và tầm nhìn rộng. Đây là nhóm người dễ quan tâm đến cộng đồng, lòng nhân ái và những giá trị vượt khỏi lợi ích cá nhân.
+
+============================================================
+BIRTHDAY_9
+============================================================
+
+field: birthday
+value: 9
+base_number: 9
+group: BIRTHDAY_GROUP_9
+display_title: Ngày Sinh 9 – Nhà Từ Thiện
+keywords: Tấm lòng | Tha thứ | Bao dung | Ranh giới
+condition: birthday_original = 9
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 9 cho thấy bạn có món quà của lòng nhân ái, sự bao dung và khả năng tha thứ. Bạn dễ thu hút người khác bởi sự ấm áp và tầm nhìn rộng.
+
+gift:
+Vũ khí của bạn là tấm lòng vàng và khả năng tha thứ. Bạn có thể làm người khác cảm thấy được chấp nhận, được cảm thông và được nhìn bằng con mắt nhân văn.
+
+warning:
+Đừng để người khác lợi dụng lòng tốt của bạn. Cho đi không có nghĩa là để mình bị rút cạn.
+
+life_symptoms:
+- Bạn dễ mềm lòng trước nỗi đau của người khác.
+- Bạn có thể cho đi nhiều hơn mình nhận lại.
+- Bạn cần học cách đặt ranh giới với lòng tốt.
+
+free_guidance:
+Hãy bao dung nhưng tỉnh táo. Lòng nhân ái cần đi cùng sự phân biệt để không biến thành tự hy sinh mù quáng.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 9. Để hiểu nó hỗ trợ hay làm bạn cạn năng lượng trong bản đồ tổng thể, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_18
+============================================================
+
+field: birthday
+value: 18
+base_number: 9
+group: BIRTHDAY_GROUP_9
+display_title: Ngày Sinh 18 – Nhà Lãnh Đạo Vì Cộng Đồng
+keywords: Lãnh đạo | Tài chính | Nhân đạo | Chính trực
+condition: birthday_original = 18
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 18 rút về 9, kết hợp sức mạnh lãnh đạo của số 1 với năng lực tài chính/quản trị của số 8. Bạn có khả năng dùng quyền lực hoặc nguồn lực để phục vụ mục đích nhân đạo.
+
+gift:
+Vũ khí của bạn là khả năng lãnh đạo và tài chính để phục vụ cộng đồng. Bạn có thể làm việc thiện, phát triển dự án xã hội hoặc tạo ảnh hưởng nhân văn một cách chuyên nghiệp.
+
+warning:
+Đừng dùng danh nghĩa từ thiện để đánh bóng tên tuổi cá nhân. Khi mục đích nhân đạo bị cái tôi chiếm chỗ, năng lượng 18 dễ lệch hướng.
+
+life_symptoms:
+- Bạn có thể vừa tham vọng vừa có lý tưởng.
+- Bạn muốn tạo ảnh hưởng rộng, không chỉ lo cho riêng mình.
+- Bạn cần kiểm tra động cơ thật sau mỗi hành động lớn.
+
+free_guidance:
+Hãy dùng sức mạnh cá nhân để nâng người khác lên. Khi quyền lực phục vụ lòng nhân ái, Ngày Sinh 18 trở thành một món quà rất lớn.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 18. Để hiểu cách cân bằng giữa quyền lực, tài chính và lý tưởng nhân đạo, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+BIRTHDAY_27
+============================================================
+
+field: birthday
+value: 27
+base_number: 9
+group: BIRTHDAY_GROUP_9
+display_title: Ngày Sinh 27 – Nhà Tư Vấn Thông Thái
+keywords: Thấu hiểu | Tâm lý | Trí tuệ | Chữa lành
+condition: birthday_original = 27
+report_section: BƯỚC 7 – NGÀY SINH
+free_depth: sơ lược có sức chạm
+
+summary:
+Ngày Sinh 27 rút về 9, kết hợp sự thấu cảm của số 2 với chiều sâu trí tuệ của số 7. Bạn có khả năng hiểu tâm lý con người và đưa ra lời khuyên có chiều sâu.
+
+gift:
+Vũ khí của bạn là sự thấu hiểu tâm lý con người. Bạn có thể trở thành người chữa lành tâm hồn, người tư vấn hoặc người đưa ra những lời khuyên thông tuệ.
+
+warning:
+Đừng quá nhạy cảm và ôm nỗi đau của thiên hạ vào mình. Bạn có thể hiểu người khác rất sâu, nhưng không cần mang hết gánh nặng của họ.
+
+life_symptoms:
+- Người khác dễ tìm đến bạn để tâm sự.
+- Bạn cảm được chiều sâu cảm xúc và nỗi đau của con người.
+- Bạn cần ranh giới để không bị ngập trong vấn đề của người khác.
+
+free_guidance:
+Hãy lắng nghe bằng lòng trắc ẩn, nhưng giữ lại một phần năng lượng cho chính mình. Người tư vấn tốt không phải là người đau thay, mà là người soi đường.
+
+upsell_hook:
+Phần này mới chỉ gọi tên món quà Ngày Sinh 27. Để hiểu năng lực tư vấn, chữa lành và thấu hiểu này vận hành ra sao trong toàn bản đồ, cần đọc sâu hơn bản chuyên sâu.
+
+
+============================================================
+IMPLEMENTATION NOTES
+============================================================
+
+1. Routing theo ngày sinh gốc:
+- 1 → BIRTHDAY_1
+- 2 → BIRTHDAY_2
+- 3 → BIRTHDAY_3
+- 4 → BIRTHDAY_4
+- 5 → BIRTHDAY_5
+- 6 → BIRTHDAY_6
+- 7 → BIRTHDAY_7
+- 8 → BIRTHDAY_8
+- 9 → BIRTHDAY_9
+- 10 → BIRTHDAY_10
+- 11 → BIRTHDAY_11
+- 12 → BIRTHDAY_12
+- 13 → BIRTHDAY_13
+- 14 → BIRTHDAY_14
+- 15 → BIRTHDAY_15
+- 16 → BIRTHDAY_16
+- 17 → BIRTHDAY_17
+- 18 → BIRTHDAY_18
+- 19 → BIRTHDAY_19
+- 20 → BIRTHDAY_20
+- 21 → BIRTHDAY_21
+- 22 → BIRTHDAY_22
+- 23 → BIRTHDAY_23
+- 24 → BIRTHDAY_24
+- 25 → BIRTHDAY_25
+- 26 → BIRTHDAY_26
+- 27 → BIRTHDAY_27
+- 28 → BIRTHDAY_28
+- 29 → BIRTHDAY_29
+- 30 → BIRTHDAY_30
+- 31 → BIRTHDAY_31
+
+2. Routing theo nhóm:
+- 1, 10, 19, 28 → BIRTHDAY_GROUP_1
+- 2, 11, 20, 29 → BIRTHDAY_GROUP_2
+- 3, 12, 21, 30 → BIRTHDAY_GROUP_3
+- 4, 13, 22, 31 → BIRTHDAY_GROUP_4
+- 5, 14, 23 → BIRTHDAY_GROUP_5
+- 6, 15, 24 → BIRTHDAY_GROUP_6
+- 7, 16, 25 → BIRTHDAY_GROUP_7
+- 8, 17, 26 → BIRTHDAY_GROUP_8
+- 9, 18, 27 → BIRTHDAY_GROUP_9
+
+3. Karmic/Master flags:
+- 13 → BIRTHDAY_13 + KARMIC_OVERLAY_13_4
+- 14 → BIRTHDAY_14 + KARMIC_OVERLAY_14_5
+- 16 → BIRTHDAY_16 + KARMIC_OVERLAY_16_7
+- 19 → BIRTHDAY_19 + KARMIC_OVERLAY_19_1
+- 11 → BIRTHDAY_11, master_number = 11/2
+- 22 → BIRTHDAY_22, master_number = 22/4
+- 29 → BIRTHDAY_29, derived_master_number = 11/2
+
+4. FREE display:
+- Nên hiển thị 300–650 chữ cho phần Ngày Sinh.
+- Ưu tiên các trường: summary, gift, warning, life_symptoms, free_guidance, upsell_hook.
+- Nếu ngày sinh là Karmic, có thể thêm một đoạn ngắn từ Karmic Overlay nhưng không phân tích toàn bộ chiến lược hóa giải.
+
+5. Paid upgrade:
+Bản trả phí có thể mở rộng bằng:
+- Ngày Sinh bổ trợ hay cản trở Đường Đời
+- Ngày Sinh vs Sứ Mệnh
+- Ngày Sinh vs Linh Hồn
+- Tài năng phụ trong nghề nghiệp
+- Ấn tượng ban đầu trong giao tiếp
+- Cạm bẫy hành vi lặp lại

@@ -1,0 +1,1187 @@
+{
+  "schema_name": "Data_Schema_FREE_v1",
+  "schema_version": "1.0",
+  "brand": "BRIAN-NUMEROLOGIST",
+  "created_at": "2026-06-14",
+  "purpose": "Quy định cấu trúc dữ liệu máy đọc cho website MVP Brian-Numerologist bản FREE 11 bước.",
+  "design_decisions": {
+    "schema_type": "combined_json_schema_example_enums_notes",
+    "field_naming": "snake_case",
+    "birth_date_format": "DD/MM/YYYY",
+    "calculation_debug": "enabled_but_hidden_from_customer_report_by_default",
+    "name_breakdown_required_for_destiny_soul_personality": true,
+    "birthday_storage": {
+      "primary_display_field": "birthday",
+      "example": "21/3",
+      "technical_note": "Theo lựa chọn 6B, core_numbers.birthday lưu dạng hiển thị. Để route đúng BIRTHDAY_21, ngày gốc được lưu trong calculation_debug.birthday_calculation.original_day và routing.birthday_blocks."
+    },
+    "karmic_debt_storage": "both_list_and_details",
+    "master_number_storage": "primary_master_numbers_and_intermediate_master_numbers",
+    "report_storage": "sections_and_full_report_text",
+    "report_section_fields": [
+      "step_number",
+      "section_id",
+      "title",
+      "source_type",
+      "source_block_ids",
+      "content",
+      "upsell_hook",
+      "is_locked_for_paid"
+    ],
+    "lead_status_enum": "standard_full_enum",
+    "service_packages": "six_packages_enabled",
+    "consent_to_contact": "required",
+    "admin_schema": "enabled",
+    "include_test_case_example": true
+  },
+  "dependencies": {
+    "calculation_rules": "01_Calculation_Rules_v1.1.txt",
+    "lifepath_library": "LifePath_Library_FREE_v1.txt",
+    "karmic_overlay_library": "Karmic_Overlay_FREE_v1.txt",
+    "destiny_library": "Destiny_Library_FREE_v1.txt",
+    "soul_library": "Soul_Library_FREE_v1.txt",
+    "birthday_library": "Birthday_Library_FREE_v1.txt",
+    "report_template": "Report_Template_FREE_11_Buoc_v1.txt",
+    "test_case": "TEST_CASE_001_NGUYEN_THANH_TRI_FREE_REPORT.txt"
+  },
+  "enums": {
+    "lead_status": [
+      "new",
+      "report_generated",
+      "txt_downloaded",
+      "pdf_requested",
+      "paid_report_requested",
+      "contacted",
+      "converted",
+      "not_converted"
+    ],
+    "service_package_keys": [
+      "hat_giong_thau_hieu",
+      "lo_trinh_giai_ma",
+      "ban_do_kien_tao",
+      "toi_uu_doanh_nghiep",
+      "thau_hieu_moi_quan_he",
+      "kien_tao_ban_than"
+    ],
+    "source_type": [
+      "calculation",
+      "library",
+      "karmic_overlay",
+      "fallback",
+      "static",
+      "cta"
+    ],
+    "report_format": [
+      "web",
+      "txt",
+      "pdf"
+    ],
+    "gender": [
+      "nam",
+      "nu",
+      "khac",
+      "khong_cung_cap"
+    ],
+    "core_number_fields": [
+      "life_path",
+      "destiny",
+      "soul",
+      "birthday",
+      "personality"
+    ],
+    "karmic_values": [
+      "13/4",
+      "14/5",
+      "16/7",
+      "19/1"
+    ],
+    "master_values": [
+      "11/2",
+      "22/4"
+    ]
+  },
+  "service_packages": {
+    "hat_giong_thau_hieu": {
+      "display_name": "Hạt Giống Thấu Hiểu",
+      "short_description": "Gói nền cho người mới bắt đầu, tập trung vào 4 chỉ số cốt lõi."
+    },
+    "lo_trinh_giai_ma": {
+      "display_name": "Lộ Trình Giải Mã",
+      "short_description": "Mở rộng từ cốt lõi sang các chỉ số bổ sung và các lớp nội tâm."
+    },
+    "ban_do_kien_tao": {
+      "display_name": "Bản Đồ Kiến Tạo",
+      "short_description": "Bản đồ toàn diện hơn, kết hợp cốt lõi, bổ sung, chu kỳ và định hướng."
+    },
+    "toi_uu_doanh_nghiep": {
+      "display_name": "Tối Ưu Doanh Nghiệp",
+      "short_description": "Dành cho tên thương hiệu, cửa hàng, đối tác, đội nhóm hoặc kinh doanh."
+    },
+    "thau_hieu_moi_quan_he": {
+      "display_name": "Thấu Hiểu Mối Quan Hệ",
+      "short_description": "Dành cho vợ chồng, người yêu, gia đình, bạn bè, đối tác hoặc đội nhóm."
+    },
+    "kien_tao_ban_than": {
+      "display_name": "Kiến Tạo Bản Thân",
+      "short_description": "Gói đi sâu toàn diện: bản đồ cá nhân, chu kỳ, nghề nghiệp, tên phụ và chiến lược phát triển."
+    }
+  },
+  "json_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Brian Numerologist FREE Report Data Schema",
+    "type": "object",
+    "required": [
+      "schema_version",
+      "input",
+      "normalized",
+      "core_numbers",
+      "master_numbers",
+      "karmic_debts",
+      "karmic_debt_details",
+      "calculation_audit",
+      "calculation_debug",
+      "routing",
+      "report",
+      "lead",
+      "cta",
+      "admin"
+    ],
+    "properties": {
+      "schema_version": {
+        "type": "string"
+      },
+      "input": {
+        "type": "object",
+        "required": [
+          "full_name_original",
+          "birth_date",
+          "consent_to_contact"
+        ],
+        "properties": {
+          "full_name_original": {
+            "type": "string",
+            "minLength": 2
+          },
+          "birth_date": {
+            "type": "string",
+            "pattern": "^\\d{2}/\\d{2}/\\d{4}$",
+            "description": "Định dạng bắt buộc DD/MM/YYYY, ví dụ 21/04/1986."
+          },
+          "phone_or_zalo": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gender": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "nam",
+              "nu",
+              "khac",
+              "khong_cung_cap",
+              null
+            ]
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "consent_to_contact": {
+            "type": "boolean",
+            "description": "Bắt buộc true nếu khách yêu cầu PDF hoặc tư vấn chuyên sâu."
+          }
+        }
+      },
+      "normalized": {
+        "type": "object",
+        "required": [
+          "full_name",
+          "last_name",
+          "middle_name_group",
+          "first_name"
+        ],
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "middle_name_group": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          }
+        }
+      },
+      "core_numbers": {
+        "type": "object",
+        "required": [
+          "life_path",
+          "life_path_base",
+          "destiny",
+          "destiny_base",
+          "soul",
+          "soul_base",
+          "birthday",
+          "birthday_base",
+          "personality",
+          "personality_base"
+        ],
+        "properties": {
+          "life_path": {
+            "type": "string"
+          },
+          "life_path_base": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          },
+          "destiny": {
+            "type": "string"
+          },
+          "destiny_base": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          },
+          "soul": {
+            "type": "string"
+          },
+          "soul_base": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Dạng hiển thị, ví dụ 21/3."
+          },
+          "birthday_base": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          },
+          "personality": {
+            "type": "string"
+          },
+          "personality_base": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          }
+        }
+      },
+      "master_numbers": {
+        "type": "object",
+        "required": [
+          "primary_master_numbers",
+          "intermediate_master_numbers"
+        ],
+        "properties": {
+          "primary_master_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "value",
+                "appears_in"
+              ],
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "enum": [
+                    "11/2",
+                    "22/4"
+                  ]
+                },
+                "appears_in": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "intermediate_master_numbers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "value",
+                "appears_in",
+                "note"
+              ],
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "enum": [
+                    "11/2",
+                    "22/4"
+                  ]
+                },
+                "appears_in": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "karmic_debts": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "13/4",
+            "14/5",
+            "16/7",
+            "19/1"
+          ]
+        }
+      },
+      "karmic_debt_details": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "value",
+            "base",
+            "appears_in",
+            "overlay_block_id"
+          ],
+          "properties": {
+            "value": {
+              "type": "string",
+              "enum": [
+                "13/4",
+                "14/5",
+                "16/7",
+                "19/1"
+              ]
+            },
+            "base": {
+              "type": "integer"
+            },
+            "appears_in": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "overlay_block_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "calculation_audit": {
+        "type": "object",
+        "required": [
+          "letter_count",
+          "number_count",
+          "is_valid"
+        ],
+        "properties": {
+          "letter_count": {
+            "type": "integer"
+          },
+          "number_count": {
+            "type": "integer"
+          },
+          "is_valid": {
+            "type": "boolean"
+          },
+          "audit_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "calculation_debug": {
+        "type": "object",
+        "description": "Dữ liệu debug được lưu để kiểm tra công thức, mặc định ẩn khỏi báo cáo khách hàng.",
+        "required": [
+          "name_conversion",
+          "life_path_calculation",
+          "destiny_calculation",
+          "soul_calculation",
+          "personality_calculation",
+          "birthday_calculation"
+        ],
+        "properties": {
+          "name_conversion": {
+            "type": "object"
+          },
+          "life_path_calculation": {
+            "type": "object"
+          },
+          "destiny_calculation": {
+            "type": "object"
+          },
+          "soul_calculation": {
+            "type": "object"
+          },
+          "personality_calculation": {
+            "type": "object"
+          },
+          "birthday_calculation": {
+            "type": "object",
+            "required": [
+              "original_day",
+              "base",
+              "display",
+              "route_block_id"
+            ],
+            "properties": {
+              "original_day": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 31
+              },
+              "base": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9
+              },
+              "display": {
+                "type": "string"
+              },
+              "route_block_id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "routing": {
+        "type": "object",
+        "required": [
+          "life_path_blocks",
+          "destiny_blocks",
+          "soul_blocks",
+          "birthday_blocks"
+        ],
+        "properties": {
+          "life_path_blocks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "destiny_blocks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "soul_blocks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "birthday_blocks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "report": {
+        "type": "object",
+        "required": [
+          "format",
+          "sections",
+          "full_report_text"
+        ],
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "web",
+              "txt",
+              "pdf"
+            ]
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "step_number",
+                "section_id",
+                "title",
+                "source_type",
+                "source_block_ids",
+                "content",
+                "upsell_hook",
+                "is_locked_for_paid"
+              ],
+              "properties": {
+                "step_number": {
+                  "type": "integer"
+                },
+                "section_id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "source_type": {
+                  "type": "string"
+                },
+                "source_block_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "content": {
+                  "type": "string"
+                },
+                "upsell_hook": {
+                  "type": "string"
+                },
+                "is_locked_for_paid": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "full_report_text": {
+            "type": "string"
+          }
+        }
+      },
+      "lead": {
+        "type": "object",
+        "required": [
+          "status",
+          "requested_pdf",
+          "requested_paid_report",
+          "selected_package"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "new",
+              "report_generated",
+              "txt_downloaded",
+              "pdf_requested",
+              "paid_report_requested",
+              "contacted",
+              "converted",
+              "not_converted"
+            ]
+          },
+          "requested_pdf": {
+            "type": "boolean"
+          },
+          "requested_paid_report": {
+            "type": "boolean"
+          },
+          "selected_package": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "hat_giong_thau_hieu",
+              "lo_trinh_giai_ma",
+              "ban_do_kien_tao",
+              "toi_uu_doanh_nghiep",
+              "thau_hieu_moi_quan_he",
+              "kien_tao_ban_than",
+              null
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "cta": {
+        "type": "object",
+        "required": [
+          "brand",
+          "consultant_name",
+          "zalo_phone",
+          "discount",
+          "discount_validity",
+          "service_packages"
+        ],
+        "properties": {
+          "brand": {
+            "type": "string"
+          },
+          "consultant_name": {
+            "type": "string"
+          },
+          "zalo_phone": {
+            "type": "string"
+          },
+          "discount": {
+            "type": "string"
+          },
+          "discount_validity": {
+            "type": "string"
+          },
+          "service_packages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "admin": {
+        "type": "object",
+        "required": [
+          "can_regenerate_report",
+          "can_download_txt",
+          "can_download_pdf",
+          "can_view_google_sheet_leads"
+        ],
+        "properties": {
+          "can_regenerate_report": {
+            "type": "boolean"
+          },
+          "can_download_txt": {
+            "type": "boolean"
+          },
+          "can_download_pdf": {
+            "type": "boolean"
+          },
+          "can_view_google_sheet_leads": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "google_sheet_schema": {
+    "sheet_name": "Brian_Numerologist_FREE_Leads",
+    "columns": [
+      "created_at",
+      "full_name_original",
+      "birth_date",
+      "phone_or_zalo",
+      "email",
+      "gender",
+      "note",
+      "consent_to_contact",
+      "normalized_name",
+      "life_path",
+      "destiny",
+      "soul",
+      "birthday",
+      "personality",
+      "karmic_debts",
+      "requested_pdf",
+      "requested_paid_report",
+      "selected_package",
+      "source",
+      "status"
+    ]
+  },
+  "report_sections_schema": {
+    "expected_steps": [
+      {
+        "step_number": 1,
+        "section_id": "STEP_01_CALCULATION",
+        "title": "BƯỚC 1 – TÍNH TOÁN VÀ NHẬN DIỆN 4 CHỈ SỐ CỐT LÕI",
+        "source_type": "calculation"
+      },
+      {
+        "step_number": 2,
+        "section_id": "STEP_02_LIFE_PATH",
+        "title": "BƯỚC 2 – ĐƯỜNG ĐỜI",
+        "source_type": "library"
+      },
+      {
+        "step_number": 3,
+        "section_id": "STEP_03_DESTINY",
+        "title": "BƯỚC 3 – SỨ MỆNH",
+        "source_type": "library"
+      },
+      {
+        "step_number": 4,
+        "section_id": "STEP_04_LIFE_PATH_VS_DESTINY",
+        "title": "BƯỚC 4 – ĐƯỜNG ĐỜI VS SỨ MỆNH",
+        "source_type": "fallback"
+      },
+      {
+        "step_number": 5,
+        "section_id": "STEP_05_SOUL",
+        "title": "BƯỚC 5 – LINH HỒN",
+        "source_type": "library"
+      },
+      {
+        "step_number": 6,
+        "section_id": "STEP_06_SOUL_RELATIONSHIPS",
+        "title": "BƯỚC 6 – LINH HỒN VS ĐƯỜNG ĐỜI, LINH HỒN VS SỨ MỆNH",
+        "source_type": "fallback"
+      },
+      {
+        "step_number": 7,
+        "section_id": "STEP_07_BIRTHDAY",
+        "title": "BƯỚC 7 – NGÀY SINH",
+        "source_type": "library"
+      },
+      {
+        "step_number": 8,
+        "section_id": "STEP_08_CORE_CONFLICT_SUMMARY",
+        "title": "BƯỚC 8 – TỔNG HỢP MÂU THUẪN CHÍNH",
+        "source_type": "fallback"
+      },
+      {
+        "step_number": 9,
+        "section_id": "STEP_09_IMPORTANCE_OF_RESOLUTION",
+        "title": "BƯỚC 9 – TẦM QUAN TRỌNG CỦA HÓA GIẢI MÂU THUẪN",
+        "source_type": "fallback"
+      },
+      {
+        "step_number": 10,
+        "section_id": "STEP_10_ADDITIONAL_NUMBERS_PREVIEW",
+        "title": "BƯỚC 10 – CÁC CHỈ SỐ BỔ SUNG",
+        "source_type": "static"
+      },
+      {
+        "step_number": 11,
+        "section_id": "STEP_11_SERVICE_ECOSYSTEM",
+        "title": "BƯỚC 11 – HỆ SINH THÁI THẦN SỐ HỌC",
+        "source_type": "cta"
+      }
+    ]
+  },
+  "example": {
+    "schema_version": "1.0",
+    "input": {
+      "full_name_original": "Nguyễn Thanh Trí",
+      "birth_date": "21/04/1986",
+      "phone_or_zalo": "0948909983",
+      "email": null,
+      "gender": "nam",
+      "note": "Test case chuẩn đầu tiên cho hệ thống FREE.",
+      "consent_to_contact": true
+    },
+    "normalized": {
+      "full_name": "NGUYEN THANH TRI",
+      "last_name": "NGUYEN",
+      "middle_name_group": "THANH",
+      "first_name": "TRI"
+    },
+    "core_numbers": {
+      "life_path": "13/4",
+      "life_path_base": 4,
+      "destiny": "13/4",
+      "destiny_base": 4,
+      "soul": "16/7",
+      "soul_base": 7,
+      "birthday": "21/3",
+      "birthday_base": 3,
+      "personality": "24/6",
+      "personality_base": 6
+    },
+    "master_numbers": {
+      "primary_master_numbers": [],
+      "intermediate_master_numbers": [
+        {
+          "value": "11/2",
+          "appears_in": [
+            "personality.first_name_consonants"
+          ],
+          "note": "T + R = 2 + 9 = 11 khi tính phụ âm phần Tên TRI; kết quả Nhân Cách cuối cùng là 24/6."
+        }
+      ]
+    },
+    "karmic_debts": [
+      "13/4",
+      "16/7"
+    ],
+    "karmic_debt_details": [
+      {
+        "value": "13/4",
+        "base": 4,
+        "appears_in": [
+          "life_path",
+          "destiny"
+        ],
+        "overlay_block_id": "KARMIC_OVERLAY_13_4"
+      },
+      {
+        "value": "16/7",
+        "base": 7,
+        "appears_in": [
+          "soul"
+        ],
+        "overlay_block_id": "KARMIC_OVERLAY_16_7"
+      }
+    ],
+    "calculation_audit": {
+      "letter_count": 14,
+      "number_count": 14,
+      "is_valid": true,
+      "audit_notes": [
+        "NGUYEN THANH TRI sau khi bỏ khoảng trắng là NGUYENTHANHTRI.",
+        "Tên có 14 chữ cái và 14 con số quy đổi.",
+        "Y được tính là nguyên âm trong tên tiếng Việt."
+      ]
+    },
+    "calculation_debug": {
+      "name_conversion": {
+        "original": "Nguyễn Thanh Trí",
+        "normalized": "NGUYEN THANH TRI",
+        "without_spaces": "NGUYENTHANHTRI",
+        "letters": [
+          "N",
+          "G",
+          "U",
+          "Y",
+          "E",
+          "N",
+          "T",
+          "H",
+          "A",
+          "N",
+          "H",
+          "T",
+          "R",
+          "I"
+        ],
+        "numbers": [
+          5,
+          7,
+          3,
+          7,
+          5,
+          5,
+          2,
+          8,
+          1,
+          5,
+          8,
+          2,
+          9,
+          9
+        ]
+      },
+      "life_path_calculation": {
+        "day": {
+          "raw": 21,
+          "reduced": 3
+        },
+        "month": {
+          "raw": 4,
+          "reduced": 4
+        },
+        "year": {
+          "raw": 1986,
+          "digit_sum": 24,
+          "reduced": 6
+        },
+        "total": 13,
+        "display": "13/4",
+        "base": 4,
+        "karmic": "13/4"
+      },
+      "destiny_calculation": {
+        "method": "last_name_middle_name_group_first_name_separately_then_sum_reduced_results",
+        "last_name": {
+          "text": "NGUYEN",
+          "letters": [
+            "N",
+            "G",
+            "U",
+            "Y",
+            "E",
+            "N"
+          ],
+          "numbers": [
+            5,
+            7,
+            3,
+            7,
+            5,
+            5
+          ],
+          "total": 32,
+          "reduced": 5
+        },
+        "middle_name_group": {
+          "text": "THANH",
+          "letters": [
+            "T",
+            "H",
+            "A",
+            "N",
+            "H"
+          ],
+          "numbers": [
+            2,
+            8,
+            1,
+            5,
+            8
+          ],
+          "total": 24,
+          "reduced": 6
+        },
+        "first_name": {
+          "text": "TRI",
+          "letters": [
+            "T",
+            "R",
+            "I"
+          ],
+          "numbers": [
+            2,
+            9,
+            9
+          ],
+          "total": 20,
+          "reduced": 2
+        },
+        "sum_of_reduced_parts": 13,
+        "display": "13/4",
+        "base": 4,
+        "karmic": "13/4"
+      },
+      "soul_calculation": {
+        "vowels": [
+          "A",
+          "E",
+          "I",
+          "O",
+          "U",
+          "Y"
+        ],
+        "method": "vowels_only_by_name_parts",
+        "last_name": {
+          "text": "NGUYEN",
+          "vowels": [
+            "U",
+            "Y",
+            "E"
+          ],
+          "numbers": [
+            3,
+            7,
+            5
+          ],
+          "total": 15,
+          "reduced": 6
+        },
+        "middle_name_group": {
+          "text": "THANH",
+          "vowels": [
+            "A"
+          ],
+          "numbers": [
+            1
+          ],
+          "total": 1,
+          "reduced": 1
+        },
+        "first_name": {
+          "text": "TRI",
+          "vowels": [
+            "I"
+          ],
+          "numbers": [
+            9
+          ],
+          "total": 9,
+          "reduced": 9
+        },
+        "sum_of_reduced_parts": 16,
+        "display": "16/7",
+        "base": 7,
+        "karmic": "16/7"
+      },
+      "personality_calculation": {
+        "consonants_exclude_y": true,
+        "method": "consonants_only_by_name_parts",
+        "last_name": {
+          "text": "NGUYEN",
+          "consonants": [
+            "N",
+            "G",
+            "N"
+          ],
+          "numbers": [
+            5,
+            7,
+            5
+          ],
+          "total": 17,
+          "reduced": 8
+        },
+        "middle_name_group": {
+          "text": "THANH",
+          "consonants": [
+            "T",
+            "H",
+            "N",
+            "H"
+          ],
+          "numbers": [
+            2,
+            8,
+            5,
+            8
+          ],
+          "total": 23,
+          "reduced": 5
+        },
+        "first_name": {
+          "text": "TRI",
+          "consonants": [
+            "T",
+            "R"
+          ],
+          "numbers": [
+            2,
+            9
+          ],
+          "total": 11,
+          "reduced": "11/2"
+        },
+        "sum_of_reduced_parts": 24,
+        "display": "24/6",
+        "base": 6
+      },
+      "birthday_calculation": {
+        "original_day": 21,
+        "base": 3,
+        "display": "21/3",
+        "route_block_id": "BIRTHDAY_21"
+      }
+    },
+    "routing": {
+      "life_path_blocks": [
+        "LIFEPATH_4",
+        "KARMIC_OVERLAY_13_4"
+      ],
+      "destiny_blocks": [
+        "DESTINY_4",
+        "KARMIC_OVERLAY_13_4"
+      ],
+      "soul_blocks": [
+        "SOUL_7",
+        "KARMIC_OVERLAY_16_7"
+      ],
+      "birthday_blocks": [
+        "BIRTHDAY_21"
+      ]
+    },
+    "report": {
+      "format": "txt",
+      "sections": [
+        {
+          "step_number": 1,
+          "section_id": "STEP_01_CALCULATION",
+          "title": "BƯỚC 1 – TÍNH TOÁN VÀ NHẬN DIỆN 4 CHỈ SỐ CỐT LÕI",
+          "source_type": "calculation",
+          "source_block_ids": [],
+          "content": "Tóm tắt phép tính, kết quả 4 chỉ số cốt lõi và audit.",
+          "upsell_hook": "",
+          "is_locked_for_paid": false
+        },
+        {
+          "step_number": 2,
+          "section_id": "STEP_02_LIFE_PATH",
+          "title": "BƯỚC 2 – ĐƯỜNG ĐỜI",
+          "source_type": "library",
+          "source_block_ids": [
+            "LIFEPATH_4",
+            "KARMIC_OVERLAY_13_4"
+          ],
+          "content": "Nội dung lấy từ LifePath Library và Karmic Overlay.",
+          "upsell_hook": "Phân tích trên mới chỉ là lớp bề mặt.",
+          "is_locked_for_paid": false
+        },
+        {
+          "step_number": 3,
+          "section_id": "STEP_03_DESTINY",
+          "title": "BƯỚC 3 – SỨ MỆNH",
+          "source_type": "library",
+          "source_block_ids": [
+            "DESTINY_4",
+            "KARMIC_OVERLAY_13_4"
+          ],
+          "content": "Nội dung lấy từ Destiny Library và Karmic Overlay.",
+          "upsell_hook": "Để biết cách phát huy Sứ Mệnh đúng môi trường, cần bản chuyên sâu.",
+          "is_locked_for_paid": false
+        }
+      ],
+      "full_report_text": "Full report text sẽ được Report Engine ghép từ 11 section."
+    },
+    "lead": {
+      "status": "report_generated",
+      "requested_pdf": false,
+      "requested_paid_report": false,
+      "selected_package": null,
+      "source": "website_mvp"
+    },
+    "cta": {
+      "brand": "BRIAN-NUMEROLOGIST",
+      "consultant_name": "BRIAN",
+      "zalo_phone": "0948909983",
+      "discount": "20%",
+      "discount_validity": "3 ngày",
+      "service_packages": [
+        "hat_giong_thau_hieu",
+        "lo_trinh_giai_ma",
+        "ban_do_kien_tao",
+        "toi_uu_doanh_nghiep",
+        "thau_hieu_moi_quan_he",
+        "kien_tao_ban_than"
+      ]
+    },
+    "admin": {
+      "can_regenerate_report": true,
+      "can_download_txt": true,
+      "can_download_pdf": true,
+      "can_view_google_sheet_leads": true
+    }
+  },
+  "implementation_notes": [
+    "File này là JSON hợp lệ, không dùng comment trong JSON.",
+    "core_numbers.birthday dùng dạng hiển thị theo lựa chọn của Brian: ví dụ 21/3.",
+    "Để route đúng ngày sinh, luôn dùng calculation_debug.birthday_calculation.original_day hoặc routing.birthday_blocks.",
+    "Không được tính Y là phụ âm trong tên tiếng Việt.",
+    "Không được tính Sứ Mệnh, Linh Hồn, Nhân Cách bằng cách cộng toàn bộ chuỗi tên trước rồi mới rút gọn.",
+    "MVP dùng fallback cho các bước 4, 6, 8, 9; chưa bắt buộc dùng AI.",
+    "Lead Google Sheet phải có consent_to_contact nếu khách yêu cầu PDF hoặc tư vấn chuyên sâu.",
+    "Test case Nguyễn Thanh Trí phải pass trước khi làm đẹp giao diện."
+  ]
+}

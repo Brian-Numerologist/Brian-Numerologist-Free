@@ -1,0 +1,910 @@
+# Brian_Numerologist – Report Template FREE 11 Bước v1
+# Mục đích: Mẫu ghép báo cáo PDF bản FREE cho website Brian-Numerologist.
+# Vai trò: Quy định cách Calculation Engine + Content Libraries + AI/Template Engine ghép thành báo cáo miễn phí 11 bước.
+# Phiên bản: v1
+# Trạng thái: Dùng cho MVP website nhập Họ tên + Ngày sinh → tính chỉ số → xuất báo cáo FREE → upsell gói trả phí.
+#
+# Các file phụ thuộc:
+# 01_Calculation_Rules_v1.txt
+# LifePath_Library_FREE_v1.txt
+# Karmic_Overlay_FREE_v1.txt
+# Destiny_Library_FREE_v1.txt
+# Soul_Library_FREE_v1.txt
+# Birthday_Library_FREE_v1.txt
+#
+# Triết lý:
+# Bản FREE là “cửa mở”.
+# Phải đủ đúng để tạo niềm tin, đủ sâu để khách hàng thấy vấn đề, nhưng giữ lại phần chiến lược hóa giải cho gói chuyên sâu.
+
+============================================================
+I. NGUYÊN TẮC TỔNG QUÁT CỦA BÁO CÁO FREE
+============================================================
+
+1. Báo cáo dùng cho khách hàng nhập:
+- Họ tên khai sinh đầy đủ.
+- Ngày/tháng/năm sinh dương lịch.
+- Email/Zalo nếu website cần thu lead.
+
+2. Báo cáo FREE chỉ phân tích 4 chỉ số cốt lõi:
+- Đường Đời.
+- Sứ Mệnh.
+- Linh Hồn.
+- Ngày Sinh.
+
+3. Có thể hiển thị sơ lược:
+- Nhân Cách.
+- Master Number.
+- Karmic Debt.
+- Một số chỉ số bổ sung dưới dạng “các lớp chưa mở khóa”.
+
+4. Không phân tích sâu trong bản FREE:
+- Trưởng Thành.
+- Thử Thách.
+- Bài Học Nghiệp.
+- Cường Độ.
+- Cân Bằng.
+- Phát Triển.
+- Planes.
+- Khí Chất.
+- Dự báo năm/tháng/ngày.
+- Transit.
+- Essence.
+- Tên phụ.
+- Tương hợp.
+
+5. Ngôn ngữ:
+- Trực diện.
+- Sâu sắc.
+- Thấu cảm.
+- Có sức chạm.
+- Không hù dọa.
+- Không phán xét.
+- Không khẳng định định mệnh tuyệt đối.
+- Biết dừng đúng lúc để tạo tò mò.
+
+6. Cụm từ nên dùng:
+- “Có khuynh hướng…”
+- “Dễ xuất hiện…”
+- “Nếu không tỉnh thức…”
+- “Đây là tín hiệu cần đọc sâu hơn…”
+- “Bản chuyên sâu sẽ bóc tách kỹ hơn…”
+
+7. Cụm từ không được dùng:
+- “Bạn chắc chắn thất bại…”
+- “Bạn chắc chắn giàu…”
+- “Bạn chắc chắn ly hôn…”
+- “Bạn chắc chắn bị phản bội…”
+- “Không mua gói thì sẽ gặp tai họa…”
+- “Bản miễn phí vô dụng…”
+
+============================================================
+II. DỮ LIỆU ĐẦU VÀO CHO REPORT TEMPLATE
+============================================================
+
+Template này nhận dữ liệu từ Calculation Engine theo schema:
+
+{
+  "input": {
+    "full_name_original": "{Tên có dấu}",
+    "birth_date": "{DD/MM/YYYY}",
+    "email": "{email_optional}",
+    "phone_or_zalo": "{phone_or_zalo_optional}"
+  },
+  "normalized": {
+    "full_name": "{TÊN KHÔNG DẤU IN HOA}",
+    "last_name": "{HỌ}",
+    "middle_name_group": "{CỤM TÊN LÓT}",
+    "first_name": "{TÊN}"
+  },
+  "core_numbers": {
+    "life_path": "{...}",
+    "life_path_base": "{...}",
+    "destiny": "{...}",
+    "destiny_base": "{...}",
+    "soul": "{...}",
+    "soul_base": "{...}",
+    "birthday": "{...}",
+    "birthday_original": "{...}",
+    "birthday_base": "{...}",
+    "personality": "{...}",
+    "personality_base": "{...}"
+  },
+  "master_numbers": ["{...}"],
+  "karmic_debts": ["{...}"],
+  "calculation_audit": {
+    "letter_count": "{...}",
+    "number_count": "{...}",
+    "is_valid": true
+  },
+  "routing": {
+    "life_path_blocks": ["{...}"],
+    "destiny_blocks": ["{...}"],
+    "soul_blocks": ["{...}"],
+    "birthday_blocks": ["{...}"]
+  }
+}
+
+============================================================
+III. NGUYÊN TẮC GHÉP NỘI DUNG
+============================================================
+
+1. Nội dung cố định lấy từ thư viện:
+- Bước 2: LifePath_Library_FREE_v1.txt + Karmic_Overlay nếu có.
+- Bước 3: Destiny_Library_FREE_v1.txt + Karmic_Overlay nếu có.
+- Bước 5: Soul_Library_FREE_v1.txt + Karmic_Overlay nếu có.
+- Bước 7: Birthday_Library_FREE_v1.txt + Karmic_Overlay nếu có.
+
+2. Nội dung động có thể dùng AI/Template Engine sinh ngắn:
+- Bước 4: Đường Đời vs Sứ Mệnh.
+- Bước 6: Linh Hồn vs Đường Đời, Linh Hồn vs Sứ Mệnh.
+- Bước 8: Tổng hợp mâu thuẫn chính.
+- Bước 9: Tầm quan trọng của hóa giải mâu thuẫn.
+- Bước 10: Các chỉ số bổ sung.
+- Bước 11: Hệ sinh thái dịch vụ và CTA.
+
+3. Nguyên tắc AI sinh nội dung động:
+- Không bịa công thức.
+- Không tự tính lại nếu Calculation Engine đã xuất kết quả.
+- Không đưa chiến lược hóa giải đầy đủ.
+- Chỉ mô tả sơ lược mâu thuẫn và triệu chứng.
+- Luôn gợi mở rằng bản chuyên sâu sẽ bóc tách kỹ hơn.
+
+4. Độ dài khuyến nghị:
+- Toàn báo cáo FREE: 12–25 trang PDF.
+- Nếu bản landing page ngắn: 2.500–4.000 chữ.
+- Nếu bản PDF đầy đủ: 5.000–8.000 chữ.
+- Không nên quá dài khiến khách hàng cảm thấy đã nhận đủ mọi thứ.
+
+============================================================
+IV. CẤU TRÚC PDF ĐỀ XUẤT
+============================================================
+
+PAGE_01_COVER:
+- Tên báo cáo: BẢN ĐỒ THẦN SỐ HỌC FREE 11 BƯỚC
+- Subtitle: Cửa mở đầu tiên để hiểu bản thân qua Họ tên và Ngày sinh
+- Họ tên khách hàng: {full_name_original}
+- Ngày sinh: {birth_date}
+- Thương hiệu: Brian-Numerologist
+- Ghi chú nhỏ: Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.
+
+PAGE_02_OPENING:
+- Lời mở đầu ngắn.
+- Giải thích bản FREE là “cửa mở”.
+- Nhấn mạnh báo cáo này giúp gọi tên 4 trụ cột đầu tiên, chưa phải bản đồ toàn diện.
+
+PAGE_03_PROFILE_SUMMARY:
+- Bảng thông tin hồ sơ.
+- Tên có dấu.
+- Tên đã chuẩn hóa.
+- Ngày sinh.
+- 4 chỉ số cốt lõi.
+- Master/Karmic nếu có.
+- Ghi chú kiểm tra chéo.
+
+PAGE_04_TO_END:
+- 11 bước phân tích.
+
+FINAL_PAGE:
+- Hệ sinh thái dịch vụ.
+- CTA nâng cấp.
+- Ưu đãi 3 ngày nếu có.
+- Thông tin liên hệ.
+
+============================================================
+V. TEMPLATE CHI TIẾT 11 BƯỚC
+============================================================
+
+------------------------------------------------------------
+BƯỚC 1 – TÍNH TOÁN VÀ NHẬN DIỆN 4 CHỈ SỐ CỐT LÕI
+------------------------------------------------------------
+
+section_id: STEP_01_CALCULATION
+title: BƯỚC 1 – TÍNH TOÁN VÀ NHẬN DIỆN 4 CHỈ SỐ CỐT LÕI
+source: Calculation Engine
+render_type: fixed_template + calculation_data
+required_data:
+- input.full_name_original
+- normalized.full_name
+- normalized.last_name
+- normalized.middle_name_group
+- normalized.first_name
+- core_numbers.life_path
+- core_numbers.destiny
+- core_numbers.soul
+- core_numbers.birthday
+- core_numbers.personality
+- master_numbers
+- karmic_debts
+- calculation_audit
+
+Mục tiêu hiển thị:
+- Tính Đường Đời.
+- Tính Sứ Mệnh.
+- Tính Linh Hồn.
+- Tính Ngày Sinh.
+- Kiểm tra Master/Karmic.
+- In bảng quy đổi cơ bản.
+- Kiểm tra số chữ cái và số con số quy đổi.
+
+Template nội dung:
+
+“Trước khi đi vào phân tích, Brian-Numerologist cần khóa lại phần tính toán. Vì trong Thần số học, chỉ cần sai một chữ cái hoặc sai một bước rút gọn, toàn bộ phần diễn giải phía sau có thể lệch hướng.
+
+Hồ sơ được ghi nhận như sau:
+
+Họ tên khai sinh: {full_name_original}
+Tên chuẩn hóa: {full_name}
+Ngày sinh dương lịch: {birth_date}
+
+Cấu trúc tên:
+- Họ: {last_name}
+- Cụm tên lót: {middle_name_group}
+- Tên: {first_name}
+
+4 chỉ số cốt lõi:
+- Đường Đời: {life_path}
+- Sứ Mệnh: {destiny}
+- Linh Hồn: {soul}
+- Ngày Sinh: {birthday}
+
+Chỉ số hiển thị bổ sung trong bản FREE:
+- Nhân Cách: {personality}
+
+Master/Karmic Debt được ghi nhận:
+{master_karmic_display}
+
+Kiểm tra chéo:
+- Số chữ cái sau khi bỏ dấu và bỏ khoảng trắng: {letter_count}
+- Số con số đã quy đổi: {number_count}
+- Trạng thái kiểm tra: {is_valid_display}
+
+Nếu các dữ liệu trên đúng với thông tin khai sinh của bạn, chúng ta bắt đầu đọc bản đồ sơ lược đầu tiên.”
+
+Website mode:
+- Nếu is_valid = false: không xuất báo cáo, yêu cầu kiểm tra lại họ tên.
+- Nếu is_valid = true: tiếp tục xuất báo cáo.
+- Nếu muốn mô phỏng GPT mode: có thể thêm nút “Tôi xác nhận phép tính”.
+
+------------------------------------------------------------
+BƯỚC 2 – ĐƯỜNG ĐỜI
+------------------------------------------------------------
+
+section_id: STEP_02_LIFE_PATH
+title: BƯỚC 2 – ĐƯỜNG ĐỜI: CON ĐƯỜNG CHÍNH CỦA BẠN
+source: LifePath_Library_FREE_v1.txt + Karmic_Overlay_FREE_v1.txt nếu có
+render_type: library_block
+required_blocks:
+- routing.life_path_blocks
+
+Mục tiêu:
+1. Phân tích sơ lược mục đích sống và con đường chính.
+2. Phân tích đặc điểm tích cực, thế mạnh tự nhiên, cách phản ứng khi sống đúng Đường Đời.
+3. Làm khách hàng thấy “đúng mình”.
+4. Cảnh báo 2–3 triệu chứng tiêu cực.
+5. Gợi mở bản chuyên sâu.
+
+Template ghép:
+
+“Đường Đời là dòng chảy chính trong bản đồ Thần số học. Nó không nói bạn chắc chắn sẽ trở thành ai, mà chỉ ra bài học lớn nhất và con đường thuận nhất để bạn trưởng thành.”
+
+Insert:
+- life_path.display_title
+- life_path.summary
+- life_path.soul_lesson
+- life_path.positive_energy
+- life_path.underbalanced_energy
+- life_path.overbalanced_energy
+- life_path.warning_signs
+- life_path.life_symptoms
+- life_path.free_guidance
+- life_path.upsell_hook
+
+Nếu có Karmic Debt:
+Insert thêm:
+- karmic_overlay.display_title
+- karmic_overlay.subtitle
+- karmic_overlay.core_meaning
+- karmic_overlay.current_life_manifestation
+- karmic_overlay.life_symptoms
+- karmic_overlay.free_guidance
+- karmic_overlay.upsell_hook
+
+Gợi mở cuối bước:
+“Phân tích trên mới chỉ là lớp bề mặt của Đường Đời. Gốc rễ thật sự nằm ở cách Đường Đời này va vào Sứ Mệnh, Linh Hồn và các chỉ số bổ sung phía sau.”
+
+------------------------------------------------------------
+BƯỚC 3 – SỨ MỆNH
+------------------------------------------------------------
+
+section_id: STEP_03_DESTINY
+title: BƯỚC 3 – SỨ MỆNH: HÀNH TRANG TÀI NĂNG BẠN MANG THEO
+source: Destiny_Library_FREE_v1.txt + Karmic_Overlay_FREE_v1.txt nếu có
+render_type: library_block
+required_blocks:
+- routing.destiny_blocks
+
+Mục tiêu:
+1. Phân tích sơ lược tài năng Sứ Mệnh.
+2. Phân tích thái độ khi tài năng phát lộ.
+3. Phân tích thái độ khi tài năng bị lãng phí.
+4. Gợi mở bản chuyên sâu.
+
+Template ghép:
+
+“Nếu Đường Đời là con đường bạn đi, thì Sứ Mệnh là hành trang bạn mang theo. Nó cho biết bạn có xu hướng dùng tài năng nào để đi qua cuộc đời này.”
+
+Insert:
+- destiny.display_title
+- destiny.subtitle
+- destiny.summary
+- destiny.core_potential
+- destiny.positive_attitude
+- destiny.shadow_attitude
+- destiny.career_direction
+- destiny.career_note
+- destiny.life_symptoms
+- destiny.free_guidance
+- destiny.upsell_hook
+
+Nếu có Karmic Debt:
+Insert thêm:
+- karmic_overlay liên quan.
+
+Gợi mở cuối bước:
+“Phần này mới chỉ gọi tên tài năng chính. Để biết cách phát huy Sứ Mệnh đúng môi trường, đúng thời điểm và đúng chiến lược, cần đọc ở bản chuyên sâu.”
+
+------------------------------------------------------------
+BƯỚC 4 – ĐƯỜNG ĐỜI VS SỨ MỆNH
+------------------------------------------------------------
+
+section_id: STEP_04_LIFE_PATH_VS_DESTINY
+title: BƯỚC 4 – ĐƯỜNG ĐỜI VS SỨ MỆNH: CON ĐƯỜNG VÀ HÀNH TRANG CÓ KHỚP NHAU KHÔNG?
+source: AI/Template Engine using life_path + destiny
+render_type: dynamic_ai_short
+required_data:
+- core_numbers.life_path
+- core_numbers.life_path_base
+- core_numbers.destiny
+- core_numbers.destiny_base
+- life_path.summary
+- life_path.life_symptoms
+- destiny.summary
+- destiny.life_symptoms
+
+Prompt nội bộ cho AI/Template Engine:
+
+“Dựa trên Đường Đời {life_path} và Sứ Mệnh {destiny}, hãy viết phần phân tích FREE 500–900 chữ bằng tiếng Việt theo phong cách Brian-Numerologist.
+Yêu cầu:
+1. Giải thích sơ lược mối quan hệ giữa Đường Đời và Sứ Mệnh.
+2. Cho biết hai năng lượng này có khuynh hướng hỗ trợ, căng kéo hay vừa hỗ trợ vừa thử thách nhau.
+3. Phân tích khái niệm Hiệu quả/Khoảng cách:
+   - Năng lực có tương xứng với con đường không?
+   - Có đang cầm vũ khí lớn nhưng đứng sai sân khấu không?
+   - Có cơ hội nhưng thiếu công cụ không?
+   - Có tài nhưng dùng sai hướng không?
+4. Nêu 2–3 triệu chứng đời sống khiến khách hàng thấy nhột.
+5. Không đưa giải pháp hóa giải đầy đủ.
+6. Kết thúc bằng gợi mở bản chuyên sâu.
+
+Không dùng ngôn ngữ định mệnh tuyệt đối.”
+
+Fallback template nếu không dùng AI:
+
+“Đường Đời {life_path} mô tả con đường chính của bạn, còn Sứ Mệnh {destiny} mô tả hành trang tài năng bạn mang theo. Khi hai chỉ số này thuận nhau, bạn dễ cảm thấy mình có công cụ phù hợp để đi đúng đường. Khi chúng căng kéo nhau, bạn có thể làm được việc nhưng vẫn thấy không đúng sân khấu, hoặc có cơ hội nhưng chưa biết dùng đúng năng lực.
+
+Một vài triệu chứng dễ xuất hiện:
+- Bạn có thể giỏi một việc nhưng chưa chắc thấy nó thật sự dẫn mình đi đúng hướng.
+- Bạn có thể có tài năng rõ, nhưng dùng nó trong môi trường chưa phù hợp.
+- Bạn có thể cảm thấy mình đang cố gắng rất nhiều nhưng hiệu quả chưa tương xứng.
+
+Phần này mới chỉ là bề mặt. Bản chuyên sâu sẽ bóc tách kỹ hơn cơ chế vì sao con đường và hành trang của bạn đang hỗ trợ hay cản trở nhau.”
+
+------------------------------------------------------------
+BƯỚC 5 – LINH HỒN
+------------------------------------------------------------
+
+section_id: STEP_05_SOUL
+title: BƯỚC 5 – LINH HỒN: ĐỘNG LỰC NGẦM BÊN TRONG
+source: Soul_Library_FREE_v1.txt + Karmic_Overlay_FREE_v1.txt nếu có
+render_type: library_block
+required_blocks:
+- routing.soul_blocks
+
+Mục tiêu:
+1. Phân tích sơ lược động lực ngầm bên trong.
+2. Phân tích trạng thái khi Linh Hồn được thỏa mãn.
+3. Phân tích trạng thái khi Linh Hồn bị kìm nén.
+4. Gợi mở bản chuyên sâu.
+
+Template ghép:
+
+“Linh Hồn là phần ít người nhìn thấy nhất, nhưng lại điều khiển rất nhiều lựa chọn của bạn. Nó không hỏi bạn đang làm gì, mà hỏi: sâu thẳm bên trong, bạn thật sự khao khát điều gì?”
+
+Insert:
+- soul.display_title
+- soul.summary
+- soul.core_motivation
+- soul.fulfilled_state
+- soul.positive_attitude
+- soul.blocked_state
+- soul.shadow_attitude
+- soul.life_symptoms
+- soul.free_guidance
+- soul.upsell_hook
+
+Nếu có Karmic Debt:
+Insert thêm:
+- karmic_overlay liên quan.
+
+Gợi mở cuối bước:
+“Phần này mới chỉ gọi tên động lực ngầm. Khi ráp Linh Hồn với Đường Đời và Sứ Mệnh, bạn sẽ bắt đầu thấy vì sao có những việc bạn làm tốt nhưng lại không thật sự vui.”
+
+------------------------------------------------------------
+BƯỚC 6 – LINH HỒN VS ĐƯỜNG ĐỜI, LINH HỒN VS SỨ MỆNH
+------------------------------------------------------------
+
+section_id: STEP_06_SOUL_RELATIONSHIPS
+title: BƯỚC 6 – LINH HỒN VS ĐƯỜNG ĐỜI, LINH HỒN VS SỨ MỆNH
+source: AI/Template Engine using soul + life_path + destiny
+render_type: dynamic_ai_short
+required_data:
+- core_numbers.soul
+- core_numbers.life_path
+- core_numbers.destiny
+- soul.core_motivation
+- life_path.summary
+- destiny.core_potential
+
+Prompt nội bộ cho AI/Template Engine:
+
+“Dựa trên Linh Hồn {soul}, Đường Đời {life_path} và Sứ Mệnh {destiny}, hãy viết phần phân tích FREE 600–1.000 chữ bằng tiếng Việt theo phong cách Brian-Numerologist.
+Yêu cầu:
+1. Phân tích sơ lược mục tiêu cuộc đời có phù hợp với khao khát bên trong không.
+2. Phân tích người này có yêu điều mình làm giỏi không.
+3. Nếu lệch, nêu 2–3 triệu chứng:
+   - Giỏi nhưng không vui.
+   - Được khen nhưng trống rỗng.
+   - Làm tốt nhưng mau chán.
+   - Trì hoãn.
+   - Cả thèm chóng chán.
+   - Khó đi đường dài.
+   - Đốt năng lượng sai chỗ.
+4. Không đưa chiến lược hòa giải đầy đủ.
+5. Kết thúc bằng gợi mở bản chuyên sâu.
+
+Không hù dọa. Không nói chắc chắn.”
+
+Fallback template nếu không dùng AI:
+
+“Linh Hồn cho biết điều bên trong bạn thật sự muốn. Đường Đời cho biết con đường lớn bạn cần học. Sứ Mệnh cho biết tài năng bạn mang theo. Khi ba lớp này cùng hướng, bạn dễ hành động có lực, có niềm vui và có cảm giác mình đang sống đúng. Nhưng khi chúng lệch nhau, bạn có thể rơi vào trạng thái rất khó chịu: làm được nhưng không vui, được khen nhưng trống rỗng, có tài nhưng không muốn dùng, hoặc có mục tiêu nhưng thiếu động lực đi đường dài.
+
+Một vài tín hiệu cần đọc sâu:
+- Bạn có thể làm tốt một việc nhưng không thật sự yêu việc đó.
+- Bạn có thể khao khát một đời sống khác với con đường mình đang đi.
+- Bạn có thể trì hoãn không phải vì lười, mà vì bên trong chưa thật sự đồng thuận.
+
+Bản miễn phí giúp gọi tên mâu thuẫn. Bản chuyên sâu mới đi vào chiến lược hòa giải.”
+
+------------------------------------------------------------
+BƯỚC 7 – NGÀY SINH
+------------------------------------------------------------
+
+section_id: STEP_07_BIRTHDAY
+title: BƯỚC 7 – NGÀY SINH: MÓN QUÀ PHỤ TRỢ VÀ ẤN TƯỢNG BAN ĐẦU
+source: Birthday_Library_FREE_v1.txt + Karmic_Overlay_FREE_v1.txt nếu có
+render_type: library_block
+required_blocks:
+- routing.birthday_blocks
+
+Mục tiêu:
+1. Phân tích sơ lược bài học phụ.
+2. Phân tích tài năng phụ.
+3. Phân tích ấn tượng ban đầu.
+4. Phân tích sơ lược Ngày Sinh bổ trợ hay cản trở Đường Đời.
+5. Gợi mở bản chuyên sâu.
+
+Template ghép:
+
+“Ngày Sinh là món quà phụ trợ. Nó không mạnh bằng Đường Đời, nhưng lại thường hiện ra rất nhanh trong cách bạn phản ứng, tạo ấn tượng và xử lý tình huống hằng ngày.”
+
+Insert:
+- birthday.display_title
+- birthday.summary
+- birthday.gift
+- birthday.warning
+- birthday.life_symptoms
+- birthday.free_guidance
+- birthday.upsell_hook
+
+Nếu có Karmic/Master:
+Insert thêm:
+- compatible_karmic_overlay nếu ngày 13, 14, 16, 19.
+- master note nếu ngày 11 hoặc 22.
+- derived master note nếu ngày 29.
+
+Gợi mở cuối bước:
+“Ngày Sinh chỉ là một lớp phụ trợ. Nhưng khi đặt cạnh Đường Đời, nó có thể cho thấy bạn đang có một món quà giúp đi nhanh hơn, hoặc một phản xạ khiến bạn dễ tự cản đường mình.”
+
+------------------------------------------------------------
+BƯỚC 8 – TỔNG HỢP MÂU THUẪN CHÍNH
+------------------------------------------------------------
+
+section_id: STEP_08_CORE_CONFLICT_SUMMARY
+title: BƯỚC 8 – TỔNG HỢP MÂU THUẪN CHÍNH
+source: AI/Template Engine using four core numbers
+render_type: dynamic_ai_short
+required_data:
+- core_numbers.life_path
+- core_numbers.destiny
+- core_numbers.soul
+- core_numbers.birthday
+- life_path.life_symptoms
+- destiny.life_symptoms
+- soul.life_symptoms
+- birthday.life_symptoms
+
+Prompt nội bộ cho AI/Template Engine:
+
+“Dựa trên 4 chỉ số cốt lõi:
+Đường Đời: {life_path}
+Sứ Mệnh: {destiny}
+Linh Hồn: {soul}
+Ngày Sinh: {birthday}
+
+Hãy viết phần tổng hợp mâu thuẫn chính bản FREE 700–1.100 chữ.
+Yêu cầu:
+1. Chỉ ra 1–3 xung đột lớn nhất giữa 4 chỉ số.
+2. Nêu mâu thuẫn chính bằng ngôn ngữ dễ hiểu, có sức chạm.
+3. Mô tả cách mâu thuẫn đó gây hao tổn năng lượng.
+4. Cho khách hàng thấy vì sao họ có thể “hiểu mình nhưng vẫn mắc kẹt”.
+5. Nêu 2–3 triệu chứng đời sống.
+6. Không đưa chiến lược hóa giải đầy đủ.
+7. Kết thúc bằng gợi mở bản chuyên sâu.
+
+Không hù dọa, không định mệnh hóa.”
+
+Fallback template nếu không dùng AI:
+
+“Khi nhìn riêng từng chỉ số, bạn sẽ thấy từng mảnh rời rạc. Nhưng khi ráp bốn chỉ số cốt lõi lại với nhau, một bức tranh khác bắt đầu hiện ra: có những phần trong bạn đang hỗ trợ nhau, nhưng cũng có những phần đang kéo nhau về hai hướng khác nhau.
+
+Mâu thuẫn chính có thể khiến bạn:
+- Hiểu mình muốn gì nhưng vẫn khó hành động.
+- Có tài nhưng chưa đặt đúng môi trường.
+- Có động lực bên trong nhưng bị con đường bên ngoài làm mỏi.
+- Muốn thay đổi nhưng lại quay về mô thức cũ.
+
+Đây không phải điểm yếu để xấu hổ, mà là một nút thắt cần được tháo đúng cách. Bản miễn phí giúp gọi tên vấn đề. Bản chuyên sâu mới đi vào chiến lược hóa giải.”
+
+------------------------------------------------------------
+BƯỚC 9 – TẦM QUAN TRỌNG CỦA HÓA GIẢI MÂU THUẪN
+------------------------------------------------------------
+
+section_id: STEP_09_IMPORTANCE_OF_RESOLUTION
+title: BƯỚC 9 – VÌ SAO CẦN HÓA GIẢI MÂU THUẪN NỘI TẠI?
+source: AI/Template Engine
+render_type: dynamic_ai_short
+required_data:
+- conflict_summary from STEP_08
+- core_numbers
+
+Prompt nội bộ cho AI/Template Engine:
+
+“Dựa trên mâu thuẫn chính ở bước 8, hãy viết phần cảnh tỉnh bản FREE 500–800 chữ.
+Yêu cầu:
+1. Tập trung vào hậu quả nếu mâu thuẫn kéo dài, nhưng không hù dọa.
+2. Có thể nhắc đến các biểu hiện:
+   - Nhảy việc.
+   - Cạn tài chính.
+   - Lặp mối quan hệ sai.
+   - Cạn năng lượng.
+   - Mất phương hướng.
+   - Mất niềm tin vào bản thân.
+   - Tự nghi ngờ năng lực.
+   - Biết vấn đề nhưng không thoát ra được.
+3. Không nói chắc chắn tai họa.
+4. Khơi gợi nhu cầu mua gói chuyên sâu để có chiến lược hóa giải riêng.
+5. Giữ giọng thấu hiểu, không thao túng.”
+
+Fallback template:
+
+“Nếu mâu thuẫn nội tại kéo dài, vấn đề không nằm ở việc bạn ‘không đủ giỏi’. Vấn đề là năng lượng bên trong bị chia đôi. Một phần muốn tiến lên, một phần kéo lại. Một phần muốn ổn định, một phần đòi tự do. Một phần muốn được công nhận, một phần lại sợ phải lộ diện.
+
+Khi các lực này không được hiểu đúng, dễ xuất hiện các mô thức:
+- Làm nhiều nhưng mau cạn năng lượng.
+- Đổi hướng liên tục nhưng vẫn không thấy đúng.
+- Lặp lại cùng một kiểu quan hệ hoặc công việc.
+- Tự nghi ngờ năng lực dù bên ngoài vẫn có thành tựu.
+- Biết vấn đề nhưng không tìm được nút tháo.
+
+Bản FREE giúp bạn nhìn thấy dấu hiệu. Bản chuyên sâu sẽ đi sâu vào cơ chế và chiến lược hóa giải riêng cho hồ sơ này.”
+
+------------------------------------------------------------
+BƯỚC 10 – CÁC CHỈ SỐ BỔ SUNG
+------------------------------------------------------------
+
+section_id: STEP_10_ADDITIONAL_NUMBERS_PREVIEW
+title: BƯỚC 10 – CÁC LỚP CHƯA MỞ KHÓA TRONG BẢN ĐỒ CỦA BẠN
+source: fixed_template + available calculation data
+render_type: fixed_template
+required_data:
+- core_numbers.personality
+- master_numbers
+- karmic_debts
+
+Mục tiêu:
+Cho khách hàng biết còn nhiều lớp sâu hơn, nhưng không phân tích chi tiết.
+
+Template nội dung:
+
+“Bốn chỉ số cốt lõi chỉ là phần khung chính. Bên dưới còn nhiều lớp khác có thể giải thích vì sao bạn phản ứng như vậy, vì sao bạn lặp lại một số mô thức, và vì sao có những giai đoạn cuộc đời tưởng như ‘tự nhiên’ đổi hướng rất mạnh.
+
+Trong bản chuyên sâu, các lớp sau sẽ được mở khóa:
+
+1. Nhân Cách
+Đây là cách người khác thường cảm nhận về bạn trước khi họ hiểu bạn thật sự. Ở bản FREE, hệ thống đã ghi nhận Nhân Cách của bạn là: {personality}. Tuy nhiên, phần này chưa được phân tích sâu.
+
+2. Trưởng Thành
+Chỉ số cho thấy năng lượng bạn cần phát triển mạnh hơn khi bước vào giai đoạn trưởng thành.
+
+3. Nợ Nghiệp
+Nếu hồ sơ có 13/4, 14/5, 16/7 hoặc 19/1, đây là những mô thức cần đọc kỹ. Bản FREE chỉ gọi tên, chưa đi vào chiến lược chuyển hóa.
+
+4. Thử Thách
+Cho biết những dạng bài kiểm tra lặp lại trong từng giai đoạn.
+
+5. Bài Học Nghiệp
+Cho biết những năng lượng còn thiếu, cần học thêm trong đời này.
+
+6. Cường Độ
+Cho thấy con số nào đang quá mạnh hoặc quá yếu trong tên gọi.
+
+7. Cân Bằng
+Cho biết phản xạ khi gặp áp lực, khủng hoảng hoặc xung đột.
+
+8. Phát Triển
+Cho biết chìa khóa phát triển thông qua tên gọi chính.
+
+9. Planes
+Cho biết bạn thiên về thể chất, trí tuệ, cảm xúc hay trực giác.
+
+10. Khí Chất
+Cho biết cách bạn bắt đầu, duy trì và kết thúc một việc.
+
+Nếu chỉ nhìn 4 chỉ số cốt lõi, bạn mới thấy phần khung. Khi mở các lớp bổ sung, lý do sâu hơn mới hiện ra rõ.”
+
+Gợi mở cuối bước:
+“Phần này mới chỉ là bản đồ các cánh cửa. Bản chuyên sâu sẽ mở từng cánh cửa và chỉ ra chiến lược ứng dụng cụ thể.”
+
+------------------------------------------------------------
+BƯỚC 11 – HỆ SINH THÁI THẦN SỐ HỌC
+------------------------------------------------------------
+
+section_id: STEP_11_SERVICE_ECOSYSTEM
+title: BƯỚC 11 – HỆ SINH THÁI BRIAN-NUMEROLOGIST
+source: fixed_template
+render_type: fixed_template + CTA
+
+Mục tiêu:
+- Giới thiệu các gói.
+- Dẫn dắt upsell tự nhiên.
+- Không thao túng bằng nỗi sợ.
+- Chốt ưu đãi nếu nâng cấp trong vòng 3 ngày.
+
+Template nội dung:
+
+“Bạn vừa đi qua bản FREE 11 bước – một cửa mở đầu tiên để nhìn thấy 4 trụ cột quan trọng trong bản đồ cá nhân.
+
+Nhưng đây chưa phải toàn bộ bản đồ.
+
+Bản FREE giúp gọi tên vấn đề. Bản chuyên sâu mới đi vào cơ chế, mâu thuẫn, chiến lược hóa giải và hướng ứng dụng thực tế trong công việc, tình cảm, tài chính, gia đình và định hướng tương lai.
+
+Các gói trong hệ sinh thái Brian-Numerologist:
+
+1. Hạt Giống Thấu Hiểu
+Phù hợp với người mới bắt đầu, muốn hiểu 4 chỉ số cốt lõi và có một bản nền để soi lại bản thân.
+
+2. Lộ Trình Giải Mã
+Mở rộng từ cốt lõi sang các chỉ số bổ sung như Nhân Cách, Cân Bằng, Cường Độ, Bài Học Nghiệp, Thử Thách và các lớp nội tâm khác.
+
+3. Bản Đồ Kiến Tạo
+Bản đồ toàn diện hơn, kết hợp phân tích cốt lõi, bổ sung, dự báo, chu kỳ và định hướng hành động.
+
+4. Tối Ưu Doanh Nghiệp
+Dành cho tên thương hiệu, tên cửa hàng, năng lượng kinh doanh, đối tác, đội nhóm hoặc định hướng phát triển dịch vụ.
+
+5. Thấu Hiểu Mối Quan Hệ
+Dành cho vợ chồng, người yêu, đối tác, gia đình, bạn bè hoặc đội nhóm cần hiểu cách hai bản đồ năng lượng tương tác với nhau.
+
+6. Kiến Tạo Bản Thân
+Dành cho người muốn đi sâu toàn diện: bản đồ cá nhân, dự báo chu kỳ, định hướng nghề nghiệp, tên phụ và chiến lược phát triển dài hạn.
+
+CTA chính:
+“Đặc quyền dành riêng cho hồ sơ này: Nếu bạn nâng cấp lên gói tính phí trong vòng 3 ngày tới, bạn được ưu đãi 20% phí dịch vụ.”
+
+CTA mềm:
+“Nếu bản FREE này đã chạm đúng một phần con người bạn, thì bản chuyên sâu sẽ giúp bạn hiểu rõ hơn: vì sao mô thức đó lặp lại, đâu là nút thắt chính, và bạn nên bắt đầu tháo từ đâu.”
+
+CTA nút trên website:
+- Tôi muốn nhận bản chuyên sâu
+- Tư vấn gói phù hợp với tôi
+- Nhắn Zalo để được hỗ trợ
+
+============================================================
+VI. BỘ NHỚ HỒ SƠ FREE
+============================================================
+
+memory_block_template:
+
+--- [⚙️ BỘ NHỚ HỒ SƠ FREE - BƯỚC 11]
+Họ tên khai sinh: {full_name_original} -> {full_name}
+Ngày sinh gốc: {birth_date}
+
+4 chỉ số cốt lõi:
+Đường Đời: {life_path}
+Sứ Mệnh: {destiny}
+Linh Hồn: {soul}
+Ngày Sinh: {birthday}
+
+Chỉ số bổ sung:
+Nhân Cách: {personality}
+Thái Độ: Chưa phân tích
+Màng lọc: Chưa phân tích
+Cường độ: Chưa phân tích
+Cân bằng: Chưa phân tích
+Phát triển: Chưa phân tích
+Khí Chất: Chưa phân tích
+Thử Thách: Chưa phân tích
+Bài học nghiệp: Chưa phân tích
+Trưởng thành: Chưa phân tích
+
+Master/Karmic Debt:
+{master_karmic_display}
+
+Mâu thuẫn đã gợi mở:
+{conflict_summary_short}
+
+Gợi ý nâng cấp:
+Nên nâng cấp lên gói chuyên sâu nếu khách hàng muốn đọc cơ chế mâu thuẫn, các chỉ số bổ sung, chiến lược hóa giải và định hướng hành động.
+
+Ghi chú trạng thái:
+Bản FREE đã hoàn thành.
+---
+
+============================================================
+VII. QUY TẮC AN TOÀN TRONG BÁO CÁO
+============================================================
+
+1. Không được nói:
+- “Bạn chắc chắn thất bại.”
+- “Bạn chắc chắn giàu.”
+- “Bạn chắc chắn ly hôn.”
+- “Bạn chắc chắn bị phản bội.”
+- “Không mua gói thì sẽ gặp tai họa.”
+- “Bản miễn phí vô dụng.”
+
+2. Được nói:
+- “Có khuynh hướng…”
+- “Dễ xuất hiện mô thức…”
+- “Nếu không tỉnh thức…”
+- “Đây là tín hiệu đáng đọc sâu…”
+- “Bản chuyên sâu sẽ giúp bóc tách kỹ hơn…”
+
+3. Nợ nghiệp:
+- Không diễn giải như lời kết tội.
+- Không khẳng định chắc chắn tiền kiếp.
+- Nên dùng cách nói: “Theo ngôn ngữ nghiệp học…” hoặc “Đây có thể xem như một mô thức biểu tượng cần chuyển hóa…”
+
+4. Master Number:
+- Không thần thánh hóa.
+- Không nói người có Master Number chắc chắn đặc biệt hơn người khác.
+- Nên nói: “Tiềm năng cao đi kèm áp lực cao.”
+
+5. Upsell:
+- Không bán bằng nỗi sợ.
+- Dẫn dắt bằng sự thấu hiểu.
+- Cho khách thấy bản FREE đã gọi tên vấn đề, còn bản chuyên sâu mở khóa cơ chế và chiến lược.
+
+============================================================
+VIII. CÁC CÂU GỢI MỞ ĐƯỢC PHÉP DÙNG
+============================================================
+
+1. “Phần này mới chỉ là bề mặt. Gốc rễ thật sự nằm ở cách các chỉ số này va vào nhau.”
+
+2. “Triệu chứng thì bạn có thể đã thấy trong đời sống rồi; điều cần đọc sâu hơn là cơ chế nào khiến nó lặp lại.”
+
+3. “Bản miễn phí giúp gọi tên vấn đề. Bản chuyên sâu mới đi vào chiến lược hóa giải.”
+
+4. “Đây không phải điểm yếu để xấu hổ, mà là một nút thắt cần được tháo đúng cách.”
+
+5. “Nếu chỉ nhìn một chỉ số, bạn sẽ thấy mình rời rạc. Khi ráp toàn bản đồ, lý do mới hiện ra rõ.”
+
+6. “Bạn không cần vội sửa mình ngay lập tức. Trước hết, hãy hiểu vì sao mình vận hành như vậy.”
+
+7. “Điều quan trọng không phải là bạn có con số nào, mà là bạn đang sống ở tầng năng lượng nào của con số đó.”
+
+8. “Bản đồ không quyết định con đường thay bạn. Nó chỉ giúp bạn nhận ra mình đang cầm lái trong điều kiện thời tiết nào.”
+
+============================================================
+IX. OUTPUT PDF CHECKLIST
+============================================================
+
+Trước khi xuất PDF, hệ thống cần kiểm tra:
+
+[ ] Đã có full_name_original.
+[ ] Đã có birth_date.
+[ ] Tên đã chuẩn hóa.
+[ ] Đã tách Họ – Cụm tên lót – Tên.
+[ ] Đã tính Đường Đời.
+[ ] Đã tính Sứ Mệnh.
+[ ] Đã tính Linh Hồn.
+[ ] Đã tính Ngày Sinh.
+[ ] Đã tính Nhân Cách.
+[ ] Đã kiểm tra Master/Karmic.
+[ ] letter_count = number_count.
+[ ] Đã gọi đúng LifePath block.
+[ ] Đã gọi đúng Destiny block.
+[ ] Đã gọi đúng Soul block.
+[ ] Đã gọi đúng Birthday block.
+[ ] Đã gọi Karmic Overlay nếu có.
+[ ] Đã có Bước 4 động hoặc fallback.
+[ ] Đã có Bước 6 động hoặc fallback.
+[ ] Đã có Bước 8 động hoặc fallback.
+[ ] Đã có Bước 9 động hoặc fallback.
+[ ] Đã có Bước 10 preview chỉ số bổ sung.
+[ ] Đã có Bước 11 CTA upsell.
+[ ] Không có câu khẳng định định mệnh tuyệt đối.
+[ ] Không có câu hù dọa mua hàng.
+[ ] Có thông tin liên hệ hoặc CTA.
+
+============================================================
+X. GỢI Ý ĐẶT TÊN FILE PDF
+============================================================
+
+PDF filename format:
+Brian_Numerologist_FREE_{normalized_name}_{birth_date_yyyymmdd}.pdf
+
+Ví dụ:
+Brian_Numerologist_FREE_NGUYEN_THANH_TRI_19860421.pdf
+
+============================================================
+XI. GHI CHÚ CHO CODEX / LẬP TRÌNH VIÊN
+============================================================
+
+1. Không hard-code nội dung phân tích trực tiếp trong code.
+2. Nội dung phải được đọc từ các thư viện .txt/.json/.yaml tương ứng.
+3. Calculation Engine chỉ tính số, không phân tích.
+4. Report Engine chỉ ghép nội dung và gọi AI/Template Engine cho các phần động.
+5. Nếu dùng AI cho bước 4, 6, 8, 9:
+   - Truyền vào kết quả tính toán đã có.
+   - Không cho AI tự tính lại.
+   - Giới hạn độ dài.
+   - Dùng safety rules ở file này.
+6. Nếu AI lỗi hoặc API không hoạt động:
+   - Dùng fallback template.
+   - Vẫn xuất PDF được.
+7. Nên lưu version của các file:
+   - calculation_rules_version
+   - lifepath_library_version
+   - destiny_library_version
+   - soul_library_version
+   - birthday_library_version
+   - karmic_overlay_version
+   - report_template_version
+
+============================================================
+XII. VERSION LOG
+============================================================
+
+v1:
+- Tạo cấu trúc báo cáo FREE 11 bước.
+- Liên kết với các thư viện lõi:
+  + Calculation Rules
+  + LifePath
+  + Karmic Overlay
+  + Destiny
+  + Soul
+  + Birthday
+- Bổ sung prompt nội bộ cho các bước động.
+- Bổ sung fallback template nếu không dùng AI.
+- Bổ sung checklist xuất PDF.
+- Bổ sung CTA hệ sinh thái dịch vụ.

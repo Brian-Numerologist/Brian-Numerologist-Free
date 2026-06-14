@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Brian-Numerologist | FREE 11 bước</title>
+    <link rel="icon" href="data:,">
+    <meta
+      name="description"
+      content="Nhập họ tên khai sinh và ngày sinh để nhận bản FREE 11 bước từ Brian-Numerologist."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header no-print">
+      <a class="brand-mark" href="index.html" aria-label="Brian-Numerologist">
+        <span>BRIAN</span><span>NUMEROLOGIST</span>
+      </a>
+      <nav aria-label="Điều hướng chính">
+        <a href="#report-form">Tạo báo cáo</a>
+        <a href="#packages">Gói chuyên sâu</a>
+        <a href="admin.html">Admin Phase 2</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Brian-Numerologist</p>
+          <h1>Giải mã 4 trụ cột Thần số học đầu tiên của bạn</h1>
+          <p class="hero-subtitle">
+            Nhập họ tên khai sinh và ngày sinh để nhận bản FREE 11 bước từ Brian-Numerologist.
+          </p>
+          <p class="disclaimer">
+            Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.
+          </p>
+        </div>
+        <div class="hero-panel no-print" aria-label="Thông tin bản FREE">
+          <span class="panel-kicker">FREE MVP</span>
+          <strong>11 bước</strong>
+          <p>Đường Đời, Sứ Mệnh, Linh Hồn, Ngày Sinh, Nhân Cách và CTA chọn gói chuyên sâu.</p>
+          <a class="zalo-link" href="tel:0948909983">Zalo Brian: 0948909983</a>
+        </div>
+      </section>
+
+      <section class="workspace-grid" aria-label="Khu vực nhập liệu và kết quả nhanh">
+        <article class="form-card no-print" id="report-form">
+          <div class="section-heading">
+            <p class="eyebrow">Thông tin đầu vào</p>
+            <h2>Tạo bản FREE</h2>
+          </div>
+
+          <form id="leadForm" novalidate>
+            <div class="field">
+              <label for="fullName">Họ tên khai sinh đầy đủ <span aria-hidden="true">*</span></label>
+              <input id="fullName" name="full_name_original" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Thanh Trí">
+            </div>
+
+            <div class="field">
+              <label for="birthDate">Ngày sinh dương lịch DD/MM/YYYY <span aria-hidden="true">*</span></label>
+              <input id="birthDate" name="birth_date" type="text" inputmode="numeric" placeholder="21/04/1986">
+            </div>
+
+            <div class="field">
+              <label for="phoneOrZalo">Số điện thoại/Zalo</label>
+              <input id="phoneOrZalo" name="phone_or_zalo" type="tel" autocomplete="tel" placeholder="Bắt buộc nếu muốn PDF hoặc tư vấn">
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="Tùy chọn">
+            </div>
+
+            <div class="field">
+              <label for="gender">Giới tính</label>
+              <select id="gender" name="gender">
+                <option value="khong_cung_cap">Không cung cấp</option>
+                <option value="nam">Nam</option>
+                <option value="nu">Nữ</option>
+                <option value="khac">Khác</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="note">Ghi chú thêm</label>
+              <textarea id="note" name="note" rows="4" placeholder="Nhu cầu tư vấn, bối cảnh cá nhân, câu hỏi muốn Brian xem sâu hơn..."></textarea>
+            </div>
+
+            <label class="checkbox-row" for="consentToContact">
+              <input id="consentToContact" name="consent_to_contact" type="checkbox">
+              <span>Tôi đồng ý để Brian liên hệ qua Zalo/điện thoại/email khi tôi yêu cầu PDF hoặc gói chuyên sâu.</span>
+            </label>
+
+            <div id="formErrors" class="form-errors" role="alert" hidden></div>
+
+            <div class="button-row">
+              <button class="primary-button" type="submit">Xem bản FREE của tôi</button>
+              <button class="secondary-button" type="button" id="runTestButton">Run Test Case 001</button>
+            </div>
+          </form>
+
+          <div class="utility-row">
+            <button class="ghost-button" type="button" id="downloadCsvButton">Tải CSV lead tạm</button>
+            <span id="libraryStatus" class="status-text">Đang tải thư viện nội dung...</span>
+          </div>
+        </article>
+
+        <aside class="summary-card" id="calculationSummary" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Calculation summary</p>
+            <h2>Kết quả tính nhanh</h2>
+          </div>
+          <div id="summaryContent" class="summary-grid"></div>
+        </aside>
+
+        <aside class="test-card no-print" id="testResultCard" hidden>
+          <div class="section-heading">
+            <p class="eyebrow">Test bắt buộc</p>
+            <h2>TEST_CASE_001</h2>
+          </div>
+          <div id="testResultContent"></div>
+        </aside>
+      </section>
+
+      <section class="report-panel" id="reportPanel" hidden>
+        <div class="print-brand">
+          <strong>BRIAN-NUMEROLOGIST</strong>
+          <span>Zalo Brian: 0948909983</span>
+        </div>
+
+        <div class="report-toolbar no-print">
+          <div>
+            <p class="eyebrow">Bản FREE 11 bước</p>
+            <h2>Báo cáo của bạn</h2>
+          </div>
+          <div class="button-row compact">
+            <button class="secondary-button" type="button" id="openAllButton">Mở tất cả</button>
+            <button class="secondary-button" type="button" id="closeAllButton">Đóng tất cả</button>
+            <button class="primary-button" type="button" id="downloadTxtButton">Tải báo cáo TXT</button>
+            <button class="primary-button muted" type="button" id="printPdfButton">In/Lưu PDF</button>
+          </div>
+        </div>
+
+        <div id="reportIntro" class="report-intro"></div>
+        <div id="reportAccordion" class="accordion"></div>
+      </section>
+
+      <section class="packages no-print" id="packages">
+        <div class="section-heading centered">
+          <p class="eyebrow">Chọn gói chuyên sâu</p>
+          <h2>Hệ sinh thái dịch vụ Brian-Numerologist</h2>
+          <p>
+            Nếu bản FREE chạm đúng vấn đề, Brian có thể đọc sâu hơn theo bối cảnh cá nhân.
+            Ưu đãi 20% áp dụng trong vòng 3 ngày sau khi tạo báo cáo.
+          </p>
+        </div>
+
+        <div id="packagesGrid" class="packages-grid"></div>
+
+        <div id="packageInterestBox" class="interest-box" hidden>
+          <strong>Bạn đã chọn: <span id="selectedPackageName"></span></strong>
+          <p>Vui lòng nhập Zalo/số điện thoại và tick đồng ý liên hệ nếu muốn Brian tư vấn gói này.</p>
+          <a class="primary-button inline-link" href="tel:0948909983">Nhắn Zalo cho Brian: 0948909983</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer no-print">
+      <p>Brian-Numerologist. Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.</p>
+      <p><a href="admin.html">Admin placeholder Phase 2</a></p>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
