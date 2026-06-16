@@ -51,6 +51,16 @@ Sau khi mở website, kiểm tra dòng `libraryStatus`:
 
 Nếu đang fallback, hãy chạy lại bằng local server hoặc GitHub Pages trước khi In/Lưu PDF.
 
+## Nhập ngày sinh trên mobile
+
+Ô ngày sinh dùng `type="tel"` và `inputmode="numeric"` để điện thoại mở bàn phím số. Khách có thể nhập liền 8 số hoặc nhập/dán có dấu phân cách:
+
+- `27081962` tự chuẩn hóa thành `27/08/1962`.
+- `27/08/1962`, `27-08-1962`, `27.08.1962` đều chuẩn hóa thành `27/08/1962`.
+- `01012000` giữ đúng số 0 đầu thành `01/01/2000`.
+
+App chỉ tính sau khi ngày sinh đã chuẩn hóa về `DD/MM/YYYY` và là ngày thật. Ví dụ `29/02/2000` hợp lệ, còn `29/02/2001`, `31/02/2000`, `32131999` hoặc nhập thiếu `270819` sẽ báo lỗi.
+
 ## Deploy GitHub Pages
 
 1. Commit toàn bộ file trong thư mục này.

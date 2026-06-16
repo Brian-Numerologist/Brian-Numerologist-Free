@@ -8,6 +8,7 @@
   const PENDING_LEADS_STORAGE_KEY = "brian_numerologist_pending_leads";
   const LEAD_ID_STORAGE_KEY = "brian_numerologist_current_lead_id";
   const APP_VERSION = "free_mvp_v1_phase4_lead_crm";
+  const BIRTH_DATE_ERROR_MESSAGE = "Ngày sinh chưa hợp lệ. Anh/chị có thể nhập 27081962 hoặc 27/08/1962.";
   const GOOGLE_SHEET_CONFIG = {
     google_apps_script_web_app_url: "https://script.google.com/macros/s/AKfycby5GujG0AlO6fpZA69LoF0IiD8t6oaEjE2FyeaNIpTfGROwiSNtPKhaDYeigzDEAdCQ/exec",
     google_sheet_url: "https://docs.google.com/spreadsheets/d/11q34k1QhhgSwishOx9QqFabRrjvElbpRfU6PE5UlmrM/edit?gid=0#gid=0",
@@ -471,20 +472,43 @@
     return reduction.raw_total > 9 ? `${reduction.raw_total}/${reduction.base}` : String(reduction.base);
   }
 
+  function normalizeBirthDateInput(value) {
+    const digits = String(value || "").replace(/\D/g, "").slice(0, 8);
+
+    if (digits.length <= 2) {
+      return digits;
+    }
+
+    if (digits.length <= 4) {
+      return `${digits.slice(0, 2)}/${digits.slice(2)}`;
+    }
+
+    return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+  }
+
   function parseBirthDate(birthDate) {
-    const value = String(birthDate || "").trim();
+    const value = normalizeBirthDateInput(birthDate);
     const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value);
 
     if (!match) {
       return {
         is_valid: false,
-        error: "Ngày sinh phải đúng định dạng DD/MM/YYYY, ví dụ 21/04/1986."
+        error: BIRTH_DATE_ERROR_MESSAGE
       };
     }
 
     const day = Number(match[1]);
     const month = Number(match[2]);
     const year = Number(match[3]);
+    const currentYear = new Date().getFullYear();
+
+    if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > currentYear) {
+      return {
+        is_valid: false,
+        error: BIRTH_DATE_ERROR_MESSAGE
+      };
+    }
+
     const date = new Date(year, month - 1, day);
 
     if (
@@ -494,7 +518,7 @@
     ) {
       return {
         is_valid: false,
-        error: "Ngày sinh không hợp lệ. Vui lòng kiểm tra lại ngày, tháng, năm."
+        error: BIRTH_DATE_ERROR_MESSAGE
       };
     }
 
@@ -3021,10 +3045,30 @@
           .join("")}</ul></div>`;
   }
 
+  function normalizeBirthDateField() {
+    const field = getElement("birthDate");
+    if (!field) {
+      return "";
+    }
+
+    field.value = normalizeBirthDateInput(field.value);
+    return field.value;
+  }
+
+  function handleBirthDateInput(event) {
+    const field = event.target;
+    if (!field) {
+      return;
+    }
+
+    field.value = normalizeBirthDateInput(field.value);
+  }
+
   function handleFormSubmit(event) {
     event.preventDefault();
     clearValidationErrors();
 
+    normalizeBirthDateField();
     const input = getFormInput();
     const validationErrors = validateBaseInput(input);
 
@@ -3097,6 +3141,8 @@
     }
 
     getElement("leadForm")?.addEventListener("submit", handleFormSubmit);
+    getElement("birthDate")?.addEventListener("input", handleBirthDateInput);
+    getElement("birthDate")?.addEventListener("blur", normalizeBirthDateField);
     getElement("downloadTxtButton")?.addEventListener("click", downloadTxt);
     getElement("printPdfButton")?.addEventListener("click", printPdf);
     getElement("ctaPdfButton")?.addEventListener("click", printPdf);
@@ -3125,6 +3171,7 @@
     SERVICE_PACKAGES,
     SERVICE_ADDONS,
     normalizeVietnameseName,
+    normalizeBirthDateInput,
     splitVietnameseName,
     letterToNumber,
     isVowel,
