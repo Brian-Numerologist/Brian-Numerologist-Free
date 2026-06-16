@@ -7,7 +7,7 @@
   const LEADS_STORAGE_KEY = "brian_numerologist_free_leads_v1";
   const PENDING_LEADS_STORAGE_KEY = "brian_numerologist_pending_leads";
   const LEAD_ID_STORAGE_KEY = "brian_numerologist_current_lead_id";
-  const APP_VERSION = "free_mvp_v1_phase2";
+  const APP_VERSION = "free_mvp_v1_phase3_print";
   const GOOGLE_SHEET_CONFIG = {
     google_apps_script_web_app_url: "https://script.google.com/macros/s/AKfycby5GujG0AlO6fpZA69LoF0IiD8t6oaEjE2FyeaNIpTfGROwiSNtPKhaDYeigzDEAdCQ/exec",
     google_sheet_url: "https://docs.google.com/spreadsheets/d/11q34k1QhhgSwishOx9QqFabRrjvElbpRfU6PE5UlmrM/edit?gid=0#gid=0",
@@ -93,6 +93,20 @@
       short_description: "Gói đi sâu toàn diện: bản đồ cá nhân, chu kỳ, nghề nghiệp, tên phụ và chiến lược phát triển."
     }
   });
+
+  const PRINT_TOC_ITEMS = Object.freeze([
+    "Tính toán & nhận diện 4 chỉ số cốt lõi",
+    "Đường Đời",
+    "Sứ Mệnh",
+    "Đường Đời vs Sứ Mệnh",
+    "Linh Hồn",
+    "Linh Hồn vs Đường Đời/Sứ Mệnh",
+    "Ngày Sinh",
+    "Tổng hợp mâu thuẫn chính",
+    "Tầm quan trọng của hóa giải",
+    "Các chỉ số bổ sung",
+    "Hệ sinh thái dịch vụ"
+  ]);
 
   const FALLBACK_BLOCKS = Object.freeze({
     LIFEPATH_4: [
@@ -222,6 +236,11 @@
   ]);
 
   let contentBlocks = { ...FALLBACK_BLOCKS };
+  let contentLibraryState = {
+    loaded_count: 0,
+    loaded_files: 0,
+    used_fallback: true
+  };
   let currentReportData = null;
   let currentLeadId = null;
   let selectedPackage = null;
@@ -713,9 +732,27 @@
     };
   }
 
+  function stripInternalNotes(text) {
+    return String(text || "")
+      .replace(/\r\n/g, "\n")
+      .split(/\n=+\nIMPLEMENTATION NOTES\n=+\n/)[0]
+      .trim();
+  }
+
+  function isInternalNotesStart(line) {
+    const trimmed = String(line || "").trim();
+    return (
+      trimmed === "IMPLEMENTATION NOTES" ||
+      /^=+$/.test(trimmed) ||
+      /^Routing đề xuất:/i.test(trimmed) ||
+      /^Ngôn ngữ cần tránh:/i.test(trimmed) ||
+      /^Ngôn ngữ nên dùng:/i.test(trimmed)
+    );
+  }
+
   function parseBlocksFromText(text) {
     const blocks = {};
-    const normalized = String(text || "").replace(/\r\n/g, "\n");
+    const normalized = stripInternalNotes(text);
     const markerPattern = /(?:^|\n)=+\n([A-Z][A-Z0-9_]+)\n=+\n/g;
     const markers = [];
     let match;
@@ -743,10 +780,12 @@
 
   async function loadContentLibraries() {
     if (typeof fetch !== "function") {
-      return {
-        loaded_count: Object.keys(contentBlocks).length,
+      contentLibraryState = {
+        loaded_count: 0,
+        loaded_files: 0,
         used_fallback: true
       };
+      return contentLibraryState;
     }
 
     const loadedBlocks = {};
@@ -768,12 +807,17 @@
     }
 
     contentBlocks = { ...FALLBACK_BLOCKS, ...loadedBlocks };
-
-    return {
-      loaded_count: Object.keys(loadedBlocks).length,
+    const loadedCount = Object.keys(loadedBlocks).length;
+    contentLibraryState = {
+      loaded_count: loadedCount,
       loaded_files: loadedFiles,
-      used_fallback: loadedFiles === 0
+      used_fallback: loadedCount === 0
     };
+    return contentLibraryState;
+  }
+
+  function getContentLibraryState() {
+    return { ...contentLibraryState };
   }
 
   function getFallbackBlockContent(blockId) {
@@ -851,28 +895,32 @@
   }
 
   function formatLibraryBlock(blockId) {
-    const raw = getBlockContent(blockId);
+    const raw = stripInternalNotes(getBlockContent(blockId));
     const lines = raw.replace(/\r\n/g, "\n").split("\n");
     const output = [];
 
-    lines.forEach((line) => {
+    for (const line of lines) {
+      if (isInternalNotesStart(line)) {
+        break;
+      }
+
       const keyMatch = /^([a-z_]+):\s*(.*)$/.exec(line.trim());
 
       if (!keyMatch) {
         output.push(line);
-        return;
+        continue;
       }
 
       const key = keyMatch[1];
       const value = keyMatch[2];
 
       if (METADATA_KEYS.has(key)) {
-        return;
+        continue;
       }
 
       const label = HUMAN_LABELS[key] || key.replace(/_/g, " ");
       output.push(value ? `${label}: ${value}` : `${label}:`);
-    });
+    }
 
     return output.join("\n").replace(/\n{3,}/g, "\n\n").trim();
   }
@@ -1518,9 +1566,9 @@
     accordion.innerHTML = sections
       .map(
         (item, index) => `
-          <details ${index === 0 ? "open" : ""}>
+          <details class="report-section" ${index === 0 ? "open" : ""}>
             <summary><span>${escapeHtml(item.title)}</span></summary>
-            <div class="accordion-body">${textToHtml(item.content)}${
+            <div class="accordion-body report-section-content">${textToHtml(item.content)}${
           item.upsell_hook ? `<p><strong>Gợi mở:</strong> ${escapeHtml(item.upsell_hook)}</p>` : ""
         }</div>
           </details>
@@ -1569,6 +1617,7 @@
     renderCalculationSummary(currentReportData);
     renderReportIntro(currentReportData);
     renderReportAccordion(currentReportData.report.sections);
+    preparePrintLayout(currentReportData);
 
     if (options.saveLead !== false) {
       updateLeadStatus("report_generated", {
@@ -1978,6 +2027,173 @@
     downloadBlob("brian-numerologist-leads.csv", [headers.join(","), ...rows].join("\n"), "text/csv;charset=utf-8");
   }
 
+  function formatReportDate(date = new Date()) {
+    return date.toLocaleDateString("vi-VN", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    });
+  }
+
+  function formatCustomerDisplayName(name) {
+    return String(name || "")
+      .trim()
+      .replace(/\s+/g, " ")
+      .toLocaleLowerCase("vi-VN")
+      .split(" ")
+      .map((word) => word ? word.charAt(0).toLocaleUpperCase("vi-VN") + word.slice(1) : word)
+      .join(" ");
+  }
+
+  function renderPrintCover(data) {
+    const container = getElement("print-cover");
+    if (!container) {
+      return;
+    }
+
+    const customerDisplayName = formatCustomerDisplayName(data.input.full_name_original);
+
+    container.innerHTML = `
+      <div class="print-cover__inner">
+        <div>
+          <div class="print-cover__brand">${escapeHtml(BRAND)}</div>
+          <h1 class="print-cover__title">Bản đồ Thần số học FREE 11 bước</h1>
+          <p class="print-cover__subtitle">Cửa mở đầu tiên để hiểu bản thân qua Họ tên và Ngày sinh</p>
+          <div class="print-cover__client">
+            <div class="print-cover__meta">
+              <span>Họ tên</span>
+              <strong>${escapeHtml(customerDisplayName)}</strong>
+            </div>
+            <div class="print-cover__meta">
+              <span>Ngày sinh</span>
+              <strong>${escapeHtml(data.input.birth_date)}</strong>
+            </div>
+            <div class="print-cover__meta">
+              <span>Ngày tạo báo cáo</span>
+              <strong>${escapeHtml(formatReportDate())}</strong>
+            </div>
+            <div class="print-cover__meta">
+              <span>Zalo Brian</span>
+              <strong>${escapeHtml(ZALO_PHONE)}</strong>
+            </div>
+          </div>
+        </div>
+        <div class="print-cover__disclaimer">
+          Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.
+        </div>
+      </div>
+    `;
+  }
+
+  function renderPrintToc() {
+    const container = getElement("print-toc");
+    if (!container) {
+      return;
+    }
+
+    container.innerHTML = `
+      <h2 class="print-toc__title">Mục lục báo cáo</h2>
+      <ol class="print-toc__list">
+        ${PRINT_TOC_ITEMS.map(
+          (item, index) => `
+            <li class="print-toc__item">
+              <span class="print-toc__number">${String(index + 1).padStart(2, "0")}</span>
+              <span class="print-toc__text">${escapeHtml(item)}</span>
+            </li>
+          `
+        ).join("")}
+      </ol>
+    `;
+  }
+
+  function renderPrintCoreSummary(data) {
+    const container = getElement("print-core-summary");
+    if (!container) {
+      return;
+    }
+
+    const karmic = data.karmic_debts.length ? data.karmic_debts.join(", ") : "Không có";
+    const master = formatMasterSummary(data);
+    const originalDisplayName = formatCustomerDisplayName(data.input.full_name_original);
+    const normalizedDisplayName = formatCustomerDisplayName(data.normalized.full_name);
+    const audit = data.calculation_audit.is_valid ? "Hợp lệ" : "Cần kiểm tra lại";
+    const items = [
+      ["Họ tên gốc", originalDisplayName, "wide"],
+      ["Họ tên chuẩn hóa", normalizedDisplayName, "wide"],
+      ["Ngày sinh", data.input.birth_date],
+      ["Đường Đời", data.core_numbers.life_path],
+      ["Sứ Mệnh", data.core_numbers.destiny],
+      ["Linh Hồn", data.core_numbers.soul],
+      ["Ngày Sinh", data.core_numbers.birthday],
+      ["Nhân Cách", data.core_numbers.personality],
+      ["Master Number", master, "wide"],
+      ["Karmic Debt", karmic, "wide"],
+      ["Kiểm tra dữ liệu", audit, "wide"]
+    ];
+
+    container.innerHTML = `
+      <h2 class="print-core-summary__title">Tóm tắt bản đồ cốt lõi</h2>
+      <div class="print-core-grid">
+        ${items.map(
+          ([label, value, wide]) => `
+            <div class="print-core-card${wide ? " wide" : ""}">
+              <span class="print-core-label">${escapeHtml(label)}</span>
+              <strong class="print-core-value">${escapeHtml(value)}</strong>
+            </div>
+          `
+        ).join("")}
+      </div>
+    `;
+  }
+
+  function renderPrintFinalCta() {
+    const container = getElement("print-final-cta");
+    if (!container) {
+      return;
+    }
+
+    const packageCards = Object.entries(SERVICE_PACKAGES)
+      .map(
+        ([, pack]) => `
+          <div class="print-package-card">
+            <strong>${escapeHtml(pack.display_name)}</strong>
+            <span>${escapeHtml(pack.short_description)}</span>
+          </div>
+        `
+      )
+      .join("");
+
+    container.innerHTML = `
+      <h2 class="print-final-cta__title">Bước tiếp theo của bạn</h2>
+      <p class="print-final-cta__lead">
+        Bản FREE đã mở ra 4 trụ cột đầu tiên. Nhưng nó chưa phải toàn bộ bản đồ.
+      </p>
+      <ul class="print-limit-list">
+        <li>Chưa mở toàn bộ chỉ số bổ sung.</li>
+        <li>Chưa phân tích sâu mâu thuẫn nội tại.</li>
+        <li>Chưa có chiến lược hóa giải.</li>
+        <li>Chưa có dự báo chu kỳ cá nhân.</li>
+        <li>Chưa có định hướng hành động theo giai đoạn.</li>
+      </ul>
+      <p>
+        Nếu anh/chị muốn đi sâu hơn, hãy chọn gói chuyên sâu phù hợp hoặc nhắn Zalo cho Brian.
+      </p>
+      <div class="print-discount-box">Ưu đãi 20% nếu nâng cấp trong vòng 3 ngày. Zalo Brian: ${escapeHtml(ZALO_PHONE)}</div>
+      <div class="print-package-grid">${packageCards}</div>
+    `;
+  }
+
+  function preparePrintLayout(data = currentReportData) {
+    if (!data) {
+      return;
+    }
+
+    renderPrintCover(data);
+    renderPrintToc();
+    renderPrintCoreSummary(data);
+    renderPrintFinalCta(data);
+  }
+
   function downloadTxt() {
     if (!currentReportData) {
       showValidationError("Vui lòng tạo báo cáo trước khi tải TXT.");
@@ -1998,19 +2214,38 @@
   function printPdf() {
     if (!currentReportData) {
       showValidationError("Vui lòng tạo báo cáo trước khi In/Lưu PDF.");
+      showToast("Vui lòng tạo báo cáo trước khi In/Lưu PDF.", "warning");
       return;
     }
 
-    if (!validateContactRequirement("In/Lưu PDF")) {
+    if (contentLibraryState.used_fallback) {
+      const fallbackPrintMessage =
+        "Báo cáo hiện đang dùng fallback content ngắn vì thư viện TXT chưa tải được. Hãy chạy website bằng local server/GitHub Pages rồi in lại để có nội dung đầy đủ.";
+      showValidationError(fallbackPrintMessage);
+      showToast(fallbackPrintMessage, "warning");
       return;
     }
 
+    openAllSections();
+    preparePrintLayout(currentReportData);
+    if (typeof document !== "undefined") {
+      document.body.classList.add("is-printing-report");
+    }
+    showToast("Khi lưu PDF: chọn A4, tắt Headers and footers, bật Background graphics để bản PDF sạch và giữ màu bìa.", "info");
     updateLeadStatus("pdf_requested", {
       event_type: "pdf_requested",
       requested_pdf: true
     });
-    openAllSections();
     window.print();
+    window.setTimeout(() => {
+      showToast("Nếu cần bản chuyên sâu, nhắn Zalo Brian.", "info");
+    }, 250);
+  }
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("afterprint", () => {
+      document.body.classList.remove("is-printing-report");
+    });
   }
 
   function openAllSections() {
@@ -2202,13 +2437,20 @@
     try {
       const result = await loadContentLibraries();
       if (status) {
+        status.classList.toggle("status-warning", result.used_fallback);
         status.textContent = result.used_fallback
-          ? "Đang dùng fallback content trong app.js."
+          ? "CẢNH BÁO: Đang dùng fallback content ngắn. Vui lòng chạy bằng local server hoặc GitHub Pages để tải đủ thư viện TXT trước khi in PDF."
           : `Đã tải ${result.loaded_count} content blocks từ ${result.loaded_files} file TXT.`;
       }
     } catch (error) {
+      contentLibraryState = {
+        loaded_count: 0,
+        loaded_files: 0,
+        used_fallback: true
+      };
       if (status) {
-        status.textContent = "Không tải được thư viện TXT, đang dùng fallback content.";
+        status.classList.add("status-warning");
+        status.textContent = "CẢNH BÁO: Đang dùng fallback content ngắn. Vui lòng chạy bằng local server hoặc GitHub Pages để tải đủ thư viện TXT trước khi in PDF.";
       }
     }
 
@@ -2249,6 +2491,8 @@
     calculateAll,
     buildRouting,
     loadContentLibraries,
+    stripInternalNotes,
+    getContentLibraryState,
     parseBlocksFromText,
     getBlockContent,
     getFallbackBlockContent,
@@ -2257,6 +2501,7 @@
     renderReportAccordion,
     downloadTxt,
     printPdf,
+    preparePrintLayout,
     generateLeadId,
     getOrCreateLeadId,
     detectDeviceType,

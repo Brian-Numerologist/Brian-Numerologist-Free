@@ -10,6 +10,7 @@
       content="Nhập họ tên khai sinh và ngày sinh để nhận bản FREE 11 bước từ Brian-Numerologist."
     >
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pdf-print.css">
   </head>
   <body>
     <header class="site-header no-print">
@@ -133,6 +134,11 @@
       </section>
 
       <section class="report-panel" id="reportPanel" hidden>
+        <div id="print-cover" class="print-only print-cover" aria-hidden="true"></div>
+        <div id="print-toc" class="print-only print-toc" aria-hidden="true"></div>
+        <div id="print-core-summary" class="print-only print-core-summary" aria-hidden="true"></div>
+        <div class="print-only print-footer" aria-hidden="true">BRIAN-NUMEROLOGIST | Zalo: 0948909983</div>
+
         <div class="print-brand">
           <strong>BRIAN-NUMEROLOGIST</strong>
           <span>Zalo Brian: 0948909983</span>
@@ -153,6 +159,7 @@
 
         <div id="reportIntro" class="report-intro"></div>
         <div id="reportAccordion" class="accordion"></div>
+        <div id="print-final-cta" class="print-only print-final-cta" aria-hidden="true"></div>
       </section>
 
       <section class="packages no-print" id="packages">

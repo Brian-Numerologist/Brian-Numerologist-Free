@@ -9,9 +9,11 @@ Website MVP tĩnh bằng HTML/CSS/JavaScript thuần để tạo báo cáo Thầ
 ├── index.html
 ├── admin.html
 ├── styles.css
+├── pdf-print.css
 ├── app.js
 ├── README.md
 ├── google-sheet-config.example.json
+├── phase3-print-test-notes.md
 ├── google-apps-script/
 │   ├── Code.gs
 │   └── README_Google_Apps_Script.md
@@ -40,7 +42,14 @@ python3 -m http.server 8000
 
 Mở `http://localhost:8000`.
 
-Nếu mở trực tiếp `index.html` bằng `file://`, browser có thể chặn `fetch()` do CORS. Khi đó app vẫn chạy bằng fallback object trong `app.js`, nhưng nên dùng local server để đọc đúng thư viện TXT.
+Không test chính thức bằng cách double click `index.html` hoặc mở bằng `file://`. Browser có thể chặn `fetch()` khi đọc `content/*.txt`, làm app rơi về fallback content ngắn trong `app.js`.
+
+Sau khi mở website, kiểm tra dòng `libraryStatus`:
+
+- Đúng: `Đã tải ... content blocks từ ... file TXT.`
+- Sai: `CẢNH BÁO: Đang dùng fallback content ngắn...`
+
+Nếu đang fallback, hãy chạy lại bằng local server hoặc GitHub Pages trước khi In/Lưu PDF.
 
 ## Deploy GitHub Pages
 
@@ -96,7 +105,78 @@ Sau khi tạo báo cáo:
 - Bấm `Tải báo cáo TXT` để tải file `.txt`.
 - Bấm `In/Lưu PDF` để dùng browser print. Browser sẽ cho chọn máy in hoặc `Save as PDF`.
 
-Theo MVP, nếu muốn PDF hoặc tư vấn chuyên sâu, người dùng phải nhập số điện thoại/Zalo và tick đồng ý liên hệ.
+Nếu `libraryStatus` đang báo fallback content, app sẽ chặn In/Lưu PDF để tránh xuất bản PDF sơ sài. Chạy website bằng local server hoặc GitHub Pages để tải đủ thư viện TXT rồi in lại.
+
+Khi lưu PDF, dùng các thiết lập in này:
+
+- Paper size: `A4`.
+- Tắt: `Headers and footers`.
+- Bật: `Background graphics`.
+
+Nếu PDF còn hiện ngày giờ, title website, đường dẫn `localhost` hoặc số trang mặc định ở đầu/cuối trang, nghĩa là `Headers and footers` vẫn đang bật trong hộp thoại in của browser.
+
+Phase 3 đã nâng cấp layout browser print: có trang bìa, mục lục, tóm tắt chỉ số, 11 bước báo cáo và CTA cuối.
+
+## Phase 3 – Print/PDF Beauty
+
+Phase 3 chỉ làm đẹp bản In/Lưu PDF bằng browser print + CSS. Không dùng `html2pdf`, không dùng `jsPDF`, không dùng server-side PDF, không sửa công thức và không sửa nội dung phân tích.
+
+File mới:
+
+- `pdf-print.css`
+- `phase3-print-test-notes.md`
+
+Cách dùng:
+
+1. Không mở bằng `file://` hoặc double click `index.html`.
+2. Chạy website bằng local server:
+   ```bash
+   python3 -m http.server 8000
+   ```
+3. Mở `http://localhost:8000` hoặc dùng GitHub Pages.
+4. Kiểm tra `libraryStatus` phải hiện `Đã tải ... content blocks từ ... file TXT.`
+5. Tạo báo cáo.
+6. Bấm `In/Lưu PDF`.
+7. Trong hộp thoại in của browser, chọn:
+   - Destination: `Save as PDF`
+   - Paper size: `A4`
+   - Tắt: `Headers and footers`
+   - Bật: `Background graphics`
+   - Nếu thấy ngày giờ/title/localhost/số trang ở đầu hoặc cuối PDF, quay lại hộp thoại in và tắt `Headers and footers`.
+8. Kiểm tra bản PDF có:
+   - Trang bìa.
+   - Mục lục 11 bước.
+   - Tóm tắt bản đồ cốt lõi.
+   - 11 bước báo cáo.
+   - CTA cuối và đủ 6 gói dịch vụ.
+
+Để bìa in đúng màu đen/đỏ/vàng đồng, trong hộp thoại in hãy bật:
+
+- Chrome/Edge: `More settings > Background graphics`.
+- Safari: bật tùy chọn in nền nếu có.
+
+Nếu thấy nội dung báo cáo quá sơ sài, kiểm tra lại `libraryStatus`. Trạng thái fallback nghĩa là website chưa tải được thư viện TXT đầy đủ.
+
+Giới hạn:
+
+- Số trang custom phụ thuộc browser; nếu browser không hỗ trợ, footer vẫn có thương hiệu.
+- Màu nền bìa phụ thuộc setting `Background graphics`.
+- Chưa có QR Zalo ở Phase 3.
+- Browser print có thể khác nhau nhẹ giữa Chrome, Edge và Safari.
+
+Test Phase 3:
+
+```bash
+node -e "const app=require('./app.js'); console.log(app.runTestCase001().pass)"
+```
+
+Sau đó test trên browser:
+
+- Tạo báo cáo.
+- Bấm `In/Lưu PDF`.
+- Kiểm tra cover, mục lục, core summary, 11 bước, CTA cuối.
+- Kiểm tra `pdf_requested` vẫn được ghi vào Google Sheet logs nếu sync đã bật.
+- Kiểm tra `Tải báo cáo TXT` và chọn gói chuyên sâu vẫn hoạt động.
 
 ## Lead localStorage/CSV
 
