@@ -178,7 +178,7 @@ Sau đó test trên browser:
 - Kiểm tra `pdf_requested` vẫn được ghi vào Google Sheet logs nếu sync đã bật.
 - Kiểm tra `Tải báo cáo TXT` và chọn gói chuyên sâu vẫn hoạt động.
 
-## Lead localStorage/CSV
+## Lead localStorage và quyền riêng tư
 
 Mỗi lần generate report, app lưu lead vào `localStorage` với key `brian_numerologist_free_leads_v1`. Các trạng thái chính:
 
@@ -189,7 +189,7 @@ Mỗi lần generate report, app lưu lead vào `localStorage` với key `brian_
 - `addon_clicked`
 - `zalo_submitted`
 
-Bấm `Tải CSV lead tạm` để xuất lead hiện có. Phase 2 vẫn giữ localStorage/CSV làm fallback khi Google Sheet sync tắt hoặc lỗi.
+`localStorage` chỉ là fallback kỹ thuật khi Google Sheet sync tắt hoặc lỗi. Giao diện khách hàng không hiển thị nút tải CSV lead, không hiển thị dữ liệu lead, và không link đến Admin CRM.
 
 ## Phase 2 – Google Sheet Lead Sync
 
@@ -265,10 +265,9 @@ Không gửi `full_report_text` lên Google Sheet. Sheet chỉ nhận thông tin
 - Số lead localStorage.
 - Số pending lead lỗi.
 - Nút mở Google Sheet.
-- Nút tải CSV lead localStorage.
 - Nút đồng bộ lại lead lỗi.
 
-Admin hiện chưa có login thật. Không chia sẻ public nếu chưa có bảo mật.
+Admin hiện chưa có login thật. Chỉ dùng bằng đường dẫn trực tiếp nội bộ, không link từ trang chính và không chia sẻ public nếu chưa có bảo mật.
 
 ## Phase 4 – Lead CRM & Conversion Flow
 
@@ -316,6 +315,10 @@ Thiết lập Phase 4:
 - Nút mở Google Sheet.
 
 Admin public API chỉ trả aggregate stats và message templates, không trả danh sách tên khách hoặc số Zalo/SĐT.
+
+## Phase 4 Privacy Fix
+
+Giao diện khách hàng không còn link `admin.html`, không còn nút tải CSV lead tạm, và không có panel export/xem lead. Admin CRM vẫn giữ file `admin.html` để Brian gõ trực tiếp khi cần, có cảnh báo nội bộ và chỉ hiển thị số liệu tổng hợp, template, nút mở Google Sheet, refresh stats và retry sync.
 
 ## Test Phase 2
 

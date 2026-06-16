@@ -16,6 +16,11 @@
     enable_google_sheet_sync: true,
     fallback_to_local_storage: true
   };
+  const PUBLIC_UI_CONFIG = Object.freeze({
+    show_admin_link: false,
+    show_lead_csv_export: false,
+    show_debug_tools: false
+  });
 
   const CONTENT_FILES = [
     "content/LifePath_Library_FREE_v1.txt",
@@ -3043,7 +3048,30 @@
     if (birthDate) birthDate.value = "21/04/1986";
   }
 
+  function removeElements(selector) {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    document.querySelectorAll(selector).forEach((element) => element.remove());
+  }
+
+  function applyPublicUiConfig() {
+    if (!PUBLIC_UI_CONFIG.show_admin_link) {
+      removeElements('a[href="admin.html"], a[href="./admin.html"], [data-admin-link], [data-public-admin-link]');
+    }
+
+    if (!PUBLIC_UI_CONFIG.show_lead_csv_export) {
+      removeElements("#downloadCsvButton, #downloadAdminCsvButton, [data-lead-csv-export]");
+    }
+
+    if (!PUBLIC_UI_CONFIG.show_debug_tools) {
+      removeElements("#debugPanel, .debug-panel, [data-debug-tool]");
+    }
+  }
+
   async function init() {
+    applyPublicUiConfig();
     renderPackages();
     renderAddons();
 
@@ -3072,7 +3100,9 @@
     getElement("downloadTxtButton")?.addEventListener("click", downloadTxt);
     getElement("printPdfButton")?.addEventListener("click", printPdf);
     getElement("ctaPdfButton")?.addEventListener("click", printPdf);
-    getElement("downloadCsvButton")?.addEventListener("click", downloadLeadsCsv);
+    if (PUBLIC_UI_CONFIG.show_lead_csv_export) {
+      getElement("downloadCsvButton")?.addEventListener("click", downloadLeadsCsv);
+    }
     getElement("openAllButton")?.addEventListener("click", openAllSections);
     getElement("closeAllButton")?.addEventListener("click", closeAllSections);
     getElement("runTestButton")?.addEventListener("click", () => {
@@ -3091,6 +3121,7 @@
     KARMIC_VALUES,
     MASTER_VALUES,
     GOOGLE_SHEET_CONFIG,
+    PUBLIC_UI_CONFIG,
     SERVICE_PACKAGES,
     SERVICE_ADDONS,
     normalizeVietnameseName,

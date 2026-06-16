@@ -87,7 +87,6 @@
             <button class="primary-button" type="button" id="openSheetButton">Mở Google Sheet</button>
             <button class="secondary-button" type="button" id="refreshStatsButton">Tải lại stats</button>
             <button class="secondary-button" type="button" id="retrySyncButton">Đồng bộ lại lead lỗi</button>
-            <button class="ghost-button" type="button" id="downloadAdminCsvButton">Tải CSV local</button>
           </div>
           <p id="adminMessage" class="admin-message" role="status"></p>
         </article>
@@ -197,16 +196,6 @@
         });
 
         document.getElementById("refreshStatsButton").addEventListener("click", refreshStats);
-        document.getElementById("downloadAdminCsvButton").addEventListener("click", function () {
-          if (!api.getStoredLeads().length) {
-            message.textContent = "Chưa có lead localStorage để tải CSV.";
-            api.showToast("Chưa có lead localStorage để tải CSV.", "warning");
-            return;
-          }
-          api.downloadLeadsCsv();
-          message.textContent = "Đã tạo file CSV từ localStorage.";
-        });
-
         document.getElementById("retrySyncButton").addEventListener("click", function () {
           api.retryPendingLeads().then(function (result) {
             refreshStats();
