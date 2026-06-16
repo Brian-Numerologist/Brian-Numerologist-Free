@@ -501,17 +501,65 @@ details[open] summary::after {
   margin: 0.85rem 0;
 }
 
+.conversion-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(143, 20, 20, 0.22);
+  border: 1px solid rgba(199, 154, 58, 0.32);
+  border-radius: 8px;
+}
+
+.conversion-cta h3 {
+  margin: 0.2rem 0 0.5rem;
+  color: var(--gold-soft);
+  font-size: 1.25rem;
+}
+
+.conversion-cta p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.recommendation-box {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(199, 154, 58, 0.24);
+  border-radius: 8px;
+}
+
+.recommendation-box strong {
+  color: var(--text);
+}
+
+.recommendation-box span {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
 .packages {
   padding: 2.5rem 0 4rem;
 }
 
-.packages-grid {
+.packages-grid,
+.addons-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
-.package-card {
+.addons-heading {
+  margin-top: 2.5rem;
+}
+
+.package-card,
+.addon-card {
   display: flex;
   min-height: 230px;
   flex-direction: column;
@@ -523,12 +571,27 @@ details[open] summary::after {
   border-radius: 8px;
 }
 
-.package-card h3 {
+.addon-card {
+  min-height: 210px;
+}
+
+.package-card h3,
+.addon-card h3 {
   margin: 0;
   color: var(--gold-soft);
 }
 
-.package-card p {
+.package-price,
+.selected-price {
+  display: inline-flex;
+  margin-top: 0.45rem;
+  color: var(--gold);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.package-card p,
+.addon-card p {
   margin: 0.55rem 0 0;
   color: var(--muted);
   line-height: 1.55;
@@ -663,6 +726,74 @@ details[open] summary::after {
   line-height: 1.6;
 }
 
+.admin-warning {
+  width: fit-content;
+  padding: 0.75rem 0.9rem;
+  color: var(--text) !important;
+  background: rgba(143, 20, 20, 0.32);
+  border: 1px solid rgba(199, 154, 58, 0.32);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.crm-admin-grid .wide-admin-card {
+  grid-column: 1 / -1;
+}
+
+.admin-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.admin-metric-grid div,
+.package-stats-list div {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(199, 154, 58, 0.16);
+  border-radius: 8px;
+}
+
+.admin-metric-grid span,
+.package-stats-list span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.admin-metric-grid strong,
+.package-stats-list strong {
+  color: var(--gold-soft);
+  font-size: 1.35rem;
+}
+
+.compact-metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.package-stats-list {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.package-stats-list div {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.template-tools {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.template-tools textarea {
+  min-height: 180px;
+}
+
 .phase-badge {
   display: inline-flex;
   color: var(--gold-soft);
@@ -676,8 +807,13 @@ details[open] summary::after {
 @media (max-width: 920px) {
   .hero,
   .workspace-grid,
-  .admin-grid {
+  .admin-grid,
+  .conversion-cta {
     grid-template-columns: 1fr;
+  }
+
+  .crm-admin-grid .wide-admin-card {
+    grid-column: auto;
   }
 
   .hero {
@@ -697,7 +833,8 @@ details[open] summary::after {
     justify-content: flex-start;
   }
 
-  .packages-grid {
+  .packages-grid,
+  .addons-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -717,7 +854,10 @@ details[open] summary::after {
   }
 
   .summary-grid,
-  .packages-grid {
+  .packages-grid,
+  .addons-grid,
+  .admin-metric-grid,
+  .compact-metrics {
     grid-template-columns: 1fr;
   }
 

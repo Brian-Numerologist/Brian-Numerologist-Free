@@ -20,7 +20,7 @@
       <nav aria-label="Điều hướng chính">
         <a href="#report-form">Tạo báo cáo</a>
         <a href="#packages">Gói chuyên sâu</a>
-        <a href="admin.html">Admin Phase 2</a>
+        <a href="admin.html">Admin CRM</a>
       </nav>
     </header>
 
@@ -99,7 +99,7 @@
 
             <label class="checkbox-row" for="consentToContact">
               <input id="consentToContact" name="consent_to_contact" type="checkbox">
-              <span>Tôi đồng ý để Brian-Numerologist lưu thông tin này và liên hệ lại qua Zalo/điện thoại nếu tôi yêu cầu tư vấn hoặc bản chuyên sâu.</span>
+              <span>Tôi đồng ý để Brian liên hệ qua Zalo/SĐT nhằm tư vấn bản phân tích phù hợp.</span>
             </label>
 
             <div id="formErrors" class="form-errors" role="alert" hidden></div>
@@ -157,6 +157,19 @@
           </div>
         </div>
 
+        <div id="conversionCta" class="conversion-cta no-print" hidden>
+          <div>
+            <p class="eyebrow">Bước tiếp theo</p>
+            <h3>Bản FREE đã mở 4 trụ cột đầu tiên. Muốn Brian đọc sâu bản này?</h3>
+            <p>PDF cần Zalo/SĐT và đồng ý liên hệ để Brian có thể tư vấn đúng bối cảnh nếu bạn cần đi sâu hơn.</p>
+          </div>
+          <div id="recommendationBox" class="recommendation-box"></div>
+          <div class="button-row compact">
+            <a class="secondary-button inline-link" href="#packages">Xem gói chuyên sâu</a>
+            <button class="primary-button" type="button" id="ctaPdfButton">Tải PDF</button>
+          </div>
+        </div>
+
         <div id="reportIntro" class="report-intro"></div>
         <div id="reportAccordion" class="accordion"></div>
         <div id="print-final-cta" class="print-only print-final-cta" aria-hidden="true"></div>
@@ -174,8 +187,16 @@
 
         <div id="packagesGrid" class="packages-grid"></div>
 
+        <div class="section-heading centered addons-heading">
+          <p class="eyebrow">Add-on sau gói chính</p>
+          <h2>Dịch vụ bổ sung</h2>
+          <p>Các add-on giúp đi sâu vào quan hệ, tên phụ, nghề nghiệp hoặc checklist hành động theo thời gian.</p>
+        </div>
+
+        <div id="addonsGrid" class="addons-grid"></div>
+
         <div id="packageInterestBox" class="interest-box" hidden>
-          <strong>Bạn đã chọn: <span id="selectedPackageName"></span></strong>
+          <strong>Bạn đã chọn: <span id="selectedPackageName"></span> <span id="selectedPackagePrice" class="selected-price"></span></strong>
           <p>Vui lòng nhập Zalo/số điện thoại và tick đồng ý liên hệ nếu muốn Brian tư vấn gói này.</p>
           <a class="primary-button inline-link" href="tel:0948909983">Nhắn Zalo cho Brian: 0948909983</a>
         </div>
@@ -184,7 +205,7 @@
 
     <footer class="site-footer no-print">
       <p>Brian-Numerologist. Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.</p>
-      <p><a href="admin.html">Admin Lead Sync Phase 2</a></p>
+      <p><a href="admin.html">Admin Lead CRM Phase 4</a></p>
     </footer>
 
     <div id="toast-container" class="toast-container no-print" aria-live="polite" aria-atomic="true"></div>

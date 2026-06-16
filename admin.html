@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brian-Numerologist Admin – Lead Sync Phase 2</title>
+    <title>Brian-Numerologist Admin – Lead CRM Phase 4</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -19,67 +19,77 @@
 
     <main class="admin-shell">
       <section class="admin-hero">
-        <p class="eyebrow">Lead Sync Phase 2</p>
-        <h1>Brian-Numerologist Admin – Lead Sync Phase 2</h1>
+        <p class="eyebrow">Lead CRM Phase 4</p>
+        <h1>Brian-Numerologist Admin – Lead CRM</h1>
+        <p class="admin-warning">Trang nội bộ Brian – không chia sẻ công khai.</p>
         <p>
-          Trang nội bộ đơn giản để kiểm tra cấu hình Google Sheet, tải CSV localStorage
-          và đồng bộ lại các lead lỗi. Không chia sẻ public nếu chưa có bảo mật.
+          Dashboard này chỉ hiển thị số liệu tổng hợp, funnel và mẫu tin nhắn.
+          Thông tin chi tiết như tên khách và Zalo/SĐT cần xem trực tiếp trong Google Sheet.
         </p>
       </section>
 
-      <section class="admin-grid">
+      <section class="admin-grid crm-admin-grid">
         <article class="admin-card">
-          <h2>Google Sheet Status</h2>
-          <div class="sync-status-list">
-            <div class="sync-status-row">
-              <span>Sync</span>
-              <strong id="syncEnabledStatus">Đang kiểm tra...</strong>
-            </div>
-            <div class="sync-status-row">
-              <span>Web App URL</span>
-              <strong id="webAppStatus">Đang kiểm tra...</strong>
-            </div>
-            <div class="sync-status-row">
-              <span>Google Sheet URL</span>
-              <strong id="sheetUrlStatus">Đang kiểm tra...</strong>
-            </div>
+          <h2>Tổng quan funnel</h2>
+          <div class="admin-metric-grid">
+            <div><span>Total leads</span><strong id="statTotalLeads">0</strong></div>
+            <div><span>PDF downloaded</span><strong id="statPdfDownloaded">0</strong></div>
+            <div><span>Package clicked</span><strong id="statPackageClicked">0</strong></div>
+            <div><span>Add-on clicked</span><strong id="statAddonClicked">0</strong></div>
+            <div><span>Zalo submitted</span><strong id="statZaloSubmitted">0</strong></div>
+            <div><span>Very hot</span><strong id="statVeryHot">0</strong></div>
+            <div><span>Converted</span><strong id="statConverted">0</strong></div>
+            <div><span>Conversion value</span><strong id="statConversionValue">0đ</strong></div>
           </div>
-          <p>Phase 2 dùng Google Apps Script Web App và shared_secret cơ bản.</p>
         </article>
 
         <article class="admin-card">
-          <h2>Pending Local Leads</h2>
+          <h2>Tỷ lệ chuyển đổi</h2>
           <div class="sync-status-list">
-            <div class="sync-status-row">
-              <span>Lead localStorage</span>
-              <strong id="localLeadCount">0</strong>
-            </div>
-            <div class="sync-status-row">
-              <span>Pending sync</span>
-              <strong id="pendingLeadCount">0</strong>
-            </div>
+            <div class="sync-status-row"><span>Report → PDF</span><strong id="rateReportPdf">0%</strong></div>
+            <div class="sync-status-row"><span>PDF → Package</span><strong id="ratePdfPackage">0%</strong></div>
+            <div class="sync-status-row"><span>Package → Zalo</span><strong id="ratePackageZalo">0%</strong></div>
+            <div class="sync-status-row"><span>Zalo → Converted</span><strong id="rateZaloConverted">0%</strong></div>
           </div>
-          <p>Lead lỗi sync vẫn được giữ trong localStorage để retry sau.</p>
         </article>
 
         <article class="admin-card">
-          <h2>Actions</h2>
+          <h2>Follow-up cần chú ý</h2>
+          <div class="admin-metric-grid compact-metrics">
+            <div><span>Urgent</span><strong id="followUrgent">0</strong></div>
+            <div><span>Pending</span><strong id="followPending">0</strong></div>
+            <div><span>Retry</span><strong id="followRetry">0</strong></div>
+          </div>
+          <p>Chi tiết từng khách nằm trong tab <code>followups</code> của Google Sheet.</p>
+        </article>
+
+        <article class="admin-card">
+          <h2>Package interest</h2>
+          <div id="packageInterestStats" class="package-stats-list">
+            <p>Đang tải thống kê...</p>
+          </div>
+        </article>
+
+        <article class="admin-card wide-admin-card">
+          <h2>Mẫu tin nhắn Zalo</h2>
+          <p>Chọn template, chỉnh biến trong Google Sheet hoặc sửa tay trước khi gửi. Không dùng ngôn ngữ hù dọa hay ép mua.</p>
+          <div class="template-tools">
+            <label for="templateSelect">Template</label>
+            <select id="templateSelect"></select>
+            <textarea id="templateText" rows="8" readonly></textarea>
+            <button class="primary-button" type="button" id="copyTemplateButton">Copy template</button>
+          </div>
+        </article>
+
+        <article class="admin-card">
+          <h2>Google Sheet</h2>
           <div class="admin-actions">
             <button class="primary-button" type="button" id="openSheetButton">Mở Google Sheet</button>
-            <button class="secondary-button" type="button" id="downloadAdminCsvButton">Tải CSV lead localStorage</button>
+            <button class="secondary-button" type="button" id="refreshStatsButton">Tải lại stats</button>
             <button class="secondary-button" type="button" id="retrySyncButton">Đồng bộ lại lead lỗi</button>
-            <a class="ghost-button" href="index.html">Quay về website</a>
+            <button class="ghost-button" type="button" id="downloadAdminCsvButton">Tải CSV local</button>
           </div>
           <p id="adminMessage" class="admin-message" role="status"></p>
-        </article>
-
-        <article class="admin-card">
-          <h2>Notes</h2>
-          <p>
-            Admin Phase 2 chưa có login thật. Sync mặc định tắt cho đến khi Brian cấu hình
-            Apps Script Web App URL, Google Sheet URL, shared_secret và bật
-            <code>enable_google_sheet_sync = true</code> trong <code>app.js</code>.
-          </p>
         </article>
       </section>
     </main>
@@ -92,21 +102,90 @@
         var api = window.BrianNumerologist;
         var config = api.getGoogleSheetConfig();
         var message = document.getElementById("adminMessage");
+        var templates = [];
 
-        function setText(id, text) {
+        function setText(id, value) {
           var element = document.getElementById(id);
-          if (element) {
-            element.textContent = text;
+          if (element) element.textContent = value;
+        }
+
+        function formatPercent(value) {
+          var number = Number(value || 0) * 100;
+          return number.toFixed(number >= 10 ? 0 : 1) + "%";
+        }
+
+        function formatVnd(value) {
+          var number = Number(value || 0);
+          return number.toLocaleString("vi-VN") + "đ";
+        }
+
+        function renderStats(stats) {
+          var totals = stats.totals || {};
+          var rates = stats.funnel_rates || {};
+          var followups = stats.followups || {};
+          setText("statTotalLeads", totals.total_leads || 0);
+          setText("statPdfDownloaded", totals.pdf_downloaded || 0);
+          setText("statPackageClicked", totals.package_clicked || 0);
+          setText("statAddonClicked", totals.addon_clicked || 0);
+          setText("statZaloSubmitted", totals.zalo_submitted || 0);
+          setText("statVeryHot", totals.very_hot_leads || 0);
+          setText("statConverted", totals.converted || 0);
+          setText("statConversionValue", formatVnd(totals.total_conversion_value || 0));
+          setText("rateReportPdf", formatPercent(rates.report_to_pdf));
+          setText("ratePdfPackage", formatPercent(rates.pdf_to_package));
+          setText("ratePackageZalo", formatPercent(rates.package_to_zalo));
+          setText("rateZaloConverted", formatPercent(rates.zalo_to_converted));
+          setText("followUrgent", followups.urgent || 0);
+          setText("followPending", followups.pending || 0);
+          setText("followRetry", followups.retry || 0);
+
+          var packageBox = document.getElementById("packageInterestStats");
+          var packageRows = stats.package_interest || [];
+          packageBox.innerHTML = packageRows.length
+            ? packageRows.map(function (item) {
+                return "<div><span>" + api.escapeHtml(String(item.name || "")) + "</span><strong>" + Number(item.count || 0) + "</strong></div>";
+              }).join("")
+            : "<p>Chưa có package click.</p>";
+
+          if (stats.warning) {
+            message.textContent = "Đang dùng fallback local vì admin API chưa sẵn sàng: " + stats.warning;
+          } else {
+            message.textContent = "Stats đã tải từ " + (stats.source || "Google Sheet") + ".";
           }
         }
 
-        function refreshStatus() {
-          setText("syncEnabledStatus", config.enable_google_sheet_sync ? "Enabled" : "Disabled");
-          setText("webAppStatus", config.google_apps_script_web_app_url ? "Configured" : "Not configured");
-          setText("sheetUrlStatus", config.google_sheet_url ? "Configured" : "Not configured");
-          setText("localLeadCount", String(api.getStoredLeads().length));
-          setText("pendingLeadCount", String(api.getPendingLeadCount()));
+        function renderTemplates(payload) {
+          templates = payload.templates || [];
+          var select = document.getElementById("templateSelect");
+          select.innerHTML = templates.map(function (template) {
+            return "<option value=\"" + api.escapeHtml(template.template_key) + "\">" + api.escapeHtml(template.template_name || template.template_key) + "</option>";
+          }).join("");
+          updateTemplateText();
         }
+
+        function updateTemplateText() {
+          var key = document.getElementById("templateSelect").value;
+          var template = templates.find(function (item) { return item.template_key === key; }) || templates[0];
+          document.getElementById("templateText").value = template ? template.message_text : "";
+        }
+
+        function refreshStats() {
+          message.textContent = "Đang tải stats...";
+          api.fetchAdminStats().then(renderStats);
+          api.fetchMessageTemplates().then(renderTemplates);
+        }
+
+        document.getElementById("templateSelect").addEventListener("change", updateTemplateText);
+        document.getElementById("copyTemplateButton").addEventListener("click", function () {
+          var text = document.getElementById("templateText").value;
+          navigator.clipboard.writeText(text).then(function () {
+            api.showToast("Đã copy template.", "success");
+          }).catch(function () {
+            document.getElementById("templateText").select();
+            document.execCommand("copy");
+            api.showToast("Đã copy template.", "success");
+          });
+        });
 
         document.getElementById("openSheetButton").addEventListener("click", function () {
           if (!config.google_sheet_url) {
@@ -114,29 +193,28 @@
             api.showToast("Chưa cấu hình Google Sheet URL.", "warning");
             return;
           }
-
           window.open(config.google_sheet_url, "_blank", "noopener");
         });
 
+        document.getElementById("refreshStatsButton").addEventListener("click", refreshStats);
         document.getElementById("downloadAdminCsvButton").addEventListener("click", function () {
           if (!api.getStoredLeads().length) {
             message.textContent = "Chưa có lead localStorage để tải CSV.";
             api.showToast("Chưa có lead localStorage để tải CSV.", "warning");
             return;
           }
-
           api.downloadLeadsCsv();
           message.textContent = "Đã tạo file CSV từ localStorage.";
         });
 
         document.getElementById("retrySyncButton").addEventListener("click", function () {
           api.retryPendingLeads().then(function (result) {
-            refreshStatus();
+            refreshStats();
             message.textContent = "Retry xong: đồng bộ " + result.synced + ", còn lại " + result.remaining + ".";
           });
         });
 
-        refreshStatus();
+        refreshStats();
       });
     </script>
   </body>

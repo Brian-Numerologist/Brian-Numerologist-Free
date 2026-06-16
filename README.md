@@ -103,7 +103,7 @@ node -e "const app=require('./app.js'); console.log(app.runTestCase001().pass)"
 Sau khi tạo báo cáo:
 
 - Bấm `Tải báo cáo TXT` để tải file `.txt`.
-- Bấm `In/Lưu PDF` để dùng browser print. Browser sẽ cho chọn máy in hoặc `Save as PDF`.
+- Bấm `In/Lưu PDF` để dùng browser print. Từ Phase 4, nút này yêu cầu Zalo/SĐT hợp lệ và checkbox đồng ý liên hệ trước khi mở hộp thoại in.
 
 Nếu `libraryStatus` đang báo fallback content, app sẽ chặn In/Lưu PDF để tránh xuất bản PDF sơ sài. Chạy website bằng local server hoặc GitHub Pages để tải đủ thư viện TXT rồi in lại.
 
@@ -182,10 +182,12 @@ Sau đó test trên browser:
 
 Mỗi lần generate report, app lưu lead vào `localStorage` với key `brian_numerologist_free_leads_v1`. Các trạng thái chính:
 
-- `report_generated`
+- `new_report_generated`
 - `txt_downloaded`
-- `pdf_requested`
-- `paid_report_requested`
+- `pdf_downloaded`
+- `package_clicked`
+- `addon_clicked`
+- `zalo_submitted`
 
 Bấm `Tải CSV lead tạm` để xuất lead hiện có. Phase 2 vẫn giữ localStorage/CSV làm fallback khi Google Sheet sync tắt hoặc lỗi.
 
@@ -212,14 +214,14 @@ Tab bắt buộc:
 - `config`
 - `logs`
 
-`Code.gs` có hàm `setupSheets()` để tạo header cho 3 tab và không xóa dữ liệu cũ.
+`Code.gs` có hàm `setupSheets()` để tạo header. Từ Phase 4, `setupSheets()` gọi `setupPhase4Sheets()` để tạo đủ các tab CRM.
 
 ## Cấu hình Google Sheet Sync
 
 1. Tạo Google Sheet `Brian_Numerologist_FREE_Leads`.
 2. Vào `Extensions > Apps Script`.
 3. Dán nội dung `google-apps-script/Code.gs`.
-4. Chạy `setupSheets()`.
+4. Chạy `setupPhase4Sheets()` hoặc `setupSheets()`.
 5. Chạy `setSecretOnce()`.
 6. Deploy Apps Script:
    - Type: `Web app`
@@ -268,6 +270,53 @@ Không gửi `full_report_text` lên Google Sheet. Sheet chỉ nhận thông tin
 
 Admin hiện chưa có login thật. Không chia sẻ public nếu chưa có bảo mật.
 
+## Phase 4 – Lead CRM & Conversion Flow
+
+Phase 4 nâng cấp website thành flow lead CRM nhẹ trên Google Sheet, không đổi công thức Thần số học, không đổi nội dung phân tích và không đổi layout PDF Phase 3.
+
+Các điểm mới:
+
+- Zalo/SĐT gate trước khi `In/Lưu PDF`.
+- Log event: `report_generated`, `pdf_gate_viewed`, `zalo_submitted`, `pdf_downloaded`, `package_clicked`, `addon_clicked`, `paid_report_requested`, `error`.
+- 6 gói chính có giá chính thức và 6 add-on.
+- Gợi ý gói nhẹ theo Karmic/Master, năng lượng 8, package business/relationship đã click, hoặc chỉ tải PDF.
+- Lead status/heat: `cold`, `warm`, `hot`, `very_hot`, `converted`.
+- Admin CRM chỉ đọc số liệu aggregate, không hiển thị danh sách tên/Zalo khách.
+
+Google Sheet Phase 4 dùng các tab:
+
+- `leads`
+- `logs`
+- `dashboard`
+- `followups`
+- `message_templates`
+- `config`
+
+Thiết lập Phase 4:
+
+1. Mở Google Sheet hiện tại.
+2. Vào `Extensions > Apps Script`.
+3. Dán `google-apps-script/Code.gs`.
+4. Chạy `setSecretOnce()` nếu chưa set secret.
+5. Chạy `setupPhase4Sheets()`.
+6. Deploy lại Apps Script Web App.
+7. Test local bằng `python3 -m http.server 8000`.
+8. Tạo báo cáo, thử chặn PDF khi thiếu Zalo/consent, sau đó nhập Zalo/consent và In/Lưu PDF.
+9. Mở Google Sheet kiểm tra `leads`, `logs`, `dashboard`, `followups`, `message_templates`.
+10. Deploy GitHub Pages và test lại.
+
+`admin.html` Phase 4 có:
+
+- Cảnh báo nội bộ: “Trang nội bộ Brian – không chia sẻ công khai.”
+- Overview stats.
+- Funnel conversion rates.
+- Follow-up counts.
+- Package interest summary.
+- Message template dropdown, textarea và copy button.
+- Nút mở Google Sheet.
+
+Admin public API chỉ trả aggregate stats và message templates, không trả danh sách tên khách hoặc số Zalo/SĐT.
+
 ## Test Phase 2
 
 Sau mỗi lần sửa, chạy lại:
@@ -280,23 +329,40 @@ Expected: `true`.
 
 Checklist:
 
-- Generate report không nhập phone vẫn tạo được báo cáo và lưu status `report_generated`.
+- Generate report không nhập phone vẫn tạo được báo cáo và lưu event `report_generated`, status `new_report_generated`.
 - Bấm `Tải báo cáo TXT` vẫn tải được, status `txt_downloaded`.
-- Bấm `In/Lưu PDF` gọi browser print, status `pdf_requested`.
-- Chọn gói thiếu phone/consent thì báo lỗi và chưa ghi `paid_report_requested`.
-- Chọn gói đủ phone/consent thì lưu `selected_package` và status `paid_report_requested`.
+- Bấm `In/Lưu PDF` thiếu Zalo/consent thì bị chặn tại Zalo gate.
+- Bấm `In/Lưu PDF` đủ Zalo/consent thì gọi browser print, event `zalo_submitted` và `pdf_downloaded`.
+- Chọn gói lưu `selected_package` và event `package_clicked`.
+- Chọn add-on lưu `selected_addon` và event `addon_clicked`.
 - Sync tắt thì website vẫn chạy localStorage.
 - Sync lỗi thì payload vào pending queue.
 - Admin retry sync làm pending queue giảm khi Web App URL đúng.
 - Tab `logs` ghi event chính.
 
+## Test Phase 4
+
+Checklist sau khi sửa:
+
+- `node --check app.js`.
+- `node --check google-apps-script/Code.gs`.
+- `Run Test Case 001` PASS.
+- Tạo report vẫn hoạt động và không fallback content.
+- Bấm `In/Lưu PDF` khi thiếu Zalo/consent bị chặn nhẹ nhàng.
+- Nhập Zalo/SĐT hợp lệ và tick consent thì `In/Lưu PDF` chạy browser print.
+- Google Sheet nhận `report_generated`, `pdf_gate_viewed`, `zalo_submitted`, `pdf_downloaded`, `package_clicked`, `addon_clicked`.
+- `leads` có `lead_status_label`, `lead_temperature`, `recommended_package`, `follow_up_due_date`.
+- `dashboard`, `followups`, `message_templates` được tạo.
+- `admin.html` tải aggregate stats và không hiển thị tên/Zalo chi tiết.
+- Copy message template hoạt động.
+
 ## Bảo mật shared_secret
 
 `shared_secret` trong frontend chỉ là lớp bảo vệ cơ bản vì website GitHub Pages là public. Người có kỹ thuật vẫn có thể xem JS trong DevTools. Nếu cần bảo mật nghiêm túc, Phase 3 nên có backend riêng.
 
-## Admin Phase 2 cũ
+## Admin Phase 4
 
-Admin placeholder đã được nâng cấp thành Admin Lead Sync Phase 2.
+Admin placeholder đã được nâng cấp thành Admin Lead CRM Phase 4. Trang này không có login thật, chỉ nên dùng nội bộ và không chia sẻ công khai.
 
 ## Các lỗi cấm mắc
 

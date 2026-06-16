@@ -7,7 +7,7 @@
   const LEADS_STORAGE_KEY = "brian_numerologist_free_leads_v1";
   const PENDING_LEADS_STORAGE_KEY = "brian_numerologist_pending_leads";
   const LEAD_ID_STORAGE_KEY = "brian_numerologist_current_lead_id";
-  const APP_VERSION = "free_mvp_v1_phase3_print";
+  const APP_VERSION = "free_mvp_v1_phase4_lead_crm";
   const GOOGLE_SHEET_CONFIG = {
     google_apps_script_web_app_url: "https://script.google.com/macros/s/AKfycby5GujG0AlO6fpZA69LoF0IiD8t6oaEjE2FyeaNIpTfGROwiSNtPKhaDYeigzDEAdCQ/exec",
     google_sheet_url: "https://docs.google.com/spreadsheets/d/11q34k1QhhgSwishOx9QqFabRrjvElbpRfU6PE5UlmrM/edit?gid=0#gid=0",
@@ -70,28 +70,128 @@
   const SERVICE_PACKAGES = Object.freeze({
     hat_giong_thau_hieu: {
       display_name: "Hạt Giống Thấu Hiểu",
-      short_description: "Gói nền cho người mới bắt đầu, tập trung vào 4 chỉ số cốt lõi."
+      price: 199000,
+      price_display: "199.000đ",
+      short_description: "4 chỉ số cốt lõi, PDF 80 trang và 25 phút tư vấn.",
+      category: "personal"
     },
     lo_trinh_giai_ma: {
       display_name: "Lộ Trình Giải Mã",
-      short_description: "Mở rộng từ cốt lõi sang các chỉ số bổ sung và các lớp nội tâm."
+      price: 399000,
+      price_display: "399.000đ",
+      short_description: "Phân tích cá nhân đầy đủ hơn, PDF 120 trang và 45 phút tư vấn.",
+      category: "personal"
     },
     ban_do_kien_tao: {
       display_name: "Bản Đồ Kiến Tạo",
-      short_description: "Bản đồ toàn diện hơn, kết hợp cốt lõi, bổ sung, chu kỳ và định hướng."
+      price: 499000,
+      price_display: "499.000đ",
+      short_description: "Phân tích năng lượng cá nhân, dự báo giai đoạn và định hướng phát triển.",
+      category: "personal"
     },
-    toi_uu_doanh_nghiep: {
-      display_name: "Tối Ưu Doanh Nghiệp",
-      short_description: "Dành cho tên thương hiệu, cửa hàng, đối tác, đội nhóm hoặc kinh doanh."
+    doanh_nghiep_khoi_nghiep: {
+      display_name: "Thần Số Học Doanh Nghiệp - Gói Khởi Nghiệp",
+      price: 1688000,
+      price_display: "1.688.000đ",
+      short_description: "Phân tích chủ doanh nghiệp, tên/ngày vận hành, HR định hướng và 120 phút tư vấn.",
+      category: "business"
     },
-    thau_hieu_moi_quan_he: {
-      display_name: "Thấu Hiểu Mối Quan Hệ",
-      short_description: "Dành cho vợ chồng, người yêu, gia đình, bạn bè, đối tác hoặc đội nhóm."
+    doanh_nghiep_doanh_nghiep: {
+      display_name: "Thần Số Học Doanh Nghiệp - Gói Doanh Nghiệp",
+      price: 2368000,
+      price_display: "2.368.000đ",
+      short_description: "Phân tích chủ doanh nghiệp, tương thích doanh nghiệp, thời điểm vàng và 150 phút tư vấn.",
+      category: "business"
     },
-    kien_tao_ban_than: {
-      display_name: "Kiến Tạo Bản Thân",
-      short_description: "Gói đi sâu toàn diện: bản đồ cá nhân, chu kỳ, nghề nghiệp, tên phụ và chiến lược phát triển."
+    cap_doi_moi_quan_he: {
+      display_name: "Gói Cặp Đôi / Mối Quan Hệ",
+      price: 1399000,
+      price_display: "1.399.000đ",
+      short_description: "Phân tích 2 người, tương thích quan hệ, dự báo phát triển và 120 phút tư vấn.",
+      category: "relationship"
     }
+  });
+
+  const SERVICE_ADDONS = Object.freeze({
+    tuong_thich_moi_quan_he: {
+      display_name: "Đánh Giá Tương Thích Mối Quan Hệ",
+      price: 499000,
+      price_display: "499.000đ",
+      short_description: "Đọc tương thích theo chỉ số cốt lõi và chu kỳ thời điểm."
+    },
+    ten_phu_nickname: {
+      display_name: "Tư Vấn Tên Phụ/Nickname Cải Vận",
+      price: 149000,
+      price_display: "149.000đ",
+      short_description: "Gợi ý tên phụ/nickname và phân tích các phương án phù hợp."
+    },
+    dinh_huong_nghe_nghiep: {
+      display_name: "Định Hướng Nghề Nghiệp",
+      price: 149000,
+      price_display: "149.000đ",
+      short_description: "Gợi ý nhóm nghề và đọc một lựa chọn cá nhân đang cân nhắc."
+    },
+    checklist_3_thang: {
+      display_name: "Checklist 3 Tháng Cá Nhân",
+      price: 139000,
+      price_display: "139.000đ",
+      short_description: "Checklist hành động theo ngày trong 3 tháng."
+    },
+    checklist_6_thang: {
+      display_name: "Checklist 6 Tháng",
+      price: 239000,
+      price_display: "239.000đ",
+      short_description: "Checklist cá nhân và lịch hành động 6 tháng."
+    },
+    checklist_12_thang: {
+      display_name: "Checklist 12 Tháng",
+      price: 399000,
+      price_display: "399.000đ",
+      short_description: "Checklist cá nhân và lịch hành động 12 tháng."
+    }
+  });
+
+  const LEAD_STATUS_LABELS = Object.freeze({
+    new_report_generated: "Mới tạo báo cáo",
+    pdf_downloaded: "Đã tải PDF",
+    package_clicked: "Đã bấm chọn gói",
+    addon_clicked: "Đã bấm add-on",
+    zalo_submitted: "Đã nhập Zalo",
+    contacted: "Đã liên hệ",
+    consulted: "Đã tư vấn",
+    converted: "Đã chốt khách",
+    not_ready: "Chưa sẵn sàng",
+    no_response: "Chưa phản hồi",
+    invalid_contact: "Liên hệ không hợp lệ",
+    txt_downloaded: "Đã tải TXT"
+  });
+
+  const LEAD_STATUS_HEAT = Object.freeze({
+    new_report_generated: "warm",
+    pdf_downloaded: "warm",
+    package_clicked: "hot",
+    addon_clicked: "hot",
+    zalo_submitted: "very_hot",
+    contacted: "hot",
+    consulted: "hot",
+    converted: "converted",
+    not_ready: "cold",
+    no_response: "warm",
+    invalid_contact: "cold",
+    txt_downloaded: "warm"
+  });
+
+  const MESSAGE_TEMPLATE_FALLBACKS = Object.freeze({
+    report_generated_intro:
+      "Chào {{full_name}}, Brian đã thấy bạn vừa tạo bản FREE. Bản này mở 4 trụ cột đầu tiên: Đường Đời {{life_path}}, Sứ Mệnh {{destiny}}, Linh Hồn {{soul}}. Nếu bạn muốn Brian đọc sâu hơn theo bối cảnh hiện tại, mình có thể gợi ý hướng phù hợp.",
+    pdf_downloaded_followup:
+      "Chào {{full_name}}, bạn đã lưu bản PDF FREE. Nếu phần nào trong báo cáo khiến bạn thấy đúng với mình, Brian có thể giúp đọc sâu hơn để biến thông tin thành hướng hành động rõ ràng.",
+    package_clicked_hot:
+      "Chào {{full_name}}, Brian thấy bạn quan tâm gói {{selected_package}}. Với bản đồ hiện tại, gợi ý nhẹ là {{recommended_package}}. Nếu tiện, mình có thể tư vấn nhanh để bạn chọn đúng mức cần thiết.",
+    discount_reminder:
+      "Chào {{full_name}}, nhắc nhẹ bạn đang có ưu đãi {{discount_percent}}% trong {{discount_days}} ngày sau bản FREE. Ưu đãi chỉ là hỗ trợ quyết định, quan trọng nhất vẫn là chọn đúng gói phù hợp với nhu cầu hiện tại.",
+    consultation_booking:
+      "Chào {{full_name}}, nếu bạn muốn đặt lịch tư vấn, hãy gửi Brian 2-3 khung giờ thuận tiện. Brian sẽ xác nhận lịch và chuẩn bị phần đọc trọng tâm cho bản đồ của bạn."
   });
 
   const PRINT_TOC_ITEMS = Object.freeze([
@@ -244,6 +344,7 @@
   let currentReportData = null;
   let currentLeadId = null;
   let selectedPackage = null;
+  let selectedAddon = null;
 
   function normalizeVietnameseName(name) {
     return String(name || "")
@@ -1384,6 +1485,122 @@
     };
   }
 
+  function buildLocalAdminStats() {
+    const leads = getStoredLeads();
+    const totals = {
+      total_leads: leads.length,
+      pdf_downloaded: 0,
+      package_clicked: 0,
+      addon_clicked: 0,
+      zalo_submitted: 0,
+      very_hot_leads: 0,
+      converted: 0
+    };
+    const packages = {};
+
+    leads.forEach((lead) => {
+      const status = normalizeLeadStatus(lead.lead_status || lead.status);
+      if (status === "pdf_downloaded" || lead.requested_pdf) totals.pdf_downloaded += 1;
+      if (lead.selected_package) {
+        totals.package_clicked += 1;
+        const label = lead.selected_package_name || getPackageDisplayName(lead.selected_package) || lead.selected_package;
+        packages[label] = (packages[label] || 0) + 1;
+      }
+      if (lead.selected_addon) totals.addon_clicked += 1;
+      if (lead.phone_or_zalo && lead.consent_to_contact) totals.zalo_submitted += 1;
+      if ((lead.lead_temperature || getLeadHeat(status, lead)) === "very_hot") totals.very_hot_leads += 1;
+      if (status === "converted") totals.converted += 1;
+    });
+
+    return {
+      ok: true,
+      source: "localStorage",
+      updated_at: new Date().toISOString(),
+      totals,
+      funnel_rates: {
+        report_to_pdf: totals.total_leads ? totals.pdf_downloaded / totals.total_leads : 0,
+        pdf_to_package: totals.pdf_downloaded ? totals.package_clicked / totals.pdf_downloaded : 0,
+        package_to_zalo: totals.package_clicked ? totals.zalo_submitted / totals.package_clicked : 0,
+        zalo_to_converted: totals.zalo_submitted ? totals.converted / totals.zalo_submitted : 0
+      },
+      package_interest: Object.entries(packages).map(([name, count]) => ({ name, count })),
+      followups: {
+        urgent: leads.filter((lead) => lead.follow_up_status === "urgent").length,
+        pending: leads.filter((lead) => lead.follow_up_status === "pending").length,
+        retry: leads.filter((lead) => lead.follow_up_status === "retry").length
+      }
+    };
+  }
+
+  async function fetchGoogleSheetJson(action) {
+    const config = getGoogleSheetConfig();
+    if (!config.google_apps_script_web_app_url) {
+      throw new Error("Google Apps Script Web App URL is not configured.");
+    }
+    const url = new URL(config.google_apps_script_web_app_url);
+    url.searchParams.set("action", action);
+    url.searchParams.set("shared_secret", config.shared_secret);
+    const response = await fetch(url.toString(), { method: "GET" });
+    const text = await response.text();
+    let payload = {};
+    try {
+      payload = text ? JSON.parse(text) : {};
+    } catch (error) {
+      throw new Error(text || "Invalid Google Sheet response.");
+    }
+    if (!response.ok || payload.ok === false) {
+      throw new Error(payload.message || "Google Sheet request failed.");
+    }
+    return payload;
+  }
+
+  async function fetchAdminStats() {
+    const config = getGoogleSheetConfig();
+    if (!config.enable_google_sheet_sync || !config.google_apps_script_web_app_url) {
+      return buildLocalAdminStats();
+    }
+    try {
+      return await fetchGoogleSheetJson("admin_stats");
+    } catch (error) {
+      console.warn(error);
+      return {
+        ...buildLocalAdminStats(),
+        warning: error.message
+      };
+    }
+  }
+
+  function getLocalMessageTemplates() {
+    return Object.entries(MESSAGE_TEMPLATE_FALLBACKS).map(([template_key, message_text]) => ({
+      template_key,
+      template_name: template_key.replace(/_/g, " "),
+      message_text,
+      is_active: true
+    }));
+  }
+
+  async function fetchMessageTemplates() {
+    const config = getGoogleSheetConfig();
+    if (!config.enable_google_sheet_sync || !config.google_apps_script_web_app_url) {
+      return {
+        ok: true,
+        source: "local",
+        templates: getLocalMessageTemplates()
+      };
+    }
+    try {
+      return await fetchGoogleSheetJson("message_templates");
+    } catch (error) {
+      console.warn(error);
+      return {
+        ok: true,
+        source: "local",
+        warning: error.message,
+        templates: getLocalMessageTemplates()
+      };
+    }
+  }
+
   function generateLeadId() {
     const now = new Date();
     const pad = (value) => String(value).padStart(2, "0");
@@ -1448,6 +1665,159 @@
     return sourceFromUrl || getElement("leadSource")?.value || "website";
   }
 
+  function getSessionId() {
+    const key = "brian_numerologist_session_id";
+    if (typeof sessionStorage === "undefined") {
+      return `SESSION_${Date.now()}_${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+    }
+
+    let sessionId = sessionStorage.getItem(key);
+    if (!sessionId) {
+      sessionId = `SESSION_${Date.now()}_${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+      sessionStorage.setItem(key, sessionId);
+    }
+    return sessionId;
+  }
+
+  function normalizeLeadStatus(status) {
+    const map = {
+      report_generated: "new_report_generated",
+      pdf_requested: "pdf_downloaded",
+      paid_report_requested: "package_clicked",
+      paid_package_clicked: "package_clicked"
+    };
+    return map[status] || status || "new_report_generated";
+  }
+
+  function getLeadStatusLabel(status) {
+    return LEAD_STATUS_LABELS[normalizeLeadStatus(status)] || "Mới";
+  }
+
+  function getLeadHeat(status, lead = {}) {
+    const normalizedStatus = normalizeLeadStatus(status);
+    if (normalizedStatus === "converted") {
+      return "converted";
+    }
+    if (lead.phone_or_zalo && lead.consent_to_contact && ["package_clicked", "addon_clicked", "zalo_submitted"].includes(normalizedStatus)) {
+      return "very_hot";
+    }
+    return LEAD_STATUS_HEAT[normalizedStatus] || "warm";
+  }
+
+  function getPackageByKey(packageKey) {
+    return SERVICE_PACKAGES[packageKey] || null;
+  }
+
+  function getAddonByKey(addonKey) {
+    return SERVICE_ADDONS[addonKey] || null;
+  }
+
+  function getPackageDisplayName(packageKey) {
+    return getPackageByKey(packageKey)?.display_name || "";
+  }
+
+  function getAddonDisplayName(addonKey) {
+    return getAddonByKey(addonKey)?.display_name || "";
+  }
+
+  function buildRecommendation(data = currentReportData, context = {}) {
+    const clickedPackage = context.selected_package || selectedPackage;
+    const clickedPackageData = getPackageByKey(clickedPackage);
+
+    if (clickedPackageData?.category === "business") {
+      return {
+        recommended_package: clickedPackageData.display_name,
+        recommendation_reason: "Bạn vừa quan tâm nhóm doanh nghiệp, nên Brian ưu tiên đọc theo bối cảnh kinh doanh hiện tại."
+      };
+    }
+
+    if (clickedPackageData?.category === "relationship") {
+      return {
+        recommended_package: "Gói Cặp Đôi / Mối Quan Hệ",
+        recommendation_reason: "Bạn vừa quan tâm nhóm quan hệ, nên hướng đọc nên đặt trọng tâm vào tương thích và cách phối hợp giữa hai người."
+      };
+    }
+
+    const karmicDebts = data?.karmic_debts || [];
+    const masterNumbers = [
+      ...(data?.master_numbers?.primary_master_numbers || []),
+      ...(data?.master_numbers?.intermediate_master_numbers || [])
+    ];
+    if (karmicDebts.length || masterNumbers.length) {
+      return {
+        recommended_package: "Bản Đồ Kiến Tạo",
+        recommendation_reason: "Bản đồ có Karmic/Master cần đọc nhiều lớp hơn để tránh nhìn một chỉ số theo hướng quá đơn giản."
+      };
+    }
+
+    const bases = [
+      data?.core_numbers?.life_path_base,
+      data?.core_numbers?.destiny_base,
+      data?.core_numbers?.soul_base
+    ];
+    if (bases.includes(8)) {
+      return {
+        recommended_package: "Bản Đồ Kiến Tạo",
+        recommendation_reason: "Năng lượng 8 liên quan nhiều đến quyền lực, tiền bạc, trách nhiệm và vận hành nguồn lực; nên đọc sâu theo chiến lược phát triển."
+      };
+    }
+
+    if (context.event_type === "pdf_downloaded") {
+      return {
+        recommended_package: "Hạt Giống Thấu Hiểu hoặc Lộ Trình Giải Mã",
+        recommendation_reason: "Bạn đã lưu bản FREE; bước phù hợp là chọn mức đọc vừa đủ để biến thông tin thành hướng hành động rõ hơn."
+      };
+    }
+
+    return {
+      recommended_package: "Lộ Trình Giải Mã",
+      recommendation_reason: "Đây là gợi ý nhẹ để mở rộng từ 4 trụ cột đầu tiên sang các lớp bổ sung, không phải kết luận bắt buộc."
+    };
+  }
+
+  function computeFollowUpStatus(status) {
+    const normalizedStatus = normalizeLeadStatus(status);
+    if (["package_clicked", "addon_clicked", "zalo_submitted"].includes(normalizedStatus)) {
+      return "urgent";
+    }
+    if (normalizedStatus === "pdf_downloaded") {
+      return "pending";
+    }
+    if (normalizedStatus === "no_response") {
+      return "retry";
+    }
+    if (normalizedStatus === "not_ready") {
+      return "nurture";
+    }
+    if (normalizedStatus === "converted") {
+      return "done";
+    }
+    return "not_required_yet";
+  }
+
+  function addDaysIso(days) {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    return date.toISOString().slice(0, 10);
+  }
+
+  function computeFollowUpDueDate(status) {
+    const normalizedStatus = normalizeLeadStatus(status);
+    if (["package_clicked", "addon_clicked", "zalo_submitted"].includes(normalizedStatus)) {
+      return addDaysIso(0);
+    }
+    if (normalizedStatus === "pdf_downloaded") {
+      return addDaysIso(1);
+    }
+    if (normalizedStatus === "no_response") {
+      return addDaysIso(2);
+    }
+    if (normalizedStatus === "not_ready") {
+      return addDaysIso(7);
+    }
+    return "";
+  }
+
   function getFormInput() {
     return {
       full_name_original: getElement("fullName")?.value.trim() || "",
@@ -1497,13 +1867,15 @@
 
     if (!input.phone_or_zalo) {
       errors.push(`Để ${reason}, vui lòng nhập số điện thoại/Zalo.`);
+    } else if (!isValidPhoneOrZalo(input.phone_or_zalo)) {
+      errors.push("Số điện thoại/Zalo chưa hợp lệ. Vui lòng kiểm tra lại trước khi tiếp tục.");
     }
 
     if (!input.consent_to_contact) {
-      errors.push(`Để ${reason}, vui lòng tick đồng ý để Brian-Numerologist lưu thông tin và liên hệ.`);
+      errors.push(`Để ${reason}, vui lòng tick đồng ý để Brian liên hệ qua Zalo/SĐT nhằm tư vấn bản phân tích phù hợp.`);
     }
 
-    phoneField?.classList.toggle("attention-field", !input.phone_or_zalo);
+    phoneField?.classList.toggle("attention-field", !input.phone_or_zalo || !isValidPhoneOrZalo(input.phone_or_zalo));
     consentField?.classList.toggle("attention-field", !input.consent_to_contact);
 
     if (errors.length) {
@@ -1516,6 +1888,11 @@
     phoneField?.classList.remove("attention-field");
     consentField?.classList.remove("attention-field");
     return true;
+  }
+
+  function isValidPhoneOrZalo(value) {
+    const digits = String(value || "").replace(/\D/g, "");
+    return digits.length >= 8 && digits.length <= 15;
   }
 
   function renderCalculationSummary(data) {
@@ -1599,6 +1976,7 @@
           <article class="package-card">
             <div>
               <h3>${escapeHtml(pack.display_name)}</h3>
+              <strong class="package-price">${escapeHtml(pack.price_display)}</strong>
               <p>${escapeHtml(pack.short_description)}</p>
             </div>
             <button class="secondary-button package-button" type="button" data-package-key="${escapeHtml(key)}">Tôi quan tâm gói này</button>
@@ -1612,15 +1990,59 @@
     });
   }
 
+  function renderAddons() {
+    const grid = getElement("addonsGrid");
+    if (!grid) {
+      return;
+    }
+
+    grid.innerHTML = Object.entries(SERVICE_ADDONS)
+      .map(
+        ([key, addon]) => `
+          <article class="addon-card">
+            <div>
+              <h3>${escapeHtml(addon.display_name)}</h3>
+              <strong class="package-price">${escapeHtml(addon.price_display)}</strong>
+              <p>${escapeHtml(addon.short_description)}</p>
+            </div>
+            <button class="ghost-button addon-button" type="button" data-addon-key="${escapeHtml(key)}">Tôi quan tâm add-on</button>
+          </article>
+        `
+      )
+      .join("");
+
+    grid.querySelectorAll(".addon-button").forEach((button) => {
+      button.addEventListener("click", () => handleAddonClick(button.dataset.addonKey));
+    });
+  }
+
+  function renderConversionCta(data = currentReportData) {
+    const panel = getElement("conversionCta");
+    const recommendationBox = getElement("recommendationBox");
+    if (!panel || !data) {
+      return;
+    }
+
+    const recommendation = buildRecommendation(data);
+    if (recommendationBox) {
+      recommendationBox.innerHTML = `
+        <strong>Gợi ý nhẹ từ bản FREE: ${escapeHtml(recommendation.recommended_package)}</strong>
+        <span>${escapeHtml(recommendation.recommendation_reason)}</span>
+      `;
+    }
+    panel.hidden = false;
+  }
+
   function renderComputedData(data, options = {}) {
     currentReportData = attachReport(data);
     renderCalculationSummary(currentReportData);
     renderReportIntro(currentReportData);
     renderReportAccordion(currentReportData.report.sections);
     preparePrintLayout(currentReportData);
+    renderConversionCta(currentReportData);
 
     if (options.saveLead !== false) {
-      updateLeadStatus("report_generated", {
+      updateLeadStatus("new_report_generated", {
         event_type: "report_generated"
       });
     }
@@ -1651,21 +2073,47 @@
     const leadId = overrides.lead_id || existingLead.lead_id || getOrCreateLeadId();
     const createdAt = existingLead.created_at || now;
     const selectedPackageValue = overrides.selected_package ?? selectedPackage ?? existingLead.selected_package ?? null;
+    const selectedAddonValue = overrides.selected_addon ?? selectedAddon ?? existingLead.selected_addon ?? null;
+    const packageData = getPackageByKey(selectedPackageValue);
+    const addonData = getAddonByKey(selectedAddonValue);
     const coreNumbers = data?.core_numbers || {};
+    const leadStatus = normalizeLeadStatus(overrides.lead_status || overrides.status || existingLead.lead_status || existingLead.status || "new_report_generated");
+    const recommendation = buildRecommendation(data, {
+      selected_package: selectedPackageValue,
+      event_type: overrides.event_type || statusToEventType(leadStatus)
+    });
+    const leadDraft = {
+      phone_or_zalo: input.phone_or_zalo || data?.input?.phone_or_zalo || "",
+      consent_to_contact: input.consent_to_contact
+    };
+    const leadTemperature = overrides.lead_temperature || getLeadHeat(leadStatus, leadDraft);
 
     return {
       lead_id: leadId,
       created_at: createdAt,
       last_updated_at: now,
       updated_at: now,
-      status: overrides.status || existingLead.status || "new",
+      status: leadStatus,
+      lead_status: leadStatus,
+      lead_status_label: getLeadStatusLabel(leadStatus),
+      lead_temperature: leadTemperature,
       requested_pdf: Boolean(overrides.requested_pdf ?? existingLead.requested_pdf),
       requested_paid_report: Boolean(overrides.requested_paid_report ?? existingLead.requested_paid_report),
       selected_package: selectedPackageValue,
+      selected_package_name: packageData?.display_name || existingLead.selected_package_name || "",
+      selected_package_price: packageData?.price || existingLead.selected_package_price || "",
+      selected_package_price_display: packageData?.price_display || existingLead.selected_package_price_display || "",
+      selected_addon: selectedAddonValue,
+      selected_addon_name: addonData?.display_name || existingLead.selected_addon_name || "",
+      selected_addon_price: addonData?.price || existingLead.selected_addon_price || "",
+      selected_addon_price_display: addonData?.price_display || existingLead.selected_addon_price_display || "",
+      recommended_package: recommendation.recommended_package,
+      recommendation_reason: recommendation.recommendation_reason,
       consent_to_contact: input.consent_to_contact,
       full_name_original: data?.input?.full_name_original || input.full_name_original,
       birth_date: data?.input?.birth_date || input.birth_date,
       phone_or_zalo: input.phone_or_zalo || data?.input?.phone_or_zalo || "",
+      zalo_phone: input.phone_or_zalo || data?.input?.phone_or_zalo || "",
       email: input.email || data?.input?.email || "",
       gender: input.gender || data?.input?.gender || "khong_cung_cap",
       note: input.note || data?.input?.note || "",
@@ -1681,6 +2129,25 @@
       personality: coreNumbers.personality || "",
       karmic_debts_text: (data?.karmic_debts || []).join(", "),
       master_numbers_text: formatMasterNumbersForLead(data),
+      report_summary: `Đường Đời ${coreNumbers.life_path || ""}, Sứ Mệnh ${coreNumbers.destiny || ""}, Linh Hồn ${coreNumbers.soul || ""}`,
+      last_action: overrides.event_type || statusToEventType(leadStatus),
+      last_action_at: now,
+      pdf_downloaded_at: leadStatus === "pdf_downloaded" ? now : existingLead.pdf_downloaded_at || "",
+      package_clicked_at: leadStatus === "package_clicked" ? now : existingLead.package_clicked_at || "",
+      addon_clicked_at: leadStatus === "addon_clicked" ? now : existingLead.addon_clicked_at || "",
+      zalo_submitted_at: leadStatus === "zalo_submitted" ? now : existingLead.zalo_submitted_at || "",
+      follow_up_status: overrides.follow_up_status || computeFollowUpStatus(leadStatus),
+      follow_up_due_date: overrides.follow_up_due_date || computeFollowUpDueDate(leadStatus),
+      follow_up_note: overrides.follow_up_note || existingLead.follow_up_note || "",
+      contacted_at: existingLead.contacted_at || "",
+      consulted_at: existingLead.consulted_at || "",
+      converted_at: existingLead.converted_at || "",
+      conversion_value: existingLead.conversion_value || "",
+      consultant_note: existingLead.consultant_note || "",
+      session_id: overrides.session_id || existingLead.session_id || getSessionId(),
+      source_url: typeof window !== "undefined" ? window.location.href : "",
+      user_agent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+      event_count: Number(existingLead.event_count || 0) + 1,
       local_backup_id: existingLead.local_backup_id || `LOCAL_${Date.now()}`,
       core_numbers: coreNumbers,
       karmic_debts: data?.karmic_debts || [],
@@ -1737,11 +2204,15 @@
   }
 
   function statusToEventType(status) {
-    if (status === "paid_report_requested") {
-      return "paid_package_clicked";
-    }
-
-    return status || "report_generated";
+    const map = {
+      new_report_generated: "report_generated",
+      pdf_downloaded: "pdf_downloaded",
+      package_clicked: "package_clicked",
+      addon_clicked: "addon_clicked",
+      zalo_submitted: "zalo_submitted",
+      paid_report_requested: "paid_report_requested"
+    };
+    return map[status] || status || "report_generated";
   }
 
   function buildLeadPayload(eventType, status, extraData = {}) {
@@ -1750,21 +2221,27 @@
       status
     });
     const config = getGoogleSheetConfig();
+    const normalizedStatus = normalizeLeadStatus(status || lead.lead_status || lead.status);
+    const resolvedEventType = eventType || statusToEventType(normalizedStatus);
 
     return {
       shared_secret: config.shared_secret,
-      event_type: eventType || statusToEventType(status),
+      event_type: resolvedEventType,
+      event_id: `EVT_${Date.now()}_${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
       lead: {
         created_at: lead.created_at || "",
         last_updated_at: lead.last_updated_at || lead.updated_at || "",
         lead_id: lead.lead_id || "",
         full_name_original: lead.full_name_original || "",
+        full_name: lead.full_name_original || "",
         birth_date: lead.birth_date || "",
         phone_or_zalo: lead.phone_or_zalo || "",
+        zalo_phone: lead.zalo_phone || lead.phone_or_zalo || "",
         email: lead.email || "",
         gender: lead.gender || "",
         note: lead.note || "",
         consent_to_contact: Boolean(lead.consent_to_contact),
+        consent: Boolean(lead.consent_to_contact),
         entry_mode: lead.entry_mode || "customer_self",
         source: lead.source || "website",
         device_type: lead.device_type || "unknown",
@@ -1775,9 +2252,42 @@
         birthday: lead.birthday || lead.core_numbers?.birthday || "",
         personality: lead.personality || lead.core_numbers?.personality || "",
         karmic_debts: lead.karmic_debts_text || (lead.karmic_debts || []).join(", "),
+        karmic_debt: lead.karmic_debts_text || (lead.karmic_debts || []).join(", "),
         master_numbers: lead.master_numbers_text || "",
+        master_number: lead.master_numbers_text || "",
+        report_summary: lead.report_summary || "",
         selected_package: lead.selected_package || "",
-        status: lead.status || status || "new",
+        selected_package_name: lead.selected_package_name || getPackageDisplayName(lead.selected_package) || "",
+        selected_package_price: lead.selected_package_price || "",
+        selected_package_price_display: lead.selected_package_price_display || "",
+        selected_addon: lead.selected_addon || "",
+        selected_addon_name: lead.selected_addon_name || getAddonDisplayName(lead.selected_addon) || "",
+        selected_addon_price: lead.selected_addon_price || "",
+        selected_addon_price_display: lead.selected_addon_price_display || "",
+        recommended_package: lead.recommended_package || "",
+        recommendation_reason: lead.recommendation_reason || "",
+        status: normalizedStatus,
+        lead_status: normalizedStatus,
+        lead_status_label: lead.lead_status_label || getLeadStatusLabel(normalizedStatus),
+        lead_temperature: lead.lead_temperature || getLeadHeat(normalizedStatus, lead),
+        last_action: resolvedEventType,
+        last_action_at: lead.last_action_at || new Date().toISOString(),
+        pdf_downloaded_at: lead.pdf_downloaded_at || "",
+        package_clicked_at: lead.package_clicked_at || "",
+        addon_clicked_at: lead.addon_clicked_at || "",
+        zalo_submitted_at: lead.zalo_submitted_at || "",
+        follow_up_status: lead.follow_up_status || computeFollowUpStatus(normalizedStatus),
+        follow_up_due_date: lead.follow_up_due_date || computeFollowUpDueDate(normalizedStatus),
+        follow_up_note: lead.follow_up_note || "",
+        contacted_at: lead.contacted_at || "",
+        consulted_at: lead.consulted_at || "",
+        converted_at: lead.converted_at || "",
+        conversion_value: lead.conversion_value || "",
+        consultant_note: lead.consultant_note || "",
+        source_url: lead.source_url || (typeof window !== "undefined" ? window.location.href : ""),
+        user_agent: lead.user_agent || (typeof navigator !== "undefined" ? navigator.userAgent : ""),
+        session_id: lead.session_id || getSessionId(),
+        event_count: lead.event_count || 1,
         local_backup_id: lead.local_backup_id || ""
       },
       meta: {
@@ -1785,7 +2295,8 @@
         app_version: APP_VERSION,
         user_agent: typeof navigator !== "undefined" ? navigator.userAgent : "",
         screen_width: typeof window !== "undefined" ? window.innerWidth : "",
-        screen_height: typeof window !== "undefined" ? window.innerHeight : ""
+        screen_height: typeof window !== "undefined" ? window.innerHeight : "",
+        session_id: lead.session_id || getSessionId()
       }
     };
   }
@@ -1949,19 +2460,23 @@
     }
 
     const existingLead = currentReportData.lead || {};
+    const normalizedStatus = normalizeLeadStatus(status);
     const extra = {
-      status,
+      status: normalizedStatus,
+      lead_status: normalizedStatus,
+      event_type: overrides.event_type || statusToEventType(normalizedStatus),
       requested_pdf:
-        overrides.requested_pdf ?? (status === "pdf_requested" ? true : Boolean(existingLead.requested_pdf)),
+        overrides.requested_pdf ?? (normalizedStatus === "pdf_downloaded" ? true : Boolean(existingLead.requested_pdf)),
       requested_paid_report:
         overrides.requested_paid_report ??
-        (status === "paid_report_requested" ? true : Boolean(existingLead.requested_paid_report)),
-      selected_package: overrides.selected_package ?? selectedPackage ?? existingLead.selected_package ?? null
+        (normalizedStatus === "package_clicked" ? true : Boolean(existingLead.requested_paid_report)),
+      selected_package: overrides.selected_package ?? selectedPackage ?? existingLead.selected_package ?? null,
+      selected_addon: overrides.selected_addon ?? selectedAddon ?? existingLead.selected_addon ?? null
     };
     currentReportData.lead = buildLeadData(currentReportData, extra);
     return saveLead(currentReportData.lead, {
-      event_type: overrides.event_type || statusToEventType(status),
-      status
+      event_type: overrides.event_type || statusToEventType(normalizedStatus),
+      status: normalizedStatus
     });
   }
 
@@ -1999,6 +2514,9 @@
       "created_at",
       "updated_at",
       "status",
+      "lead_status",
+      "lead_status_label",
+      "lead_temperature",
       "full_name_original",
       "birth_date",
       "phone_or_zalo",
@@ -2009,6 +2527,17 @@
       "source",
       "device_type",
       "selected_package",
+      "selected_package_name",
+      "selected_package_price",
+      "selected_addon",
+      "selected_addon_name",
+      "selected_addon_price",
+      "recommended_package",
+      "recommendation_reason",
+      "follow_up_status",
+      "follow_up_due_date",
+      "last_action",
+      "last_action_at",
       "requested_pdf",
       "requested_paid_report",
       "consent_to_contact",
@@ -2226,14 +2755,27 @@
       return;
     }
 
+    updateLeadStatus("new_report_generated", {
+      event_type: "pdf_gate_viewed"
+    });
+
+    if (!validateContactConsentForPaidAction("tải/In PDF")) {
+      showToast("PDF cần Zalo/SĐT và đồng ý liên hệ để Brian có thể tư vấn bản phân tích phù hợp.", "warning");
+      return;
+    }
+
+    updateLeadStatus("zalo_submitted", {
+      event_type: "zalo_submitted"
+    });
+
     openAllSections();
     preparePrintLayout(currentReportData);
     if (typeof document !== "undefined") {
       document.body.classList.add("is-printing-report");
     }
     showToast("Khi lưu PDF: chọn A4, tắt Headers and footers, bật Background graphics để bản PDF sạch và giữ màu bìa.", "info");
-    updateLeadStatus("pdf_requested", {
-      event_type: "pdf_requested",
+    updateLeadStatus("pdf_downloaded", {
+      event_type: "pdf_downloaded",
       requested_pdf: true
     });
     window.print();
@@ -2273,9 +2815,14 @@
     const pack = SERVICE_PACKAGES[packageKey];
     const box = getElement("packageInterestBox");
     const name = getElement("selectedPackageName");
+    const price = getElement("selectedPackagePrice");
+    const recommendationBox = getElement("recommendationBox");
 
     if (box && name && pack) {
       name.textContent = pack.display_name;
+      if (price) {
+        price.textContent = pack.price_display;
+      }
       box.hidden = false;
     }
 
@@ -2285,17 +2832,83 @@
       return;
     }
 
-    if (!validateContactConsentForPaidAction("chọn gói chuyên sâu")) {
-      showToast("Vui lòng nhập Zalo/SĐT và tick consent trước khi gửi yêu cầu gói chuyên sâu.", "warning");
+    const recommendation = buildRecommendation(currentReportData, {
+      selected_package: packageKey,
+      event_type: "package_clicked"
+    });
+    if (recommendationBox) {
+      recommendationBox.innerHTML = `
+        <strong>Gợi ý đang mở: ${escapeHtml(recommendation.recommended_package)}</strong>
+        <span>${escapeHtml(recommendation.recommendation_reason)}</span>
+      `;
+    }
+
+    updateLeadStatus("package_clicked", {
+      event_type: "package_clicked",
+      selected_package: packageKey,
+      requested_paid_report: true
+    });
+
+    const input = getFormInput();
+    if (!input.phone_or_zalo || !input.consent_to_contact || !isValidPhoneOrZalo(input.phone_or_zalo)) {
+      getElement("phoneOrZalo")?.classList.add("attention-field");
+      getElement("consentToContact")?.classList.add("attention-field");
+      showToast("Brian đã ghi nhận gói quan tâm. Vui lòng nhập Zalo/SĐT và tick đồng ý nếu muốn được tư vấn nhanh.", "warning");
       return;
     }
 
-    updateLeadStatus("paid_report_requested", {
-      event_type: "paid_package_clicked",
+    updateLeadStatus("zalo_submitted", {
+      event_type: "zalo_submitted",
+      selected_package: packageKey,
+      requested_paid_report: true
+    });
+    updateLeadStatus("package_clicked", {
+      event_type: "paid_report_requested",
       selected_package: packageKey,
       requested_paid_report: true
     });
     showToast("Brian đã ghi nhận yêu cầu. Bạn có thể nhắn Zalo 0948909983 để được tư vấn nhanh hơn.", "success");
+  }
+
+  function handleAddonClick(addonKey) {
+    selectedAddon = addonKey;
+    const addon = SERVICE_ADDONS[addonKey];
+    const box = getElement("packageInterestBox");
+    const name = getElement("selectedPackageName");
+    const price = getElement("selectedPackagePrice");
+
+    if (box && name && addon) {
+      name.textContent = addon.display_name;
+      if (price) {
+        price.textContent = addon.price_display;
+      }
+      box.hidden = false;
+    }
+
+    if (!currentReportData) {
+      showValidationError("Hãy tạo báo cáo FREE trước, sau đó chọn add-on để lưu đúng lead.");
+      getElement("leadForm")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    updateLeadStatus("addon_clicked", {
+      event_type: "addon_clicked",
+      selected_addon: addonKey
+    });
+
+    const input = getFormInput();
+    if (!input.phone_or_zalo || !input.consent_to_contact || !isValidPhoneOrZalo(input.phone_or_zalo)) {
+      getElement("phoneOrZalo")?.classList.add("attention-field");
+      getElement("consentToContact")?.classList.add("attention-field");
+      showToast("Brian đã ghi nhận add-on quan tâm. Vui lòng nhập Zalo/SĐT và tick đồng ý nếu muốn được tư vấn.", "warning");
+      return;
+    }
+
+    updateLeadStatus("zalo_submitted", {
+      event_type: "zalo_submitted",
+      selected_addon: addonKey
+    });
+    showToast("Brian đã ghi nhận add-on bạn quan tâm.", "success");
   }
 
   function assertEqual(errors, label, actual, expected) {
@@ -2432,6 +3045,7 @@
 
   async function init() {
     renderPackages();
+    renderAddons();
 
     const status = getElement("libraryStatus");
     try {
@@ -2457,6 +3071,7 @@
     getElement("leadForm")?.addEventListener("submit", handleFormSubmit);
     getElement("downloadTxtButton")?.addEventListener("click", downloadTxt);
     getElement("printPdfButton")?.addEventListener("click", printPdf);
+    getElement("ctaPdfButton")?.addEventListener("click", printPdf);
     getElement("downloadCsvButton")?.addEventListener("click", downloadLeadsCsv);
     getElement("openAllButton")?.addEventListener("click", openAllSections);
     getElement("closeAllButton")?.addEventListener("click", closeAllSections);
@@ -2476,6 +3091,8 @@
     KARMIC_VALUES,
     MASTER_VALUES,
     GOOGLE_SHEET_CONFIG,
+    SERVICE_PACKAGES,
+    SERVICE_ADDONS,
     normalizeVietnameseName,
     splitVietnameseName,
     letterToNumber,
@@ -2508,6 +3125,11 @@
     getEntryMode,
     getSource,
     getGoogleSheetConfig,
+    fetchAdminStats,
+    fetchMessageTemplates,
+    buildLocalAdminStats,
+    getLocalMessageTemplates,
+    escapeHtml,
     buildLeadData,
     buildLeadPayload,
     getStoredLeads,
@@ -2520,6 +3142,7 @@
     getPendingLeadCount,
     updateLeadStatus,
     validateContactConsentForPaidAction,
+    isValidPhoneOrZalo,
     downloadLeadsCsv,
     runTestCase001,
     assertEqual,
@@ -2529,6 +3152,7 @@
     clearValidationErrors,
     showToast,
     handlePackageClick,
+    handleAddonClick,
     openAllSections,
     closeAllSections
   };
