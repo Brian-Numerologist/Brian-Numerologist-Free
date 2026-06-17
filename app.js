@@ -7,6 +7,7 @@
   const LEADS_STORAGE_KEY = "brian_numerologist_free_leads_v1";
   const PENDING_LEADS_STORAGE_KEY = "brian_numerologist_pending_leads";
   const LEAD_ID_STORAGE_KEY = "brian_numerologist_current_lead_id";
+  const PRINT_VIEW_STORAGE_KEY = "brian_numerologist_print_view_report_data";
   const APP_VERSION = "free_mvp_v1_phase4_lead_crm";
   const BIRTH_DATE_ERROR_MESSAGE = "Ngày sinh chưa hợp lệ. Anh/chị có thể nhập 27081962 hoặc 27/08/1962.";
   const GOOGLE_SHEET_CONFIG = {
@@ -2752,6 +2753,189 @@
     renderPrintFinalCta(data);
   }
 
+  function isMobilePrintEnvironment() {
+    if (typeof navigator === "undefined" || typeof window === "undefined") {
+      return false;
+    }
+
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768;
+  }
+
+  function isPrintViewMode() {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return new URLSearchParams(window.location.search).get("print") === "1";
+  }
+
+  function saveCurrentReportForPrintView() {
+    if (typeof sessionStorage === "undefined" || !currentReportData) {
+      return false;
+    }
+
+    try {
+      sessionStorage.setItem(PRINT_VIEW_STORAGE_KEY, JSON.stringify(currentReportData));
+      return true;
+    } catch (error) {
+      console.warn(error);
+      return false;
+    }
+  }
+
+  function loadReportForPrintView() {
+    if (typeof sessionStorage === "undefined") {
+      return null;
+    }
+
+    try {
+      const raw = sessionStorage.getItem(PRINT_VIEW_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      console.warn(error);
+      return null;
+    }
+  }
+
+  function prepareCurrentReportForPrint() {
+    openAllSections();
+    preparePrintLayout(currentReportData);
+    saveCurrentReportForPrintView();
+    if (typeof document !== "undefined") {
+      document.body.classList.add("is-printing-report");
+    }
+  }
+
+  function setMobilePrintHelpVisible(visible) {
+    const modal = getElement("mobilePrintHelpModal");
+    if (!modal || typeof document === "undefined") {
+      return;
+    }
+
+    modal.hidden = !visible;
+    document.body.classList.toggle("has-mobile-print-modal", visible);
+  }
+
+  function showMobilePrintHelp() {
+    prepareCurrentReportForPrint();
+    updateLeadStatus("pdf_downloaded", {
+      event_type: "pdf_downloaded",
+      requested_pdf: true
+    });
+    updateLeadStatus("pdf_downloaded", {
+      event_type: "mobile_print_help_viewed",
+      requested_pdf: true
+    });
+    saveCurrentReportForPrintView();
+    setMobilePrintHelpVisible(true);
+    showToast("Trên điện thoại, hãy mở bản in riêng rồi dùng Share/In/Lưu PDF của trình duyệt nếu hộp thoại in không hiện.", "info");
+  }
+
+  function buildPrintViewUrl() {
+    const url = new URL(window.location.href);
+    url.searchParams.set("print", "1");
+    url.hash = "";
+    return url.toString();
+  }
+
+  function openMobilePrintView() {
+    if (!currentReportData || typeof window === "undefined") {
+      return;
+    }
+
+    prepareCurrentReportForPrint();
+    updateLeadStatus("pdf_downloaded", {
+      event_type: "mobile_print_view_opened",
+      requested_pdf: true
+    });
+    saveCurrentReportForPrintView();
+
+    const opened = window.open(buildPrintViewUrl(), "_blank");
+    if (!opened) {
+      showToast("Trình duyệt đang chặn tab mới. Tôi sẽ mở bản in ngay trong tab hiện tại.", "warning");
+      window.location.href = buildPrintViewUrl();
+    }
+  }
+
+  function tryMobilePrintNow() {
+    if (!currentReportData) {
+      return;
+    }
+
+    prepareCurrentReportForPrint();
+    updateLeadStatus("pdf_downloaded", {
+      event_type: "print_attempted",
+      requested_pdf: true
+    });
+    saveCurrentReportForPrintView();
+    window.print();
+  }
+
+  function printFromPrintView() {
+    if (!currentReportData) {
+      showToast("Không tìm thấy dữ liệu bản in. Vui lòng quay lại tạo báo cáo trước.", "warning");
+      return;
+    }
+
+    prepareCurrentReportForPrint();
+    updateLeadStatus("pdf_downloaded", {
+      event_type: "print_attempted",
+      requested_pdf: true
+    });
+    saveCurrentReportForPrintView();
+    window.print();
+  }
+
+  function goBackFromPrintView() {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("print");
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = url.toString();
+    }
+  }
+
+  function renderMobilePrintViewFromSession() {
+    if (!isPrintViewMode() || typeof document === "undefined") {
+      return false;
+    }
+
+    document.body.classList.add("is-mobile-print-view");
+    const bar = getElement("mobilePrintViewBar");
+    const status = getElement("mobilePrintViewStatus");
+    if (bar) {
+      bar.hidden = false;
+    }
+
+    const data = loadReportForPrintView();
+    if (!data || !data.report || !Array.isArray(data.report.sections)) {
+      if (status) {
+        status.textContent = "Không tìm thấy dữ liệu bản in. Vui lòng quay lại trang chính, tạo báo cáo rồi mở bản in lại.";
+      }
+      showValidationError("Không tìm thấy dữ liệu bản in. Vui lòng quay lại tạo báo cáo trước.");
+      return true;
+    }
+
+    currentReportData = data;
+    document.title = "Bản in PDF | Brian-Numerologist";
+    renderCalculationSummary(currentReportData);
+    renderReportIntro(currentReportData);
+    renderReportAccordion(currentReportData.report.sections);
+    openAllSections();
+    preparePrintLayout(currentReportData);
+    const reportPanel = getElement("reportPanel");
+    if (reportPanel) {
+      reportPanel.hidden = false;
+    }
+
+    return true;
+  }
+
   function downloadTxt() {
     if (!currentReportData) {
       showValidationError("Vui lòng tạo báo cáo trước khi tải TXT.");
@@ -2797,11 +2981,12 @@
       event_type: "zalo_submitted"
     });
 
-    openAllSections();
-    preparePrintLayout(currentReportData);
-    if (typeof document !== "undefined") {
-      document.body.classList.add("is-printing-report");
+    if (isMobilePrintEnvironment()) {
+      showMobilePrintHelp();
+      return;
     }
+
+    prepareCurrentReportForPrint();
     showToast("Khi lưu PDF: chọn A4, tắt Headers and footers, bật Background graphics để bản PDF sạch và giữ màu bìa.", "info");
     updateLeadStatus("pdf_downloaded", {
       event_type: "pdf_downloaded",
@@ -3140,12 +3325,19 @@
       }
     }
 
+    renderMobilePrintViewFromSession();
+
     getElement("leadForm")?.addEventListener("submit", handleFormSubmit);
     getElement("birthDate")?.addEventListener("input", handleBirthDateInput);
     getElement("birthDate")?.addEventListener("blur", normalizeBirthDateField);
     getElement("downloadTxtButton")?.addEventListener("click", downloadTxt);
     getElement("printPdfButton")?.addEventListener("click", printPdf);
     getElement("ctaPdfButton")?.addEventListener("click", printPdf);
+    getElement("closeMobilePrintHelpButton")?.addEventListener("click", () => setMobilePrintHelpVisible(false));
+    getElement("openMobilePrintViewButton")?.addEventListener("click", openMobilePrintView);
+    getElement("tryMobilePrintButton")?.addEventListener("click", tryMobilePrintNow);
+    getElement("printViewPrintButton")?.addEventListener("click", printFromPrintView);
+    getElement("printViewBackButton")?.addEventListener("click", goBackFromPrintView);
     if (PUBLIC_UI_CONFIG.show_lead_csv_export) {
       getElement("downloadCsvButton")?.addEventListener("click", downloadLeadsCsv);
     }
@@ -3197,6 +3389,14 @@
     downloadTxt,
     printPdf,
     preparePrintLayout,
+    isMobilePrintEnvironment,
+    isPrintViewMode,
+    saveCurrentReportForPrintView,
+    loadReportForPrintView,
+    openMobilePrintView,
+    tryMobilePrintNow,
+    printFromPrintView,
+    renderMobilePrintViewFromSession,
     generateLeadId,
     getOrCreateLeadId,
     detectDeviceType,

@@ -114,6 +114,8 @@ Sau khi tạo báo cáo:
 
 - Bấm `Tải báo cáo TXT` để tải file `.txt`.
 - Bấm `In/Lưu PDF` để dùng browser print. Từ Phase 4, nút này yêu cầu Zalo/SĐT hợp lệ và checkbox đồng ý liên hệ trước khi mở hộp thoại in.
+- Trên desktop/laptop, flow in hiện tại vẫn mở hộp thoại in trực tiếp.
+- Trên điện thoại, nếu trình duyệt không mở hộp thoại in ổn định, app sẽ hiện hướng dẫn với nút `Mở bản in trên điện thoại` và `Thử in ngay`.
 
 Nếu `libraryStatus` đang báo fallback content, app sẽ chặn In/Lưu PDF để tránh xuất bản PDF sơ sài. Chạy website bằng local server hoặc GitHub Pages để tải đủ thư viện TXT rồi in lại.
 
@@ -126,6 +128,29 @@ Khi lưu PDF, dùng các thiết lập in này:
 Nếu PDF còn hiện ngày giờ, title website, đường dẫn `localhost` hoặc số trang mặc định ở đầu/cuối trang, nghĩa là `Headers and footers` vẫn đang bật trong hộp thoại in của browser.
 
 Phase 3 đã nâng cấp layout browser print: có trang bìa, mục lục, tóm tắt chỉ số, 11 bước báo cáo và CTA cuối.
+
+### In/Lưu PDF trên điện thoại
+
+Nếu bấm `In/Lưu PDF` trên điện thoại mà hộp thoại in không mở:
+
+1. Bấm `Mở bản in trên điện thoại`.
+2. App mở trang `?print=1` với cover, mục lục, core summary, 11 bước và CTA cuối.
+3. Trên trang đó, bấm `In/Lưu PDF`; lệnh print được gọi trực tiếp từ thao tác bấm của người dùng.
+
+iPhone Safari:
+
+1. Bấm nút Chia sẻ.
+2. Chọn `In`.
+3. Chụm/mở bản xem trước để thành PDF.
+4. Bấm Chia sẻ → `Lưu vào Tệp`.
+
+Android Chrome:
+
+1. Bấm menu `⋮`.
+2. Chọn `Chia sẻ` hoặc `In`.
+3. Chọn `Lưu dưới dạng PDF`.
+
+Tracking vẫn ghi nhận yêu cầu PDF và các event mobile print như `mobile_print_help_viewed`, `mobile_print_view_opened`, `print_attempted`.
 
 ## Phase 3 – Print/PDF Beauty
 

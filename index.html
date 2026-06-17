@@ -205,6 +205,46 @@
       <p>Brian-Numerologist. Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.</p>
     </footer>
 
+    <div id="mobilePrintHelpModal" class="mobile-print-modal no-print" role="dialog" aria-modal="true" aria-labelledby="mobilePrintHelpTitle" hidden>
+      <div class="mobile-print-modal__panel">
+        <button class="mobile-print-modal__close" type="button" id="closeMobilePrintHelpButton" aria-label="Đóng hướng dẫn in">×</button>
+        <p class="eyebrow">In/Lưu PDF trên điện thoại</p>
+        <h2 id="mobilePrintHelpTitle">Mở bản in riêng để lưu PDF ổn định hơn</h2>
+        <p>
+          Trên điện thoại, nếu nút In/Lưu PDF không mở hộp thoại, hãy dùng nút
+          <strong>Mở bản in trên điện thoại</strong>, rồi chọn Chia sẻ/In/Lưu PDF trong trình duyệt.
+        </p>
+        <div class="mobile-print-guide">
+          <div>
+            <strong>iPhone Safari</strong>
+            <span>Bấm Chia sẻ → In → chụm/mở bản xem trước để thành PDF → Chia sẻ/Lưu vào Tệp.</span>
+          </div>
+          <div>
+            <strong>Android Chrome</strong>
+            <span>Bấm menu ⋮ → Chia sẻ hoặc In → chọn Lưu dưới dạng PDF.</span>
+          </div>
+        </div>
+        <div class="button-row compact">
+          <button class="primary-button" type="button" id="openMobilePrintViewButton">Mở bản in trên điện thoại</button>
+          <button class="secondary-button" type="button" id="tryMobilePrintButton">Thử in ngay</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobilePrintViewBar" class="mobile-print-view-bar no-print" hidden>
+      <div>
+        <p class="eyebrow">Bản in PDF trên điện thoại</p>
+        <strong>Nhấn In/Lưu PDF từ trang này để trình duyệt nhận thao tác trực tiếp.</strong>
+        <p id="mobilePrintViewStatus">
+          iPhone: Chia sẻ → In → mở bản xem trước PDF → Lưu vào Tệp. Android: menu ⋮ → Chia sẻ/In → Lưu dưới dạng PDF.
+        </p>
+      </div>
+      <div class="button-row compact">
+        <button class="primary-button" type="button" id="printViewPrintButton">In/Lưu PDF</button>
+        <button class="secondary-button" type="button" id="printViewBackButton">Quay lại báo cáo</button>
+      </div>
+    </div>
+
     <div id="toast-container" class="toast-container no-print" aria-live="polite" aria-atomic="true"></div>
 
     <script src="app.js" defer></script>
