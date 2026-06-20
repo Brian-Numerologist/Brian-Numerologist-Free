@@ -7,8 +7,10 @@
   const LEADS_STORAGE_KEY = "brian_numerologist_free_leads_v1";
   const PENDING_LEADS_STORAGE_KEY = "brian_numerologist_pending_leads";
   const LEAD_ID_STORAGE_KEY = "brian_numerologist_current_lead_id";
-  const PRINT_VIEW_STORAGE_KEY = "brian_numerologist_print_view_report_data";
   const APP_VERSION = "free_mvp_v1_phase4_lead_crm";
+  const FREE_REPORT_MODE = "teaser";
+  const FREE_TEASER_CTA =
+    "Bản FREE chỉ gọi tên lớp đầu tiên. Bản chuyên sâu sẽ đọc kỹ hơn mâu thuẫn, chu kỳ và chiến lược hành động phù hợp với anh/chị.";
   const BIRTH_DATE_ERROR_MESSAGE = "Ngày sinh chưa hợp lệ. Anh/chị có thể nhập 27081962 hoặc 27/08/1962.";
   const GOOGLE_SHEET_CONFIG = {
     google_apps_script_web_app_url: "https://script.google.com/macros/s/AKfycby5GujG0AlO6fpZA69LoF0IiD8t6oaEjE2FyeaNIpTfGROwiSNtPKhaDYeigzDEAdCQ/exec",
@@ -163,6 +165,7 @@
     pdf_downloaded: "Đã tải PDF",
     package_clicked: "Đã bấm chọn gói",
     addon_clicked: "Đã bấm add-on",
+    brian_contact_clicked: "Đã bấm liên hệ Brian",
     zalo_submitted: "Đã nhập Zalo",
     contacted: "Đã liên hệ",
     consulted: "Đã tư vấn",
@@ -178,6 +181,7 @@
     pdf_downloaded: "warm",
     package_clicked: "hot",
     addon_clicked: "hot",
+    brian_contact_clicked: "hot",
     zalo_submitted: "very_hot",
     contacted: "hot",
     consulted: "hot",
@@ -352,6 +356,7 @@
   let currentLeadId = null;
   let selectedPackage = null;
   let selectedAddon = null;
+  let mobilePdfHelpTracked = false;
 
   function normalizeVietnameseName(name) {
     return String(name || "")
@@ -784,7 +789,7 @@
         birth_date: parsedDate.normalized,
         phone_or_zalo: input.phone_or_zalo || null,
         email: input.email || null,
-        gender: input.gender || "khong_cung_cap",
+        gender: input.gender || "",
         note: input.note || null,
         consent_to_contact: Boolean(input.consent_to_contact)
       },
@@ -1060,6 +1065,128 @@
     return blockIds.map(formatLibraryBlock).join("\n\n---\n\n");
   }
 
+  function extractStructuredBlockFields(blockId) {
+    const raw = stripInternalNotes(getBlockContent(blockId));
+    const fields = {};
+    let currentKey = null;
+
+    raw.replace(/\r\n/g, "\n").split("\n").forEach((line) => {
+      const keyMatch = /^([a-z_]+):\s*(.*)$/.exec(line.trim());
+
+      if (keyMatch) {
+        const key = keyMatch[1];
+        if (METADATA_KEYS.has(key)) {
+          currentKey = null;
+          return;
+        }
+
+        currentKey = key;
+        fields[currentKey] = fields[currentKey] || [];
+        if (keyMatch[2]) {
+          fields[currentKey].push(keyMatch[2]);
+        }
+        return;
+      }
+
+      if (currentKey && line.trim()) {
+        fields[currentKey].push(line.trim());
+      }
+    });
+
+    return Object.fromEntries(
+      Object.entries(fields).map(([key, lines]) => [key, lines.join("\n").trim()])
+    );
+  }
+
+  function truncateForFreeTeaser(text, maxWords) {
+    const normalized = String(text || "").trim();
+    const words = normalized.split(/\s+/).filter(Boolean);
+    if (words.length <= maxWords) {
+      return normalized;
+    }
+
+    const candidate = words.slice(0, maxWords).join(" ");
+    const boundaries = [candidate.lastIndexOf(". "), candidate.lastIndexOf("! "), candidate.lastIndexOf("? ")];
+    const lastBoundary = Math.max(...boundaries);
+    return lastBoundary >= candidate.length * 0.55
+      ? candidate.slice(0, lastBoundary + 1)
+      : `${candidate}…`;
+  }
+
+  function firstTeaserSymptoms(text, maxItems, maxWordsPerItem) {
+    return String(text || "")
+      .split("\n")
+      .map((line) => line.replace(/^[-•]\s*/, "").trim())
+      .filter(Boolean)
+      .slice(0, maxItems)
+      .map((line) => `- ${truncateForFreeTeaser(line, maxWordsPerItem)}`)
+      .join("\n");
+  }
+
+  function formatLibraryBlockForTeaser(blockId, maxWords) {
+    const fields = extractStructuredBlockFields(blockId);
+    const isKarmic = String(blockId || "").startsWith("KARMIC_OVERLAY_");
+    const isBirthday = String(blockId || "").startsWith("BIRTHDAY_");
+    const output = [];
+
+    if (fields.display_title) {
+      output.push(`Tiêu đề: ${fields.display_title}`);
+    }
+    if (fields.keywords) {
+      output.push(`Từ khóa: ${fields.keywords}`);
+    }
+
+    if (isKarmic) {
+      if (fields.core_meaning) {
+        output.push(`Ý nghĩa cốt lõi: ${truncateForFreeTeaser(fields.core_meaning, 38)}`);
+      }
+      const symptoms = firstTeaserSymptoms(fields.life_symptoms, 2, 16);
+      if (symptoms) {
+        output.push(`Triệu chứng dễ chạm:\n${symptoms}`);
+      }
+      return truncateForFreeTeaser(output.join("\n\n"), maxWords);
+    }
+
+    if (fields.summary) {
+      output.push(`Tổng quan: ${truncateForFreeTeaser(fields.summary, isBirthday ? 38 : 48)}`);
+    }
+    if (isBirthday && fields.gift) {
+      output.push(`Món quà: ${truncateForFreeTeaser(fields.gift, 28)}`);
+    }
+    if (isBirthday && fields.warning) {
+      output.push(`Lưu ý: ${truncateForFreeTeaser(fields.warning, 26)}`);
+    }
+
+    const symptoms = firstTeaserSymptoms(fields.life_symptoms || fields.warning_signs, 3, isBirthday ? 13 : 18);
+    if (symptoms) {
+      output.push(`Triệu chứng dễ chạm:\n${symptoms}`);
+    }
+    if (fields.free_guidance) {
+      output.push(`Gợi mở bản FREE: ${truncateForFreeTeaser(fields.free_guidance, isBirthday ? 24 : 34)}`);
+    }
+
+    return truncateForFreeTeaser(output.join("\n\n"), maxWords);
+  }
+
+  function joinBlockContentsForFreeTeaser(blockIds, targetWords) {
+    if (FREE_REPORT_MODE !== "teaser") {
+      return joinBlockContents(blockIds);
+    }
+
+    const ids = Array.isArray(blockIds) ? blockIds : [];
+    const primaryIds = ids.filter((id) => !String(id).startsWith("KARMIC_OVERLAY_"));
+    const karmicIds = ids.filter((id) => String(id).startsWith("KARMIC_OVERLAY_"));
+    const ctaWords = FREE_TEASER_CTA.split(/\s+/).length;
+    const karmicBudget = karmicIds.length ? 62 : 0;
+    const primaryBudget = Math.max(90, targetWords - karmicBudget - ctaWords);
+    const parts = [
+      ...primaryIds.map((id) => formatLibraryBlockForTeaser(id, primaryBudget)),
+      ...karmicIds.map((id) => formatLibraryBlockForTeaser(id, 62))
+    ].filter(Boolean);
+
+    return parts.join("\n\n---\n\n").trim();
+  }
+
   function formatKarmicSummary(data) {
     if (!data.karmic_debt_details.length) {
       return "Không ghi nhận Karmic Debt ở 4 chỉ số cốt lõi trong bản FREE này.";
@@ -1312,8 +1439,8 @@
         "Bước 2 - Đường Đời",
         "library",
         data.routing.life_path_blocks,
-        joinBlockContents(data.routing.life_path_blocks),
-        "Đọc sâu hơn Đường Đời cần đối chiếu với các chỉ số còn lại.",
+        joinBlockContentsForFreeTeaser(data.routing.life_path_blocks, 235),
+        FREE_TEASER_CTA,
         false
       ),
       section(
@@ -1322,8 +1449,8 @@
         "Bước 3 - Sứ Mệnh",
         "library",
         data.routing.destiny_blocks,
-        joinBlockContents(data.routing.destiny_blocks),
-        "Sứ Mệnh cần được soi cùng môi trường nghề nghiệp và lựa chọn thực tế.",
+        joinBlockContentsForFreeTeaser(data.routing.destiny_blocks, 235),
+        FREE_TEASER_CTA,
         false
       ),
       section(
@@ -1342,8 +1469,8 @@
         "Bước 5 - Linh Hồn",
         "library",
         data.routing.soul_blocks,
-        joinBlockContents(data.routing.soul_blocks),
-        "Linh Hồn là lớp cần đọc kỹ nếu bạn muốn hiểu nhu cầu thật bên trong.",
+        joinBlockContentsForFreeTeaser(data.routing.soul_blocks, 235),
+        FREE_TEASER_CTA,
         false
       ),
       section(
@@ -1362,8 +1489,8 @@
         "Bước 7 - Ngày Sinh",
         "library",
         data.routing.birthday_blocks,
-        joinBlockContents(data.routing.birthday_blocks),
-        "Ngày Sinh là món quà, nhưng cần đi cùng kỷ luật vận hành.",
+        joinBlockContentsForFreeTeaser(data.routing.birthday_blocks, 165),
+        FREE_TEASER_CTA,
         false
       ),
       section(
@@ -1681,9 +1808,17 @@
     return "desktop";
   }
 
+  function isMobilePublicEnvironment() {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return detectDeviceType() !== "desktop" || window.innerWidth <= 768;
+  }
+
   function getEntryMode() {
     const value = getElement("entryMode")?.value;
-    return value === "internal_entry" ? "internal_entry" : "customer_self";
+    return value === "internal_entry" ? "internal_entry" : "public_simple";
   }
 
   function getSource() {
@@ -1713,6 +1848,7 @@
     const map = {
       report_generated: "new_report_generated",
       pdf_requested: "pdf_downloaded",
+      brian_contact_clicked: "package_clicked",
       paid_report_requested: "package_clicked",
       paid_package_clicked: "package_clicked"
     };
@@ -1807,7 +1943,7 @@
 
   function computeFollowUpStatus(status) {
     const normalizedStatus = normalizeLeadStatus(status);
-    if (["package_clicked", "addon_clicked", "zalo_submitted"].includes(normalizedStatus)) {
+    if (["package_clicked", "addon_clicked", "brian_contact_clicked", "zalo_submitted"].includes(normalizedStatus)) {
       return "urgent";
     }
     if (normalizedStatus === "pdf_downloaded") {
@@ -1833,7 +1969,7 @@
 
   function computeFollowUpDueDate(status) {
     const normalizedStatus = normalizeLeadStatus(status);
-    if (["package_clicked", "addon_clicked", "zalo_submitted"].includes(normalizedStatus)) {
+    if (["package_clicked", "addon_clicked", "brian_contact_clicked", "zalo_submitted"].includes(normalizedStatus)) {
       return addDaysIso(0);
     }
     if (normalizedStatus === "pdf_downloaded") {
@@ -1852,13 +1988,13 @@
     return {
       full_name_original: getElement("fullName")?.value.trim() || "",
       birth_date: getElement("birthDate")?.value.trim() || "",
-      phone_or_zalo: getElement("phoneOrZalo")?.value.trim() || "",
-      email: getElement("email")?.value.trim() || "",
-      gender: getElement("gender")?.value || "khong_cung_cap",
-      entry_mode: getElement("entryMode")?.value || "customer_self",
+      phone_or_zalo: "",
+      email: "",
+      gender: "",
+      entry_mode: getElement("entryMode")?.value || "public_simple",
       source: getElement("leadSource")?.value || getSource(),
-      note: getElement("note")?.value.trim() || "",
-      consent_to_contact: Boolean(getElement("consentToContact")?.checked)
+      note: "",
+      consent_to_contact: false
     };
   }
 
@@ -1876,10 +2012,6 @@
 
     if (!parsedDate.is_valid) {
       errors.push(parsedDate.error);
-    }
-
-    if (input.phone_or_zalo && !input.consent_to_contact) {
-      errors.push("Nếu đã nhập số điện thoại/Zalo, vui lòng tick đồng ý để Brian-Numerologist lưu thông tin và liên hệ khi cần.");
     }
 
     return errors;
@@ -1947,11 +2079,7 @@
       ["Nhân Cách", data.core_numbers.personality, false],
       ["Master Number", intermediateMasters, true],
       ["Karmic Debt", karmic, true],
-      [
-        "Audit",
-        `letter_count=${data.calculation_audit.letter_count}, number_count=${data.calculation_audit.number_count}, is_valid=${data.calculation_audit.is_valid}`,
-        true
-      ]
+      ["Kiểm tra dữ liệu", data.calculation_audit.is_valid ? "Hợp lệ" : "Cần kiểm tra lại", true]
     ];
 
     content.innerHTML = items
@@ -2063,7 +2191,44 @@
     panel.hidden = false;
   }
 
+  function updateReportActionsForDevice(trackEvent = true) {
+    const isMobile = isMobilePublicEnvironment();
+    const desktopPrintButton = getElement("printPdfButton");
+    const mobileActions = getElement("mobileReportActions");
+
+    if (desktopPrintButton) {
+      desktopPrintButton.hidden = isMobile;
+    }
+    if (mobileActions) {
+      mobileActions.hidden = !isMobile;
+    }
+
+    if (trackEvent && isMobile && currentReportData && !mobilePdfHelpTracked) {
+      mobilePdfHelpTracked = true;
+      updateLeadStatus("new_report_generated", {
+        event_type: "mobile_pdf_help_viewed"
+      });
+    }
+  }
+
+  function viewReportOnWeb() {
+    openAllSections();
+    getElement("reportAccordion")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function handleBrianContactClick(event) {
+    if (currentReportData) {
+      updateLeadStatus("brian_contact_clicked", {
+        event_type: "brian_contact_clicked",
+        requested_paid_report: true,
+        follow_up_note: event?.currentTarget?.dataset?.brianContact || "public_cta"
+      });
+    }
+    showToast("Anh/chị đang mở Zalo của Brian. Không cần để lại SĐT trên website.", "success");
+  }
+
   function renderComputedData(data, options = {}) {
+    mobilePdfHelpTracked = false;
     currentReportData = attachReport(data);
     renderCalculationSummary(currentReportData);
     renderReportIntro(currentReportData);
@@ -2076,6 +2241,8 @@
         event_type: "report_generated"
       });
     }
+
+    updateReportActionsForDevice(options.saveLead !== false);
 
     getElement("reportPanel")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -2145,7 +2312,7 @@
       phone_or_zalo: input.phone_or_zalo || data?.input?.phone_or_zalo || "",
       zalo_phone: input.phone_or_zalo || data?.input?.phone_or_zalo || "",
       email: input.email || data?.input?.email || "",
-      gender: input.gender || data?.input?.gender || "khong_cung_cap",
+      gender: input.gender || data?.input?.gender || "",
       note: input.note || data?.input?.note || "",
       entry_mode: input.entry_mode || getEntryMode(),
       source: input.source || getSource(),
@@ -2239,6 +2406,7 @@
       pdf_downloaded: "pdf_downloaded",
       package_clicked: "package_clicked",
       addon_clicked: "addon_clicked",
+      brian_contact_clicked: "brian_contact_clicked",
       zalo_submitted: "zalo_submitted",
       paid_report_requested: "paid_report_requested"
     };
@@ -2272,7 +2440,7 @@
         note: lead.note || "",
         consent_to_contact: Boolean(lead.consent_to_contact),
         consent: Boolean(lead.consent_to_contact),
-        entry_mode: lead.entry_mode || "customer_self",
+        entry_mode: lead.entry_mode || "public_simple",
         source: lead.source || "website",
         device_type: lead.device_type || "unknown",
         normalized_name: lead.normalized_name || lead.normalized_full_name || "",
@@ -2753,189 +2921,6 @@
     renderPrintFinalCta(data);
   }
 
-  function isMobilePrintEnvironment() {
-    if (typeof navigator === "undefined" || typeof window === "undefined") {
-      return false;
-    }
-
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768;
-  }
-
-  function isPrintViewMode() {
-    if (typeof window === "undefined") {
-      return false;
-    }
-
-    return new URLSearchParams(window.location.search).get("print") === "1";
-  }
-
-  function saveCurrentReportForPrintView() {
-    if (typeof sessionStorage === "undefined" || !currentReportData) {
-      return false;
-    }
-
-    try {
-      sessionStorage.setItem(PRINT_VIEW_STORAGE_KEY, JSON.stringify(currentReportData));
-      return true;
-    } catch (error) {
-      console.warn(error);
-      return false;
-    }
-  }
-
-  function loadReportForPrintView() {
-    if (typeof sessionStorage === "undefined") {
-      return null;
-    }
-
-    try {
-      const raw = sessionStorage.getItem(PRINT_VIEW_STORAGE_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (error) {
-      console.warn(error);
-      return null;
-    }
-  }
-
-  function prepareCurrentReportForPrint() {
-    openAllSections();
-    preparePrintLayout(currentReportData);
-    saveCurrentReportForPrintView();
-    if (typeof document !== "undefined") {
-      document.body.classList.add("is-printing-report");
-    }
-  }
-
-  function setMobilePrintHelpVisible(visible) {
-    const modal = getElement("mobilePrintHelpModal");
-    if (!modal || typeof document === "undefined") {
-      return;
-    }
-
-    modal.hidden = !visible;
-    document.body.classList.toggle("has-mobile-print-modal", visible);
-  }
-
-  function showMobilePrintHelp() {
-    prepareCurrentReportForPrint();
-    updateLeadStatus("pdf_downloaded", {
-      event_type: "pdf_downloaded",
-      requested_pdf: true
-    });
-    updateLeadStatus("pdf_downloaded", {
-      event_type: "mobile_print_help_viewed",
-      requested_pdf: true
-    });
-    saveCurrentReportForPrintView();
-    setMobilePrintHelpVisible(true);
-    showToast("Trên điện thoại, hãy mở bản in riêng rồi dùng Share/In/Lưu PDF của trình duyệt nếu hộp thoại in không hiện.", "info");
-  }
-
-  function buildPrintViewUrl() {
-    const url = new URL(window.location.href);
-    url.searchParams.set("print", "1");
-    url.hash = "";
-    return url.toString();
-  }
-
-  function openMobilePrintView() {
-    if (!currentReportData || typeof window === "undefined") {
-      return;
-    }
-
-    prepareCurrentReportForPrint();
-    updateLeadStatus("pdf_downloaded", {
-      event_type: "mobile_print_view_opened",
-      requested_pdf: true
-    });
-    saveCurrentReportForPrintView();
-
-    const opened = window.open(buildPrintViewUrl(), "_blank");
-    if (!opened) {
-      showToast("Trình duyệt đang chặn tab mới. Tôi sẽ mở bản in ngay trong tab hiện tại.", "warning");
-      window.location.href = buildPrintViewUrl();
-    }
-  }
-
-  function tryMobilePrintNow() {
-    if (!currentReportData) {
-      return;
-    }
-
-    prepareCurrentReportForPrint();
-    updateLeadStatus("pdf_downloaded", {
-      event_type: "print_attempted",
-      requested_pdf: true
-    });
-    saveCurrentReportForPrintView();
-    window.print();
-  }
-
-  function printFromPrintView() {
-    if (!currentReportData) {
-      showToast("Không tìm thấy dữ liệu bản in. Vui lòng quay lại tạo báo cáo trước.", "warning");
-      return;
-    }
-
-    prepareCurrentReportForPrint();
-    updateLeadStatus("pdf_downloaded", {
-      event_type: "print_attempted",
-      requested_pdf: true
-    });
-    saveCurrentReportForPrintView();
-    window.print();
-  }
-
-  function goBackFromPrintView() {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const url = new URL(window.location.href);
-    url.searchParams.delete("print");
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = url.toString();
-    }
-  }
-
-  function renderMobilePrintViewFromSession() {
-    if (!isPrintViewMode() || typeof document === "undefined") {
-      return false;
-    }
-
-    document.body.classList.add("is-mobile-print-view");
-    const bar = getElement("mobilePrintViewBar");
-    const status = getElement("mobilePrintViewStatus");
-    if (bar) {
-      bar.hidden = false;
-    }
-
-    const data = loadReportForPrintView();
-    if (!data || !data.report || !Array.isArray(data.report.sections)) {
-      if (status) {
-        status.textContent = "Không tìm thấy dữ liệu bản in. Vui lòng quay lại trang chính, tạo báo cáo rồi mở bản in lại.";
-      }
-      showValidationError("Không tìm thấy dữ liệu bản in. Vui lòng quay lại tạo báo cáo trước.");
-      return true;
-    }
-
-    currentReportData = data;
-    document.title = "Bản in PDF | Brian-Numerologist";
-    renderCalculationSummary(currentReportData);
-    renderReportIntro(currentReportData);
-    renderReportAccordion(currentReportData.report.sections);
-    openAllSections();
-    preparePrintLayout(currentReportData);
-    const reportPanel = getElement("reportPanel");
-    if (reportPanel) {
-      reportPanel.hidden = false;
-    }
-
-    return true;
-  }
-
   function downloadTxt() {
     if (!currentReportData) {
       showValidationError("Vui lòng tạo báo cáo trước khi tải TXT.");
@@ -2968,28 +2953,20 @@
       return;
     }
 
-    updateLeadStatus("new_report_generated", {
-      event_type: "pdf_gate_viewed"
-    });
-
-    if (!validateContactConsentForPaidAction("tải/In PDF")) {
-      showToast("PDF cần Zalo/SĐT và đồng ý liên hệ để Brian có thể tư vấn bản phân tích phù hợp.", "warning");
-      return;
+    openAllSections();
+    preparePrintLayout(currentReportData);
+    if (typeof document !== "undefined") {
+      document.body.classList.add("is-printing-report");
     }
-
-    updateLeadStatus("zalo_submitted", {
-      event_type: "zalo_submitted"
-    });
-
-    if (isMobilePrintEnvironment()) {
-      showMobilePrintHelp();
-      return;
-    }
-
-    prepareCurrentReportForPrint();
-    showToast("Khi lưu PDF: chọn A4, tắt Headers and footers, bật Background graphics để bản PDF sạch và giữ màu bìa.", "info");
+    const isMobile = isMobilePublicEnvironment();
+    showToast(
+      isMobile
+        ? "Nếu trình duyệt mobile không mở hộp thoại in, anh/chị vẫn có thể đọc báo cáo trên web hoặc nhắn Brian để nhận hỗ trợ."
+        : "Khi lưu PDF: chọn A4, tắt Headers and footers, bật Background graphics để bản PDF sạch và giữ màu bìa.",
+      "info"
+    );
     updateLeadStatus("pdf_downloaded", {
-      event_type: "pdf_downloaded",
+      event_type: isMobile ? "mobile_pdf_attempted" : "pdf_attempted_desktop",
       requested_pdf: true
     });
     window.print();
@@ -3062,26 +3039,7 @@
       selected_package: packageKey,
       requested_paid_report: true
     });
-
-    const input = getFormInput();
-    if (!input.phone_or_zalo || !input.consent_to_contact || !isValidPhoneOrZalo(input.phone_or_zalo)) {
-      getElement("phoneOrZalo")?.classList.add("attention-field");
-      getElement("consentToContact")?.classList.add("attention-field");
-      showToast("Brian đã ghi nhận gói quan tâm. Vui lòng nhập Zalo/SĐT và tick đồng ý nếu muốn được tư vấn nhanh.", "warning");
-      return;
-    }
-
-    updateLeadStatus("zalo_submitted", {
-      event_type: "zalo_submitted",
-      selected_package: packageKey,
-      requested_paid_report: true
-    });
-    updateLeadStatus("package_clicked", {
-      event_type: "paid_report_requested",
-      selected_package: packageKey,
-      requested_paid_report: true
-    });
-    showToast("Brian đã ghi nhận yêu cầu. Bạn có thể nhắn Zalo 0948909983 để được tư vấn nhanh hơn.", "success");
+    showToast("Brian đã ghi nhận gói anh/chị quan tâm. Chỉ nhắn Zalo khi anh/chị thật sự muốn được tư vấn.", "success");
   }
 
   function handleAddonClick(addonKey) {
@@ -3107,22 +3065,10 @@
 
     updateLeadStatus("addon_clicked", {
       event_type: "addon_clicked",
-      selected_addon: addonKey
+      selected_addon: addonKey,
+      requested_paid_report: true
     });
-
-    const input = getFormInput();
-    if (!input.phone_or_zalo || !input.consent_to_contact || !isValidPhoneOrZalo(input.phone_or_zalo)) {
-      getElement("phoneOrZalo")?.classList.add("attention-field");
-      getElement("consentToContact")?.classList.add("attention-field");
-      showToast("Brian đã ghi nhận add-on quan tâm. Vui lòng nhập Zalo/SĐT và tick đồng ý nếu muốn được tư vấn.", "warning");
-      return;
-    }
-
-    updateLeadStatus("zalo_submitted", {
-      event_type: "zalo_submitted",
-      selected_addon: addonKey
-    });
-    showToast("Brian đã ghi nhận add-on bạn quan tâm.", "success");
+    showToast("Brian đã ghi nhận add-on anh/chị quan tâm. Không cần để lại SĐT trên website.", "success");
   }
 
   function assertEqual(errors, label, actual, expected) {
@@ -3325,32 +3271,25 @@
       }
     }
 
-    renderMobilePrintViewFromSession();
-
     getElement("leadForm")?.addEventListener("submit", handleFormSubmit);
     getElement("birthDate")?.addEventListener("input", handleBirthDateInput);
     getElement("birthDate")?.addEventListener("blur", normalizeBirthDateField);
     getElement("downloadTxtButton")?.addEventListener("click", downloadTxt);
     getElement("printPdfButton")?.addEventListener("click", printPdf);
-    getElement("ctaPdfButton")?.addEventListener("click", printPdf);
-    getElement("closeMobilePrintHelpButton")?.addEventListener("click", () => setMobilePrintHelpVisible(false));
-    getElement("openMobilePrintViewButton")?.addEventListener("click", openMobilePrintView);
-    getElement("tryMobilePrintButton")?.addEventListener("click", tryMobilePrintNow);
-    getElement("printViewPrintButton")?.addEventListener("click", printFromPrintView);
-    getElement("printViewBackButton")?.addEventListener("click", goBackFromPrintView);
+    getElement("mobileTryPrintButton")?.addEventListener("click", printPdf);
+    getElement("viewReportWebButton")?.addEventListener("click", viewReportOnWeb);
+    document.querySelectorAll("[data-brian-contact]").forEach((link) => {
+      link.addEventListener("click", handleBrianContactClick);
+    });
     if (PUBLIC_UI_CONFIG.show_lead_csv_export) {
       getElement("downloadCsvButton")?.addEventListener("click", downloadLeadsCsv);
     }
     getElement("openAllButton")?.addEventListener("click", openAllSections);
     getElement("closeAllButton")?.addEventListener("click", closeAllSections);
-    getElement("runTestButton")?.addEventListener("click", () => {
-      clearValidationErrors();
-      fillFormWithTestCase();
-      const result = runTestCase001();
-      if (result.pass) {
-        renderComputedData(result.data, { saveLead: false });
-      }
-    });
+    updateReportActionsForDevice(false);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", () => updateReportActionsForDevice(false));
+    }
   }
 
   const api = {
@@ -3360,6 +3299,7 @@
     MASTER_VALUES,
     GOOGLE_SHEET_CONFIG,
     PUBLIC_UI_CONFIG,
+    FREE_REPORT_MODE,
     SERVICE_PACKAGES,
     SERVICE_ADDONS,
     normalizeVietnameseName,
@@ -3383,23 +3323,19 @@
     parseBlocksFromText,
     getBlockContent,
     getFallbackBlockContent,
+    truncateForFreeTeaser,
+    formatLibraryBlockForTeaser,
+    joinBlockContentsForFreeTeaser,
     buildReportSections,
     buildFullReportText,
     renderReportAccordion,
     downloadTxt,
     printPdf,
     preparePrintLayout,
-    isMobilePrintEnvironment,
-    isPrintViewMode,
-    saveCurrentReportForPrintView,
-    loadReportForPrintView,
-    openMobilePrintView,
-    tryMobilePrintNow,
-    printFromPrintView,
-    renderMobilePrintViewFromSession,
     generateLeadId,
     getOrCreateLeadId,
     detectDeviceType,
+    isMobilePublicEnvironment,
     getEntryMode,
     getSource,
     getGoogleSheetConfig,
@@ -3431,6 +3367,7 @@
     showToast,
     handlePackageClick,
     handleAddonClick,
+    handleBrianContactClick,
     openAllSections,
     closeAllSections
   };

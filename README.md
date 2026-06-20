@@ -2,6 +2,8 @@
 
 Website MVP tĩnh bằng HTML/CSS/JavaScript thuần để tạo báo cáo Thần số học FREE 11 bước cho Brian-Numerologist.
 
+Bản hotfix Trust & Mobile Conversion tối giản giao diện khách hàng: form public chỉ hỏi họ tên khai sinh và ngày sinh. Không yêu cầu SĐT/Zalo, email, giới tính, chế độ nhập, ghi chú hoặc consent để xem báo cáo, chọn gói hay thử in PDF.
+
 ## Cấu trúc thư mục
 
 ```text
@@ -61,6 +63,15 @@ Nếu đang fallback, hãy chạy lại bằng local server hoặc GitHub Pages 
 
 App chỉ tính sau khi ngày sinh đã chuẩn hóa về `DD/MM/YYYY` và là ngày thật. Ví dụ `29/02/2000` hợp lệ, còn `29/02/2001`, `31/02/2000`, `32131999` hoặc nhập thiếu `270819` sẽ báo lỗi.
 
+## Form public và quyền riêng tư
+
+Form khách hàng chỉ có:
+
+- Họ tên khai sinh đầy đủ.
+- Ngày sinh dương lịch.
+
+Các trường kỹ thuật được gán mặc định trong code: `phone_or_zalo = ""`, `email = ""`, `gender = ""`, `note = ""`, `entry_mode = "public_simple"`, `consent_to_contact = false`. Giao diện public không có Run Test, Admin CRM, danh sách lead, debug panel hoặc nút xuất CSV.
+
 ## Deploy GitHub Pages
 
 1. Commit toàn bộ file trong thư mục này.
@@ -87,7 +98,7 @@ Report engine sẽ gọi block theo ID như `LIFEPATH_4`, `DESTINY_4`, `SOUL_7`,
 
 ## Cách chạy test case
 
-Trên website, bấm nút `Run Test Case 001`.
+Nút `Run Test Case 001` không hiển thị trên giao diện khách hàng. Hàm `runTestCase001()` vẫn được giữ nguyên để kiểm thử nội bộ.
 
 Expected chính:
 
@@ -108,14 +119,20 @@ Có thể kiểm tra bằng Node:
 node -e "const app=require('./app.js'); console.log(app.runTestCase001().pass)"
 ```
 
+Hoặc mở DevTools Console trong môi trường nội bộ và chạy:
+
+```js
+BrianNumerologist.runTestCase001()
+```
+
 ## Tải TXT và In/Lưu PDF
 
 Sau khi tạo báo cáo:
 
 - Bấm `Tải báo cáo TXT` để tải file `.txt`.
-- Bấm `In/Lưu PDF` để dùng browser print. Từ Phase 4, nút này yêu cầu Zalo/SĐT hợp lệ và checkbox đồng ý liên hệ trước khi mở hộp thoại in.
-- Trên desktop/laptop, flow in hiện tại vẫn mở hộp thoại in trực tiếp.
-- Trên điện thoại, nếu trình duyệt không mở hộp thoại in ổn định, app sẽ hiện hướng dẫn với nút `Mở bản in trên điện thoại` và `Thử in ngay`.
+- Trên desktop, bấm `In/Lưu PDF` để dùng browser print như Phase 3.
+- Trên mobile, luồng chính là `Xem báo cáo trên web`. Người dùng có thể liên hệ Brian qua Zalo hoặc chọn `Thử in PDF`; website không phụ thuộc vào khả năng in thiếu ổn định của Safari mobile.
+- Không yêu cầu Zalo/SĐT hoặc consent trước khi xem web, chọn gói, chọn add-on hay thử in.
 
 Nếu `libraryStatus` đang báo fallback content, app sẽ chặn In/Lưu PDF để tránh xuất bản PDF sơ sài. Chạy website bằng local server hoặc GitHub Pages để tải đủ thư viện TXT rồi in lại.
 
@@ -128,29 +145,6 @@ Khi lưu PDF, dùng các thiết lập in này:
 Nếu PDF còn hiện ngày giờ, title website, đường dẫn `localhost` hoặc số trang mặc định ở đầu/cuối trang, nghĩa là `Headers and footers` vẫn đang bật trong hộp thoại in của browser.
 
 Phase 3 đã nâng cấp layout browser print: có trang bìa, mục lục, tóm tắt chỉ số, 11 bước báo cáo và CTA cuối.
-
-### In/Lưu PDF trên điện thoại
-
-Nếu bấm `In/Lưu PDF` trên điện thoại mà hộp thoại in không mở:
-
-1. Bấm `Mở bản in trên điện thoại`.
-2. App mở trang `?print=1` với cover, mục lục, core summary, 11 bước và CTA cuối.
-3. Trên trang đó, bấm `In/Lưu PDF`; lệnh print được gọi trực tiếp từ thao tác bấm của người dùng.
-
-iPhone Safari:
-
-1. Bấm nút Chia sẻ.
-2. Chọn `In`.
-3. Chụm/mở bản xem trước để thành PDF.
-4. Bấm Chia sẻ → `Lưu vào Tệp`.
-
-Android Chrome:
-
-1. Bấm menu `⋮`.
-2. Chọn `Chia sẻ` hoặc `In`.
-3. Chọn `Lưu dưới dạng PDF`.
-
-Tracking vẫn ghi nhận yêu cầu PDF và các event mobile print như `mobile_print_help_viewed`, `mobile_print_view_opened`, `print_attempted`.
 
 ## Phase 3 – Print/PDF Beauty
 
@@ -222,7 +216,9 @@ Mỗi lần generate report, app lưu lead vào `localStorage` với key `brian_
 - `pdf_downloaded`
 - `package_clicked`
 - `addon_clicked`
-- `zalo_submitted`
+- `brian_contact_clicked`
+
+Các event conversion chính gồm `report_generated`, `package_clicked`, `addon_clicked`, `brian_contact_clicked`, `pdf_attempted_desktop` và `mobile_pdf_help_viewed`.
 
 `localStorage` chỉ là fallback kỹ thuật khi Google Sheet sync tắt hoặc lỗi. Giao diện khách hàng không hiển thị nút tải CSV lead, không hiển thị dữ liệu lead, và không link đến Admin CRM.
 
@@ -306,12 +302,14 @@ Admin hiện chưa có login thật. Chỉ dùng bằng đường dẫn trực t
 
 ## Phase 4 – Lead CRM & Conversion Flow
 
-Phase 4 nâng cấp website thành flow lead CRM nhẹ trên Google Sheet, không đổi công thức Thần số học, không đổi nội dung phân tích và không đổi layout PDF Phase 3.
+Phase 4 nâng cấp website thành flow lead CRM nhẹ trên Google Sheet, không đổi công thức Thần số học và không đổi layout PDF Phase 3. Hotfix Trust & Mobile Conversion chỉ thay cách hiển thị bản FREE bằng teaser được dựng lúc render; các file thư viện phân tích gốc không bị sửa.
 
 Các điểm mới:
 
-- Zalo/SĐT gate trước khi `In/Lưu PDF`.
-- Log event: `report_generated`, `pdf_gate_viewed`, `zalo_submitted`, `pdf_downloaded`, `package_clicked`, `addon_clicked`, `paid_report_requested`, `error`.
+- Form public chỉ có họ tên và ngày sinh; không có Zalo/SĐT gate.
+- Bản FREE rút gọn các bước thư viện chính: Bước 2/3/5 tối đa 250 từ và Bước 7 tối đa 180 từ.
+- Desktop giữ flow browser print Phase 3; mobile ưu tiên đọc báo cáo trên web và có nút thử in tùy chọn.
+- Log event chính: `report_generated`, `pdf_attempted_desktop`, `mobile_pdf_help_viewed`, `package_clicked`, `addon_clicked`, `brian_contact_clicked`, `error`.
 - 6 gói chính có giá chính thức và 6 add-on.
 - Gợi ý gói nhẹ theo Karmic/Master, năng lượng 8, package business/relationship đã click, hoặc chỉ tải PDF.
 - Lead status/heat: `cold`, `warm`, `hot`, `very_hot`, `converted`.
@@ -335,7 +333,7 @@ Thiết lập Phase 4:
 5. Chạy `setupPhase4Sheets()`.
 6. Deploy lại Apps Script Web App.
 7. Test local bằng `python3 -m http.server 8000`.
-8. Tạo báo cáo, thử chặn PDF khi thiếu Zalo/consent, sau đó nhập Zalo/consent và In/Lưu PDF.
+8. Tạo báo cáo chỉ bằng họ tên và ngày sinh; kiểm tra desktop print và mobile web-first flow.
 9. Mở Google Sheet kiểm tra `leads`, `logs`, `dashboard`, `followups`, `message_templates`.
 10. Deploy GitHub Pages và test lại.
 
@@ -369,10 +367,11 @@ Checklist:
 
 - Generate report không nhập phone vẫn tạo được báo cáo và lưu event `report_generated`, status `new_report_generated`.
 - Bấm `Tải báo cáo TXT` vẫn tải được, status `txt_downloaded`.
-- Bấm `In/Lưu PDF` thiếu Zalo/consent thì bị chặn tại Zalo gate.
-- Bấm `In/Lưu PDF` đủ Zalo/consent thì gọi browser print, event `zalo_submitted` và `pdf_downloaded`.
+- Desktop bấm `In/Lưu PDF` gọi browser print và lưu event `pdf_attempted_desktop` mà không yêu cầu thông tin liên hệ.
+- Mobile hiển thị `Xem báo cáo trên web`, liên hệ Zalo và `Thử in PDF`; nút print desktop được ẩn.
 - Chọn gói lưu `selected_package` và event `package_clicked`.
 - Chọn add-on lưu `selected_addon` và event `addon_clicked`.
+- Bấm liên hệ Brian lưu event `brian_contact_clicked` mà không tự thu thập SĐT/email.
 - Sync tắt thì website vẫn chạy localStorage.
 - Sync lỗi thì payload vào pending queue.
 - Admin retry sync làm pending queue giảm khi Web App URL đúng.
@@ -384,11 +383,13 @@ Checklist sau khi sửa:
 
 - `node --check app.js`.
 - `node --check google-apps-script/Code.gs`.
-- `Run Test Case 001` PASS.
+- `runTestCase001()` PASS bằng Node hoặc DevTools nội bộ.
 - Tạo report vẫn hoạt động và không fallback content.
-- Bấm `In/Lưu PDF` khi thiếu Zalo/consent bị chặn nhẹ nhàng.
-- Nhập Zalo/SĐT hợp lệ và tick consent thì `In/Lưu PDF` chạy browser print.
-- Google Sheet nhận `report_generated`, `pdf_gate_viewed`, `zalo_submitted`, `pdf_downloaded`, `package_clicked`, `addon_clicked`.
+- Form public chỉ có `fullName` và `birthDate`; nhập `27081962` thành `27/08/1962`.
+- Bước 2/3/5/7 hiển thị teaser, không sửa file TXT thư viện.
+- Desktop `In/Lưu PDF` chạy browser print mà không có contact gate.
+- Mobile ưu tiên xem web, có liên hệ Zalo và thử in tùy chọn.
+- Google Sheet nhận `report_generated`, `pdf_attempted_desktop`, `mobile_pdf_help_viewed`, `package_clicked`, `addon_clicked`, `brian_contact_clicked`.
 - `leads` có `lead_status_label`, `lead_temperature`, `recommended_package`, `follow_up_due_date`.
 - `dashboard`, `followups`, `message_templates` được tạo.
 - `admin.html` tải aggregate stats và không hiển thị tên/Zalo chi tiết.

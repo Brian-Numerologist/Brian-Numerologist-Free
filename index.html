@@ -39,7 +39,7 @@
           <span class="panel-kicker">FREE MVP</span>
           <strong>11 bước</strong>
           <p>Đường Đời, Sứ Mệnh, Linh Hồn, Ngày Sinh, Nhân Cách và CTA chọn gói chuyên sâu.</p>
-          <a class="zalo-link" href="tel:0948909983">Zalo Brian: 0948909983</a>
+          <a class="zalo-link" href="https://zalo.me/0948909983" target="_blank" rel="noopener" data-brian-contact="hero">Zalo Brian: 0948909983</a>
         </div>
       </section>
 
@@ -53,7 +53,7 @@
           <form id="leadForm" novalidate>
             <div class="field">
               <label for="fullName">Họ tên khai sinh đầy đủ <span aria-hidden="true">*</span></label>
-              <input id="fullName" name="full_name_original" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Thanh Trí">
+              <input id="fullName" name="full_name_original" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Thanh Tâm">
             </div>
 
             <div class="field">
@@ -61,51 +61,16 @@
               <input id="birthDate" name="birth_date" type="tel" inputmode="numeric" autocomplete="bday" placeholder="VD: 27081962 hoặc 27/08/1962" maxlength="10">
             </div>
 
-            <div class="field">
-              <label for="phoneOrZalo">Số điện thoại/Zalo</label>
-              <input id="phoneOrZalo" name="phone_or_zalo" type="tel" autocomplete="tel" placeholder="Bắt buộc nếu muốn PDF hoặc tư vấn">
-            </div>
-
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" placeholder="Tùy chọn">
-            </div>
-
-            <div class="field">
-              <label for="gender">Giới tính</label>
-              <select id="gender" name="gender">
-                <option value="khong_cung_cap">Không cung cấp</option>
-                <option value="nam">Nam</option>
-                <option value="nu">Nữ</option>
-                <option value="khac">Khác</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="entryMode">Chế độ nhập</label>
-              <select id="entryMode" name="entry_mode">
-                <option value="customer_self">Khách tự nhập</option>
-                <option value="internal_entry">Brian/nhân viên nhập giúp</option>
-              </select>
-            </div>
-
             <input id="leadSource" name="source" type="hidden" value="website">
 
-            <div class="field">
-              <label for="note">Ghi chú thêm</label>
-              <textarea id="note" name="note" rows="4" placeholder="Nhu cầu tư vấn, bối cảnh cá nhân, câu hỏi muốn Brian xem sâu hơn..."></textarea>
-            </div>
-
-            <label class="checkbox-row" for="consentToContact">
-              <input id="consentToContact" name="consent_to_contact" type="checkbox">
-              <span>Tôi đồng ý để Brian liên hệ qua Zalo/SĐT nhằm tư vấn bản phân tích phù hợp.</span>
-            </label>
+            <p class="trust-copy">
+              Không cần nhập SĐT/email. Dữ liệu chỉ dùng để tạo bản phân tích FREE; anh/chị chỉ liên hệ Brian khi thật sự muốn đọc sâu hơn.
+            </p>
 
             <div id="formErrors" class="form-errors" role="alert" hidden></div>
 
             <div class="button-row">
               <button class="primary-button" type="submit">Xem bản FREE của tôi</button>
-              <button class="secondary-button" type="button" id="runTestButton">Run Test Case 001</button>
             </div>
           </form>
 
@@ -122,13 +87,6 @@
           <div id="summaryContent" class="summary-grid"></div>
         </aside>
 
-        <aside class="test-card no-print" id="testResultCard" hidden>
-          <div class="section-heading">
-            <p class="eyebrow">Test bắt buộc</p>
-            <h2>TEST_CASE_001</h2>
-          </div>
-          <div id="testResultContent"></div>
-        </aside>
       </section>
 
       <section class="report-panel" id="reportPanel" hidden>
@@ -151,20 +109,41 @@
             <button class="secondary-button" type="button" id="openAllButton">Mở tất cả</button>
             <button class="secondary-button" type="button" id="closeAllButton">Đóng tất cả</button>
             <button class="primary-button" type="button" id="downloadTxtButton">Tải báo cáo TXT</button>
-            <button class="primary-button muted" type="button" id="printPdfButton">In/Lưu PDF</button>
+            <button class="primary-button muted desktop-print-action" type="button" id="printPdfButton">In/Lưu PDF</button>
+          </div>
+        </div>
+
+        <div id="mobileReportActions" class="mobile-report-actions no-print" hidden>
+          <div>
+            <p class="eyebrow">Đọc báo cáo trên điện thoại</p>
+            <h3>Xem trực tiếp trên web là cách ổn định nhất</h3>
+            <p>
+              Trên điện thoại, một số trình duyệt như Safari có thể không hỗ trợ lưu PDF ổn định.
+              Anh/chị có thể đọc báo cáo trực tiếp trên web hoặc nhắn Brian để được hỗ trợ nhận bản PDF/chuyên sâu.
+            </p>
+          </div>
+          <div class="button-row compact">
+            <button class="primary-button" type="button" id="viewReportWebButton">Xem báo cáo trên web</button>
+            <a class="secondary-button inline-link" href="https://zalo.me/0948909983" target="_blank" rel="noopener" data-brian-contact="mobile_pdf">Muốn nhận bản PDF đẹp? Nhắn Brian</a>
+            <button class="ghost-button mobile-try-print" type="button" id="mobileTryPrintButton">Thử in PDF</button>
           </div>
         </div>
 
         <div id="conversionCta" class="conversion-cta no-print" hidden>
           <div>
             <p class="eyebrow">Bước tiếp theo</p>
-            <h3>Bản FREE đã mở 4 trụ cột đầu tiên. Muốn Brian đọc sâu bản này?</h3>
-            <p>PDF cần Zalo/SĐT và đồng ý liên hệ để Brian có thể tư vấn đúng bối cảnh nếu bạn cần đi sâu hơn.</p>
+            <h3>Bản FREE mới chỉ mở cánh cửa đầu tiên</h3>
+            <p>
+              Để đọc sâu hơn về mâu thuẫn nội tại, bài học lặp lại, định hướng nghề nghiệp,
+              chu kỳ cá nhân và chiến lược hành động, anh/chị có thể chọn gói chuyên sâu
+              hoặc nhắn Brian để được tư vấn gói phù hợp.
+            </p>
           </div>
           <div id="recommendationBox" class="recommendation-box"></div>
           <div class="button-row compact">
-            <a class="secondary-button inline-link" href="#packages">Xem gói chuyên sâu</a>
-            <button class="primary-button" type="button" id="ctaPdfButton">Tải PDF</button>
+            <a class="primary-button inline-link" href="#packages">Xem gói chuyên sâu</a>
+            <a class="secondary-button inline-link" href="https://zalo.me/0948909983" target="_blank" rel="noopener" data-brian-contact="report_cta">Nhắn Brian qua Zalo</a>
+            <a class="ghost-button inline-link" href="https://zalo.me/0948909983" target="_blank" rel="noopener" data-brian-contact="package_suggestion">Tôi muốn được gợi ý gói phù hợp</a>
           </div>
         </div>
 
@@ -195,8 +174,8 @@
 
         <div id="packageInterestBox" class="interest-box" hidden>
           <strong>Bạn đã chọn: <span id="selectedPackageName"></span> <span id="selectedPackagePrice" class="selected-price"></span></strong>
-          <p>Vui lòng nhập Zalo/số điện thoại và tick đồng ý liên hệ nếu muốn Brian tư vấn gói này.</p>
-          <a class="primary-button inline-link" href="tel:0948909983">Nhắn Zalo cho Brian: 0948909983</a>
+          <p>Brian đã ghi nhận gói anh/chị quan tâm. Khi sẵn sàng, anh/chị có thể chủ động nhắn Brian để được tư vấn.</p>
+          <a class="primary-button inline-link" href="https://zalo.me/0948909983" target="_blank" rel="noopener" data-brian-contact="package_interest">Nhắn Zalo cho Brian: 0948909983</a>
         </div>
       </section>
     </main>
@@ -204,46 +183,6 @@
     <footer class="site-footer no-print">
       <p>Brian-Numerologist. Thần số học là bản đồ khuynh hướng, không phải bản án định mệnh.</p>
     </footer>
-
-    <div id="mobilePrintHelpModal" class="mobile-print-modal no-print" role="dialog" aria-modal="true" aria-labelledby="mobilePrintHelpTitle" hidden>
-      <div class="mobile-print-modal__panel">
-        <button class="mobile-print-modal__close" type="button" id="closeMobilePrintHelpButton" aria-label="Đóng hướng dẫn in">×</button>
-        <p class="eyebrow">In/Lưu PDF trên điện thoại</p>
-        <h2 id="mobilePrintHelpTitle">Mở bản in riêng để lưu PDF ổn định hơn</h2>
-        <p>
-          Trên điện thoại, nếu nút In/Lưu PDF không mở hộp thoại, hãy dùng nút
-          <strong>Mở bản in trên điện thoại</strong>, rồi chọn Chia sẻ/In/Lưu PDF trong trình duyệt.
-        </p>
-        <div class="mobile-print-guide">
-          <div>
-            <strong>iPhone Safari</strong>
-            <span>Bấm Chia sẻ → In → chụm/mở bản xem trước để thành PDF → Chia sẻ/Lưu vào Tệp.</span>
-          </div>
-          <div>
-            <strong>Android Chrome</strong>
-            <span>Bấm menu ⋮ → Chia sẻ hoặc In → chọn Lưu dưới dạng PDF.</span>
-          </div>
-        </div>
-        <div class="button-row compact">
-          <button class="primary-button" type="button" id="openMobilePrintViewButton">Mở bản in trên điện thoại</button>
-          <button class="secondary-button" type="button" id="tryMobilePrintButton">Thử in ngay</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="mobilePrintViewBar" class="mobile-print-view-bar no-print" hidden>
-      <div>
-        <p class="eyebrow">Bản in PDF trên điện thoại</p>
-        <strong>Nhấn In/Lưu PDF từ trang này để trình duyệt nhận thao tác trực tiếp.</strong>
-        <p id="mobilePrintViewStatus">
-          iPhone: Chia sẻ → In → mở bản xem trước PDF → Lưu vào Tệp. Android: menu ⋮ → Chia sẻ/In → Lưu dưới dạng PDF.
-        </p>
-      </div>
-      <div class="button-row compact">
-        <button class="primary-button" type="button" id="printViewPrintButton">In/Lưu PDF</button>
-        <button class="secondary-button" type="button" id="printViewBackButton">Quay lại báo cáo</button>
-      </div>
-    </div>
 
     <div id="toast-container" class="toast-container no-print" aria-live="polite" aria-atomic="true"></div>
 
